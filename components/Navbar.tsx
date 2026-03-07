@@ -108,7 +108,7 @@ function MegaMenuDropdown({ menuKey, isOpen }: { menuKey: string; isOpen: boolea
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="absolute top-full left-0 w-full z-50 overflow-hidden"
+                        className="fixed top-16 left-0 right-0 w-screen z-50 overflow-hidden"
                     >
                         <div className="bg-white border-b border-slate-200 shadow-xl">
                             <div className="container mx-auto px-4 md:px-8 py-10">
@@ -262,12 +262,20 @@ export function Navbar() {
                                     {item.name}
                                 </Link>
                             )}
-                            {item.hasDropdown && (
-                                <MegaMenuDropdown menuKey={item.name} isOpen={openDropdown === item.name} />
-                            )}
                         </div>
                     ))}
                 </nav>
+                
+                {/* Full-width dropdowns positioned relative to viewport */}
+                {menuItems.map((item) => (
+                    item.hasDropdown && (
+                        <MegaMenuDropdown 
+                            key={`dropdown-${item.name}`}
+                            menuKey={item.name} 
+                            isOpen={openDropdown === item.name} 
+                        />
+                    )
+                ))}
 
                 {/* CTA Buttons */}
                 <div className="hidden xl:flex items-center gap-3">
