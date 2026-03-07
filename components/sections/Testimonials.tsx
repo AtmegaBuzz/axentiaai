@@ -1,15 +1,82 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 
 const testimonials = [
-    { name: 'Charu Tyagi', role: 'SAP SF Consultant — Orane Consulting', quote: 'From HR roles to SAP consulting — Daksha helped me restart my career with confidence and real project skills.' },
-    { name: 'Anjali Kaushik', role: 'SAP ABAP Consultant — Orane Consulting', quote: 'As a CS grad, I wanted a career with impact. Daksha made me industry-ready and fast-tracked my entry into SAP consulting.' },
-    { name: 'Madhav Jhawar', role: 'SAP MM Consultant — Orane Consulting', quote: 'From learning fundamentals to optimizing business operations — Daksha helped me transform curiosity into consulting skills.' },
-    { name: 'Sakshi Patodi', role: 'SAP ABAP Consultant — Orane Consulting', quote: 'Daksha didn\'t just teach me ABAP — it turned me into a professional who can build real solutions for enterprise clients.' },
+    {
+        name: 'Charu Tyagi',
+        role: 'SAP SF Consultant — Orane Consulting',
+        quote: 'From HR roles to SAP consulting — Daksha helped me restart my career with confidence and real project skills.',
+        videoId: 'tTpmml4ndWM',
+    },
+    {
+        name: 'Anjali Kaushik',
+        role: 'SAP ABAP Consultant — Orane Consulting',
+        quote: 'As a CS grad, I wanted a career with impact. Daksha made me industry-ready and fast-tracked my entry into SAP consulting.',
+        videoId: 'XX-Qx3yx3ZE',
+    },
+    {
+        name: 'Madhav Jhawar',
+        role: 'SAP MM Consultant — Orane Consulting',
+        quote: 'From learning fundamentals to optimizing business operations — Daksha helped me transform curiosity into consulting skills.',
+        videoId: 'vM23wbWFL4E',
+    },
+    {
+        name: 'Sakshi Patodi',
+        role: 'SAP ABAP Consultant — Orane Consulting',
+        quote: 'Daksha didn\'t just teach me ABAP — it turned me into a professional who can build real solutions for enterprise clients.',
+        videoId: 'JbsyTIxOh6I',
+    },
+    {
+        name: 'Deeksha',
+        role: 'Trainee — Daksha Career Accelerator',
+        quote: 'Every week, I see myself becoming more confident, more skilled, and more future-ready. Daksha is shaping my tomorrow.',
+        videoId: 'bffdXIDsR3U',
+    },
 ];
+
+function VideoThumbnail({ videoId, name }: { videoId: string; name: string }) {
+    const [playing, setPlaying] = useState(false);
+
+    if (playing) {
+        return (
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+                <iframe
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+                    title={`${name} testimonial`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                />
+            </div>
+        );
+    }
+
+    return (
+        <button
+            onClick={() => setPlaying(true)}
+            className="relative w-full aspect-video rounded-xl overflow-hidden group cursor-pointer"
+        >
+            {/* YouTube thumbnail */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+                src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                alt={`${name} testimonial`}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
+            {/* Play button */}
+            <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-brand-500/90 flex items-center justify-center group-hover:bg-brand-500 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-brand-500/30">
+                    <Play className="w-7 h-7 text-white ml-1" fill="white" />
+                </div>
+            </div>
+        </button>
+    );
+}
 
 export function Testimonials() {
     const [current, setCurrent] = useState(0);
@@ -27,25 +94,16 @@ export function Testimonials() {
 
     // Auto-play
     useEffect(() => {
-        const timer = setInterval(next, 5000);
+        const timer = setInterval(next, 6000);
         return () => clearInterval(timer);
     }, [next]);
 
-    // Get visible cards (3 on desktop, handled via CSS)
-    const getVisible = () => {
-        const items = [];
-        for (let i = 0; i < 3; i++) {
-            items.push({ ...testimonials[(current + i) % testimonials.length], idx: (current + i) % testimonials.length });
-        }
-        return items;
-    };
-
-    const visible = getVisible();
+    const t = testimonials[current];
 
     const variants = {
-        enter: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
+        enter: (dir: number) => ({ x: dir > 0 ? 100 : -100, opacity: 0 }),
         center: { x: 0, opacity: 1 },
-        exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
+        exit: (dir: number) => ({ x: dir > 0 ? -100 : 100, opacity: 0 }),
     };
 
     return (
@@ -62,7 +120,7 @@ export function Testimonials() {
                         viewport={{ once: true }}
                         className="text-brand-400 font-semibold tracking-wide uppercase text-sm mb-4"
                     >
-                        Don&apos;t just take our word for it
+                        Testimonials
                     </motion.p>
                     <motion.h2
                         initial={{ opacity: 0, y: 15 }}
@@ -84,8 +142,8 @@ export function Testimonials() {
                     </motion.p>
                 </div>
 
-                {/* Cards */}
-                <div className="relative">
+                {/* Card with video + quote */}
+                <div className="relative max-w-5xl mx-auto">
                     <AnimatePresence mode="wait" custom={direction}>
                         <motion.div
                             key={current}
@@ -95,37 +153,40 @@ export function Testimonials() {
                             animate="center"
                             exit="exit"
                             transition={{ duration: 0.4, ease: 'easeInOut' }}
-                            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+                            className="bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden"
                         >
-                            {visible.map((t) => (
-                                <div
-                                    key={t.name}
-                                    className="group relative bg-white/[0.04] border border-white/[0.08] rounded-2xl p-8 md:p-10 flex flex-col hover:bg-white/[0.07] transition-colors duration-300 first:block md:first:block [&:nth-child(2)]:hidden md:[&:nth-child(2)]:block [&:nth-child(3)]:hidden md:[&:nth-child(3)]:block"
-                                >
+                            <div className="grid grid-cols-1 md:grid-cols-2">
+                                {/* Video side */}
+                                <div className="p-4 md:p-6">
+                                    <VideoThumbnail videoId={t.videoId} name={t.name} />
+                                </div>
+
+                                {/* Quote side */}
+                                <div className="p-6 md:p-10 flex flex-col justify-center">
                                     {/* Accent line */}
-                                    <div className="w-10 h-1 bg-brand-500 rounded-full mb-8" />
+                                    <div className="w-10 h-1 bg-brand-500 rounded-full mb-6" />
 
                                     {/* Quote */}
-                                    <p className="text-xl md:text-2xl text-white/80 leading-relaxed italic flex-grow mb-10">
+                                    <p className="text-xl md:text-2xl text-white/80 leading-relaxed italic mb-8">
                                         &ldquo;{t.quote}&rdquo;
                                     </p>
 
                                     {/* Person */}
-                                    <div className="mt-auto">
+                                    <div>
                                         <h4 className="font-bold text-white text-lg">{t.name}</h4>
                                         <p className="text-sm text-white/40 mt-1">{t.role}</p>
                                     </div>
                                 </div>
-                            ))}
+                            </div>
                         </motion.div>
                     </AnimatePresence>
 
                     {/* Nav arrows */}
-                    <div className="flex justify-center gap-3 mt-12">
+                    <div className="flex justify-center gap-3 mt-10">
                         <button
                             onClick={prev}
                             className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-500/50 hover:bg-white/5 transition-all duration-200"
-                            aria-label="Previous testimonials"
+                            aria-label="Previous testimonial"
                         >
                             <ChevronLeft className="w-5 h-5 text-white/60" />
                         </button>
@@ -143,7 +204,7 @@ export function Testimonials() {
                         <button
                             onClick={next}
                             className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-500/50 hover:bg-white/5 transition-all duration-200"
-                            aria-label="Next testimonials"
+                            aria-label="Next testimonial"
                         >
                             <ChevronRight className="w-5 h-5 text-white/60" />
                         </button>
