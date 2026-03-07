@@ -2,13 +2,14 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { BookOpen, Wrench, BarChart3, Settings, Crown } from 'lucide-react'
 
 const timelineItems = [
-  { step: 1, period: 'Month 0–4', title: 'Trainee', description: 'Learn enterprise process flows, SAP basics, and structured documentation practices.' },
-  { step: 2, period: 'Month 4–10', title: 'Apprentice', description: 'Work on supervised project tasks. Paid. Deliverables reviewed by senior consultants.' },
-  { step: 3, period: 'Year 1–2', title: 'Associate Consultant', description: 'Support UAT cycles, prepare dashboards, handle structured client communication, manage defined tasks independently.' },
-  { step: 4, period: 'Year 2–4', title: 'Consultant', description: 'Own specific process areas, manage configuration and testing cycles, coordinate across teams.' },
-  { step: 5, period: 'Year 4+', title: 'Senior/Lead', description: 'Drive module-level decisions, guide junior consultants, manage client-facing responsibilities.' },
+  { step: 1, period: 'Month 0–4', title: 'Trainee', description: 'Learn enterprise process flows, SAP basics, and structured documentation practices.', gradient: 'from-brand-300 to-brand-500', icon: BookOpen },
+  { step: 2, period: 'Month 4–10', title: 'Apprentice', description: 'Work on supervised project tasks. Paid. Deliverables reviewed by senior consultants.', gradient: 'from-brand-400 to-brand-600', icon: Wrench },
+  { step: 3, period: 'Year 1–2', title: 'Associate Consultant', description: 'Support UAT cycles, prepare dashboards, handle structured client communication, manage defined tasks independently.', gradient: 'from-brand-500 to-accent-400', icon: BarChart3 },
+  { step: 4, period: 'Year 2–4', title: 'Consultant', description: 'Own specific process areas, manage configuration and testing cycles, coordinate across teams.', gradient: 'from-accent-400 to-brand-500', icon: Settings },
+  { step: 5, period: 'Year 4+', title: 'Senior/Lead', description: 'Drive module-level decisions, guide junior consultants, manage client-facing responsibilities.', gradient: 'from-brand-600 to-brand-400', icon: Crown },
 ]
 
 function TimelineItem({ item, index }: { item: typeof timelineItems[0]; index: number }) {
@@ -63,9 +64,17 @@ function TimelineItem({ item, index }: { item: typeof timelineItems[0]; index: n
           <h3 className={`text-xl font-bold mb-2 transition-colors duration-500 ${isInView ? 'text-gray-900' : 'text-gray-300'}`}>
             {item.title}
           </h3>
-          <p className={`text-base leading-relaxed transition-colors duration-500 ${isInView ? 'text-gray-600' : 'text-gray-300'}`}>
+          <p className={`text-base leading-relaxed transition-colors duration-500 mb-4 ${isInView ? 'text-gray-600' : 'text-gray-300'}`}>
             {item.description}
           </p>
+          {/* Image placeholder */}
+          <motion.div
+            className={`w-full max-w-sm aspect-video rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg`}
+            animate={{ opacity: isInView ? 0.9 : 0.15 }}
+            transition={{ duration: 0.6 }}
+          >
+            <item.icon className="w-12 h-12 text-white/60" strokeWidth={1.5} />
+          </motion.div>
         </motion.div>
       </div>
     </div>
