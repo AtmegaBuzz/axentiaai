@@ -7,7 +7,6 @@ import { Programs } from "@/components/sections/Programs";
 import { EnterprisePartnerships } from "@/components/sections/EnterprisePartnerships";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Timeline } from "@/components/sections/Timeline";
-import { Journey } from "@/components/sections/Journey";
 import { Audience } from "@/components/sections/Audience";
 import Testimonials from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
@@ -25,7 +24,6 @@ export default function Home() {
                 <EnterprisePartnerships />
                 <HowItWorks />
                 <Timeline />
-                <Journey />
                 <Audience />
                 <Testimonials />
                 <FAQ />
