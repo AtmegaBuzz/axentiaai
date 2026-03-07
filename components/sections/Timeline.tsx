@@ -3,192 +3,71 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 
-const timelineData = [
-  {
-    year: '2018',
-    title: 'The Beginning',
-    description:
-      'Founded with a vision to bridge the gap between education and enterprise careers. What started as a dream in a small office became the seed of something transformative.',
-    gradient: 'from-brand-400 to-brand-600',
-    hasImage: true,
-  },
-  {
-    year: '2019',
-    title: 'First Cohort',
-    description:
-      'Launched the first SAP training cohort with 25 students — and achieved a 100% placement rate. The model was validated, and the mission was clear.',
-    gradient: 'from-brand-500 to-brand-700',
-    hasImage: false,
-    quote: {
-      text: '"Every single student from our first batch found their dream role. That moment changed everything for us."',
-      author: 'Founding Team',
-    },
-  },
-  {
-    year: '2020',
-    title: 'Going Digital',
-    description:
-      'Pivoted to fully online training during the pandemic, reaching students across India. Adversity became our catalyst — we went from one city to the entire country overnight.',
-    gradient: 'from-brand-400 to-accent-500',
-    hasImage: true,
-  },
-  {
-    year: '2021',
-    title: 'Enterprise Partnerships',
-    description:
-      'Partnered with Orane Consulting and leading SAP implementation firms. Our graduates were no longer just trained — they were industry-endorsed.',
-    gradient: 'from-brand-500 to-brand-800',
-    hasImage: false,
-  },
-  {
-    year: '2022',
-    title: 'AI Integration',
-    description:
-      'Introduced AI-powered learning paths and personalized career coaching. Every learner got a unique trajectory tailored to their strengths and market demand.',
-    gradient: 'from-accent-400 to-brand-500',
-    hasImage: true,
-    quote: {
-      text: '"AI didn\'t replace the human touch — it amplified it. Our mentors could finally focus on what mattered most."',
-      author: 'Head of Product',
-    },
-  },
-  {
-    year: '2023',
-    title: '500+ Careers Launched',
-    description:
-      'Milestone of 500+ successful career transitions into enterprise tech. From freshers to mid-career professionals, our community became a launchpad.',
-    gradient: 'from-brand-600 to-brand-400',
-    hasImage: false,
-  },
-  {
-    year: '2024',
-    title: 'AxentiaAI Rebrand',
-    description:
-      'Rebranded as AxentiaAI, expanding beyond SAP into full AI & Data career acceleration. A new chapter — same mission, bigger ambition.',
-    gradient: 'from-brand-500 to-accent-400',
-    hasImage: true,
-  },
+const timelineItems = [
+  { step: 1, period: 'Month 0–4', title: 'Trainee', description: 'Learn enterprise process flows, SAP basics, and structured documentation practices.' },
+  { step: 2, period: 'Month 4–10', title: 'Apprentice', description: 'Work on supervised project tasks. Paid. Deliverables reviewed by senior consultants.' },
+  { step: 3, period: 'Year 1–2', title: 'Associate Consultant', description: 'Support UAT cycles, prepare dashboards, handle structured client communication, manage defined tasks independently.' },
+  { step: 4, period: 'Year 2–4', title: 'Consultant', description: 'Own specific process areas, manage configuration and testing cycles, coordinate across teams.' },
+  { step: 5, period: 'Year 4+', title: 'Senior/Lead', description: 'Drive module-level decisions, guide junior consultants, manage client-facing responsibilities.' },
 ]
 
-function TimelineItem({
-  item,
-  index,
-  totalItems,
-}: {
-  item: (typeof timelineData)[0]
-  index: number
-  totalItems: number
-}) {
-  const itemRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(itemRef, { once: false, margin: '-40% 0px -40% 0px' })
+function TimelineItem({ item, index }: { item: typeof timelineItems[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-20% 0px -20% 0px' })
 
   return (
-    <div
-      ref={itemRef}
-      className="relative grid grid-cols-[1fr] md:grid-cols-[1fr_80px_1fr] gap-4 md:gap-0"
-    >
-      {/* Left: Year */}
-      <div className="hidden md:flex items-start justify-end pr-10 pt-1">
-        <motion.span
-          className="text-4xl font-bold transition-all duration-700"
-          animate={{
-            color: isInView ? 'var(--color-brand-600)' : '#d1d5db',
-            opacity: isInView ? 1 : 0.4,
-          }}
+    <div ref={ref} className="group relative grid grid-cols-[1fr_40px_1fr] md:grid-cols-[1fr_60px_1fr] gap-4 md:gap-8">
+      {/* Left: time period (desktop) */}
+      <div className="hidden md:flex items-start justify-end pt-1">
+        <motion.div
+          className="text-right"
+          initial={{ opacity: 0.3 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0.3 }}
+          transition={{ duration: 0.5 }}
         >
-          {item.year}
-        </motion.span>
+          <span className="text-xs font-mono text-brand-400 tracking-wider uppercase">step-{item.step}</span>
+          <p className={`text-lg font-semibold transition-colors duration-500 ${isInView ? 'text-gray-900' : 'text-gray-300'}`}>
+            {item.period}
+          </p>
+        </motion.div>
       </div>
 
-      {/* Center: Line + Dot */}
-      <div className="hidden md:flex flex-col items-center relative">
+      {/* Center: line + dot */}
+      <div className="flex flex-col items-center relative">
         <motion.div
-          className="relative z-10 mt-1.5 w-5 h-5 rounded-full border-2 transition-all duration-500"
-          animate={{
-            borderColor: isInView ? 'var(--color-brand-500)' : '#d1d5db',
-            backgroundColor: isInView ? 'var(--color-brand-500)' : 'transparent',
-            scale: isInView ? 1 : 0.7,
-            boxShadow: isInView ? '0 0 16px rgba(168,85,247,0.4)' : '0 0 0px transparent',
+          className="w-4 h-4 rounded-full border-2 z-10 flex-shrink-0 mt-1 transition-all duration-500"
+          style={{
+            borderColor: isInView ? 'var(--color-brand-500, #d946ef)' : '#d1d5db',
+            backgroundColor: isInView ? 'var(--color-brand-500, #d946ef)' : 'transparent',
           }}
         />
-        {index < totalItems - 1 && (
-          <div className="w-px flex-1 bg-gray-200" />
+        {index < timelineItems.length - 1 && (
+          <div className="w-[2px] flex-1 bg-gray-200 min-h-[60px]" />
         )}
       </div>
 
-      {/* Right: Content */}
-      <motion.div
-        className="pl-8 md:pl-10 pb-16 md:pb-24 relative"
-        animate={{
-          opacity: isInView ? 1 : 0.3,
-          y: isInView ? 0 : 20,
-        }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {/* Mobile: line + dot on left */}
-        <div className="md:hidden absolute left-0 top-0 bottom-0 flex flex-col items-center">
-          <motion.div
-            className="relative z-10 mt-1.5 shrink-0 w-4 h-4 rounded-full border-2 transition-all duration-500"
-            animate={{
-              borderColor: isInView ? 'var(--color-brand-500)' : '#d1d5db',
-              backgroundColor: isInView ? 'var(--color-brand-500)' : 'transparent',
-              scale: isInView ? 1 : 0.7,
-            }}
-          />
-          {index < totalItems - 1 && (
-            <div className="w-px flex-1 bg-gray-200" />
-          )}
-        </div>
-
-        {/* Mobile year */}
-        <motion.span
-          className="md:hidden text-2xl font-bold mb-2 block transition-colors duration-700"
-          animate={{
-            color: isInView ? 'var(--color-brand-600)' : '#d1d5db',
-          }}
+      {/* Right: content */}
+      <div className="pb-12 md:pb-16">
+        {/* Mobile: show period inline */}
+        <motion.div
+          initial={{ opacity: 0.3, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.3, y: 12 }}
+          transition={{ duration: 0.5 }}
         >
-          {item.year}
-        </motion.span>
-
-        <h3
-          className="text-xl md:text-2xl font-semibold mb-3 transition-colors duration-500"
-          style={{ color: isInView ? '#111827' : '#9ca3af' }}
-        >
-          {item.title}
-        </h3>
-        <p
-          className="leading-relaxed max-w-lg mb-5 transition-colors duration-500"
-          style={{ color: isInView ? '#4b5563' : '#d1d5db' }}
-        >
-          {item.description}
-        </p>
-
-        {item.hasImage && (
-          <motion.div
-            className={`w-full max-w-md aspect-video rounded-2xl bg-gradient-to-br ${item.gradient} mb-5 shadow-lg`}
-            animate={{ opacity: isInView ? 0.9 : 0.2 }}
-            transition={{ duration: 0.6 }}
-          />
-        )}
-
-        {item.quote && (
-          <motion.blockquote
-            className="border-l-2 pl-4 max-w-md"
-            animate={{
-              borderColor: isInView ? 'var(--color-brand-400)' : '#e5e7eb',
-              opacity: isInView ? 1 : 0.3,
-            }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-gray-500 italic text-sm leading-relaxed">
-              {item.quote.text}
+          <div className="md:hidden mb-1">
+            <span className="text-xs font-mono text-brand-400 tracking-wider uppercase">step-{item.step}</span>
+            <p className={`text-sm font-semibold transition-colors duration-500 ${isInView ? 'text-gray-900' : 'text-gray-300'}`}>
+              {item.period}
             </p>
-            <cite className="text-brand-400 text-xs mt-1 block not-italic">
-              — {item.quote.author}
-            </cite>
-          </motion.blockquote>
-        )}
-      </motion.div>
+          </div>
+          <h3 className={`text-xl font-bold mb-2 transition-colors duration-500 ${isInView ? 'text-gray-900' : 'text-gray-300'}`}>
+            {item.title}
+          </h3>
+          <p className={`text-base leading-relaxed transition-colors duration-500 ${isInView ? 'text-gray-600' : 'text-gray-300'}`}>
+            {item.description}
+          </p>
+        </motion.div>
+      </div>
     </div>
   )
 }
@@ -197,57 +76,38 @@ export function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end start'],
+    offset: ['start 80%', 'end 60%'],
   })
-  const progressHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
   return (
-    <section className="relative bg-white py-24 md:py-32 overflow-hidden">
-      <div className="relative max-w-5xl mx-auto px-6">
-        {/* Heading */}
-        <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-brand-500 text-sm font-medium tracking-widest uppercase mb-3">
-            Our Journey
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-            The AxentiaAI Story
-          </h2>
-        </motion.div>
+    <section className="bg-white py-20 md:py-32">
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-16 md:mb-24">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">Student Path</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900">Your Career Timeline</h2>
+        </div>
 
         {/* Timeline */}
         <div ref={containerRef} className="relative">
-          {/* Desktop progress line */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px">
-            <div className="absolute inset-0 bg-gray-200" />
+          {/* Scroll-driven progress line */}
+          <div className="absolute left-[20px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[3px] bg-gray-100">
             <motion.div
-              className="absolute top-0 left-0 w-full bg-gradient-to-b from-brand-400 via-brand-500 to-brand-600 origin-top"
-              style={{ height: progressHeight }}
+              className="w-full origin-top"
+              style={{
+                height: lineHeight,
+                background: 'linear-gradient(to bottom, var(--color-brand-400, #e879f9), var(--color-brand-600, #a21caf))',
+              }}
             />
           </div>
 
-          {/* Mobile progress line */}
-          <div className="md:hidden absolute left-[7px] top-0 bottom-0 w-px">
-            <div className="absolute inset-0 bg-gray-200" />
-            <motion.div
-              className="absolute top-0 left-0 w-full bg-gradient-to-b from-brand-400 via-brand-500 to-brand-600 origin-top"
-              style={{ height: progressHeight }}
-            />
+          {/* Items */}
+          <div className="relative z-10">
+            {timelineItems.map((item, i) => (
+              <TimelineItem key={item.step} item={item} index={i} />
+            ))}
           </div>
-
-          {timelineData.map((item, i) => (
-            <TimelineItem
-              key={item.year}
-              item={item}
-              index={i}
-              totalItems={timelineData.length}
-            />
-          ))}
         </div>
       </div>
     </section>

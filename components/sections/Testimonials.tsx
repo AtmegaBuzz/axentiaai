@@ -39,7 +39,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden" style={{ backgroundColor: '#0a0118' }}>
+    <section className="relative py-20 md:py-28 overflow-hidden bg-slate-50">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
         <motion.div
@@ -49,10 +49,10 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
             What Our Learners Say
           </h2>
-          <p className="mt-4 text-lg text-white/50 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
             Real stories from professionals who transformed their careers with Daksha.
           </p>
         </motion.div>
@@ -64,14 +64,14 @@ export default function Testimonials() {
         <button
           onClick={prev}
           aria-label="Previous testimonial"
-          className="absolute left-4 md:left-8 lg:left-[calc(50%-480px)] z-30 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
+          className="absolute left-4 md:left-8 lg:left-[calc(50%-480px)] z-30 w-11 h-11 rounded-full bg-white shadow-md border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
         <button
           onClick={next}
           aria-label="Next testimonial"
-          className="absolute right-4 md:right-8 lg:right-[calc(50%-480px)] z-30 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
+          className="absolute right-4 md:right-8 lg:right-[calc(50%-480px)] z-30 w-11 h-11 rounded-full bg-white shadow-md border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
@@ -85,11 +85,11 @@ export default function Testimonials() {
             const isCenter = offset === 0;
             const absOff = Math.abs(offset);
 
-            const translateX = offset * 520;
-            const scale = isCenter ? 1 : absOff === 1 ? 0.85 : 0.7;
+            const translateX = offset * 560;
+            const scale = isCenter ? 1 : absOff === 1 ? 0.88 : 0.76;
             const zIndex = 10 - absOff;
-            const blur = isCenter ? 0 : absOff === 1 ? 4 : 8;
-            const opacity = isCenter ? 1 : absOff === 1 ? 0.6 : 0.3;
+            const blur = isCenter ? 0 : absOff === 1 ? 3 : 6;
+            const opacity = isCenter ? 1 : absOff === 1 ? 0.5 : 0.25;
 
             return (
               <motion.div
@@ -109,7 +109,7 @@ export default function Testimonials() {
                 }}
               >
                 <div
-                  className={`relative w-full rounded-2xl overflow-hidden ${isCenter ? 'cursor-pointer group' : 'pointer-events-none'}`}
+                  className={`relative w-full rounded-3xl overflow-hidden shadow-2xl ${isCenter ? 'cursor-pointer group ring-1 ring-black/5' : 'pointer-events-none'}`}
                   style={{ aspectRatio: '16/9' }}
                   onClick={() => isCenter && setActiveVideo(t.videoId)}
                 >
@@ -160,7 +160,7 @@ export default function Testimonials() {
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === active ? 'w-7 bg-brand-500' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === active ? 'w-7 bg-brand-500' : 'w-2 bg-gray-300 hover:bg-gray-400'}`}
             aria-label={`Go to testimonial ${i + 1}`}
           />
         ))}
