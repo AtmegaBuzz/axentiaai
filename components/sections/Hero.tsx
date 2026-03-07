@@ -16,7 +16,7 @@ export function Hero() {
                     playsInline
                     className="w-full h-full object-cover"
                 >
-                    <source src="/hero-bg.mp4" type="video/mp4" />
+                    <source src="/hero_video.mp4" type="video/mp4" />
                     {/* Fallback gradient if video fails to load */}
                 </video>
                 
