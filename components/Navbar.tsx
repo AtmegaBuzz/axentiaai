@@ -251,7 +251,7 @@ export function Navbar() {
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between h-16">
                 <Link href="/" className="flex items-center">
-                    <Image src="/logo.png" alt="AxentiaAI" width={260} height={65} className="h-16 w-auto" priority />
+                    <Image src="/logo.png" alt="AxentiaAI" width={320} height={80} className="h-20 w-auto" priority />
                 </Link>
 
                 {/* Desktop Nav */}
