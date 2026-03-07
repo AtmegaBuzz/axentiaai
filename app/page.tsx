@@ -9,7 +9,7 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Timeline } from "@/components/sections/Timeline";
 import { Journey } from "@/components/sections/Journey";
 import { Audience } from "@/components/sections/Audience";
-import { Testimonials } from "@/components/sections/Testimonials";
+import Testimonials from "@/components/sections/Testimonials";
 import { JoinCommunity } from "@/components/sections/JoinCommunity";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTA } from "@/components/sections/CTA";

@@ -1,216 +1,211 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const testimonials = [
-    {
-        name: 'Charu Tyagi',
-        role: 'SAP SF Consultant — Orane Consulting',
-        quote: 'From HR roles to SAP consulting — Daksha helped me restart my career with confidence and real project skills.',
-        videoId: 'tTpmml4ndWM',
-    },
-    {
-        name: 'Anjali Kaushik',
-        role: 'SAP ABAP Consultant — Orane Consulting',
-        quote: 'As a CS grad, I wanted a career with impact. Daksha made me industry-ready and fast-tracked my entry into SAP consulting.',
-        videoId: 'XX-Qx3yx3ZE',
-    },
-    {
-        name: 'Madhav Jhawar',
-        role: 'SAP MM Consultant — Orane Consulting',
-        quote: 'From learning fundamentals to optimizing business operations — Daksha helped me transform curiosity into consulting skills.',
-        videoId: 'vM23wbWFL4E',
-    },
-    {
-        name: 'Sakshi Patodi',
-        role: 'SAP ABAP Consultant — Orane Consulting',
-        quote: 'Daksha didn\'t just teach me ABAP — it turned me into a professional who can build real solutions for enterprise clients.',
-        videoId: 'JbsyTIxOh6I',
-    },
-    {
-        name: 'Deeksha',
-        role: 'Trainee — Daksha Career Accelerator',
-        quote: 'Every week, I see myself becoming more confident, more skilled, and more future-ready. Daksha is shaping my tomorrow.',
-        videoId: 'bffdXIDsR3U',
-    },
+  { name: 'Charu Tyagi', role: 'SAP SF Consultant — Orane Consulting', quote: 'From HR roles to SAP consulting — Daksha helped me restart my career with confidence and real project skills.', videoId: 'tTpmml4ndWM', category: 'Career Transition' },
+  { name: 'Anjali Kaushik', role: 'SAP ABAP Consultant — Orane Consulting', quote: 'As a CS grad, I wanted a career with impact. Daksha made me industry-ready and fast-tracked my entry into SAP consulting.', videoId: 'XX-Qx3yx3ZE', category: 'Campus to Career' },
+  { name: 'Madhav Jhawar', role: 'SAP MM Consultant — Orane Consulting', quote: 'From learning fundamentals to optimizing business operations — Daksha helped me transform curiosity into consulting skills.', videoId: 'vM23wbWFL4E', category: 'Skill Building' },
+  { name: 'Sakshi Patodi', role: 'SAP ABAP Consultant — Orane Consulting', quote: "Daksha didn't just teach me ABAP — it turned me into a professional who can build real solutions for enterprise clients.", videoId: 'JbsyTIxOh6I', category: 'Enterprise Ready' },
+  { name: 'Deeksha', role: 'Trainee — Daksha Career Accelerator', quote: 'Every week, I see myself becoming more confident, more skilled, and more future-ready. Daksha is shaping my tomorrow.', videoId: 'bffdXIDsR3U', category: 'Personal Growth' },
 ];
 
-function VideoThumbnail({ videoId, name }: { videoId: string; name: string }) {
-    const [playing, setPlaying] = useState(false);
-
-    if (playing) {
-        return (
-            <div className="relative w-full aspect-video rounded-xl overflow-hidden">
-                <iframe
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-                    title={`${name} testimonial`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                />
-            </div>
-        );
-    }
-
-    return (
-        <button
-            onClick={() => setPlaying(true)}
-            className="relative w-full aspect-video rounded-xl overflow-hidden group cursor-pointer"
-        >
-            {/* YouTube thumbnail */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-                src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-                alt={`${name} testimonial`}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
-            {/* Play button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-brand-500/90 flex items-center justify-center group-hover:bg-brand-500 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-brand-500/30">
-                    <Play className="w-7 h-7 text-white ml-1" fill="white" />
-                </div>
-            </div>
-        </button>
-    );
+function getThumbUrl(videoId: string) {
+  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 }
 
-export function Testimonials() {
-    const [current, setCurrent] = useState(0);
-    const [direction, setDirection] = useState(1);
+/** Wrap index into [0, len) */
+function wrap(i: number, len: number) {
+  return ((i % len) + len) % len;
+}
 
-    const next = useCallback(() => {
-        setDirection(1);
-        setCurrent((c) => (c + 1) % testimonials.length);
-    }, []);
+export default function Testimonials() {
+  const [active, setActive] = useState(0);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const len = testimonials.length;
 
-    const prev = useCallback(() => {
-        setDirection(-1);
-        setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
-    }, []);
+  const next = useCallback(() => setActive((a) => wrap(a + 1, len)), [len]);
+  const prev = useCallback(() => setActive((a) => wrap(a - 1, len)), [len]);
 
-    // Auto-play
-    useEffect(() => {
-        const timer = setInterval(next, 6000);
-        return () => clearInterval(timer);
-    }, [next]);
+  // Auto-rotation (pause when video modal is open)
+  useEffect(() => {
+    if (activeVideo) return;
+    const id = setInterval(next, 5000);
+    return () => clearInterval(id);
+  }, [next, activeVideo]);
 
-    const t = testimonials[current];
+  // Positions: show 5 cards centered around `active`
+  // offsets: -2, -1, 0, +1, +2
+  const offsets = [-2, -1, 0, 1, 2];
 
-    const variants = {
-        enter: (dir: number) => ({ x: dir > 0 ? 100 : -100, opacity: 0 }),
-        center: { x: 0, opacity: 1 },
-        exit: (dir: number) => ({ x: dir > 0 ? -100 : 100, opacity: 0 }),
-    };
+  return (
+    <section className="relative py-20 md:py-28 overflow-hidden" style={{ backgroundColor: '#0a0118' }}>
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
+            What Our Learners Say
+          </h2>
+          <p className="mt-4 text-lg text-white/50 max-w-2xl mx-auto">
+            Real stories from professionals who transformed their careers with Daksha.
+          </p>
+        </motion.div>
+      </div>
 
-    return (
-        <section className="py-24 md:py-32 bg-[#0a0118] relative overflow-hidden">
-            {/* Subtle gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-950/20 to-transparent pointer-events-none" />
+      {/* Carousel */}
+      <div className="relative flex items-center justify-center" style={{ height: 520 }}>
+        {/* Nav arrows */}
+        <button
+          onClick={prev}
+          aria-label="Previous testimonial"
+          className="absolute left-4 md:left-8 lg:left-[calc(50%-420px)] z-30 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={next}
+          aria-label="Next testimonial"
+          className="absolute right-4 md:right-8 lg:right-[calc(50%-420px)] z-30 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
-                {/* Header */}
-                <div className="text-center mb-16 md:mb-20">
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-brand-400 font-semibold tracking-wide uppercase text-sm mb-4"
-                    >
-                        Testimonials
-                    </motion.p>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.05 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6"
-                    >
-                        What Our Learners Say
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-lg text-white/50 max-w-2xl mx-auto"
-                    >
-                        We measure our success by the success of our consultants in the field.
-                    </motion.p>
-                </div>
+        {/* Cards */}
+        <div className="relative w-full flex items-center justify-center" style={{ height: 500 }}>
+          {offsets.map((offset) => {
+            const idx = wrap(active + offset, len);
+            const t = testimonials[idx];
+            const isCenter = offset === 0;
+            const absOff = Math.abs(offset);
 
-                {/* Card with video + quote */}
-                <div className="relative max-w-5xl mx-auto">
-                    <AnimatePresence mode="wait" custom={direction}>
-                        <motion.div
-                            key={current}
-                            custom={direction}
-                            variants={variants}
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
-                            transition={{ duration: 0.4, ease: 'easeInOut' }}
-                            className="bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden"
-                        >
-                            <div className="grid grid-cols-1 md:grid-cols-2">
-                                {/* Video side */}
-                                <div className="p-4 md:p-6">
-                                    <VideoThumbnail videoId={t.videoId} name={t.name} />
-                                </div>
+            // Positioning
+            const translateX = offset * 300; // px spacing between cards
+            const scale = isCenter ? 1 : offset === 1 || offset === -1 ? 0.88 : 0.76;
+            const zIndex = 10 - absOff;
+            const blur = isCenter ? 0 : absOff === 1 ? 4 : 8;
+            const opacity = isCenter ? 1 : absOff === 1 ? 0.7 : 0.4;
 
-                                {/* Quote side */}
-                                <div className="p-6 md:p-10 flex flex-col justify-center">
-                                    {/* Accent line */}
-                                    <div className="w-10 h-1 bg-brand-500 rounded-full mb-6" />
+            return (
+              <motion.div
+                key={`${idx}-${offset}`}
+                animate={{
+                  x: translateX,
+                  scale,
+                  opacity,
+                  filter: `blur(${blur}px)`,
+                }}
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                className="absolute"
+                style={{
+                  width: 280,
+                  zIndex,
+                  willChange: 'transform, opacity, filter',
+                }}
+              >
+                <div
+                  className={`relative w-full rounded-2xl overflow-hidden ${isCenter ? 'cursor-pointer group' : 'pointer-events-none'}`}
+                  style={{ aspectRatio: '9/16' }}
+                  onClick={() => isCenter && setActiveVideo(t.videoId)}
+                >
+                  {/* Thumbnail */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={getThumbUrl(t.videoId)}
+                    alt={t.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
 
-                                    {/* Quote */}
-                                    <p className="text-xl md:text-2xl text-white/80 leading-relaxed italic mb-8">
-                                        &ldquo;{t.quote}&rdquo;
-                                    </p>
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
-                                    {/* Person */}
-                                    <div>
-                                        <h4 className="font-bold text-white text-lg">{t.name}</h4>
-                                        <p className="text-sm text-white/40 mt-1">{t.role}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
+                  {/* Category pill */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-white/15 backdrop-blur-md text-white border border-white/10">
+                      {t.category}
+                    </span>
+                  </div>
 
-                    {/* Nav arrows */}
-                    <div className="flex justify-center gap-3 mt-10">
-                        <button
-                            onClick={prev}
-                            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-500/50 hover:bg-white/5 transition-all duration-200"
-                            aria-label="Previous testimonial"
-                        >
-                            <ChevronLeft className="w-5 h-5 text-white/60" />
-                        </button>
-                        {/* Dots */}
-                        <div className="flex items-center gap-2 mx-4">
-                            {testimonials.map((_, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
-                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${i === current ? 'bg-brand-500 w-6' : 'bg-white/20 hover:bg-white/40'}`}
-                                    aria-label={`Go to testimonial ${i + 1}`}
-                                />
-                            ))}
-                        </div>
-                        <button
-                            onClick={next}
-                            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:border-brand-500/50 hover:bg-white/5 transition-all duration-200"
-                            aria-label="Next testimonial"
-                        >
-                            <ChevronRight className="w-5 h-5 text-white/60" />
-                        </button>
+                  {/* Play button (center card only) */}
+                  {isCenter && (
+                    <div className="absolute inset-0 flex items-center justify-center z-10">
+                      <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/20 transition-transform group-hover:scale-110">
+                        <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+                      </div>
                     </div>
+                  )}
+
+                  {/* Bottom text */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
+                    <p className="text-white/90 text-sm leading-relaxed line-clamp-3 mb-3">
+                      &ldquo;{t.quote}&rdquo;
+                    </p>
+                    <p className="text-white font-semibold text-sm">{t.name}</p>
+                    <p className="text-white/50 text-xs mt-0.5">{t.role}</p>
+                  </div>
                 </div>
-            </div>
-        </section>
-    );
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-2 mt-8">
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === active ? 'w-7 bg-brand-500' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+            aria-label={`Go to testimonial ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Video modal */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setActiveVideo(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="relative w-full max-w-3xl aspect-video rounded-xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&rel=0`}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+              <button
+                onClick={() => setActiveVideo(null)}
+                className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80 transition cursor-pointer"
+                aria-label="Close video"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
 }
