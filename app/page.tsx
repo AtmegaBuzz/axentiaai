@@ -3,7 +3,6 @@ import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Stats } from "@/components/sections/Stats";
 import { TrustedBy } from "@/components/sections/TrustedBy";
-import { About } from "@/components/sections/About";
 import { WhyDaksha } from "@/components/sections/WhyDaksha";
 import { Programs } from "@/components/sections/Programs";
 import { EnterprisePartnerships } from "@/components/sections/EnterprisePartnerships";
@@ -24,7 +23,6 @@ export default function Home() {
                 <Hero />
                 <Stats />
                 <TrustedBy />
-                <About />
                 <WhyDaksha />
                 <Programs />
                 <EnterprisePartnerships />

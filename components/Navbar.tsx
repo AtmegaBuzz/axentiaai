@@ -10,10 +10,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 const megaMenuData = {
     'Why AxentiaAI': {
         items: [
-            { name: 'Our Mission', href: '/about', description: 'Transforming careers through AI education' },
-            { name: 'Industry Partners', href: '/partners', description: 'Leading companies we collaborate with' },
-            { name: 'Success Stories', href: '/success', description: 'Real outcomes from our programs' },
-            { name: 'Campus Life', href: '/campus', description: 'Experience our learning environment' },
+            { name: 'Why AxentiaAI', href: '/about', description: 'Your partner for future-ready workforce skills' },
+            { name: 'How it works', href: '/how-it-works', description: 'Identify, close, and prevent skills gaps' },
+            { name: 'The Apprenticeship Levy', href: '/apprenticeship-levy', description: 'Your guide to funding workforce skills training' },
+            { name: 'Case studies', href: '/case-studies', description: 'Explore success stories from our programs' },
         ],
         featured: {
             label: "NEWS",
@@ -22,14 +22,16 @@ const megaMenuData = {
             href: "/about"
         }
     },
-    'Academics': {
+    'Programs': {
         items: [
-            { name: 'AI & Machine Learning', href: '/programs/ai-ml', description: 'Deep learning and neural networks' },
-            { name: 'SAP Certification', href: '/programs/sap', description: 'Enterprise SAP consulting track' },
-            { name: 'Data Science', href: '/programs/data-science', description: 'Analytics and business intelligence' },
-            { name: 'Full Stack Development', href: '/programs/fullstack', description: 'End-to-end web development' },
-            { name: 'Cloud Computing', href: '/programs/cloud', description: 'AWS, Azure, and GCP mastery' },
-            { name: 'Cybersecurity', href: '/programs/security', description: 'Enterprise security and compliance' },
+            { name: 'SAP Consulting Apprenticeship', href: '/programs/sap-consulting', description: 'Enterprise SAP consulting career track' },
+            { name: 'Data & AI for Enterprise', href: '/programs/data-ai-enterprise', description: 'Deep learning and AI for business impact' },
+            { name: 'ERP Business Analyst Track', href: '/programs/erp-analyst', description: 'End-to-end business process analysis' },
+            { name: 'Program Overview', href: '/programs', description: 'Explore our full range of programs' },
+            { name: 'Curriculum', href: '/programs/curriculum', description: 'Detailed course structure and modules' },
+            { name: 'Tools Taught', href: '/programs/tools', description: 'Industry-standard tools and platforms' },
+            { name: 'Mentors', href: '/programs/mentors', description: 'Learn from experienced industry professionals' },
+            { name: 'Outcomes', href: '/programs/outcomes', description: 'Real results from our latest cohorts' },
         ],
         featured: {
             label: "GUIDE",
@@ -38,32 +40,49 @@ const megaMenuData = {
             href: "/programs"
         }
     },
+    'Student Life': {
+        items: [
+            { name: 'Campus Experience', href: '/student-life/campus', description: 'Discover our learning environment' },
+            { name: 'Community', href: '/student-life/community', description: 'Connect with fellow learners' },
+            { name: 'Events & Workshops', href: '/student-life/events', description: 'Hands-on sessions and networking' },
+            { name: 'Student Stories', href: '/student-life/stories', description: 'Real experiences from our students' },
+        ],
+        featured: {
+            label: "SPOTLIGHT",
+            title: "A Day in the Life at AxentiaAI",
+            description: "See what it's like to learn with us",
+            href: "/student-life"
+        }
+    },
+    'Faculty': {
+        items: [
+            { name: 'Our Instructors', href: '/faculty/instructors', description: 'Industry experts and thought leaders' },
+            { name: 'Advisory Board', href: '/faculty/advisory', description: 'Guiding our academic excellence' },
+            { name: 'Research', href: '/faculty/research', description: 'Cutting-edge AI and tech research' },
+            { name: 'Guest Speakers', href: '/faculty/speakers', description: 'Learn from global industry leaders' },
+        ],
+        featured: {
+            label: "FEATURE",
+            title: "Meet Our World-Class Faculty",
+            description: "Experts from leading tech companies",
+            href: "/faculty"
+        }
+    },
     'Enterprises': {
         items: [
-            { name: 'Corporate Training', href: '/enterprises/training', description: 'Upskill your workforce' },
-            { name: 'Hiring Partners', href: '/enterprises/hiring', description: 'Access our talent pipeline' },
-            { name: 'Custom Programs', href: '/enterprises/custom', description: 'Tailored curriculum for your needs' },
-            { name: 'ROI Calculator', href: '/enterprises/roi', description: 'Measure training impact' },
+            { name: 'Hire Enterprise-Ready Talent', href: '/enterprises/hiring', description: 'Access our skilled talent pipeline' },
+            { name: 'Corporate Partnerships', href: '/enterprises/partnerships', description: 'Strategic collaboration opportunities' },
+            { name: 'Talent Pipeline Model', href: '/enterprises/talent-pipeline', description: 'End-to-end workforce development' },
+            { name: 'Custom Enterprise Training', href: '/enterprises/training', description: 'Tailored programs for your needs' },
+            { name: 'Case Studies', href: '/enterprises/case-studies', description: 'See how companies measure impact' },
+            { name: 'Enterprise Partners', href: '/enterprises/partners', description: 'Our corporate partner network' },
+            { name: 'Enterprise Contact Form', href: '/enterprises/contact', description: 'Get in touch with our team' },
         ],
         featured: {
             label: "REPORT",
             title: "Enterprise AI Training ROI Report 2026",
             description: "See how companies measure training impact",
             href: "/enterprises"
-        }
-    },
-    'Outcomes': {
-        items: [
-            { name: 'Placement Stats', href: '/outcomes/placements', description: '95% placement rate within 6 months' },
-            { name: 'Alumni Network', href: '/outcomes/alumni', description: 'Connect with 5000+ graduates' },
-            { name: 'Career Paths', href: '/outcomes/careers', description: 'Track your growth trajectory' },
-            { name: 'Salary Reports', href: '/outcomes/salaries', description: 'Average 40% salary increase' },
-        ],
-        featured: {
-            label: "SPOTLIGHT",
-            title: "Graduate Success: 95% Placement Rate",
-            description: "Real outcomes from our latest cohort",
-            href: "/outcomes"
         }
     }
 };
@@ -76,14 +95,17 @@ function MegaMenuDropdown({ menuKey, isOpen }: { menuKey: string; isOpen: boolea
         if (text === 'Why AxentiaAI') {
             return (<>Why <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">AxentiaAI</span></>);
         }
-        if (text === 'Academics') {
-            return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Academics</span></>);
+        if (text === 'Programs') {
+            return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Programs</span></>);
+        }
+        if (text === 'Student Life') {
+            return (<><span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Student</span> Life</>);
+        }
+        if (text === 'Faculty') {
+            return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Faculty</span></>);
         }
         if (text === 'Enterprises') {
             return (<>For <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Enterprises</span></>);
-        }
-        if (text === 'Outcomes') {
-            return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Outcomes</span></>);
         }
         return text;
     };
@@ -198,10 +220,10 @@ export function Navbar() {
 
     const menuItems = [
         { name: 'Why AxentiaAI', hasDropdown: true },
-        { name: 'Academics', hasDropdown: true },
+        { name: 'Programs', hasDropdown: true },
+        { name: 'Student Life', hasDropdown: true },
+        { name: 'Faculty', hasDropdown: true },
         { name: 'Enterprises', hasDropdown: true },
-        { name: 'Outcomes', hasDropdown: true },
-        { name: 'Forum', href: '/forum', hasDropdown: false },
     ];
 
     useEffect(() => {
@@ -229,7 +251,7 @@ export function Navbar() {
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between h-16">
                 <Link href="/" className="flex items-center">
-                    <Image src="/logo.png" alt="AxentiaAI" width={160} height={40} className="h-10 w-auto" priority />
+                    <Image src="/logo.png" alt="AxentiaAI" width={200} height={50} className="h-12 w-auto" priority />
                 </Link>
 
                 {/* Desktop Nav */}
@@ -278,25 +300,10 @@ export function Navbar() {
                 ))}
 
                 {/* CTA Buttons */}
-                <div className="hidden xl:flex items-center gap-3">
-                    <Button 
-                        variant="secondary" 
-                        size="sm" 
-                        className={`transition-all duration-200 ${
-                            (isScrolled || openDropdown)
-                                ? 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
-                                : 'bg-white/10 border-white/20 text-white hover:bg-white/20'
-                        }`}
-                    >
-                        Sign In
-                    </Button>
-                    <Button 
-                        variant="primary" 
-                        size="sm" 
-                        className="bg-brand-600 hover:bg-brand-700 text-white shadow-lg shadow-brand-600/25"
-                    >
-                        Apply Now
-                    </Button>
+                <div className="hidden xl:flex items-center">
+                    <Link href="/contact" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200">
+                        Contact Us
+                    </Link>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -352,9 +359,14 @@ export function Navbar() {
                                     )}
                                 </div>
                             ))}
-                            <div className="pt-4 border-t border-slate-200 space-y-3">
-                                <Button variant="secondary" className="w-full" onClick={() => setMobileMenuOpen(false)}>Sign In</Button>
-                                <Button variant="primary" className="w-full bg-brand-600 hover:bg-brand-700" onClick={() => setMobileMenuOpen(false)}>Apply Now</Button>
+                            <div className="pt-4 border-t border-slate-200">
+                                <Link 
+                                    href="/contact" 
+                                    className="block w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Contact Us
+                                </Link>
                             </div>
                         </div>
                     </motion.div>
