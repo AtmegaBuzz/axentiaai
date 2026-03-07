@@ -20,8 +20,8 @@ export function Hero() {
                     {/* Fallback gradient if video fails to load */}
                 </video>
                 
-                {/* Light overlay for better text readability */}
-                <div className="absolute inset-0 bg-white/70" />
+                {/* Darker overlay so video is visible + text readable */}
+                <div className="absolute inset-0 bg-black/40" />
             </div>
 
             {/* Hero Content */}
@@ -35,10 +35,10 @@ export function Hero() {
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="text-left"
                         >
-                            <div className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-slate-900 leading-[0.9] tracking-tight">
+                            <div className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[0.9] tracking-tight">
                                 Learn AI
                             </div>
-                            <div className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[0.9] tracking-tight mt-2">
+                            <div className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[0.9] tracking-tight mt-2">
                                 by{' '}
                                 <span className="bg-gradient-to-r from-accent-400 to-accent-500 bg-clip-text text-transparent">
                                     Doing
@@ -55,7 +55,7 @@ export function Hero() {
                         >
                             <Button 
                                 size="lg" 
-                                className="bg-slate-900 hover:bg-slate-800 text-white font-semibold py-4 px-8 rounded-full shadow-xl gap-3"
+                                className="bg-white hover:bg-white/90 text-slate-900 font-semibold py-4 px-8 rounded-full shadow-xl gap-3"
                                 variant="primary"
                             >
                                 <Play className="w-5 h-5" />
@@ -63,7 +63,7 @@ export function Hero() {
                             </Button>
                             <Button 
                                 size="lg" 
-                                className="bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 hover:bg-white font-semibold py-4 px-8 rounded-full shadow-xl gap-3"
+                                className="bg-white/10 backdrop-blur-md border border-white/30 text-white hover:bg-white/20 font-semibold py-4 px-8 rounded-full shadow-xl gap-3"
                                 variant="secondary"
                             >
                                 <Download className="w-5 h-5" />
