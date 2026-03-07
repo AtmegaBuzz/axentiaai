@@ -65,7 +65,7 @@ export function Audience() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-8"
                     >
-                        Ready to invest in your future?
+                        Who Is This For?
                     </motion.h2>
                 </div>
 

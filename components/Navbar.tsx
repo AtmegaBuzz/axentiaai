@@ -288,8 +288,9 @@ export function Navbar() {
 
                 {/* CTA Buttons */}
                 <div className="hidden xl:flex items-center">
-                    <Link href="/contact" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200">
+                    <Link href="/contact" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center gap-2">
                         Contact Us
+                        <ArrowRight className="w-4 h-4" />
                     </Link>
                 </div>
 
@@ -339,10 +340,11 @@ export function Navbar() {
                             <div className="pt-4 border-t border-slate-200">
                                 <Link 
                                     href="/contact" 
-                                    className="block w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200"
+                                    className="w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center justify-center gap-2"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     Contact Us
+                                    <ArrowRight className="w-4 h-4" />
                                 </Link>
                             </div>
                         </div>

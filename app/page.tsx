@@ -10,7 +10,6 @@ import { Timeline } from "@/components/sections/Timeline";
 import { Audience } from "@/components/sections/Audience";
 import Testimonials from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
-import { CTA } from "@/components/sections/CTA";
 
 export default function Home() {
     return (
@@ -27,7 +26,6 @@ export default function Home() {
                 <Audience />
                 <Testimonials />
                 <FAQ />
-                <CTA />
             </main>
             <Footer />
         </>
