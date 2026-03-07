@@ -30,7 +30,13 @@ export default function Testimonials() {
     return () => clearInterval(id);
   }, [next, activeVideo]);
 
-  const offsets = [-2, -1, 0, 1, 2];
+  // Build position map: for each testimonial index, what's its offset from active?
+  function getOffset(idx: number): number | null {
+    for (let o = -2; o <= 2; o++) {
+      if (wrap(active + o, len) === idx) return o;
+    }
+    return null;
+  }
 
   return (
     <section className="relative py-20 md:py-28 overflow-hidden" style={{ backgroundColor: '#0a0118' }}>
@@ -70,11 +76,12 @@ export default function Testimonials() {
           <ChevronRight className="w-5 h-5" />
         </button>
 
-        {/* Cards */}
+        {/* Cards — keyed by testimonial index so framer-motion tracks each card across positions */}
         <div className="relative w-full flex items-center justify-center" style={{ height: 400 }}>
-          {offsets.map((offset) => {
-            const idx = wrap(active + offset, len);
-            const t = testimonials[idx];
+          {testimonials.map((t, idx) => {
+            const offset = getOffset(idx);
+            if (offset === null) return null; // not visible
+
             const isCenter = offset === 0;
             const absOff = Math.abs(offset);
 
@@ -86,14 +93,14 @@ export default function Testimonials() {
 
             return (
               <motion.div
-                key={`${idx}-${offset}`}
+                key={idx}
                 animate={{
                   x: translateX,
                   scale,
                   opacity,
                   filter: `blur(${blur}px)`,
                 }}
-                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
                 className="absolute"
                 style={{
                   width: 640,
