@@ -1,83 +1,126 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { ArrowRight, Rocket, TrendingUp, Globe, Settings, Brain, BarChart3 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
-const programs = [
+interface Program {
+    title: string;
+    subtitle: string;
+    badge: string;
+    badgeColor: string;
+    desc: string;
+    meta: string;
+    gradient: string;
+    icon: LucideIcon;
+}
+
+const programs: Program[] = [
     {
         title: 'DCAP',
         subtitle: 'Daksha Career Accelerator Program',
         badge: 'Most Popular',
-        badgeColor: 'bg-brand-100 text-brand-700',
-        type: 'Basic',
-        desc: 'A 10-month structured pathway.',
-        timeline: ['4 months full-time classroom learning in Noida', '6–8 months paid apprenticeship'],
-        learnList: ['Enterprise process flows (P2P, O2C, R2R, H2R)', 'SAP S/4HANA core modules (MM, FICO, SD)', 'Basic configuration and testing', 'Clear documentation practices'],
-        meta: '4 months classroom + apprenticeship',
-        activeHighlight: true,
+        badgeColor: 'bg-white/90 text-brand-700',
+        desc: 'A 10-month structured pathway with 4 months classroom learning and a paid apprenticeship.',
+        meta: '10 months · Classroom + Apprenticeship',
+        gradient: 'from-brand-500 to-purple-600',
+        icon: Rocket,
     },
     {
         title: 'EAP',
         subtitle: 'Enterprise Acceleration Program',
         badge: 'Advanced',
-        badgeColor: 'bg-slate-100 text-slate-700',
-        type: 'Professional',
-        desc: 'For participants who complete DCAP.',
-        timeline: [],
-        learnList: ['Cross-module integration', 'Industry-specific scenarios', 'Presales and estimation support', 'AI use cases within enterprise projects'],
-        meta: 'Selection is based on performance during DCAP.',
-        activeHighlight: false,
+        badgeColor: 'bg-white/90 text-indigo-700',
+        desc: 'For DCAP completers ready to tackle cross-module integration and industry scenarios.',
+        meta: 'Performance-based selection',
+        gradient: 'from-purple-600 to-indigo-700',
+        icon: TrendingUp,
     },
     {
         title: 'Online Program',
         subtitle: 'Online Foundation',
         badge: 'Upcoming',
-        badgeColor: 'bg-accent-100 text-accent-700',
-        type: 'Explore',
-        desc: 'For those who want to begin with the basics',
-        timeline: [],
-        learnList: ['SAP fundamentals', 'Enterprise process understanding', 'Introductory structured modules'],
-        meta: 'No apprenticeship included',
-        activeHighlight: false,
+        badgeColor: 'bg-white/90 text-teal-700',
+        desc: 'Begin with the basics — SAP fundamentals and enterprise process understanding.',
+        meta: 'Self-paced · Online',
+        gradient: 'from-teal-500 to-cyan-500',
+        icon: Globe,
     },
     {
         title: 'SAP Consulting',
         subtitle: 'SAP Consulting Apprenticeship',
         badge: 'New',
-        badgeColor: 'bg-brand-100 text-brand-700',
-        type: 'Apprenticeship',
-        desc: 'Hands-on SAP consulting with enterprise clients.',
-        timeline: [],
-        learnList: ['End-to-end SAP implementation', 'Client communication', 'Configuration & testing', 'Go-live support'],
-        meta: '6 months hands-on',
-        activeHighlight: false,
+        badgeColor: 'bg-white/90 text-brand-700',
+        desc: 'Hands-on SAP consulting with real enterprise clients from implementation to go-live.',
+        meta: '6 months · Hands-on',
+        gradient: 'from-brand-600 to-brand-800',
+        icon: Settings,
     },
     {
         title: 'Data & AI',
         subtitle: 'Data & AI for Enterprise',
         badge: 'New',
-        badgeColor: 'bg-accent-100 text-accent-700',
-        type: 'Specialized',
-        desc: 'AI and data analytics for enterprise systems.',
-        timeline: [],
-        learnList: ['Enterprise data architecture', 'AI/ML for business processes', 'Predictive analytics', 'SAP BTP & AI integration'],
-        meta: '4 months intensive',
-        activeHighlight: false,
+        badgeColor: 'bg-white/90 text-amber-700',
+        desc: 'AI/ML and data analytics applied to enterprise systems and business processes.',
+        meta: '4 months · Intensive',
+        gradient: 'from-amber-400 to-orange-500',
+        icon: Brain,
     },
     {
         title: 'ERP Analyst',
         subtitle: 'ERP Business Analyst Track',
         badge: 'New',
-        badgeColor: 'bg-brand-100 text-brand-700',
-        type: 'Analyst',
-        desc: 'Business analysis for ERP implementations.',
-        timeline: [],
-        learnList: ['Requirements gathering', 'Process mapping', 'Gap analysis', 'Solution design documentation'],
-        meta: '5 months program',
-        activeHighlight: false,
+        badgeColor: 'bg-white/90 text-slate-700',
+        desc: 'Business analysis for ERP — requirements gathering, process mapping, and solution design.',
+        meta: '5 months · Program',
+        gradient: 'from-slate-500 to-brand-600',
+        icon: BarChart3,
     },
 ];
+
+function ProgramCard({ prog, idx }: { prog: Program; idx: number }) {
+    const Icon = prog.icon;
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ delay: 0.08 * idx, duration: 0.5 }}
+            className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden"
+        >
+            {/* Gradient image area */}
+            <div className={`relative h-52 bg-gradient-to-br ${prog.gradient} overflow-hidden`}>
+                {/* Abstract decorative shapes */}
+                <div className="absolute inset-0 opacity-[0.12]">
+                    <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full border-[6px] border-white" />
+                    <div className="absolute bottom-4 left-6 w-20 h-20 rounded-full border-[4px] border-white" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full border-[3px] border-white" />
+                </div>
+                {/* Icon */}
+                <Icon className="absolute bottom-5 right-5 w-12 h-12 text-white/20" strokeWidth={1.5} />
+                {/* Badge */}
+                <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm ${prog.badgeColor}`}>
+                    {prog.badge}
+                </span>
+            </div>
+
+            {/* Content */}
+            <div className="flex flex-col flex-grow p-6">
+                <h3 className="text-xl font-bold text-slate-900 mb-1">{prog.title}</h3>
+                <p className="text-sm font-semibold text-brand-600 mb-3">{prog.subtitle}</p>
+                <p className="text-sm text-slate-600 leading-relaxed mb-4 flex-grow">{prog.desc}</p>
+                <p className="text-xs text-slate-400 font-medium mb-4">{prog.meta}</p>
+                <button
+                    onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors group/link"
+                >
+                    Enroll Now
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5" />
+                </button>
+            </div>
+        </motion.div>
+    );
+}
 
 export function Programs() {
     return (
@@ -89,49 +132,9 @@ export function Programs() {
                     <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-lg text-slate-600">Six programs designed for different stages of your consulting career.</motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {programs.map((prog, idx) => (
-                        <motion.div
-                            key={prog.title}
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: 0.05 * idx }}
-                            className={`relative bg-white rounded-2xl p-8 border transition-all duration-300 flex flex-col h-full ${prog.activeHighlight ? 'border-brand-500 shadow-xl z-10' : 'border-slate-200 shadow-sm hover:border-brand-200'}`}
-                        >
-                            <div className="flex items-center justify-between mb-6">
-                                <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${prog.badgeColor}`}>{prog.badge}</span>
-                                <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">{prog.type}</span>
-                            </div>
-                            <h3 className="text-3xl font-extrabold text-slate-900 mb-1">{prog.title}</h3>
-                            <p className="text-brand-600 font-semibold mb-4">{prog.subtitle}</p>
-                            <p className="text-slate-600 text-sm mb-6 pb-6 border-b border-slate-100">{prog.desc}</p>
-                            {prog.timeline.length > 0 && (
-                                <div className="mb-6 space-y-2">
-                                    {prog.timeline.map((item, i) => (
-                                        <p key={i} className="text-sm font-medium text-slate-700 bg-slate-50 px-3 py-2 rounded-lg">{item}</p>
-                                    ))}
-                                </div>
-                            )}
-                            <div className="mb-8 flex-grow">
-                                <h4 className="text-sm font-bold text-slate-900 mb-4">{prog.timeline.length > 0 ? 'You learn:' : 'You work on:'}</h4>
-                                <ul className="space-y-3">
-                                    {prog.learnList.map((item, i) => (
-                                        <li key={i} className="flex flex-start gap-3">
-                                            <CheckCircle2 className={`w-5 h-5 shrink-0 ${prog.activeHighlight ? 'text-brand-500' : 'text-slate-400'}`} />
-                                            <span className="text-sm text-slate-600 leading-snug">{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
-                                <p className="text-xs font-medium text-slate-500 max-w-[50%]">{prog.meta}</p>
-                                <Button variant={prog.activeHighlight ? 'primary' : 'outline'} size="sm" className="gap-2"
-                                    onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}>
-                                    Enroll Now <ArrowRight className="w-4 h-4" />
-                                </Button>
-                            </div>
-                        </motion.div>
+                        <ProgramCard key={prog.title} prog={prog} idx={idx} />
                     ))}
                 </div>
             </div>
