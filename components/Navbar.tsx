@@ -3,69 +3,74 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, ChevronDown, Target, Brain, BookOpen, GraduationCap, Cloud, Shield, Users, Award, TrendingUp, DollarSign } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { Button } from './ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const megaMenuData = {
     'Why AxentiaAI': {
-        categories: [
-            {
-                title: 'About Us',
-                items: [
-                    { name: 'Our Mission', href: '/about', icon: Target, description: 'Transforming careers through AI education' },
-                    { name: 'Industry Partners', href: '/partners', icon: Users, description: 'Leading companies we collaborate with' },
-                    { name: 'Success Stories', href: '/success', icon: Award, description: 'Real outcomes from our programs' },
-                    { name: 'Campus Life', href: '/campus', icon: GraduationCap, description: 'Experience our learning environment' },
-                ]
-            }
-        ]
+        items: [
+            { name: 'Our Mission', href: '/about', description: 'Transforming careers through AI education' },
+            { name: 'Industry Partners', href: '/partners', description: 'Leading companies we collaborate with' },
+            { name: 'Success Stories', href: '/success', description: 'Real outcomes from our programs' },
+            { name: 'Campus Life', href: '/campus', description: 'Experience our learning environment' },
+            { name: 'Faculty Excellence', href: '/faculty', description: 'World-class instructors and mentors' },
+            { name: 'Innovation Labs', href: '/labs', description: 'Cutting-edge research and development' },
+        ],
+        featured: {
+            label: "NEWS",
+            title: "AxentiaAI Launches New AI Campus",
+            description: "Discover our state-of-the-art learning environment",
+            href: "/about"
+        }
     },
     'Academics': {
-        categories: [
-            {
-                title: 'Core Programs',
-                items: [
-                    { name: 'AI & Machine Learning', href: '/programs/ai-ml', icon: Brain, description: 'Deep learning and neural networks' },
-                    { name: 'SAP Certification', href: '/programs/sap', icon: Award, description: 'Enterprise SAP consulting track' },
-                    { name: 'Data Science', href: '/programs/data-science', icon: TrendingUp, description: 'Analytics and business intelligence' },
-                    { name: 'Full Stack Development', href: '/programs/fullstack', icon: BookOpen, description: 'End-to-end web development' },
-                ]
-            },
-            {
-                title: 'Specialized Tracks',
-                items: [
-                    { name: 'Cloud Computing', href: '/programs/cloud', icon: Cloud, description: 'AWS, Azure, and GCP mastery' },
-                    { name: 'Cybersecurity', href: '/programs/security', icon: Shield, description: 'Enterprise security and compliance' },
-                ]
-            }
-        ]
+        items: [
+            { name: 'AI & Machine Learning', href: '/programs/ai-ml', description: 'Deep learning and neural networks' },
+            { name: 'SAP Certification', href: '/programs/sap', description: 'Enterprise SAP consulting track' },
+            { name: 'Data Science', href: '/programs/data-science', description: 'Analytics and business intelligence' },
+            { name: 'Full Stack Development', href: '/programs/fullstack', description: 'End-to-end web development' },
+            { name: 'Cloud Computing', href: '/programs/cloud', description: 'AWS, Azure, and GCP mastery' },
+            { name: 'Cybersecurity', href: '/programs/security', description: 'Enterprise security and compliance' },
+        ],
+        featured: {
+            label: "GUIDE",
+            title: "From Learner to AI Professional",
+            description: "Download our career transformation playbook",
+            href: "/programs"
+        }
     },
     'Enterprises': {
-        categories: [
-            {
-                title: 'Solutions',
-                items: [
-                    { name: 'Corporate Training', href: '/enterprises/training', icon: GraduationCap, description: 'Upskill your workforce' },
-                    { name: 'Hiring Partners', href: '/enterprises/hiring', icon: Users, description: 'Access our talent pipeline' },
-                    { name: 'Custom Programs', href: '/enterprises/custom', icon: Target, description: 'Tailored curriculum for your needs' },
-                    { name: 'ROI Calculator', href: '/enterprises/roi', icon: DollarSign, description: 'Measure training impact' },
-                ]
-            }
-        ]
+        items: [
+            { name: 'Corporate Training', href: '/enterprises/training', description: 'Upskill your workforce' },
+            { name: 'Hiring Partners', href: '/enterprises/hiring', description: 'Access our talent pipeline' },
+            { name: 'Custom Programs', href: '/enterprises/custom', description: 'Tailored curriculum for your needs' },
+            { name: 'ROI Calculator', href: '/enterprises/roi', description: 'Measure training impact' },
+            { name: 'Consulting Services', href: '/enterprises/consulting', description: 'Strategic AI implementation guidance' },
+            { name: 'Partnership Program', href: '/enterprises/partnership', description: 'Long-term collaboration opportunities' },
+        ],
+        featured: {
+            label: "REPORT",
+            title: "Enterprise AI Training ROI Report 2026",
+            description: "See how companies measure training impact",
+            href: "/enterprises"
+        }
     },
     'Outcomes': {
-        categories: [
-            {
-                title: 'Results',
-                items: [
-                    { name: 'Placement Stats', href: '/outcomes/placements', icon: TrendingUp, description: '95% placement rate within 6 months' },
-                    { name: 'Alumni Network', href: '/outcomes/alumni', icon: Users, description: 'Connect with 5000+ graduates' },
-                    { name: 'Career Paths', href: '/outcomes/careers', icon: Target, description: 'Track your growth trajectory' },
-                    { name: 'Salary Reports', href: '/outcomes/salaries', icon: DollarSign, description: 'Average 40% salary increase' },
-                ]
-            }
-        ]
+        items: [
+            { name: 'Placement Stats', href: '/outcomes/placements', description: '95% placement rate within 6 months' },
+            { name: 'Alumni Network', href: '/outcomes/alumni', description: 'Connect with 5000+ graduates' },
+            { name: 'Career Paths', href: '/outcomes/careers', description: 'Track your growth trajectory' },
+            { name: 'Salary Reports', href: '/outcomes/salaries', description: 'Average 40% salary increase' },
+            { name: 'Success Stories', href: '/outcomes/stories', description: 'Inspiring graduate journeys' },
+            { name: 'Industry Recognition', href: '/outcomes/recognition', description: 'Awards and achievements' },
+        ],
+        featured: {
+            label: "SPOTLIGHT",
+            title: "Graduate Success: 95% Placement Rate",
+            description: "Real outcomes from our latest cohort",
+            href: "/outcomes"
+        }
     }
 };
 
@@ -74,52 +79,106 @@ function MegaMenuDropdown({ menuKey, isOpen }: { menuKey: string; isOpen: boolea
     
     if (!menuData) return null;
 
+    // Create the heading with highlighted brand word
+    const createHeading = (text: string) => {
+        if (text === 'Why AxentiaAI') {
+            return (
+                <>
+                    Why <span className="bg-[#c026d3]/10 px-2 py-1 rounded-md text-[#c026d3] font-bold">AxentiaAI</span>
+                </>
+            );
+        }
+        return text;
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.225, ease: 'easeOut' }}
-                    className="absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-xl z-50"
-                >
-                    <div className="container mx-auto px-4 md:px-6 py-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {menuData.categories.map((category, categoryIndex) => (
-                                <div key={categoryIndex} className="space-y-4">
-                                    <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">
-                                        {category.title}
-                                    </h3>
-                                    <div className="space-y-1">
-                                        {category.items.map((item) => {
-                                            const IconComponent = item.icon;
-                                            return (
-                                                <Link
-                                                    key={item.name}
-                                                    href={item.href}
-                                                    className="group flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors"
-                                                >
-                                                    <div className="flex-shrink-0 w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center group-hover:bg-brand-200 transition-colors">
-                                                        <IconComponent className="w-5 h-5 text-brand-600" />
-                                                    </div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <div className="text-sm font-semibold text-slate-900 group-hover:text-brand-600 transition-colors">
-                                                            {item.name}
+                <>
+                    {/* Dark overlay */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.45, ease: 'easeInOut' }}
+                        className="fixed inset-0 bg-black/40 z-40"
+                    />
+                    
+                    {/* Dropdown container with height animation */}
+                    <motion.div
+                        initial={{ gridTemplateRows: "0fr" }}
+                        animate={{ gridTemplateRows: "1fr" }}
+                        exit={{ gridTemplateRows: "0fr" }}
+                        transition={{ duration: 0.45, ease: 'easeInOut' }}
+                        className="absolute top-full left-0 w-full z-50 grid"
+                    >
+                        <div className="overflow-hidden">
+                            <div className="bg-white border-b border-slate-200 shadow-xl">
+                                <div className="container mx-auto px-4 md:px-6 py-12">
+                                    {/* 2-column grid layout */}
+                                    <div className="grid grid-cols-[2fr_1fr] gap-12">
+                                        {/* Left column */}
+                                        <div className="space-y-8">
+                                            {/* Heading */}
+                                            <h2 className="text-3xl font-bold text-slate-900">
+                                                {createHeading(menuKey)}
+                                            </h2>
+                                            
+                                            {/* 2-column grid of links */}
+                                            <div className="grid grid-cols-2 gap-6">
+                                                {menuData.items.map((item) => (
+                                                    <Link
+                                                        key={item.name}
+                                                        href={item.href}
+                                                        className="group block space-y-2 p-4 rounded-lg hover:bg-slate-50 transition-all duration-300"
+                                                    >
+                                                        <div className="flex items-center justify-between">
+                                                            <h3 className="text-base font-medium text-slate-900 group-hover:text-[#c026d3] group-hover:underline transition-all duration-300">
+                                                                {item.name}
+                                                            </h3>
+                                                            <ArrowRight className="w-4 h-4 text-[#c026d3] opacity-0 group-hover:opacity-100 transform translate-x-[-8px] group-hover:translate-x-0 transition-all duration-300" />
                                                         </div>
-                                                        <div className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                                        <p className="text-sm text-slate-500 leading-relaxed">
                                                             {item.description}
-                                                        </div>
+                                                        </p>
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        
+                                        {/* Right column - Featured content */}
+                                        <div className="border-l border-slate-200 pl-12">
+                                            <Link
+                                                href={menuData.featured.href}
+                                                className="group block p-6 bg-slate-50 rounded-xl border border-slate-200 hover:border-slate-300 transition-all duration-300"
+                                            >
+                                                {/* Featured image placeholder */}
+                                                <div className="w-full h-32 bg-gradient-to-br from-[#c026d3]/20 to-[#c026d3]/10 rounded-lg mb-4 flex items-center justify-center">
+                                                    <div className="w-12 h-12 bg-[#c026d3]/20 rounded-lg flex items-center justify-center">
+                                                        <div className="w-6 h-6 bg-[#c026d3] rounded"></div>
                                                     </div>
-                                                </Link>
-                                            );
-                                        })}
+                                                </div>
+                                                
+                                                {/* Featured content */}
+                                                <div className="space-y-2">
+                                                    <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                                                        {menuData.featured.label}
+                                                    </div>
+                                                    <h3 className="text-lg font-medium text-slate-900 group-hover:underline transition-all duration-300">
+                                                        {menuData.featured.title}
+                                                    </h3>
+                                                    <p className="text-sm text-slate-600 leading-relaxed">
+                                                        {menuData.featured.description}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
-                            ))}
+                            </div>
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </>
             )}
         </AnimatePresence>
     );
@@ -266,28 +325,20 @@ export function Navbar() {
                                             <h3 className="text-sm font-bold text-brand-600 uppercase tracking-wider">
                                                 {item.name}
                                             </h3>
-                                            {megaMenuData[item.name as keyof typeof megaMenuData]?.categories.map((category, catIndex) => (
-                                                <div key={catIndex} className="space-y-2">
-                                                    <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wider ml-4">
-                                                        {category.title}
-                                                    </h4>
-                                                    {category.items.map((subItem) => {
-                                                        const IconComponent = subItem.icon;
-                                                        return (
-                                                            <Link
-                                                                key={subItem.name}
-                                                                href={subItem.href}
-                                                                className="flex items-center gap-3 p-3 ml-4 rounded-lg hover:bg-slate-50"
-                                                                onClick={() => setMobileMenuOpen(false)}
-                                                            >
-                                                                <IconComponent className="w-4 h-4 text-brand-600" />
-                                                                <span className="text-sm font-medium text-slate-700">
-                                                                    {subItem.name}
-                                                                </span>
-                                                            </Link>
-                                                        );
-                                                    })}
-                                                </div>
+                                            {megaMenuData[item.name as keyof typeof megaMenuData]?.items.map((subItem) => (
+                                                <Link
+                                                    key={subItem.name}
+                                                    href={subItem.href}
+                                                    className="block p-3 ml-4 rounded-lg hover:bg-slate-50"
+                                                    onClick={() => setMobileMenuOpen(false)}
+                                                >
+                                                    <div className="text-sm font-medium text-slate-700">
+                                                        {subItem.name}
+                                                    </div>
+                                                    <div className="text-xs text-slate-500 mt-1">
+                                                        {subItem.description}
+                                                    </div>
+                                                </Link>
                                             ))}
                                         </div>
                                     ) : (

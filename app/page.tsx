@@ -7,7 +7,6 @@ import { About } from "@/components/sections/About";
 import { WhyDaksha } from "@/components/sections/WhyDaksha";
 import { Programs } from "@/components/sections/Programs";
 import { EnterprisePartnerships } from "@/components/sections/EnterprisePartnerships";
-import { CareerPaths } from "@/components/sections/CareerPaths";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Timeline } from "@/components/sections/Timeline";
 import { Journey } from "@/components/sections/Journey";
@@ -29,7 +28,6 @@ export default function Home() {
                 <WhyDaksha />
                 <Programs />
                 <EnterprisePartnerships />
-                <CareerPaths />
                 <HowItWorks />
                 <Timeline />
                 <Journey />
