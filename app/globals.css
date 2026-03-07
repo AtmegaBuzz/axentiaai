@@ -23,7 +23,7 @@
   --color-accent-800: #854d0e;
   --color-accent-900: #713f12;
 
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-plus-jakarta);
 }
 
 @layer base {
