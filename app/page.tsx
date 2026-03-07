@@ -10,7 +10,6 @@ import { Timeline } from "@/components/sections/Timeline";
 import { Journey } from "@/components/sections/Journey";
 import { Audience } from "@/components/sections/Audience";
 import Testimonials from "@/components/sections/Testimonials";
-import { JoinCommunity } from "@/components/sections/JoinCommunity";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTA } from "@/components/sections/CTA";
 
@@ -29,7 +28,6 @@ export default function Home() {
                 <Journey />
                 <Audience />
                 <Testimonials />
-                <JoinCommunity />
                 <FAQ />
                 <CTA />
             </main>

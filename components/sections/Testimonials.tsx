@@ -12,11 +12,6 @@ const testimonials = [
   { name: 'Deeksha', role: 'Trainee — Daksha Career Accelerator', quote: 'Every week, I see myself becoming more confident, more skilled, and more future-ready. Daksha is shaping my tomorrow.', videoId: 'bffdXIDsR3U', category: 'Personal Growth' },
 ];
 
-function getThumbUrl(videoId: string) {
-  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-}
-
-/** Wrap index into [0, len) */
 function wrap(i: number, len: number) {
   return ((i % len) + len) % len;
 }
@@ -29,15 +24,12 @@ export default function Testimonials() {
   const next = useCallback(() => setActive((a) => wrap(a + 1, len)), [len]);
   const prev = useCallback(() => setActive((a) => wrap(a - 1, len)), [len]);
 
-  // Auto-rotation (pause when video modal is open)
   useEffect(() => {
     if (activeVideo) return;
     const id = setInterval(next, 5000);
     return () => clearInterval(id);
   }, [next, activeVideo]);
 
-  // Positions: show 5 cards centered around `active`
-  // offsets: -2, -1, 0, +1, +2
   const offsets = [-2, -1, 0, 1, 2];
 
   return (
@@ -61,37 +53,36 @@ export default function Testimonials() {
       </div>
 
       {/* Carousel */}
-      <div className="relative flex items-center justify-center" style={{ height: 520 }}>
+      <div className="relative flex items-center justify-center" style={{ height: 440 }}>
         {/* Nav arrows */}
         <button
           onClick={prev}
           aria-label="Previous testimonial"
-          className="absolute left-4 md:left-8 lg:left-[calc(50%-420px)] z-30 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
+          className="absolute left-4 md:left-8 lg:left-[calc(50%-480px)] z-30 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
         <button
           onClick={next}
           aria-label="Next testimonial"
-          className="absolute right-4 md:right-8 lg:right-[calc(50%-420px)] z-30 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
+          className="absolute right-4 md:right-8 lg:right-[calc(50%-480px)] z-30 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition cursor-pointer"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
 
         {/* Cards */}
-        <div className="relative w-full flex items-center justify-center" style={{ height: 500 }}>
+        <div className="relative w-full flex items-center justify-center" style={{ height: 400 }}>
           {offsets.map((offset) => {
             const idx = wrap(active + offset, len);
             const t = testimonials[idx];
             const isCenter = offset === 0;
             const absOff = Math.abs(offset);
 
-            // Positioning
-            const translateX = offset * 300; // px spacing between cards
-            const scale = isCenter ? 1 : offset === 1 || offset === -1 ? 0.88 : 0.76;
+            const translateX = offset * 520;
+            const scale = isCenter ? 1 : absOff === 1 ? 0.85 : 0.7;
             const zIndex = 10 - absOff;
             const blur = isCenter ? 0 : absOff === 1 ? 4 : 8;
-            const opacity = isCenter ? 1 : absOff === 1 ? 0.7 : 0.4;
+            const opacity = isCenter ? 1 : absOff === 1 ? 0.6 : 0.3;
 
             return (
               <motion.div
@@ -105,27 +96,25 @@ export default function Testimonials() {
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                 className="absolute"
                 style={{
-                  width: 280,
+                  width: 640,
                   zIndex,
                   willChange: 'transform, opacity, filter',
                 }}
               >
                 <div
                   className={`relative w-full rounded-2xl overflow-hidden ${isCenter ? 'cursor-pointer group' : 'pointer-events-none'}`}
-                  style={{ aspectRatio: '9/16' }}
+                  style={{ aspectRatio: '16/9' }}
                   onClick={() => isCenter && setActiveVideo(t.videoId)}
                 >
-                  {/* Thumbnail */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={getThumbUrl(t.videoId)}
+                    src={`https://img.youtube.com/vi/${t.videoId}/maxresdefault.jpg`}
                     alt={t.name}
                     className="absolute inset-0 w-full h-full object-cover"
                     loading="lazy"
                   />
 
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
                   {/* Category pill */}
                   <div className="absolute top-4 left-4 z-10">
@@ -134,18 +123,18 @@ export default function Testimonials() {
                     </span>
                   </div>
 
-                  {/* Play button (center card only) */}
+                  {/* Play button */}
                   {isCenter && (
                     <div className="absolute inset-0 flex items-center justify-center z-10">
-                      <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/20 transition-transform group-hover:scale-110">
-                        <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+                      <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/20 transition-transform group-hover:scale-110">
+                        <Play className="w-7 h-7 text-white fill-white ml-0.5" />
                       </div>
                     </div>
                   )}
 
                   {/* Bottom text */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-                    <p className="text-white/90 text-sm leading-relaxed line-clamp-3 mb-3">
+                    <p className="text-white/90 text-sm leading-relaxed line-clamp-2 mb-2">
                       &ldquo;{t.quote}&rdquo;
                     </p>
                     <p className="text-white font-semibold text-sm">{t.name}</p>
@@ -158,7 +147,7 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Dot indicators */}
+      {/* Dots */}
       <div className="flex justify-center gap-2 mt-8">
         {testimonials.map((_, i) => (
           <button
@@ -186,7 +175,7 @@ export default function Testimonials() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="relative w-full max-w-3xl aspect-video rounded-xl overflow-hidden"
+              className="relative w-full max-w-4xl aspect-video rounded-xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <iframe
