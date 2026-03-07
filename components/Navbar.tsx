@@ -219,11 +219,11 @@ export function Navbar() {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const menuItems = [
-        { name: 'Why AxentiaAI', hasDropdown: true },
-        { name: 'Programs', hasDropdown: true },
-        { name: 'Student Life', hasDropdown: true },
-        { name: 'Faculty', hasDropdown: true },
-        { name: 'Enterprises', hasDropdown: true },
+        { name: 'Why AxentiaAI' },
+        { name: 'Programs' },
+        { name: 'Student Life' },
+        { name: 'Faculty' },
+        { name: 'Enterprises' },
     ];
 
     useEffect(() => {
@@ -251,7 +251,7 @@ export function Navbar() {
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between h-16">
                 <Link href="/" className="flex items-center">
-                    <Image src="/logo.png" alt="AxentiaAI" width={200} height={50} className="h-12 w-auto" priority />
+                    <Image src="/logo.png" alt="AxentiaAI" width={260} height={65} className="h-16 w-auto" priority />
                 </Link>
 
                 {/* Desktop Nav */}
@@ -260,43 +260,30 @@ export function Navbar() {
                         <div
                             key={item.name}
                             className="relative"
-                            onMouseEnter={() => item.hasDropdown && handleMouseEnter(item.name)}
-                            onMouseLeave={() => item.hasDropdown && handleMouseLeave()}
+                            onMouseEnter={() => handleMouseEnter(item.name)}
+                            onMouseLeave={() => handleMouseLeave()}
                         >
-                            {item.hasDropdown ? (
-                                <button
-                                    className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-all duration-200 ease-out cursor-default ${
-                                        openDropdown === item.name
-                                            ? 'text-brand-600'
-                                            : ((isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white')
-                                    }`}
-                                >
-                                    {item.name}
-                                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${openDropdown === item.name ? 'rotate-180' : ''}`} />
-                                </button>
-                            ) : (
-                                <Link
-                                    href={item.href!}
-                                    className={`px-4 py-2 text-sm font-medium transition-all duration-200 ease-out ${
-                                        (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
-                                    }`}
-                                >
-                                    {item.name}
-                                </Link>
-                            )}
+                            <button
+                                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-all duration-200 ease-out cursor-default ${
+                                    openDropdown === item.name
+                                        ? 'text-brand-600'
+                                        : ((isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white')
+                                }`}
+                            >
+                                {item.name}
+                                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${openDropdown === item.name ? 'rotate-180' : ''}`} />
+                            </button>
                         </div>
                     ))}
                 </nav>
                 
                 {/* Full-width dropdowns positioned relative to viewport */}
                 {menuItems.map((item) => (
-                    item.hasDropdown && (
-                        <MegaMenuDropdown 
-                            key={`dropdown-${item.name}`}
-                            menuKey={item.name} 
-                            isOpen={openDropdown === item.name} 
-                        />
-                    )
+                    <MegaMenuDropdown 
+                        key={`dropdown-${item.name}`}
+                        menuKey={item.name} 
+                        isOpen={openDropdown === item.name} 
+                    />
                 ))}
 
                 {/* CTA Buttons */}
@@ -328,35 +315,25 @@ export function Navbar() {
                         <div className="container mx-auto px-4 py-6 space-y-5">
                             {menuItems.map((item) => (
                                 <div key={item.name}>
-                                    {item.hasDropdown ? (
-                                        <div className="space-y-2">
-                                            <h3 className="text-sm font-bold text-brand-600 uppercase tracking-wider">
-                                                {item.name}
-                                            </h3>
-                                            {megaMenuData[item.name as keyof typeof megaMenuData]?.items.map((subItem) => (
-                                                <Link
-                                                    key={subItem.name}
-                                                    href={subItem.href}
-                                                    className="flex items-center gap-3 p-2.5 ml-2 rounded-lg hover:bg-slate-50"
-                                                    onClick={() => setMobileMenuOpen(false)}
-                                                >
-                                                    <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
-                                                    <div>
-                                                        <span className="text-sm font-medium text-slate-700">{subItem.name}</span>
-                                                        <p className="text-xs text-slate-400">{subItem.description}</p>
-                                                    </div>
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <Link
-                                            href={item.href!}
-                                            className="block text-base font-medium text-slate-700 py-2"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                        >
+                                    <div className="space-y-2">
+                                        <h3 className="text-sm font-bold text-brand-600 uppercase tracking-wider">
                                             {item.name}
-                                        </Link>
-                                    )}
+                                        </h3>
+                                        {megaMenuData[item.name as keyof typeof megaMenuData]?.items.map((subItem) => (
+                                            <Link
+                                                key={subItem.name}
+                                                href={subItem.href}
+                                                className="flex items-center gap-3 p-2.5 ml-2 rounded-lg hover:bg-slate-50"
+                                                onClick={() => setMobileMenuOpen(false)}
+                                            >
+                                                <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
+                                                <div>
+                                                    <span className="text-sm font-medium text-slate-700">{subItem.name}</span>
+                                                    <p className="text-xs text-slate-400">{subItem.description}</p>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </div>
                             ))}
                             <div className="pt-4 border-t border-slate-200">
