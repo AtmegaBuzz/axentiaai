@@ -1,81 +1,236 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { useRef, useState, useEffect, useCallback } from 'react'
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
 import { BookOpen, Wrench, BarChart3, Settings, Crown } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
-const timelineItems = [
-  { step: 1, period: 'Month 0–4', title: 'Trainee', description: 'Learn enterprise process flows, SAP basics, and structured documentation practices.', gradient: 'from-brand-300 to-brand-500', icon: BookOpen },
-  { step: 2, period: 'Month 4–10', title: 'Apprentice', description: 'Work on supervised project tasks. Paid. Deliverables reviewed by senior consultants.', gradient: 'from-brand-400 to-brand-600', icon: Wrench },
-  { step: 3, period: 'Year 1–2', title: 'Associate Consultant', description: 'Support UAT cycles, prepare dashboards, handle structured client communication, manage defined tasks independently.', gradient: 'from-brand-500 to-accent-400', icon: BarChart3 },
-  { step: 4, period: 'Year 2–4', title: 'Consultant', description: 'Own specific process areas, manage configuration and testing cycles, coordinate across teams.', gradient: 'from-accent-400 to-brand-500', icon: Settings },
-  { step: 5, period: 'Year 4+', title: 'Senior/Lead', description: 'Drive module-level decisions, guide junior consultants, manage client-facing responsibilities.', gradient: 'from-brand-600 to-brand-400', icon: Crown },
+interface TimelineEntry {
+  step: number
+  period: string
+  title: string
+  description: string
+  image: string
+  icon: LucideIcon
+}
+
+const timelineItems: TimelineEntry[] = [
+  {
+    step: 1,
+    period: 'Month 0-4',
+    title: 'Trainee',
+    description:
+      'Learn enterprise process flows, SAP basics, and structured documentation practices in an immersive classroom setting.',
+    image:
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&q=80',
+    icon: BookOpen,
+  },
+  {
+    step: 2,
+    period: 'Month 4-10',
+    title: 'Apprentice',
+    description:
+      'Work on supervised project tasks with pay. Deliverables reviewed by senior consultants on live engagements.',
+    image:
+      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
+    icon: Wrench,
+  },
+  {
+    step: 3,
+    period: 'Year 1-2',
+    title: 'Associate Consultant',
+    description:
+      'Support UAT cycles, prepare dashboards, handle structured client communication, and manage defined tasks independently.',
+    image:
+      'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80',
+    icon: BarChart3,
+  },
+  {
+    step: 4,
+    period: 'Year 2-4',
+    title: 'Consultant',
+    description:
+      'Own specific process areas, manage configuration and testing cycles, coordinate across cross-functional teams.',
+    image:
+      'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
+    icon: Settings,
+  },
+  {
+    step: 5,
+    period: 'Year 4+',
+    title: 'Senior / Lead',
+    description:
+      'Drive module-level decisions, guide junior consultants, and manage client-facing responsibilities at scale.',
+    image:
+      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&q=80',
+    icon: Crown,
+  },
 ]
 
-function TimelineItem({ item, index }: { item: typeof timelineItems[0]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-20% 0px -20% 0px' })
+/*
+  Layout per row (desktop):
+    Even index (0, 2, 4): card LEFT  | dot CENTER | period+image RIGHT
+    Odd  index (1, 3):    period+image LEFT | dot CENTER | card RIGHT
+*/
+
+function TimelineItem({
+  item,
+  index,
+  isActive,
+  dotRef,
+}: {
+  item: TimelineEntry
+  index: number
+  isActive: boolean
+  dotRef: (el: HTMLDivElement | null) => void
+}) {
+  const Icon = item.icon
+  const isEven = index % 2 === 0
+
+  /* Shared card block */
+  const card = (
+    <div
+      className={`bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group/card max-w-md ${
+        isEven ? 'ml-auto' : 'mr-auto'
+      }`}
+    >
+      <div className="p-5">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-9 h-9 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center shrink-0">
+            <Icon className="w-4 h-4 text-brand-600" strokeWidth={2} />
+          </div>
+          <h3 className="text-lg font-bold text-slate-900">{item.title}</h3>
+        </div>
+        <p className="text-slate-600 leading-relaxed text-sm">{item.description}</p>
+      </div>
+    </div>
+  )
+
+  /* Shared period + image block */
+  const periodAndImage = (
+    <div className={`max-w-md ${isEven ? 'mr-auto' : 'ml-auto'}`}>
+      <div className="mb-3">
+        <span
+          className="text-xs font-mono tracking-wider uppercase block mb-1 transition-colors duration-500"
+          style={{ color: isActive ? 'var(--color-brand-400, #e879f9)' : '#cbd5e1' }}
+        >
+          Step {item.step}
+        </span>
+        <p
+          className="text-lg font-semibold transition-colors duration-500"
+          style={{ color: isActive ? '#111827' : '#d1d5db' }}
+        >
+          {item.period}
+        </p>
+      </div>
+      <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full aspect-[3/2] object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  )
 
   return (
-    <div ref={ref} className="group relative grid grid-cols-[1fr_40px_1fr] md:grid-cols-[1fr_60px_1fr] gap-4 md:gap-8">
-      {/* Left: time period (desktop) */}
-      <div className="hidden md:flex items-start justify-end pt-1">
-        <motion.div
-          className="text-right"
-          initial={{ opacity: 0.3 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0.3 }}
-          transition={{ duration: 0.5 }}
+    <div className="relative">
+      {/* ── Desktop layout ── */}
+      <div className="hidden md:grid md:grid-cols-[1fr_60px_1fr] md:gap-8 items-start pb-20">
+        {/* Left column */}
+        <div
+          className={`transition-all duration-700 ease-out ${
+            isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-6'
+          }`}
         >
-          <span className="text-xs font-mono text-brand-400 tracking-wider uppercase">step-{item.step}</span>
-          <p className={`text-lg font-semibold transition-colors duration-500 ${isInView ? 'text-gray-900' : 'text-gray-300'}`}>
+          {isEven ? card : periodAndImage}
+        </div>
+
+        {/* Center: dot on the line */}
+        <div className="flex justify-center pt-1">
+          <div
+            ref={dotRef}
+            className="w-5 h-5 rounded-full z-20 transition-all duration-500"
+            style={{
+              border: `3px solid ${isActive ? 'var(--color-brand-500, #d946ef)' : '#cbd5e1'}`,
+              backgroundColor: isActive ? 'var(--color-brand-500, #d946ef)' : '#f8fafc',
+              boxShadow: isActive
+                ? '0 0 0 6px rgba(217, 70, 239, 0.15), 0 0 20px rgba(217, 70, 239, 0.3)'
+                : '0 0 0 4px rgba(203, 213, 225, 0.15)',
+            }}
+          />
+        </div>
+
+        {/* Right column */}
+        <div
+          className={`transition-all duration-700 ease-out ${
+            isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-6'
+          }`}
+        >
+          {isEven ? periodAndImage : card}
+        </div>
+      </div>
+
+      {/* ── Mobile layout ── */}
+      <div className="md:hidden grid grid-cols-[24px_1fr] gap-4 pb-14">
+        {/* Dot */}
+        <div className="flex justify-center pt-1">
+          <div
+            ref={index === 0 ? dotRef : undefined}
+            className="w-4 h-4 rounded-full z-20 transition-all duration-500"
+            style={{
+              border: `3px solid ${isActive ? 'var(--color-brand-500, #d946ef)' : '#cbd5e1'}`,
+              backgroundColor: isActive ? 'var(--color-brand-500, #d946ef)' : '#f8fafc',
+              boxShadow: isActive
+                ? '0 0 0 4px rgba(217, 70, 239, 0.15), 0 0 12px rgba(217, 70, 239, 0.3)'
+                : 'none',
+            }}
+          />
+        </div>
+
+        {/* Content */}
+        <div
+          className={`transition-all duration-700 ease-out ${
+            isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-4'
+          }`}
+        >
+          <span
+            className="text-xs font-mono tracking-wider uppercase block mb-1 transition-colors duration-500"
+            style={{ color: isActive ? 'var(--color-brand-400, #e879f9)' : '#d1d5db' }}
+          >
+            Step {item.step}
+          </span>
+          <p
+            className="text-sm font-semibold mb-3 transition-colors duration-500"
+            style={{ color: isActive ? '#111827' : '#d1d5db' }}
+          >
             {item.period}
           </p>
-        </motion.div>
-      </div>
 
-      {/* Center: line + dot */}
-      <div className="flex flex-col items-center relative">
-        <motion.div
-          className="w-4 h-4 rounded-full border-2 z-10 flex-shrink-0 mt-1 transition-all duration-500"
-          style={{
-            borderColor: isInView ? 'var(--color-brand-500, #d946ef)' : '#d1d5db',
-            backgroundColor: isInView ? 'var(--color-brand-500, #d946ef)' : 'transparent',
-          }}
-        />
-        {index < timelineItems.length - 1 && (
-          <div className="w-[2px] flex-1 bg-gray-200 min-h-[60px]" />
-        )}
-      </div>
-
-      {/* Right: content */}
-      <div className="pb-12 md:pb-16">
-        {/* Mobile: show period inline */}
-        <motion.div
-          initial={{ opacity: 0.3, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.3, y: 12 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="md:hidden mb-1">
-            <span className="text-xs font-mono text-brand-400 tracking-wider uppercase">step-{item.step}</span>
-            <p className={`text-sm font-semibold transition-colors duration-500 ${isInView ? 'text-gray-900' : 'text-gray-300'}`}>
-              {item.period}
-            </p>
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-3">
+            <div className="p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center shrink-0">
+                  <Icon className="w-4 h-4 text-brand-600" strokeWidth={2} />
+                </div>
+                <h3 className="text-base font-bold text-slate-900">{item.title}</h3>
+              </div>
+              <p className="text-slate-600 leading-relaxed text-sm">{item.description}</p>
+            </div>
           </div>
-          <h3 className={`text-xl font-bold mb-2 transition-colors duration-500 ${isInView ? 'text-gray-900' : 'text-gray-300'}`}>
-            {item.title}
-          </h3>
-          <p className={`text-base leading-relaxed transition-colors duration-500 mb-4 ${isInView ? 'text-gray-600' : 'text-gray-300'}`}>
-            {item.description}
-          </p>
-          {/* Image placeholder */}
-          <motion.div
-            className={`w-full max-w-sm aspect-video rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg`}
-            animate={{ opacity: isInView ? 0.9 : 0.15 }}
-            transition={{ duration: 0.6 }}
-          >
-            <item.icon className="w-12 h-12 text-white/60" strokeWidth={1.5} />
-          </motion.div>
-        </motion.div>
+
+          <div className="rounded-xl overflow-hidden border border-slate-200">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={item.image}
+              alt={item.title}
+              className="w-full aspect-[3/2] object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -83,30 +238,114 @@ function TimelineItem({ item, index }: { item: typeof timelineItems[0]; index: n
 
 export function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const dotEls = useRef<(HTMLDivElement | null)[]>([])
+  const [dotOffsets, setDotOffsets] = useState<number[]>([])
+  const [activeIndex, setActiveIndex] = useState(-1)
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 80%', 'end 60%'],
   })
+
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
+  const measureDots = useCallback(() => {
+    const container = containerRef.current
+    if (!container) return
+    const containerRect = container.getBoundingClientRect()
+    const containerHeight = containerRect.height
+    if (containerHeight === 0) return
+
+    const offsets = dotEls.current.map((dot) => {
+      if (!dot) return 0
+      const dotRect = dot.getBoundingClientRect()
+      const dotCenter = dotRect.top + dotRect.height / 2 - containerRect.top
+      return dotCenter / containerHeight
+    })
+    setDotOffsets(offsets)
+  }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(measureDots, 150)
+    window.addEventListener('resize', measureDots)
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('resize', measureDots)
+    }
+  }, [measureDots])
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (dotOffsets.length === 0) return
+    let newIndex = -1
+    for (let i = 0; i < dotOffsets.length; i++) {
+      if (latest >= dotOffsets[i]) newIndex = i
+    }
+    setActiveIndex(newIndex)
+  })
+
+  const setDotRef = useCallback(
+    (index: number) => (el: HTMLDivElement | null) => {
+      dotEls.current[index] = el
+    },
+    []
+  )
+
   return (
-    <section className="bg-white py-20 md:py-32">
-      <div className="max-w-4xl mx-auto px-6">
+    <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-brand-50/20 to-slate-50 relative overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 xl:px-12">
         {/* Header */}
-        <div className="text-center mb-16 md:mb-24">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">Student Path</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900">Your Career Timeline</h2>
+        <div className="max-w-3xl mb-20 md:mb-28">
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3"
+          >
+            Student Path
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-5"
+          >
+            Your Career Timeline
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="text-lg text-slate-600"
+          >
+            A structured progression from classroom learning to enterprise
+            leadership — each stage earned through performance.
+          </motion.p>
         </div>
 
         {/* Timeline */}
         <div ref={containerRef} className="relative">
-          {/* Scroll-driven progress line */}
-          <div className="absolute left-[20px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[3px] bg-gray-100">
+          {/* Center vertical line — background track (desktop) */}
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-slate-200">
             <motion.div
               className="w-full origin-top"
               style={{
                 height: lineHeight,
-                background: 'linear-gradient(to bottom, var(--color-brand-400, #e879f9), var(--color-brand-600, #a21caf))',
+                background:
+                  'linear-gradient(to bottom, var(--color-brand-400, #e879f9), var(--color-brand-600, #a21caf))',
+              }}
+            />
+          </div>
+
+          {/* Left vertical line (mobile) */}
+          <div className="md:hidden absolute left-[12px] top-0 bottom-0 w-[3px] bg-slate-200">
+            <motion.div
+              className="w-full origin-top"
+              style={{
+                height: lineHeight,
+                background:
+                  'linear-gradient(to bottom, var(--color-brand-400, #e879f9), var(--color-brand-600, #a21caf))',
               }}
             />
           </div>
@@ -114,7 +353,13 @@ export function Timeline() {
           {/* Items */}
           <div className="relative z-10">
             {timelineItems.map((item, i) => (
-              <TimelineItem key={item.step} item={item} index={i} />
+              <TimelineItem
+                key={item.step}
+                item={item}
+                index={i}
+                isActive={i <= activeIndex}
+                dotRef={setDotRef(i)}
+              />
             ))}
           </div>
         </div>
