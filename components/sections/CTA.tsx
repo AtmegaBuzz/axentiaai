@@ -1,44 +1,66 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Button } from '../ui/Button';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export function CTA() {
     return (
-        <section className="py-24 bg-brand-600 border-t border-brand-700">
+        <section id="cta" className="py-16 md:py-20 bg-white">
             <div className="container mx-auto px-4 md:px-8 xl:px-12">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
-                    <div className="max-w-2xl">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
-                        >
-                            Let’s get you to the right place.
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="text-xl text-brand-100 leading-relaxed font-medium"
-                        >
-                            No pressure. Just a conversation about your goals, where you are now, and whether Daksha might be the right next step.
-                        </motion.p>
+                <div className="relative w-full rounded-[2rem] bg-gradient-to-r from-brand-700 to-brand-500 overflow-hidden shadow-xl xl:h-[320px] flex flex-col xl:flex-row items-center">
+
+                    {/* Watermark letter */}
+                    <div className="absolute -top-10 right-0 xl:right-[15%] text-[16rem] md:text-[24rem] font-serif font-bold text-white/10 leading-none pointer-events-none select-none">
+                        D
                     </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="shrink-0 w-full md:w-auto"
-                    >
-                        <Button size="lg" className="w-full md:w-auto bg-white text-brand-700 hover:bg-slate-50 hover:text-brand-800 font-bold py-4 px-10 shadow-lg rounded-lg whitespace-nowrap">
-                            Schedule a Consultation
-                        </Button>
-                    </motion.div>
+                    {/* Left Content */}
+                    <div className="relative z-10 p-10 md:p-16 xl:w-3/5 flex flex-col items-start justify-center h-full">
+                        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">
+                            Let&apos;s get you to the right place.
+                        </h2>
+                        <p className="text-lg md:text-xl text-brand-100 mb-8 font-medium">
+                            No pressure. Just a conversation about your goals, where you are now, and whether Daksha might be the right next step.
+                        </p>
+
+                        <div className="flex flex-wrap items-center gap-6">
+                            <Link
+                                href="#"
+                                className="bg-white text-slate-900 border-2 border-white font-bold py-3 px-8 rounded-full hover:bg-brand-50 transition-colors"
+                            >
+                                Schedule a Consultation
+                            </Link>
+                            <Link
+                                href="/programs"
+                                className="text-white font-semibold flex items-center gap-2 hover:text-brand-100 transition-colors group"
+                            >
+                                Explore Programs
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Right Image — Desktop */}
+                    <div className="hidden xl:block absolute -top-12 -right-6 w-64 h-64 lg:w-80 lg:h-80 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20">
+                        <Image
+                            src="/mingers-woman.png"
+                            alt="Daksha Student"
+                            fill
+                            className="object-cover object-top"
+                            priority
+                        />
+                    </div>
+                    {/* Right Image — Mobile */}
+                    <div className="xl:hidden mt-8 mb-10 w-48 h-48 sm:w-64 sm:h-64 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20 relative self-center">
+                        <Image
+                            src="/mingers-woman.png"
+                            alt="Daksha Student"
+                            fill
+                            className="object-cover object-top"
+                            priority
+                        />
+                    </div>
                 </div>
             </div>
         </section>
