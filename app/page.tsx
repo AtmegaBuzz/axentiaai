@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import { MingersFooter } from "@/components/MingersFooter";
 import { Hero } from "@/components/sections/Hero";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { WhyDaksha } from "@/components/sections/WhyDaksha";
@@ -27,7 +27,7 @@ export default function Home() {
                 <Testimonials />
                 <CTA />
             </main>
-            <Footer />
+            <MingersFooter />
         </>
     );
 }
