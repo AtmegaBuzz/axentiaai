@@ -87,7 +87,7 @@ const megaMenuData = {
     }
 };
 
-function MegaMenuDropdown({ menuKey, isOpen }: { menuKey: string; isOpen: boolean }) {
+function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { menuKey: string; isOpen: boolean; onMouseEnter: () => void; onMouseLeave: () => void }) {
     const menuData = megaMenuData[menuKey as keyof typeof megaMenuData];
     if (!menuData) return null;
 
@@ -122,6 +122,7 @@ function MegaMenuDropdown({ menuKey, isOpen }: { menuKey: string; isOpen: boolea
                         transition={{ duration: 0.35, ease: 'easeInOut' }}
                         className="fixed inset-0 bg-black/40 z-40"
                         style={{ top: '64px' }}
+                        onMouseEnter={onMouseLeave}
                     />
                     
                     {/* Dropdown panel */}
@@ -131,6 +132,8 @@ function MegaMenuDropdown({ menuKey, isOpen }: { menuKey: string; isOpen: boolea
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                         className="fixed top-16 left-0 right-0 w-screen z-50 overflow-hidden"
+                        onMouseEnter={onMouseEnter}
+                        onMouseLeave={onMouseLeave}
                     >
                         <div className="bg-white border-b border-slate-200 shadow-xl">
                             <div className="container mx-auto px-4 md:px-8 py-10">
@@ -282,7 +285,9 @@ export function Navbar() {
                     <MegaMenuDropdown 
                         key={`dropdown-${item.name}`}
                         menuKey={item.name} 
-                        isOpen={openDropdown === item.name} 
+                        isOpen={openDropdown === item.name}
+                        onMouseEnter={() => handleMouseEnter(item.name)}
+                        onMouseLeave={() => handleMouseLeave()}
                     />
                 ))}
 
