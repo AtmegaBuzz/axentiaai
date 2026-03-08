@@ -124,7 +124,7 @@ function ProgramCard({ prog, idx }: { prog: Program; idx: number }) {
 
 export function Programs() {
     return (
-        <section id="programs" className="py-24 bg-slate-50 relative">
+        <section id="programs" className="py-16 md:py-24 bg-slate-50 relative">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4">Programs</motion.div>

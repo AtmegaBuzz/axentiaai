@@ -12,7 +12,7 @@ const benefits = [
 
 export function EnterprisePartnerships() {
     return (
-        <section id="enterprises" className="py-24 bg-slate-50 border-b border-slate-200">
+        <section id="enterprises" className="py-16 md:py-24 bg-slate-50 border-b border-slate-200">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <motion.div

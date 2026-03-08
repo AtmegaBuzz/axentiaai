@@ -27,7 +27,7 @@ export function FAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section className="py-24 bg-brand-50 relative border-t border-brand-100">
+        <section className="py-16 md:py-24 bg-brand-50 relative border-t border-brand-100">
             <div className="container mx-auto px-4 md:px-6 max-w-4xl">
                 <div className="text-center mb-16">
                     <motion.div
