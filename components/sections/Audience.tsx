@@ -1,34 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GraduationCap, BriefcaseBusiness, MapPin, Clock, Check, X } from 'lucide-react';
-
-const targets = [
-    {
-        title: 'Fresh Graduates',
-        desc: 'B.Tech, B.E., BBA, B.Com, BCA, B.Sc, MCA, MBA with 0–2 years experience',
-        icon: <GraduationCap className="w-8 h-8 text-brand-600" />,
-        color: 'bg-brand-50 border-brand-100',
-    },
-    {
-        title: 'Career Changers',
-        desc: 'Finance, HR, Procurement, Operations, Supply Chain with 1–6 years experience',
-        icon: <BriefcaseBusiness className="w-8 h-8 text-accent-600" />,
-        color: 'bg-accent-50 border-accent-100',
-    },
-    {
-        title: 'Noida-Based',
-        desc: 'Able to attend full-time, in-person training at our Noida campus',
-        icon: <MapPin className="w-8 h-8 text-emerald-600" />,
-        color: 'bg-emerald-50 border-emerald-100',
-    },
-    {
-        title: 'Committed',
-        desc: 'Full-time for ~10 months (training + apprenticeship)',
-        icon: <Clock className="w-8 h-8 text-amber-600" />,
-        color: 'bg-amber-50 border-amber-100',
-    },
-];
+import { GraduationCap, BriefcaseBusiness, MapPin, Clock, CheckCircle2, XCircle } from 'lucide-react';
 
 const fits = [
     'See consulting as a long-term profession',
@@ -47,89 +20,177 @@ const nonFits = [
 
 export function Audience() {
     return (
-        <section className="py-24 bg-white relative">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="flex items-center justify-center gap-2 text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4"
-                    >
-                        Who It's For
-                    </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-8"
-                    >
-                        Who Is This For?
-                    </motion.h2>
-                </div>
+        <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12">
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
-                    {targets.map((target, idx) => (
+                {/* ── WHO IS THIS FOR (BENTO BOX) ── */}
+                <div className="mb-24">
+                    <div className="max-w-3xl mb-12">
                         <motion.div
-                            key={target.title}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 15 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: 0.1 * idx }}
-                            className={`p-8 rounded-3xl border transition-all hover:shadow-xl flex flex-col items-center text-center ${target.color}`}
+                            viewport={{ once: true }}
+                            className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3"
                         >
-                            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6">
-                                {target.icon}
-                            </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3">{target.title}</h3>
-                            <p className="text-slate-600 leading-relaxed text-sm">{target.desc}</p>
+                            Who It's For
                         </motion.div>
-                    ))}
-                </div>
-
-                <div className="max-w-5xl mx-auto bg-slate-50 rounded-[3rem] p-10 md:p-16 border border-slate-200">
-                    <div className="text-center mb-12">
-                        <h3 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">Is This Right For You?</h3>
-                        <p className="text-slate-600 text-lg">We're looking for people who think long-term. Daksha requires focus and commitment.</p>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight"
+                        >
+                            Designed for the <span className="text-brand-600">Dedicated</span>
+                        </motion.h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <div className="bg-white p-8 rounded-3xl border border-emerald-100 shadow-sm">
-                            <h4 className="font-bold text-emerald-700 text-lg mb-6 flex items-center gap-2">
-                                <Check className="w-6 h-6 text-emerald-500" />
-                                You are likely a good fit if you:
-                            </h4>
-                            <ul className="space-y-4">
-                                {fits.map((fit, i) => (
-                                    <li key={i} className="flex gap-3 items-start">
-                                        <span className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                                            <Check className="w-4 h-4 text-emerald-600" />
-                                        </span>
-                                        <span className="text-slate-700 leading-relaxed">{fit}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    {/* Bento Grid layout */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
+                        {/* Tile 1: Fresh Graduates (Tall) */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="md:col-span-1 md:row-span-2 relative rounded-3xl overflow-hidden bg-brand-600 text-white p-8 flex flex-col justify-between shadow-lg group"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+                            <div className="relative z-10">
+                                <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 shadow-sm">
+                                    <GraduationCap className="w-7 h-7 text-white" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-4">Fresh Graduates</h3>
+                                <p className="text-white/80 leading-relaxed font-medium">
+                                    B.Tech, B.E., BBA, B.Com, BCA, B.Sc, MCA, MBA with 0–2 years experience looking to jumpstart an enterprise career.
+                                </p>
+                            </div>
 
-                        <div className="bg-white p-8 rounded-3xl border border-rose-100 shadow-sm">
-                            <h4 className="font-bold text-rose-700 text-lg mb-6 flex items-center gap-2">
-                                <X className="w-6 h-6 text-rose-500" />
-                                Daksha may not be suitable if you:
-                            </h4>
-                            <ul className="space-y-4">
-                                {nonFits.map((fit, i) => (
-                                    <li key={i} className="flex gap-3 items-start">
-                                        <span className="w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center shrink-0 mt-0.5">
-                                            <X className="w-4 h-4 text-rose-600" />
-                                        </span>
-                                        <span className="text-slate-700 leading-relaxed">{fit}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                            {/* Decorative faint icon in bg */}
+                            <GraduationCap className="absolute -bottom-10 -right-10 w-48 h-48 text-white/5 pointer-events-none transition-transform duration-700 group-hover:scale-110" strokeWidth={1} />
+                        </motion.div>
+
+                        {/* Tile 2: Career Changers (Wide) */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="md:col-span-2 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow"
+                        >
+                            <div className="flex items-start gap-6 relative z-10">
+                                <div className="w-14 h-14 shrink-0 bg-accent-50 rounded-2xl border border-accent-100 flex items-center justify-center shadow-sm">
+                                    <BriefcaseBusiness className="w-7 h-7 text-accent-600" />
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-bold text-slate-900 mb-3">Career Changers</h3>
+                                    <p className="text-slate-600 leading-relaxed">
+                                        Professionals in Finance, HR, Procurement, Operations, or Supply Chain with 1–6 years of experience, ready to pivot into high-impact SAP consulting roles.
+                                    </p>
+                                </div>
+                            </div>
+                            <BriefcaseBusiness className="absolute -top-12 -right-12 w-48 h-48 text-slate-50 pointer-events-none transition-transform duration-700 group-hover:-rotate-6" strokeWidth={1} />
+                        </motion.div>
+
+                        {/* Tile 3: Noida-Based (Square) */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="md:col-span-1 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow"
+                        >
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 bg-emerald-50 rounded-xl border border-emerald-100 flex items-center justify-center mb-5 shadow-sm">
+                                    <MapPin className="w-6 h-6 text-emerald-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2">Campus Based</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">
+                                    Able to attend full-time, in-person training at our Noida campus facility.
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        {/* Tile 4: Committed (Square) */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="md:col-span-1 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow"
+                        >
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 bg-amber-50 rounded-xl border border-amber-100 flex items-center justify-center mb-5 shadow-sm">
+                                    <Clock className="w-6 h-6 text-amber-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2">Committed</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">
+                                    Available full-time for ~10 months (training + live project apprenticeship).
+                                </p>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
+
+                {/* ── IS THIS RIGHT FOR YOU (UNIFIED CARD) ── */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="relative bg-white rounded-[2.5rem] p-8 md:p-12 lg:p-16 border border-slate-200 shadow-xl shadow-slate-200/40"
+                >
+                    {/* subtle background mesh/gradient */}
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-slate-50/80 to-transparent pointer-events-none rounded-r-[2.5rem]" />
+
+                    <div className="relative z-10">
+                        <div className="max-w-2xl mb-14">
+                            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">
+                                Is This Right For <span className="text-brand-600">You?</span>
+                            </h3>
+                            <p className="text-slate-600 text-lg">
+                                We're looking for individuals who think long-term. Daksha requires immense focus and commitment to transform your career foundation.
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-12 lg:gap-24 relative">
+                            {/* Divider for desktop */}
+                            <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-slate-200 to-transparent -translate-x-1/2" />
+
+                            {/* Good Fit */}
+                            <div>
+                                <h4 className="font-bold text-emerald-700 text-xl mb-8 flex items-center gap-3">
+                                    <CheckCircle2 className="w-7 h-7 text-emerald-500 fill-emerald-100" />
+                                    You are a great fit if you:
+                                </h4>
+                                <ul className="space-y-6">
+                                    {fits.map((fit, i) => (
+                                        <li key={i} className="flex gap-4 items-start group">
+                                            <span className="shrink-0 mt-1 relative w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                                            <span className="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">{fit}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Bad Fit */}
+                            <div>
+                                <h4 className="font-bold text-rose-700 text-xl mb-8 flex items-center gap-3">
+                                    <XCircle className="w-7 h-7 text-rose-500 fill-rose-100" />
+                                    Daksha may not fit if you:
+                                </h4>
+                                <ul className="space-y-6">
+                                    {nonFits.map((fit, i) => (
+                                        <li key={i} className="flex gap-4 items-start group">
+                                            <span className="shrink-0 mt-1 relative w-2 h-2 bg-rose-400 rotate-45 shadow-[0_0_8px_rgba(251,113,133,0.8)]" />
+                                            <span className="text-slate-600 leading-relaxed group-hover:text-slate-800 transition-colors">{fit}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </motion.div>
+
             </div>
         </section>
     );
