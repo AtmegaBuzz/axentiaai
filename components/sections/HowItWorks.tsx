@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { BookOpen, Briefcase, Zap, Layers, Cpu, Wrench, MessageSquare, Check } from 'lucide-react';
 
 const phases = [
@@ -52,34 +49,19 @@ export function HowItWorks() {
         <section className="py-16 md:py-24 bg-slate-50 relative border-b border-slate-200">
             <div className="container mx-auto px-4 md:px-8 xl:px-12">
                 <div className="max-w-3xl mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6"
-                    >
+                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6">
                         Learn. Apply. Accelerate.
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-lg text-slate-600 max-w-2xl"
-                    >
+                    </h2>
+                    <p className="text-lg text-slate-600 max-w-2xl">
                         Daksha follows a clear progression. You begin with structured learning and move into supervised project work seamlessly.
-                    </motion.p>
+                    </p>
                 </div>
 
                 {/* Phases */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-                    {phases.map((phase, idx) => (
-                        <motion.div
+                    {phases.map((phase) => (
+                        <div
                             key={phase.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: 0.05 * idx }}
                             className="bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-lg transition-shadow relative flex flex-col"
                         >
                             <div className="flex items-center gap-3 mb-4">
@@ -93,27 +75,20 @@ export function HowItWorks() {
                             <div className="mt-auto text-xs font-semibold uppercase tracking-wider text-slate-500 bg-slate-50 border border-slate-100 py-2 px-3 rounded-lg inline-block w-fit">
                                 {phase.meta}
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
-                {/* Curriculum part */}
+                {/* Curriculum */}
                 <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm relative">
                     <div className="mb-12 max-w-2xl">
-                        <h3 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">What You'll Learn</h3>
+                        <h3 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">What You&apos;ll Learn</h3>
                         <p className="text-slate-600 text-lg">During the foundation phase, your week is divided between process understanding, SAP practice, and professional skill-building.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-                        {curriculum.map((group, idx) => (
-                            <motion.div
-                                key={group.title}
-                                initial={{ opacity: 0, scale: 0.98 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.05 * idx }}
-                                className="flex flex-col"
-                            >
+                        {curriculum.map((group) => (
+                            <div key={group.title} className="flex flex-col">
                                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                                     {group.icon}
                                     <h4 className="font-bold text-slate-900">{group.title}</h4>
@@ -126,11 +101,10 @@ export function HowItWorks() {
                                         </li>
                                     ))}
                                 </ul>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>
-
             </div>
         </section>
     );
