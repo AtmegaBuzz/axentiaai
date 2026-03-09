@@ -1,3 +1,5 @@
+'use client';
+
 import { ArrowRight, Rocket, TrendingUp, Globe, Settings, Brain, BarChart3 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
