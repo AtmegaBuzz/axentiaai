@@ -1,7 +1,5 @@
 'use client';
 
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { CheckCircle2, BookOpen, Briefcase, Users, Building2, Award, ArrowRight } from 'lucide-react';
@@ -57,7 +55,6 @@ const whoShouldApply = [
 export default function ProgramsPage() {
     return (
         <>
-            <Navbar />
             <main className="pt-24">
                 {/* Header */}
                 <section className="py-24 bg-gradient-to-br from-slate-900 to-brand-950">
@@ -161,7 +158,6 @@ export default function ProgramsPage() {
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     );
 }

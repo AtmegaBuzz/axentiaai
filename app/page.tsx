@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/Navbar";
-import { MingersFooter } from "@/components/MingersFooter";
 import { Hero } from "@/components/sections/Hero";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { WhyAxentiaAI } from "@/components/sections/WhyMastersUnion";
@@ -14,22 +12,18 @@ import { CTA } from "@/components/sections/CTA";
 
 export default function Home() {
     return (
-        <>
-            <Navbar />
-            <main className="flex min-h-screen flex-col">
-                <Hero />
-                <TrustedBy />
-                <WhyAxentiaAI />
-                <WhyDaksha />
-                <Programs />
-                <EnterprisePartnerships />
-                <HowItWorks />
-                <Timeline />
-                <Audience />
-                <Testimonials />
-                <CTA />
-            </main>
-            <MingersFooter />
-        </>
+        <main className="flex min-h-screen flex-col">
+            <Hero />
+            <TrustedBy />
+            <WhyAxentiaAI />
+            <WhyDaksha />
+            <Programs />
+            <EnterprisePartnerships />
+            <HowItWorks />
+            <Timeline />
+            <Audience />
+            <Testimonials />
+            <CTA />
+        </main>
     );
 }

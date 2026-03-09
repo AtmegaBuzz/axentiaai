@@ -1,7 +1,5 @@
 'use client';
 
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { Target, Heart, Users, Award, Lightbulb, Globe } from 'lucide-react';
 
@@ -28,7 +26,6 @@ const values = [
 export default function AboutPage() {
     return (
         <>
-            <Navbar />
             <main className="pt-24">
                 {/* Our Story */}
                 <section className="py-24 bg-white">
@@ -105,7 +102,6 @@ export default function AboutPage() {
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     );
 }

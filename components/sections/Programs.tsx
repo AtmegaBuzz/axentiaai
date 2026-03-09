@@ -23,7 +23,7 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-brand-700',
         desc: 'A 10-month structured pathway with 4 months classroom learning and a paid apprenticeship.',
         meta: '10 months · Classroom + Apprenticeship',
-        gradient: 'from-brand-500/80 to-purple-600/80',
+        gradient: 'from-brand-500 to-purple-600',
         icon: Rocket,
         image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
     },
@@ -34,7 +34,7 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-indigo-700',
         desc: 'For DCAP completers ready to tackle cross-module integration and industry scenarios.',
         meta: 'Performance-based selection',
-        gradient: 'from-purple-600/80 to-indigo-700/80',
+        gradient: 'from-purple-600 to-indigo-700',
         icon: TrendingUp,
         image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
     },
@@ -45,7 +45,7 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-teal-700',
         desc: 'Begin with the basics — SAP fundamentals and enterprise process understanding.',
         meta: 'Self-paced · Online',
-        gradient: 'from-teal-500/80 to-cyan-500/80',
+        gradient: 'from-teal-500 to-cyan-500',
         icon: Globe,
         image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=600&h=400&fit=crop&q=80',
     },
@@ -56,7 +56,7 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-brand-700',
         desc: 'Hands-on SAP consulting with real enterprise clients from implementation to go-live.',
         meta: '6 months · Hands-on',
-        gradient: 'from-brand-600/80 to-brand-800/80',
+        gradient: 'from-brand-600 to-brand-800',
         icon: Settings,
         image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
     },
@@ -67,7 +67,7 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-amber-700',
         desc: 'AI/ML and data analytics applied to enterprise systems and business processes.',
         meta: '4 months · Intensive',
-        gradient: 'from-amber-400/80 to-orange-500/80',
+        gradient: 'from-amber-400 to-orange-500',
         icon: Brain,
         image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop&q=80',
     },
@@ -78,7 +78,7 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-slate-700',
         desc: 'Business analysis for ERP — requirements gathering, process mapping, and solution design.',
         meta: '5 months · Program',
-        gradient: 'from-slate-500/80 to-brand-600/80',
+        gradient: 'from-slate-500 to-brand-600',
         icon: BarChart3,
         image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80',
     },
@@ -97,12 +97,12 @@ function ProgramCard({ prog }: { prog: Program }) {
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                 />
-                {/* Gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${prog.gradient}`} />
+                {/* Subtle bottom gradient for badge/icon readability */}
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
                 {/* Icon */}
-                <Icon className="absolute bottom-5 right-5 w-12 h-12 text-white/25" strokeWidth={1.5} />
+                <Icon className="absolute bottom-5 right-5 w-12 h-12 text-white/40" strokeWidth={1.5} />
                 {/* Badge */}
-                <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm ${prog.badgeColor}`}>
+                <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm ${prog.badgeColor}`}>
                     {prog.badge}
                 </span>
             </div>
