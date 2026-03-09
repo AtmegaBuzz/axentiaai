@@ -291,7 +291,7 @@ export function Timeline() {
   )
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-brand-50/20 to-slate-50 relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 xl:px-12">
         {/* Header */}
         <div className="max-w-3xl mb-20 md:mb-28">

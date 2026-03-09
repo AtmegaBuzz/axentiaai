@@ -4,10 +4,14 @@ import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Play, Download } from 'lucide-react';
 
-export function Hero() {
+interface HeroProps {
+    loaderDone?: boolean;
+}
+
+export function Hero({ loaderDone = false }: HeroProps) {
     return (
-        <section className="relative min-h-screen flex flex-col overflow-hidden bg-gradient-to-br from-white via-slate-50 to-gray-100">
-            {/* Background Video with Light Overlay */}
+        <section className="sticky top-0 z-10 relative min-h-screen flex flex-col overflow-hidden bg-white will-change-transform" style={{ transform: 'translateZ(0)' }}>
+            {/* Background Video — always visible, GPU-accelerated */}
             <div className="absolute inset-0 z-0">
                 <video
                     autoPlay
@@ -15,12 +19,10 @@ export function Hero() {
                     loop
                     playsInline
                     className="w-full h-full object-cover"
+                    style={{ transform: 'translateZ(0)', willChange: 'transform' }}
                 >
                     <source src="/hero_video.mp4" type="video/mp4" />
-                    {/* Fallback gradient if video fails to load */}
                 </video>
-                
-                {/* Darker overlay so video is visible + text readable */}
                 <div className="absolute inset-0 bg-black/40" />
             </div>
 
@@ -28,12 +30,12 @@ export function Hero() {
             <div className="relative z-10 flex-1 flex items-center">
                 <div className="container mx-auto px-4 md:px-6 pt-32 pb-20">
                     <div className="max-w-5xl">
-                        {/* Main Heading */}
-                        <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
+                        {/* Main Heading — always visible, loader text lands on top then fades away */}
+                        {/* Main Heading — transparent during loader to allow perfectly overlaying loader text */}
+                        <h1
+                            id="hero-heading"
                             className="text-left"
+                            style={{ opacity: loaderDone ? 1 : 0 }}
                         >
                             <div className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[0.9] tracking-tight">
                                 Learn AI
@@ -44,25 +46,25 @@ export function Hero() {
                                     Doing
                                 </span>
                             </div>
-                        </motion.h1>
+                        </h1>
 
-                        {/* CTA Buttons */}
+                        {/* CTA Buttons — fade in after loader */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
+                            animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
                             className="flex flex-col sm:flex-row gap-4 mt-12"
                         >
-                            <Button 
-                                size="lg" 
+                            <Button
+                                size="lg"
                                 className="bg-white hover:bg-white/90 text-slate-900 font-semibold py-4 px-8 rounded-full shadow-xl gap-3"
                                 variant="primary"
                             >
                                 <Play className="w-5 h-5" />
                                 Watch Intro Video
                             </Button>
-                            <Button 
-                                size="lg" 
+                            <Button
+                                size="lg"
                                 className="bg-white/10 backdrop-blur-md border border-white/30 text-white hover:bg-white/20 font-semibold py-4 px-8 rounded-full shadow-xl gap-3"
                                 variant="secondary"
                             >

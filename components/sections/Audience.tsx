@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { GraduationCap, BriefcaseBusiness, MapPin, Clock, CheckCircle2, XCircle } from 'lucide-react';
 
 const fits = [
@@ -26,34 +23,18 @@ export function Audience() {
                 {/* ── WHO IS THIS FOR (BENTO BOX) ── */}
                 <div className="mb-24">
                     <div className="max-w-3xl mb-12">
-                        <motion.div
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3"
-                        >
-                            Who It's For
-                        </motion.div>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight"
-                        >
+                        <div className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">
+                            Who It&apos;s For
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
                             Designed for the <span className="text-brand-600">Dedicated</span>
-                        </motion.h2>
+                        </h2>
                     </div>
 
-                    {/* Bento Grid layout */}
+                    {/* Bento Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
                         {/* Tile 1: Fresh Graduates (Tall) */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="md:col-span-1 md:row-span-2 relative rounded-3xl overflow-hidden bg-brand-600 text-white p-8 flex flex-col justify-between shadow-lg group"
-                        >
+                        <div className="md:col-span-1 md:row-span-2 relative rounded-3xl overflow-hidden bg-brand-600 text-white p-8 flex flex-col justify-between shadow-lg group">
                             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
                             <div className="relative z-10">
                                 <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 shadow-sm">
@@ -64,19 +45,11 @@ export function Audience() {
                                     B.Tech, B.E., BBA, B.Com, BCA, B.Sc, MCA, MBA with 0–2 years experience looking to jumpstart an enterprise career.
                                 </p>
                             </div>
-
-                            {/* Decorative faint icon in bg */}
                             <GraduationCap className="absolute -bottom-10 -right-10 w-48 h-48 text-white/5 pointer-events-none transition-transform duration-700 group-hover:scale-110" strokeWidth={1} />
-                        </motion.div>
+                        </div>
 
                         {/* Tile 2: Career Changers (Wide) */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="md:col-span-2 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow"
-                        >
+                        <div className="md:col-span-2 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
                             <div className="flex items-start gap-6 relative z-10">
                                 <div className="w-14 h-14 shrink-0 bg-accent-50 rounded-2xl border border-accent-100 flex items-center justify-center shadow-sm">
                                     <BriefcaseBusiness className="w-7 h-7 text-accent-600" />
@@ -89,16 +62,10 @@ export function Audience() {
                                 </div>
                             </div>
                             <BriefcaseBusiness className="absolute -top-12 -right-12 w-48 h-48 text-slate-50 pointer-events-none transition-transform duration-700 group-hover:-rotate-6" strokeWidth={1} />
-                        </motion.div>
+                        </div>
 
                         {/* Tile 3: Noida-Based (Square) */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="md:col-span-1 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow"
-                        >
+                        <div className="md:col-span-1 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
                             <div className="relative z-10">
                                 <div className="w-12 h-12 bg-emerald-50 rounded-xl border border-emerald-100 flex items-center justify-center mb-5 shadow-sm">
                                     <MapPin className="w-6 h-6 text-emerald-600" />
@@ -108,16 +75,10 @@ export function Audience() {
                                     Able to attend full-time, in-person training at our Noida campus facility.
                                 </p>
                             </div>
-                        </motion.div>
+                        </div>
 
                         {/* Tile 4: Committed (Square) */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3 }}
-                            className="md:col-span-1 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow"
-                        >
+                        <div className="md:col-span-1 md:row-span-1 bg-white rounded-3xl p-8 flex flex-col justify-center border border-slate-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
                             <div className="relative z-10">
                                 <div className="w-12 h-12 bg-amber-50 rounded-xl border border-amber-100 flex items-center justify-center mb-5 shadow-sm">
                                     <Clock className="w-6 h-6 text-amber-600" />
@@ -127,18 +88,12 @@ export function Audience() {
                                     Available full-time for ~10 months (training + live project apprenticeship).
                                 </p>
                             </div>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
 
-                {/* ── IS THIS RIGHT FOR YOU (UNIFIED CARD) ── */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="relative bg-white rounded-[2.5rem] p-8 md:p-12 lg:p-16 border border-slate-200 shadow-xl shadow-slate-200/40"
-                >
-                    {/* subtle background mesh/gradient */}
+                {/* ── IS THIS RIGHT FOR YOU ── */}
+                <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 lg:p-16 border border-slate-200 shadow-xl shadow-slate-200/40">
                     <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-slate-50/80 to-transparent pointer-events-none rounded-r-[2.5rem]" />
 
                     <div className="relative z-10">
@@ -147,12 +102,11 @@ export function Audience() {
                                 Is This Right For <span className="text-brand-600">You?</span>
                             </h3>
                             <p className="text-slate-600 text-lg">
-                                We're looking for individuals who think long-term. Daksha requires immense focus and commitment to transform your career foundation.
+                                We&apos;re looking for individuals who think long-term. Daksha requires immense focus and commitment to transform your career foundation.
                             </p>
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-12 lg:gap-24 relative">
-                            {/* Divider for desktop */}
                             <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-slate-200 to-transparent -translate-x-1/2" />
 
                             {/* Good Fit */}
@@ -186,10 +140,9 @@ export function Audience() {
                                     ))}
                                 </ul>
                             </div>
-
                         </div>
                     </div>
-                </motion.div>
+                </div>
 
             </div>
         </section>

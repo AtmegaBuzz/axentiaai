@@ -1,7 +1,9 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
 
 /* ── shared styles ─────────────────────────────────────────────────── */
 const glass =
@@ -13,88 +15,168 @@ const chipBrand =
 const chipAccent =
     'bg-white/40 backdrop-blur-sm text-accent-700 text-xs font-semibold py-2 px-2 text-center rounded-lg border border-accent-200/30 truncate';
 
-/* ── background curves ─────────────────────────────────────────────── */
-const curves = [
-    { d: 'M-100 250 C 400 350, 1000 150, 1600 300', color: '#d946ef' },
-    { d: 'M-100 550 C 500 450, 900 650, 1600 500', color: '#facc15' },
-    { d: 'M-100 800 C 300 700, 1100 850, 1600 750', color: '#d946ef' },
-];
-
-/* ── fade-in wrapper ───────────────────────────────────────────────── */
-function FadeIn({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5, delay }}
-            className={className}
-        >
-            {children}
-        </motion.div>
-    );
-}
+/*
+ * Snap-scroll logic:
+ *  - When WhyAxentiaAI top is near the viewport bottom, we intercept wheel events.
+ *  - First 2 scroll-down events: nothing moves (scroll is blocked).
+ *  - 3rd scroll-down: the whole section snaps to the top in one smooth motion.
+ *  - Same in reverse: 2 blocked scroll-ups, 3rd snaps back to Hero.
+ *  - Debounce timer resets the counter if user pauses for 800ms.
+ */
+const SCROLLS_REQUIRED = 3;
+const DEBOUNCE_MS = 800;
 
 /* ── main component ────────────────────────────────────────────────── */
 export function WhyAxentiaAI() {
     const sectionRef = useRef<HTMLElement>(null);
+    const wheelCount = useRef(0);
+    const direction = useRef<'down' | 'up' | null>(null);
+    const isLocked = useRef(false);
+    const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const isSnapped = useRef(false); // true = WhyAxentiaAI is covering Hero
+    const isAnimating = useRef(false);
+
+    useEffect(() => {
+        const el = sectionRef.current;
+        if (!el) return;
+
+        const resetCount = () => {
+            wheelCount.current = 0;
+            direction.current = null;
+            isLocked.current = false;
+        };
+
+        const startDebounce = () => {
+            if (debounceTimer.current) clearTimeout(debounceTimer.current);
+            debounceTimer.current = setTimeout(resetCount, DEBOUNCE_MS);
+        };
+
+        const handleWheel = (e: WheelEvent) => {
+            if (isAnimating.current) {
+                e.preventDefault();
+                return;
+            }
+
+            const rect = el.getBoundingClientRect();
+            const scrollDown = e.deltaY > 0;
+            const scrollUp = e.deltaY < 0;
+
+            // ── SNAP DOWN: section approaching viewport from below ──
+            if (!isSnapped.current && scrollDown && rect.top < window.innerHeight && rect.top > -10) {
+                // Start or continue tracking
+                if (direction.current !== 'down') {
+                    wheelCount.current = 0;
+                    direction.current = 'down';
+                }
+
+                wheelCount.current += 1;
+                isLocked.current = true;
+                startDebounce();
+
+                if (wheelCount.current >= SCROLLS_REQUIRED) {
+                    // 3rd scroll — snap!
+                    e.preventDefault();
+                    isAnimating.current = true;
+                    resetCount();
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Mark as snapped after animation completes
+                    setTimeout(() => {
+                        isSnapped.current = true;
+                        isAnimating.current = false;
+                    }, 700);
+                } else {
+                    // 1st or 2nd scroll — block all movement
+                    e.preventDefault();
+                }
+                return;
+            }
+
+            // ── SNAP UP: section is snapped, user scrolls up to reveal Hero ──
+            if (isSnapped.current && scrollUp && rect.top >= -10 && rect.top < 10) {
+                if (direction.current !== 'up') {
+                    wheelCount.current = 0;
+                    direction.current = 'up';
+                }
+
+                wheelCount.current += 1;
+                isLocked.current = true;
+                startDebounce();
+
+                if (wheelCount.current >= SCROLLS_REQUIRED) {
+                    // 3rd scroll up — snap back to Hero
+                    e.preventDefault();
+                    isAnimating.current = true;
+                    resetCount();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    setTimeout(() => {
+                        isSnapped.current = false;
+                        isAnimating.current = false;
+                    }, 700);
+                } else {
+                    // 1st or 2nd scroll up — block movement
+                    e.preventDefault();
+                }
+                return;
+            }
+
+            // Outside the snap zone — reset
+            if (isLocked.current) {
+                resetCount();
+            }
+        };
+
+        // Must be non-passive to call preventDefault
+        window.addEventListener('wheel', handleWheel, { passive: false });
+        return () => {
+            window.removeEventListener('wheel', handleWheel);
+            if (debounceTimer.current) clearTimeout(debounceTimer.current);
+        };
+    }, []);
 
     return (
         <section
             ref={sectionRef}
+            id="why-axentiaai"
             style={{
                 backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #fae8ff 25%, #f1f5f9 50%, #fef9c3 75%, #f8fafc 100%)',
             }}
-            className="relative py-20 md:py-28 overflow-hidden animate-gradient-loop"
+            className="relative py-20 md:py-28 overflow-hidden animate-gradient-loop rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.08)] will-change-[background-position]"
         >
-            {/* ── Background decorations ── */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <motion.div
-                    animate={{ opacity: [0.05, 0.15, 0.05] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                    className="absolute -bottom-[10%] -left-[5%] w-[50%] h-[50%] bg-brand-400 blur-[100px] rounded-full"
+            {/* ── FloatingLines WebGL background ── */}
+            <div className="absolute inset-0 z-0 opacity-60">
+                <FloatingLines
+                    linesGradient={['#d946ef', '#e879f9', '#facc15', '#fbbf24', '#a855f7', '#7c3aed']}
+                    enabledWaves={['top', 'middle', 'bottom']}
+                    lineCount={[4, 5, 3]}
+                    lineDistance={[4, 5, 4]}
+                    bendRadius={5}
+                    bendStrength={-0.5}
+                    interactive={true}
+                    parallax={true}
+                    parallaxStrength={0.15}
+                    animationSpeed={0.8}
                 />
-                <motion.div
-                    animate={{ opacity: [0.05, 0.15, 0.05] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                    className="absolute top-[2%] right-[3%] w-[40%] h-[40%] bg-accent-400 blur-[90px] rounded-full"
-                />
-                <motion.div
-                    animate={{ opacity: [0.05, 0.15, 0.05] }}
-                    transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-                    className="absolute top-[45%] left-[35%] w-[30%] h-[30%] bg-brand-500 blur-[80px] rounded-full"
-                />
-
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="none">
-                    {curves.map((c, i) => (
-                        <path key={i} d={c.d} stroke={c.color} fill="none" strokeLinecap="round" strokeWidth={3} opacity={0.15} />
-                    ))}
-                </svg>
             </div>
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pointer-events-none">
                 {/* ── Header ── */}
                 <div className="text-center mb-14 md:mb-20">
-                    <FadeIn>
-                        <p className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">Why Choose Us</p>
-                    </FadeIn>
-                    <FadeIn delay={0.05}>
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-                            Why <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">AxentiaAI</span>
-                        </h2>
-                    </FadeIn>
-                    <FadeIn delay={0.1}>
-                        <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-                            A data-backed approach to enterprise consulting education, built on 30 years of delivery experience.
-                        </p>
-                    </FadeIn>
+                    <p className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">
+                        Why Choose Us
+                    </p>
+                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+                        Why <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">AxentiaAI</span>
+                    </h2>
+                    <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+                        A data-backed approach to enterprise consulting education, built on 30 years of delivery experience.
+                    </p>
                 </div>
 
                 {/* ── Bento Grid ── */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 auto-rows-min">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 auto-rows-min pointer-events-auto">
 
                     {/* Card 1 — 500+ Consultants */}
-                    <FadeIn className={`${glass} h-full`}>
+                    <div className={`${glass} h-full`}>
                         <div className="mb-5">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">500+</h3>
                             <p className="font-semibold text-slate-800">Consultants Trained</p>
@@ -105,10 +187,10 @@ export function WhyAxentiaAI() {
                                 <div key={tag} className={chipBrand}>{tag}</div>
                             ))}
                         </div>
-                    </FadeIn>
+                    </div>
 
                     {/* Card 2 — 95% Placement */}
-                    <FadeIn className={`${glass} h-full`} delay={0.05}>
+                    <div className={`${glass} h-full`}>
                         <div className="mb-5">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">95%</h3>
                             <p className="font-semibold text-slate-800">Placement Rate</p>
@@ -119,10 +201,10 @@ export function WhyAxentiaAI() {
                                 <div key={tag} className={chipAccent}>{tag}</div>
                             ))}
                         </div>
-                    </FadeIn>
+                    </div>
 
                     {/* Card 3 — 10+ Countries */}
-                    <FadeIn className={`${glass} h-full`} delay={0.1}>
+                    <div className={`${glass} h-full`}>
                         <div className="mb-5">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">10+</h3>
                             <p className="font-semibold text-slate-800">Countries Served</p>
@@ -133,10 +215,10 @@ export function WhyAxentiaAI() {
                                 <div key={tag} className={chipBrand}>{tag}</div>
                             ))}
                         </div>
-                    </FadeIn>
+                    </div>
 
                     {/* Card 4 — 30+ Years (tall, with image) */}
-                    <FadeIn className={`${glass} lg:row-span-2 overflow-hidden`} delay={0.15}>
+                    <div className={`${glass} lg:row-span-2 overflow-hidden`}>
                         <div className="mb-4">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">30+</h3>
                             <p className="font-semibold text-slate-800">Years of Enterprise Experience</p>
@@ -154,10 +236,10 @@ export function WhyAxentiaAI() {
                                 <div key={tag} className={`${chipBrand} flex items-center justify-center py-2.5`}>{tag}</div>
                             ))}
                         </div>
-                    </FadeIn>
+                    </div>
 
                     {/* Card 5 — CTC (with image) */}
-                    <FadeIn className={`${glass} h-full overflow-hidden`} delay={0.2}>
+                    <div className={`${glass} h-full overflow-hidden`}>
                         <div className="mb-4">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">&#8377;6-12 LPA</h3>
                             <p className="font-semibold text-slate-800">Average Starting CTC</p>
@@ -170,10 +252,10 @@ export function WhyAxentiaAI() {
                             className="w-full h-24 object-cover rounded-xl mt-auto"
                             loading="lazy"
                         />
-                    </FadeIn>
+                    </div>
 
                     {/* Card 6 — 30+ Hiring Partners */}
-                    <FadeIn className={`${glass} h-full`} delay={0.25}>
+                    <div className={`${glass} h-full`}>
                         <div className="mb-4">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">30+</h3>
                             <p className="font-semibold text-slate-800">Hiring Partners</p>
@@ -184,10 +266,10 @@ export function WhyAxentiaAI() {
                                 <div key={tag} className="bg-white/40 backdrop-blur-sm text-accent-700 text-[10px] font-semibold py-1.5 px-1 text-center rounded-md border border-accent-200/30 truncate flex items-center justify-center">{tag}</div>
                             ))}
                         </div>
-                    </FadeIn>
+                    </div>
 
                     {/* Card 7 — 100+ Enterprise Projects (with image) */}
-                    <FadeIn className={`${glass} h-full overflow-hidden`} delay={0.3}>
+                    <div className={`${glass} h-full overflow-hidden`}>
                         <div className="mb-4">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">100+</h3>
                             <p className="font-semibold text-slate-800">Enterprise Projects</p>
@@ -200,10 +282,10 @@ export function WhyAxentiaAI() {
                             className="w-full h-24 object-cover rounded-xl mt-auto"
                             loading="lazy"
                         />
-                    </FadeIn>
+                    </div>
 
                     {/* Card 8 — Programs (full width) */}
-                    <FadeIn className={`${glass} lg:col-span-4 flex-col md:flex-row items-start md:items-center gap-6 md:gap-10`} delay={0.35}>
+                    <div className={`${glass} lg:col-span-4 flex-col md:flex-row items-start md:items-center gap-6 md:gap-10`}>
                         <div className="shrink-0 md:w-1/4">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">6</h3>
                             <p className="font-semibold text-slate-800">Industry-Aligned Programs</p>
@@ -213,7 +295,7 @@ export function WhyAxentiaAI() {
                                 <div key={tag} className="bg-white/40 backdrop-blur-sm text-brand-700 text-sm font-medium py-2 px-4 rounded-full border border-brand-200/30 hover:bg-white/60 transition-colors">{tag}</div>
                             ))}
                         </div>
-                    </FadeIn>
+                    </div>
 
                 </div>
             </div>
