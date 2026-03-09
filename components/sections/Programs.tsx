@@ -12,6 +12,7 @@ interface Program {
     meta: string;
     gradient: string;
     icon: LucideIcon;
+    image: string;
 }
 
 const programs: Program[] = [
@@ -22,8 +23,9 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-brand-700',
         desc: 'A 10-month structured pathway with 4 months classroom learning and a paid apprenticeship.',
         meta: '10 months · Classroom + Apprenticeship',
-        gradient: 'from-brand-500 to-purple-600',
+        gradient: 'from-brand-500/80 to-purple-600/80',
         icon: Rocket,
+        image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
     },
     {
         title: 'EAP',
@@ -32,8 +34,9 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-indigo-700',
         desc: 'For DCAP completers ready to tackle cross-module integration and industry scenarios.',
         meta: 'Performance-based selection',
-        gradient: 'from-purple-600 to-indigo-700',
+        gradient: 'from-purple-600/80 to-indigo-700/80',
         icon: TrendingUp,
+        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
     },
     {
         title: 'Online Program',
@@ -42,8 +45,9 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-teal-700',
         desc: 'Begin with the basics — SAP fundamentals and enterprise process understanding.',
         meta: 'Self-paced · Online',
-        gradient: 'from-teal-500 to-cyan-500',
+        gradient: 'from-teal-500/80 to-cyan-500/80',
         icon: Globe,
+        image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=600&h=400&fit=crop&q=80',
     },
     {
         title: 'SAP Consulting',
@@ -52,8 +56,9 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-brand-700',
         desc: 'Hands-on SAP consulting with real enterprise clients from implementation to go-live.',
         meta: '6 months · Hands-on',
-        gradient: 'from-brand-600 to-brand-800',
+        gradient: 'from-brand-600/80 to-brand-800/80',
         icon: Settings,
+        image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
     },
     {
         title: 'Data & AI',
@@ -62,8 +67,9 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-amber-700',
         desc: 'AI/ML and data analytics applied to enterprise systems and business processes.',
         meta: '4 months · Intensive',
-        gradient: 'from-amber-400 to-orange-500',
+        gradient: 'from-amber-400/80 to-orange-500/80',
         icon: Brain,
+        image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop&q=80',
     },
     {
         title: 'ERP Analyst',
@@ -72,8 +78,9 @@ const programs: Program[] = [
         badgeColor: 'bg-white/90 text-slate-700',
         desc: 'Business analysis for ERP — requirements gathering, process mapping, and solution design.',
         meta: '5 months · Program',
-        gradient: 'from-slate-500 to-brand-600',
+        gradient: 'from-slate-500/80 to-brand-600/80',
         icon: BarChart3,
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80',
     },
 ];
 
@@ -81,16 +88,19 @@ function ProgramCard({ prog }: { prog: Program }) {
     const Icon = prog.icon;
     return (
         <div className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
-            {/* Gradient image area */}
-            <div className={`relative h-52 bg-gradient-to-br ${prog.gradient} overflow-hidden`}>
-                {/* Abstract decorative shapes */}
-                <div className="absolute inset-0 opacity-[0.12]">
-                    <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full border-[6px] border-white" />
-                    <div className="absolute bottom-4 left-6 w-20 h-20 rounded-full border-[4px] border-white" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full border-[3px] border-white" />
-                </div>
+            {/* Image area with gradient overlay */}
+            <div className="relative h-52 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={prog.image}
+                    alt={prog.subtitle}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                />
+                {/* Gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${prog.gradient}`} />
                 {/* Icon */}
-                <Icon className="absolute bottom-5 right-5 w-12 h-12 text-white/20" strokeWidth={1.5} />
+                <Icon className="absolute bottom-5 right-5 w-12 h-12 text-white/25" strokeWidth={1.5} />
                 {/* Badge */}
                 <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm ${prog.badgeColor}`}>
                     {prog.badge}
