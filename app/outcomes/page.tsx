@@ -1,7 +1,5 @@
 'use client';
 
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { TrendingUp, Users, Globe, Award, Briefcase, Linkedin } from 'lucide-react';
 
@@ -36,7 +34,6 @@ const projects = [
 export default function OutcomesPage() {
     return (
         <>
-            <Navbar />
             <main className="pt-24">
                 <section className="py-24 bg-gradient-to-br from-slate-900 to-brand-950">
                     <div className="container mx-auto px-4 md:px-6">
@@ -118,7 +115,6 @@ export default function OutcomesPage() {
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     );
 }

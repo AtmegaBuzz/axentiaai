@@ -1,7 +1,5 @@
 'use client';
 
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { useState } from 'react';
@@ -26,7 +24,6 @@ export default function ForumPage() {
 
     return (
         <>
-            <Navbar />
             <main className="pt-24">
                 <section className="py-16 bg-gradient-to-br from-slate-900 to-brand-950">
                     <div className="container mx-auto px-4 md:px-6">
@@ -111,7 +108,6 @@ export default function ForumPage() {
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     );
 }

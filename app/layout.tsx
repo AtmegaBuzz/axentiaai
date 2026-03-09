@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
+import { Navbar } from "@/components/Navbar";
+import { MingersFooter } from "@/components/MingersFooter";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -28,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${plusJakartaSans.variable} ${playfairDisplay.variable} font-sans`}>
+        <Navbar />
         {children}
+        <MingersFooter />
       </body>
     </html>
   );
