@@ -11,14 +11,14 @@ export function CTA() {
                 <div className="relative w-full rounded-[2rem] bg-gradient-to-r from-brand-700 to-brand-500 overflow-hidden shadow-xl xl:h-[320px] flex flex-col xl:flex-row items-center">
 
                     {/* Watermark letter */}
-                    <div className="absolute -top-10 right-0 xl:right-[15%] text-[16rem] md:text-[24rem] font-serif font-bold text-white/10 leading-none pointer-events-none select-none">
+                    <div className="absolute -top-10 right-0 xl:right-[15%] text-[16rem] md:text-[24rem] font-[family-name:var(--font-playfair)] italic font-bold text-white/10 leading-none pointer-events-none select-none">
                         D
                     </div>
 
                     {/* Left Content */}
                     <div className="relative z-10 p-10 md:p-16 xl:w-3/5 flex flex-col items-start justify-center h-full">
                         <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">
-                            Let&apos;s get you to the right place.
+                            Let&apos;s get you to the <span className="font-[family-name:var(--font-playfair)] italic">right place.</span>
                         </h2>
                         <p className="text-lg md:text-xl text-brand-100 mb-8 font-medium">
                             No pressure. Just a conversation about your goals, where you are now, and whether Daksha might be the right next step.
