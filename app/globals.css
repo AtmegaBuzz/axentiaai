@@ -24,6 +24,7 @@
   --color-accent-900: #713f12;
 
   --font-sans: var(--font-plus-jakarta);
+  --font-cursive: var(--font-playfair);
 }
 
 @layer base {

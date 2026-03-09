@@ -80,7 +80,7 @@ export function WhyAxentiaAI() {
                     </FadeIn>
                     <FadeIn delay={0.05}>
                         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-                            Why AxentiaAI
+                            Why <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">AxentiaAI</span>
                         </h2>
                     </FadeIn>
                     <FadeIn delay={0.1}>

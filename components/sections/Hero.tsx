@@ -40,7 +40,7 @@ export function Hero() {
                             </div>
                             <div className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[0.9] tracking-tight mt-2">
                                 by{' '}
-                                <span className="bg-gradient-to-r from-accent-400 to-accent-500 bg-clip-text text-transparent">
+                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-400 to-accent-500 bg-clip-text text-transparent">
                                     Doing
                                 </span>
                             </div>

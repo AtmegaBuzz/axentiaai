@@ -119,7 +119,7 @@ export default function Testimonials() {
               className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
             >
               See how learners get career-ready with{' '}
-              <span className="text-brand-600">Daksha</span>
+              <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Daksha</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 15 }}
