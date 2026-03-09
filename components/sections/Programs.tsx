@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { ArrowRight, Rocket, TrendingUp, Globe, Settings, Brain, BarChart3 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -78,16 +75,10 @@ const programs: Program[] = [
     },
 ];
 
-function ProgramCard({ prog, idx }: { prog: Program; idx: number }) {
+function ProgramCard({ prog }: { prog: Program }) {
     const Icon = prog.icon;
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ delay: 0.08 * idx, duration: 0.5 }}
-            className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden"
-        >
+        <div className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
             {/* Gradient image area */}
             <div className={`relative h-52 bg-gradient-to-br ${prog.gradient} overflow-hidden`}>
                 {/* Abstract decorative shapes */}
@@ -118,7 +109,7 @@ function ProgramCard({ prog, idx }: { prog: Program; idx: number }) {
                     <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5" />
                 </button>
             </div>
-        </motion.div>
+        </div>
     );
 }
 
@@ -127,14 +118,14 @@ export function Programs() {
         <section id="programs" className="py-16 md:py-24 bg-slate-50 relative">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4">Programs</motion.div>
-                    <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6">Choose your path.</motion.h2>
-                    <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-lg text-slate-600">Six programs designed for different stages of your consulting career.</motion.p>
+                    <div className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4">Programs</div>
+                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6">Choose your path.</h2>
+                    <p className="text-lg text-slate-600">Six programs designed for different stages of your consulting career.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {programs.map((prog, idx) => (
-                        <ProgramCard key={prog.title} prog={prog} idx={idx} />
+                    {programs.map((prog) => (
+                        <ProgramCard key={prog.title} prog={prog} />
                     ))}
                 </div>
             </div>
