@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { ArrowRight, Rocket, TrendingUp, Globe, Settings, Brain, BarChart3 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -84,11 +85,40 @@ const programs: Program[] = [
     },
 ];
 
-function ProgramCard({ prog }: { prog: Program }) {
+/* Snap-in directions: each card enters from a unique angle */
+const snapDirs = [
+    { x: -60, y: 50, rotate: -6 },
+    { x: 0, y: 70, rotate: 4 },
+    { x: 60, y: 50, rotate: 6 },
+    { x: -50, y: -40, rotate: -5 },
+    { x: 0, y: -60, rotate: 3 },
+    { x: 50, y: -40, rotate: 5 },
+];
+
+function ProgramCard({ prog, index }: { prog: Program; index: number }) {
     const Icon = prog.icon;
+    const dir = snapDirs[index % snapDirs.length];
+
     return (
-        <div className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
-            {/* Image area with gradient overlay */}
+        <motion.div
+            initial={{ opacity: 0, x: dir.x, y: dir.y, rotate: dir.rotate, scale: 0.8 }}
+            whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{
+                type: 'spring',
+                stiffness: 170,
+                damping: 18,
+                mass: 0.8,
+                delay: index * 0.08,
+            }}
+            whileHover={{
+                y: -8,
+                scale: 1.02,
+                transition: { type: 'spring', stiffness: 300, damping: 22 },
+            }}
+            className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden"
+        >
+            {/* Image area */}
             <div className="relative h-52 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -97,14 +127,18 @@ function ProgramCard({ prog }: { prog: Program }) {
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                 />
-                {/* Subtle bottom gradient for badge/icon readability */}
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
-                {/* Icon */}
                 <Icon className="absolute bottom-5 right-5 w-12 h-12 text-white/40" strokeWidth={1.5} />
-                {/* Badge */}
-                <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm ${prog.badgeColor}`}>
+                {/* Badge snaps in with rotation */}
+                <motion.span
+                    className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm ${prog.badgeColor}`}
+                    initial={{ opacity: 0, scale: 0, rotate: -90 }}
+                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ type: 'spring', stiffness: 250, damping: 15, delay: 0.3 + index * 0.08 }}
+                >
                     {prog.badge}
-                </span>
+                </motion.span>
             </div>
 
             {/* Content */}
@@ -121,23 +155,47 @@ function ProgramCard({ prog }: { prog: Program }) {
                     <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5" />
                 </button>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
 export function Programs() {
     return (
-        <section id="programs" className="py-16 md:py-24 bg-slate-50 relative">
+        <section id="programs" className="relative py-16 md:py-24 bg-slate-50">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <div className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4">Programs</div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6">Choose your path.</h2>
-                    <p className="text-lg text-slate-600">Six programs designed for different stages of your consulting career.</p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+                        className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4"
+                    >
+                        Programs
+                    </motion.div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
+                        className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6"
+                    >
+                        Choose your path.
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
+                        className="text-lg text-slate-600"
+                    >
+                        Six programs designed for different stages of your consulting career.
+                    </motion.p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {programs.map((prog) => (
-                        <ProgramCard key={prog.title} prog={prog} />
+                    {programs.map((prog, i) => (
+                        <ProgramCard key={prog.title} prog={prog} index={i} />
                     ))}
                 </div>
             </div>

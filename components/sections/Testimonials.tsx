@@ -97,35 +97,36 @@ export default function Testimonials() {
   const t = testimonials[active];
 
   return (
-    <section className="relative py-16 md:py-24 bg-gradient-to-b from-brand-50/60 via-brand-50/30 to-white overflow-hidden">
+    <section className="relative py-16 md:py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 xl:px-12">
 
         {/* ── header ── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-2xl">
             <motion.p
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ type: 'spring', stiffness: 120, damping: 20 }}
               className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3"
             >
               Testimonials
             </motion.p>
             <motion.h2
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
               className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
             >
               See how learners get career-ready with{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Daksha</span>
             </motion.h2>
             <motion.p
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.15 }}
+              transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.1 }}
               className="text-lg text-slate-600"
             >
               From fresh graduates to career changers, see how professionals
@@ -248,10 +249,10 @@ export default function Testimonials() {
                     setActive(i);
                   }}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`rounded-full transition-all duration-300 ${
+                  className={`h-2.5 rounded-full transition-transform transition-colors duration-300 origin-left ${
                     i === active
-                      ? 'w-8 h-2.5 bg-brand-500'
-                      : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'
+                      ? 'w-2.5 scale-x-[3.2] bg-brand-500'
+                      : 'w-2.5 scale-x-100 bg-slate-300 hover:bg-slate-400'
                   }`}
                 />
               ))}

@@ -1,15 +1,24 @@
 'use client';
 
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 export function CTA() {
-    return (
-        <section id="cta" className="py-16 md:py-20 bg-white">
-            <div className="container mx-auto px-4 md:px-8 xl:px-12">
-                <div className="relative w-full rounded-[2rem] bg-gradient-to-r from-brand-700 to-brand-500 overflow-hidden shadow-xl xl:h-[320px] flex flex-col xl:flex-row items-center">
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 40%'] });
+    const scale = useTransform(scrollYProgress, [0, 1], [0.88, 1]);
+    const borderRadius = useTransform(scrollYProgress, [0, 1], [48, 32]);
 
+    return (
+        <section id="cta" ref={ref} className="py-16 md:py-20 bg-white">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12">
+                <motion.div
+                    style={{ scale, borderRadius }}
+                    className="relative w-full bg-gradient-to-r from-brand-700 to-brand-500 overflow-hidden shadow-xl xl:h-[320px] flex flex-col xl:flex-row items-center"
+                >
                     {/* Watermark letter */}
                     <div className="absolute -top-10 right-0 xl:right-[15%] text-[16rem] md:text-[24rem] font-[family-name:var(--font-playfair)] italic font-bold text-white/10 leading-none pointer-events-none select-none">
                         D
@@ -61,7 +70,7 @@ export function CTA() {
                             priority
                         />
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );
