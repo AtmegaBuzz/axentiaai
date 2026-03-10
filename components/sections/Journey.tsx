@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 
 const steps = [
@@ -36,23 +33,16 @@ export function Journey() {
         <section className="py-16 md:py-24 bg-slate-50 relative border-t border-slate-200">
             <div className="container mx-auto px-4 md:px-6 max-w-5xl">
                 <div className="text-center mb-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                    <div
                         className="flex items-center justify-center gap-2 text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4"
                     >
                         Your Path
-                    </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                    </div>
+                    <h2
                         className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight"
                     >
                         A typical progression after entering Daksha
-                    </motion.h2>
+                    </h2>
                 </div>
 
                 <div className="relative">
@@ -61,12 +51,8 @@ export function Journey() {
 
                     <div className="space-y-12">
                         {steps.map((step, idx) => (
-                            <motion.div
+                            <div
                                 key={step.role}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ delay: 0.1 * idx }}
                                 className={`flex flex-col md:flex-row items-center justify-between ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''
                                     }`}
                             >
@@ -86,7 +72,7 @@ export function Journey() {
                                         {step.desc}
                                     </p>
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>

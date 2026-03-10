@@ -69,14 +69,14 @@ export default function ProgramsPage() {
                     <section key={prog.id} id={prog.id} className={`py-24 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'} border-b border-slate-200`}>
                         <div className="container mx-auto px-4 md:px-6">
                             <div className="max-w-5xl mx-auto">
-                                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                                <div>
                                     <h2 className="text-4xl font-bold text-slate-900 tracking-tight mb-4">{prog.title}</h2>
                                     <div className="flex flex-wrap gap-4 mb-8">
                                         <span className="px-4 py-1.5 bg-brand-50 text-brand-700 rounded-full text-sm font-semibold">Duration: {prog.duration}</span>
                                         <span className="px-4 py-1.5 bg-accent-50 text-accent-700 rounded-full text-sm font-semibold">Fee: {prog.fee}</span>
                                     </div>
                                     <p className="text-lg text-slate-600 mb-12">{prog.overview}</p>
-                                </motion.div>
+                                </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                     <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">

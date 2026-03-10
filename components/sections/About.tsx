@@ -1,18 +1,10 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
 export function About() {
     return (
         <section id="about" className="py-16 md:py-24 bg-white relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Left / Images & Profile */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.7 }}
+                    <div
                         className="flex flex-col gap-8"
                     >
                         <div className="relative p-10 bg-slate-50 rounded-[2rem] border border-slate-100 shadow-sm group hover:shadow-xl transition-all duration-300">
@@ -42,14 +34,10 @@ export function About() {
                                 <span className="text-sm text-amber-600 font-medium">Countries</span>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Right / Content */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.7 }}
+                    <div
                         className="flex flex-col gap-6"
                     >
                         <div className="flex items-center gap-2 text-brand-600 font-semibold tracking-wide uppercase text-sm">
@@ -58,7 +46,7 @@ export function About() {
                         </div>
 
                         <blockquote className="text-2xl md:text-3xl font-medium text-slate-800 leading-snug">
-                            “In enterprise consulting, readiness shows in the details — how you document, how you communicate, how you handle responsibility inside a team.”
+                            "In enterprise consulting, readiness shows in the details — how you document, how you communicate, how you handle responsibility inside a team."
                         </blockquote>
 
                         <p className="text-lg text-slate-600 leading-relaxed">
@@ -67,7 +55,7 @@ export function About() {
                         <p className="text-lg text-slate-600 leading-relaxed">
                             As the organisation scaled, one insight remained consistent: structured exposure to real project expectations makes the difference in early careers. Daksha extends the same delivery standards we follow inside Orane into a focused training and apprenticeship pathway.
                         </p>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </section>
