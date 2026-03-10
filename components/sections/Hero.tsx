@@ -4,14 +4,10 @@ import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Play, Download } from 'lucide-react';
 
-interface HeroProps {
-    loaderDone?: boolean;
-}
-
-export function Hero({ loaderDone = false }: HeroProps) {
+export function Hero() {
     return (
         <section className="sticky top-0 z-10 relative min-h-screen flex flex-col overflow-hidden bg-white will-change-transform" style={{ transform: 'translateZ(0)' }}>
-            {/* Background Video — always visible, GPU-accelerated */}
+            {/* Background Video — GPU-accelerated */}
             <div className="absolute inset-0 z-0">
                 <video
                     autoPlay
@@ -30,12 +26,11 @@ export function Hero({ loaderDone = false }: HeroProps) {
             <div className="relative z-10 flex-1 flex items-center">
                 <div className="container mx-auto px-4 md:px-6 pt-32 pb-20">
                     <div className="max-w-5xl">
-                        {/* Main Heading — always visible, loader text lands on top then fades away */}
-                        {/* Main Heading — transparent during loader to allow perfectly overlaying loader text */}
-                        <h1
-                            id="hero-heading"
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
                             className="text-left"
-                            style={{ opacity: loaderDone ? 1 : 0 }}
                         >
                             <div className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[0.9] tracking-tight">
                                 Learn AI
@@ -46,13 +41,12 @@ export function Hero({ loaderDone = false }: HeroProps) {
                                     Doing
                                 </span>
                             </div>
-                        </h1>
+                        </motion.h1>
 
-                        {/* CTA Buttons — fade in after loader */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
-                            animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.6 }}
                             className="flex flex-col sm:flex-row gap-4 mt-12"
                         >
                             <Button
