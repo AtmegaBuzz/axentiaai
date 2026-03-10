@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { Target, Link as LinkIcon, Sparkles, TrendingUp } from 'lucide-react';
 
 const reasons = [
@@ -23,9 +26,20 @@ const reasons = [
     },
 ];
 
+/* Cards 0,2 slide from left; Cards 1,3 slide from right */
+const slideDirections = [
+    { x: -120 },
+    { x: 120 },
+    { x: -120 },
+    { x: 120 },
+];
+
 export function WhyDaksha() {
     return (
-        <section id="why-daksha" className="bg-white py-16 md:py-24">
+        <section
+            id="why-daksha"
+            className="bg-white py-16 md:py-24"
+        >
             <div className="container mx-auto px-4 md:px-8 xl:px-12">
                 <div className="max-w-3xl mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6">
@@ -37,18 +51,30 @@ export function WhyDaksha() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {reasons.map((reason) => (
-                        <div
-                            key={reason.title}
-                            className="p-8 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-300 hover:shadow-lg hover:bg-white transition-colors transition-shadow duration-300 group"
-                        >
-                            <div className="mb-6 bg-brand-50 w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                {reason.icon}
-                            </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug">{reason.title}</h3>
-                            <p className="text-slate-600 leading-relaxed text-sm">{reason.description}</p>
-                        </div>
-                    ))}
+                    {reasons.map((reason, i) => {
+                        const dir = slideDirections[i];
+                        return (
+                            <motion.div
+                                key={reason.title}
+                                initial={{ opacity: 0, x: dir.x }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true, margin: '-40px' }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 160,
+                                    damping: 22,
+                                    delay: i * 0.08,
+                                }}
+                                className="p-8 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-300 hover:shadow-lg hover:bg-white transition-colors transition-shadow duration-300 group"
+                            >
+                                <div className="mb-6 bg-brand-50 w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    {reason.icon}
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug">{reason.title}</h3>
+                                <p className="text-slate-600 leading-relaxed text-sm">{reason.description}</p>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
