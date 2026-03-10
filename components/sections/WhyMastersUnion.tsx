@@ -1,13 +1,12 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
 
 /* ── shared styles ─────────────────────────────────────────────────── */
 const glass =
-    'bg-white/30 backdrop-blur-md border border-white/40 rounded-2xl p-6 flex flex-col hover:bg-white/40 transition-colors transition-shadow duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)]';
+    'bg-white/30 backdrop-blur-md border border-white/40 rounded-2xl p-6 flex flex-col hover:bg-white/40 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)]';
 
 const chipBrand =
     'bg-white/40 backdrop-blur-sm text-brand-700 text-xs font-semibold py-2 px-2 text-center rounded-lg border border-brand-200/30 truncate';
@@ -15,153 +14,33 @@ const chipBrand =
 const chipAccent =
     'bg-white/40 backdrop-blur-sm text-accent-700 text-xs font-semibold py-2 px-2 text-center rounded-lg border border-accent-200/30 truncate';
 
-/*
- * Snap-scroll logic:
- *  - When WhyAxentiaAI top is near the viewport bottom, we intercept wheel events.
- *  - First 2 scroll-down events: nothing moves (scroll is blocked).
- *  - 3rd scroll-down: the whole section snaps to the top in one smooth motion.
- *  - Same in reverse: 2 blocked scroll-ups, 3rd snaps back to Hero.
- *  - Debounce timer resets the counter if user pauses for 800ms.
- */
-const SCROLLS_REQUIRED = 3;
-const DEBOUNCE_MS = 800;
-
 /* ── main component ────────────────────────────────────────────────── */
 export function WhyAxentiaAI() {
-    const sectionRef = useRef<HTMLElement>(null);
-    const wheelCount = useRef(0);
-    const direction = useRef<'down' | 'up' | null>(null);
-    const isLocked = useRef(false);
-    const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const isSnapped = useRef(false); // true = WhyAxentiaAI is covering Hero
-    const isAnimating = useRef(false);
-
-    useEffect(() => {
-        const el = sectionRef.current;
-        if (!el) return;
-
-        const resetCount = () => {
-            wheelCount.current = 0;
-            direction.current = null;
-            isLocked.current = false;
-        };
-
-        const startDebounce = () => {
-            if (debounceTimer.current) clearTimeout(debounceTimer.current);
-            debounceTimer.current = setTimeout(resetCount, DEBOUNCE_MS);
-        };
-
-        const handleWheel = (e: WheelEvent) => {
-            if (isAnimating.current) {
-                e.preventDefault();
-                return;
-            }
-
-            const rect = el.getBoundingClientRect();
-            const scrollDown = e.deltaY > 0;
-            const scrollUp = e.deltaY < 0;
-
-            // ── SNAP DOWN: section approaching viewport from below ──
-            if (!isSnapped.current && scrollDown && rect.top < window.innerHeight && rect.top > -10) {
-                // Start or continue tracking
-                if (direction.current !== 'down') {
-                    wheelCount.current = 0;
-                    direction.current = 'down';
-                }
-
-                wheelCount.current += 1;
-                isLocked.current = true;
-                startDebounce();
-
-                if (wheelCount.current >= SCROLLS_REQUIRED) {
-                    // 3rd scroll — snap!
-                    e.preventDefault();
-                    isAnimating.current = true;
-                    resetCount();
-                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Mark as snapped after animation completes + hide Hero
-                    setTimeout(() => {
-                        isSnapped.current = true;
-                        isAnimating.current = false;
-                        // Tell Hero to hide (stop rendering video/compositing)
-                        window.dispatchEvent(new CustomEvent('hero-visibility', { detail: false }));
-                    }, 700);
-                } else {
-                    // 1st or 2nd scroll — block all movement
-                    e.preventDefault();
-                }
-                return;
-            }
-
-            // ── SNAP UP: section is snapped, user scrolls up to reveal Hero ──
-            if (isSnapped.current && scrollUp && rect.top >= -10 && rect.top < 10) {
-                if (direction.current !== 'up') {
-                    wheelCount.current = 0;
-                    direction.current = 'up';
-                }
-
-                wheelCount.current += 1;
-                isLocked.current = true;
-                startDebounce();
-
-                if (wheelCount.current >= SCROLLS_REQUIRED) {
-                    // 3rd scroll up — snap back to Hero
-                    e.preventDefault();
-                    isAnimating.current = true;
-                    resetCount();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    setTimeout(() => {
-                        isSnapped.current = false;
-                        isAnimating.current = false;
-                        // Tell Hero to show again
-                        window.dispatchEvent(new CustomEvent('hero-visibility', { detail: true }));
-                    }, 700);
-                } else {
-                    // 1st or 2nd scroll up — block movement
-                    e.preventDefault();
-                }
-                return;
-            }
-
-            // Outside the snap zone — reset
-            if (isLocked.current) {
-                resetCount();
-            }
-        };
-
-        // Must be non-passive to call preventDefault
-        window.addEventListener('wheel', handleWheel, { passive: false });
-        return () => {
-            window.removeEventListener('wheel', handleWheel);
-            if (debounceTimer.current) clearTimeout(debounceTimer.current);
-        };
-    }, []);
-
     return (
         <section
-            ref={sectionRef}
             id="why-axentiaai"
             style={{
-                backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #fae8ff 25%, #f1f5f9 50%, #fef9c3 75%, #f8fafc 100%)',
+                backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #ede5ff 25%, #f1f5f9 50%, #fef9c3 75%, #f8fafc 100%)',
             }}
-            className="relative py-20 md:py-28 overflow-hidden animate-gradient-loop rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.08)] will-change-[background-position]"
+            className="relative py-20 md:py-28 overflow-hidden animate-gradient-loop"
         >
-            {/* ── FloatingLines WebGL background (loop only, no mouse interaction) ── */}
-            <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
+            {/* ── FloatingLines WebGL background with mouse interaction ── */}
+            <div className="absolute inset-0 z-0 opacity-60">
                 <FloatingLines
-                    linesGradient={['#d946ef', '#e879f9', '#facc15', '#fbbf24', '#a855f7', '#7c3aed']}
+                    linesGradient={['#8b47f0', '#a876ff', '#facc15', '#fbbf24', '#7630d9', '#561C9C']}
                     enabledWaves={['top', 'middle', 'bottom']}
                     lineCount={[4, 5, 3]}
                     lineDistance={[4, 5, 4]}
                     bendRadius={5}
-                    bendStrength={0}
-                    interactive={false}
-                    parallax={false}
+                    bendStrength={-0.5}
+                    interactive={true}
+                    parallax={true}
+                    parallaxStrength={0.15}
                     animationSpeed={0.8}
                 />
             </div>
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pointer-events-none">
                 {/* ── Header ── */}
                 <div className="text-center mb-14 md:mb-20">
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
@@ -14,11 +14,11 @@ const faqs = [
         a: 'No. The foundation phase is full-time and in person in Noida. The apprenticeship also requires consistent availability. The structure depends on daily engagement and supervision.',
     },
     {
-        q: 'What if I\u2019m not selected for EAP?',
+        q: 'What if I’m not selected for EAP?',
         a: 'EAP is performance-based. If not selected, you continue progressing through standard consulting roles based on your demonstrated capability. EAP is an acceleration track, not the only path forward.',
     },
     {
-        q: 'What\u2019s the selection process?',
+        q: 'What’s the selection process?',
         a: 'The process includes an application review, assessment, and structured interview. We evaluate basic aptitude, communication clarity, and long-term intent toward consulting. Final selection is based on readiness and commitment.',
     },
 ];
@@ -30,22 +30,33 @@ export function FAQ() {
         <section className="py-16 md:py-24 bg-brand-50 relative border-t border-brand-100">
             <div className="container mx-auto px-4 md:px-6 max-w-4xl">
                 <div className="text-center mb-16">
-                    <div
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         className="flex items-center justify-center gap-2 text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4"
                     >
                         Questions
-                    </div>
-                    <h2
+                    </motion.div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight"
                     >
                         Frequently Asked Questions
-                    </h2>
+                    </motion.h2>
                 </div>
 
                 <div className="space-y-4">
                     {faqs.map((faq, idx) => (
-                        <div
+                        <motion.div
                             key={idx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 * idx }}
                             className="bg-white border border-brand-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
                         >
                             <button
@@ -71,7 +82,7 @@ export function FAQ() {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { Users, Briefcase, GraduationCap, Building2, ArrowRight } from 'lucide-react';
+import { Users, Briefcase, GraduationCap, Building2, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
 
 const benefits = [
@@ -37,11 +37,11 @@ export default function EnterprisesPage() {
                         <h2 className="text-4xl font-bold text-slate-900 tracking-tight text-center mb-16">How We Partner With Enterprises</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {benefits.map((b, idx) => (
-                                <div key={b.title} className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-brand-300 hover:shadow-lg transition-all group">
+                                <motion.div key={b.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-brand-300 hover:shadow-lg transition-all group">
                                     <div className="w-14 h-14 rounded-xl bg-brand-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">{b.icon}</div>
                                     <h3 className="text-xl font-bold text-slate-900 mb-3">{b.title}</h3>
                                     <p className="text-slate-600 text-sm leading-relaxed">{b.desc}</p>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
@@ -71,11 +71,11 @@ export default function EnterprisesPage() {
                         <h2 className="text-4xl font-bold text-slate-900 tracking-tight text-center mb-16">Case Studies</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                             {caseStudies.map((cs, idx) => (
-                                <div key={cs.title} className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+                                <motion.div key={cs.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
                                     <h3 className="text-xl font-bold text-slate-900 mb-2">{cs.title}</h3>
                                     <p className="text-brand-600 text-sm font-medium mb-4">{cs.client}</p>
                                     <p className="text-slate-600 text-sm">{cs.result}</p>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
