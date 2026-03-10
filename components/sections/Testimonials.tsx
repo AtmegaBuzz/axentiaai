@@ -103,35 +103,17 @@ export default function Testimonials() {
         {/* ── header ── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-2xl">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-              className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3"
-            >
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">
               Testimonials
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-              className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
-            >
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
               See how learners get career-ready with{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Daksha</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.1 }}
-              className="text-lg text-slate-600"
-            >
+            </h2>
+            <p className="text-lg text-slate-600">
               From fresh graduates to career changers, see how professionals
               transform the way they build enterprise careers.
-            </motion.p>
+            </p>
           </div>
           <div className="shrink-0">
             <a

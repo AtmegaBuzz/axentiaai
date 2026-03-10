@@ -1,10 +1,26 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Play, Download } from 'lucide-react';
 
 export function Hero() {
+    const [visible, setVisible] = useState(true);
+
+    useEffect(() => {
+        const handler = (e: Event) => {
+            setVisible((e as CustomEvent).detail as boolean);
+        };
+        window.addEventListener('hero-visibility', handler);
+        return () => window.removeEventListener('hero-visibility', handler);
+    }, []);
+
+    if (!visible) {
+        // Render a spacer div with the same height so layout doesn't collapse
+        return <div className="min-h-screen" />;
+    }
+
     return (
         <section className="sticky top-0 z-10 relative min-h-screen flex flex-col overflow-hidden bg-white will-change-transform" style={{ transform: 'translateZ(0)' }}>
             {/* Background Video — GPU-accelerated */}

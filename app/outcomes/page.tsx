@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { TrendingUp, Users, Globe, Award, Briefcase, Linkedin } from 'lucide-react';
+import { Briefcase, Linkedin } from 'lucide-react';
 
 const stats = [
     { value: '95%', label: 'Placement Rate' },
@@ -47,10 +47,10 @@ export default function OutcomesPage() {
                     <div className="container mx-auto px-4 md:px-6">
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
                             {stats.map((s, idx) => (
-                                <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="text-center">
+                                <div key={s.label} className="text-center">
                                     <div className="text-5xl md:text-6xl font-black text-brand-500 mb-3">{s.value}</div>
                                     <p className="text-slate-600 font-medium text-lg">{s.label}</p>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -74,13 +74,13 @@ export default function OutcomesPage() {
                         <h2 className="text-4xl font-bold text-slate-900 tracking-tight text-center mb-16">Student Journeys</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {journeys.map((j, idx) => (
-                                <motion.div key={j.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="bg-slate-50 rounded-2xl p-8 border border-slate-200 text-center">
+                                <div key={j.name} className="bg-slate-50 rounded-2xl p-8 border border-slate-200 text-center">
                                     <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-brand-700">{j.name.charAt(0)}</div>
                                     <h3 className="font-bold text-slate-900 mb-2">{j.name}</h3>
                                     <p className="text-sm text-slate-500 mb-1">{j.from} →</p>
                                     <p className="text-brand-600 font-semibold mb-2">{j.to}</p>
                                     <p className="text-xs text-slate-400">in {j.time}</p>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </div>

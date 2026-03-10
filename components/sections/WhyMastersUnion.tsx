@@ -7,7 +7,7 @@ const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { s
 
 /* ── shared styles ─────────────────────────────────────────────────── */
 const glass =
-    'bg-white/30 backdrop-blur-md border border-white/40 rounded-2xl p-6 flex flex-col hover:bg-white/40 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)]';
+    'bg-white/30 backdrop-blur-md border border-white/40 rounded-2xl p-6 flex flex-col hover:bg-white/40 transition-colors transition-shadow duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)]';
 
 const chipBrand =
     'bg-white/40 backdrop-blur-sm text-brand-700 text-xs font-semibold py-2 px-2 text-center rounded-lg border border-brand-200/30 truncate';
@@ -79,10 +79,12 @@ export function WhyAxentiaAI() {
                     isAnimating.current = true;
                     resetCount();
                     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Mark as snapped after animation completes
+                    // Mark as snapped after animation completes + hide Hero
                     setTimeout(() => {
                         isSnapped.current = true;
                         isAnimating.current = false;
+                        // Tell Hero to hide (stop rendering video/compositing)
+                        window.dispatchEvent(new CustomEvent('hero-visibility', { detail: false }));
                     }, 700);
                 } else {
                     // 1st or 2nd scroll — block all movement
@@ -111,6 +113,8 @@ export function WhyAxentiaAI() {
                     setTimeout(() => {
                         isSnapped.current = false;
                         isAnimating.current = false;
+                        // Tell Hero to show again
+                        window.dispatchEvent(new CustomEvent('hero-visibility', { detail: true }));
                     }, 700);
                 } else {
                     // 1st or 2nd scroll up — block movement

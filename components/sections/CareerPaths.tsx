@@ -1,6 +1,3 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 const stages = [
@@ -16,33 +13,22 @@ export function CareerPaths() {
         <section className="py-16 md:py-24 bg-white border-b border-slate-200">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                    <div
                         className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-4"
                     >
                         Career Progression
-                    </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                    </div>
+                    <h2
                         className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight"
                     >
                         Your journey from Day 1 to Leadership
-                    </motion.h2>
+                    </h2>
                 </div>
 
                 <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-2">
                     {stages.map((stage, idx) => (
-                        <motion.div
+                        <div
                             key={stage.role}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 * idx }}
                             className="flex items-center gap-2"
                         >
                             <div className={`px-6 py-4 rounded-2xl border-2 text-center min-w-[140px] ${stage.color}`}>
@@ -52,7 +38,7 @@ export function CareerPaths() {
                             {idx < stages.length - 1 && (
                                 <ArrowRight className="w-5 h-5 text-brand-300 hidden md:block" />
                             )}
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>
