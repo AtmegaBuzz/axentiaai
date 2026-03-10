@@ -142,23 +142,22 @@ export function WhyAxentiaAI() {
             }}
             className="relative py-20 md:py-28 overflow-hidden animate-gradient-loop rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.08)] will-change-[background-position]"
         >
-            {/* ── FloatingLines WebGL background ── */}
-            <div className="absolute inset-0 z-0 opacity-60">
+            {/* ── FloatingLines WebGL background (loop only, no mouse interaction) ── */}
+            <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
                 <FloatingLines
                     linesGradient={['#d946ef', '#e879f9', '#facc15', '#fbbf24', '#a855f7', '#7c3aed']}
                     enabledWaves={['top', 'middle', 'bottom']}
                     lineCount={[4, 5, 3]}
                     lineDistance={[4, 5, 4]}
                     bendRadius={5}
-                    bendStrength={-0.5}
-                    interactive={true}
-                    parallax={true}
-                    parallaxStrength={0.15}
+                    bendStrength={0}
+                    interactive={false}
+                    parallax={false}
                     animationSpeed={0.8}
                 />
             </div>
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pointer-events-none">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
                 {/* ── Header ── */}
                 <div className="text-center mb-14 md:mb-20">
                     <p className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">
