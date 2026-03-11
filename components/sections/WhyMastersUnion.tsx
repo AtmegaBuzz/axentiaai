@@ -47,7 +47,7 @@ export function WhyAxentiaAI() {
                         Why Choose Us
                     </p>
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-                        Why <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">AxentiaAI</span>
+                        Why <span className="text-brand-600">AxentiaAI</span>
                     </h2>
                     <p className="text-slate-500 text-lg max-w-2xl mx-auto">
                         A data-backed approach to enterprise consulting education, built on 30 years of delivery experience.
