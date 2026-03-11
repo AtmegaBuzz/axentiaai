@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { usePerformance } from '@/lib/usePerformance';
 
 const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
 
@@ -16,6 +17,9 @@ const chipAccent =
 
 /* ── main component ────────────────────────────────────────────────── */
 export function WhyAxentiaAI() {
+    const { tier } = usePerformance();
+    const isLowEnd = tier === 'low';
+
     return (
         <section
             id="why-axentiaai"
@@ -24,21 +28,23 @@ export function WhyAxentiaAI() {
             }}
             className="relative py-20 md:py-28 overflow-hidden animate-gradient-loop"
         >
-            {/* ── FloatingLines WebGL background with mouse interaction ── */}
-            <div className="absolute inset-0 z-0 opacity-60">
-                <FloatingLines
-                    linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}
-                    enabledWaves={['top', 'middle', 'bottom']}
-                    lineCount={[4, 5, 3]}
-                    lineDistance={[4, 5, 4]}
-                    bendRadius={5}
-                    bendStrength={-0.5}
-                    interactive={true}
-                    parallax={true}
-                    parallaxStrength={0.15}
-                    animationSpeed={0.8}
-                />
-            </div>
+            {/* ── FloatingLines WebGL background — skipped on low-end devices ── */}
+            {!isLowEnd && (
+                <div className="absolute inset-0 z-0 opacity-60">
+                    <FloatingLines
+                        linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}
+                        enabledWaves={['top', 'middle', 'bottom']}
+                        lineCount={[4, 5, 3]}
+                        lineDistance={[4, 5, 4]}
+                        bendRadius={5}
+                        bendStrength={-0.5}
+                        interactive={true}
+                        parallax={true}
+                        parallaxStrength={0.15}
+                        animationSpeed={0.8}
+                    />
+                </div>
+            )}
 
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pointer-events-none">
                 {/* ── Header ── */}
