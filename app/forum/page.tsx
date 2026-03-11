@@ -839,7 +839,7 @@ export default function ForumPage() {
       <main className="pt-0">
         {/* Hero */}
         <section className="relative pt-24 sm:pt-32 pb-10 sm:pb-16 overflow-hidden">
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #2d1054 30%, #4a1985 60%, #3d156e 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #58179B 0%, #8929AC 40%, #C010DA 100%)' }} />
           <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-500/20 rounded-full blur-[120px]" />
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent-400/15 rounded-full blur-[100px]" />
 

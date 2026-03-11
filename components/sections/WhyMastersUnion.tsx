@@ -20,14 +20,14 @@ export function WhyAxentiaAI() {
         <section
             id="why-axentiaai"
             style={{
-                backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #ede5ff 25%, #f1f5f9 50%, #fef9c3 75%, #f8fafc 100%)',
+                backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 25%, #f1f5f9 50%, #fef8ec 75%, #f8fafc 100%)',
             }}
             className="relative py-20 md:py-28 overflow-hidden animate-gradient-loop"
         >
             {/* ── FloatingLines WebGL background with mouse interaction ── */}
             <div className="absolute inset-0 z-0 opacity-60">
                 <FloatingLines
-                    linesGradient={['#b030f5', '#c25aff', '#facc15', '#fbbf24', '#b01eeb', '#a414e7']}
+                    linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}
                     enabledWaves={['top', 'middle', 'bottom']}
                     lineCount={[4, 5, 3]}
                     lineDistance={[4, 5, 4]}

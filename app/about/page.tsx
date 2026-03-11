@@ -43,7 +43,7 @@ function SAPIcon({ className = 'w-6 h-6' }: { className?: string }) {
    ═══════════════════════════════════════════════════════════════ */
 
 /* Spinning ring with orbiting dots */
-function OrbitRing({ className = '', size = 120, color = '#8b47f0' }: { className?: string; size?: number; color?: string }) {
+function OrbitRing({ className = '', size = 120, color = '#8929AC' }: { className?: string; size?: number; color?: string }) {
   return (
     <div className={`pointer-events-none ${className}`} style={{ width: size, height: size }}>
       <motion.svg viewBox="0 0 120 120" fill="none" className="w-full h-full" animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}>
@@ -63,22 +63,22 @@ function SpinningGear({ className = '', size = 80 }: { className?: string; size?
     <div className={`pointer-events-none ${className}`} style={{ width: size, height: size }}>
       <svg viewBox="0 0 80 80" fill="none" className="w-full h-full">
         <motion.g animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}>
-          <circle cx="40" cy="40" r="30" stroke="#a876ff" strokeWidth="1" opacity="0.25" strokeDasharray="4 8" />
+          <circle cx="40" cy="40" r="30" stroke="#C010DA" strokeWidth="1" opacity="0.25" strokeDasharray="4 8" />
         </motion.g>
         <motion.g animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 22, ease: 'linear' }}>
-          <circle cx="40" cy="40" r="20" stroke="#facc15" strokeWidth="1" opacity="0.2" strokeDasharray="3 6" />
+          <circle cx="40" cy="40" r="20" stroke="#F3B15F" strokeWidth="1" opacity="0.2" strokeDasharray="3 6" />
         </motion.g>
         <motion.g animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}>
-          <circle cx="40" cy="40" r="10" stroke="#a876ff" strokeWidth="0.75" opacity="0.3" strokeDasharray="2 4" />
+          <circle cx="40" cy="40" r="10" stroke="#C010DA" strokeWidth="0.75" opacity="0.3" strokeDasharray="2 4" />
         </motion.g>
-        <circle cx="40" cy="40" r="2" fill="#8b47f0" opacity="0.4" />
+        <circle cx="40" cy="40" r="2" fill="#8929AC" opacity="0.4" />
       </svg>
     </div>
   );
 }
 
 /* Rotating cross/plus */
-function RotatingCross({ className = '', color = '#8b47f0' }: { className?: string; color?: string }) {
+function RotatingCross({ className = '', color = '#8929AC' }: { className?: string; color?: string }) {
   return (
     <motion.div className={`pointer-events-none ${className}`} animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 12, ease: 'linear' }}>
       <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
@@ -90,7 +90,7 @@ function RotatingCross({ className = '', color = '#8b47f0' }: { className?: stri
 }
 
 /* Floating diamond */
-function FloatingDiamond({ className = '', color = '#8b47f0' }: { className?: string; color?: string }) {
+function FloatingDiamond({ className = '', color = '#8929AC' }: { className?: string; color?: string }) {
   return (
     <motion.div className={`pointer-events-none ${className}`} animate={{ y: [-8, 8, -8], rotate: [0, 45, 0] }} transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}>
       <svg viewBox="0 0 20 20" fill="none" className="w-full h-full">
@@ -117,11 +117,11 @@ function FlowingLine({ className = '' }: { className?: string }) {
         />
         <defs>
           <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#8b47f0" stopOpacity="0" />
-            <stop offset="20%" stopColor="#8b47f0" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#facc15" stopOpacity="0.3" />
-            <stop offset="80%" stopColor="#8b47f0" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#8b47f0" stopOpacity="0" />
+            <stop offset="0%" stopColor="#8929AC" stopOpacity="0" />
+            <stop offset="20%" stopColor="#8929AC" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="#F3B15F" stopOpacity="0.3" />
+            <stop offset="80%" stopColor="#8929AC" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#8929AC" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>
@@ -163,25 +163,25 @@ function HeroSection() {
   return (
     <section ref={ref} className="relative h-[160vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #2d1054 30%, #4a1985 60%, #3d156e 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #58179B 0%, #8929AC 40%, #C010DA 100%)' }} />
         {/* SVG curves */}
         <svg className="absolute inset-0 w-full h-full opacity-[0.08] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 900">
           <path d="M0,300 Q360,100 720,300 T1440,300" stroke="url(#hg1)" strokeWidth="2" fill="none" />
           <path d="M0,500 Q360,300 720,500 T1440,500" stroke="url(#hg2)" strokeWidth="1.5" fill="none" />
           <path d="M0,700 Q360,500 720,700 T1440,700" stroke="url(#hg1)" strokeWidth="1" fill="none" />
           <defs>
-            <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#a876ff" /><stop offset="100%" stopColor="#facc15" /></linearGradient>
-            <linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#facc15" /><stop offset="100%" stopColor="#a876ff" /></linearGradient>
+            <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#C010DA" /><stop offset="100%" stopColor="#F3B15F" /></linearGradient>
+            <linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#F3B15F" /><stop offset="100%" stopColor="#C010DA" /></linearGradient>
           </defs>
         </svg>
         <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-500/20 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent-400/15 rounded-full blur-[100px]" />
 
         {/* Rotating widgets */}
-        <OrbitRing className="absolute top-20 right-[15%] hidden lg:block" size={140} color="#a876ff" />
+        <OrbitRing className="absolute top-20 right-[15%] hidden lg:block" size={140} color="#C010DA" />
         <SpinningGear className="absolute bottom-32 left-[10%] hidden lg:block" size={90} />
-        <RotatingCross className="absolute top-[40%] right-[8%] w-8 h-8 hidden md:block" color="#facc15" />
-        <FloatingDiamond className="absolute bottom-[20%] right-[25%] w-6 h-6 hidden md:block" color="#a876ff" />
+        <RotatingCross className="absolute top-[40%] right-[8%] w-8 h-8 hidden md:block" color="#F3B15F" />
+        <FloatingDiamond className="absolute bottom-[20%] right-[25%] w-6 h-6 hidden md:block" color="#C010DA" />
 
         {/* Floating filler images */}
         <motion.div style={{ y: imgY, rotate: imgRotate }} className="absolute top-[12%] right-[8%] hidden xl:block">
@@ -326,7 +326,7 @@ function LegacySection() {
                 ))}
               </div>
               {/* Orbit ring behind stats */}
-              <OrbitRing className="absolute -bottom-10 -left-10 hidden lg:block" size={100} color="#8b47f0" />
+              <OrbitRing className="absolute -bottom-10 -left-10 hidden lg:block" size={100} color="#8929AC" />
             </div>
           </FadeIn>
         </div>
@@ -362,11 +362,11 @@ function JourneySection() {
     <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
       <div className="sticky top-0 h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-brand-50/20 to-slate-50">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 900">
-          <path d="M-100,450 Q360,200 720,450 T1540,450" stroke="#8b47f0" strokeWidth="3" fill="none" />
+          <path d="M-100,450 Q360,200 720,450 T1540,450" stroke="#8929AC" strokeWidth="3" fill="none" />
           <path d="M-100,350 Q500,600 1000,350 T1540,350" stroke="#eab308" strokeWidth="2" fill="none" />
         </svg>
         {/* Rotating widgets */}
-        <OrbitRing className="absolute top-8 right-8 hidden lg:block" size={100} color="#8b47f0" />
+        <OrbitRing className="absolute top-8 right-8 hidden lg:block" size={100} color="#8929AC" />
         <FloatingDiamond className="absolute bottom-16 right-20 w-7 h-7 hidden md:block" />
         <SpinningGear className="absolute bottom-8 left-8 hidden lg:block" size={60} />
 
@@ -435,7 +435,7 @@ function NumbersSection() {
 
   return (
     <section ref={ref} className="relative py-24 md:py-36 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #6d0d99 0%, #a414e7 40%, #8610bb 70%, #550a7a 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(120deg, #58179B 0%, #8929AC 30%, #C010DA 60%, #E473BA 100%)' }} />
       <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 600">
         {Array.from({ length: 13 }).map((_, i) => <line key={`v${i}`} x1={i * 120} y1="0" x2={i * 120} y2="600" stroke="white" strokeWidth="1" />)}
         {Array.from({ length: 7 }).map((_, i) => <line key={`h${i}`} x1="0" y1={i * 100} x2="1440" y2={i * 100} stroke="white" strokeWidth="1" />)}
@@ -455,8 +455,8 @@ function NumbersSection() {
       </div>
 
       {/* Rotating widgets */}
-      <OrbitRing className="absolute top-12 left-12 hidden lg:block" size={120} color="#a876ff" />
-      <OrbitRing className="absolute bottom-12 right-12 hidden lg:block" size={90} color="#facc15" />
+      <OrbitRing className="absolute top-12 left-12 hidden lg:block" size={120} color="#C010DA" />
+      <OrbitRing className="absolute bottom-12 right-12 hidden lg:block" size={90} color="#F3B15F" />
       <RotatingCross className="absolute top-1/2 right-[5%] w-10 h-10 hidden md:block" color="rgba(255,255,255,0.15)" />
 
       <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
@@ -505,11 +505,11 @@ const valuesData = [
 function ValuesSection() {
   return (
     <section className="relative py-24 md:py-36 overflow-hidden">
-      <div className="absolute inset-0 animate-gradient-loop" style={{ background: 'linear-gradient(135deg, #f5f0ff 0%, #ede5ff 25%, #fefce8 50%, #f5f0ff 75%, #daccff 100%)' }} />
+      <div className="absolute inset-0 animate-gradient-loop" style={{ background: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 25%, #fef8ec 50%, #faf5ff 75%, #e9d0ff 100%)' }} />
       <div className="absolute top-16 left-16 w-64 h-64 bg-brand-400/15 rounded-full blur-[100px] animate-pulse" />
       <div className="absolute bottom-16 right-16 w-56 h-56 bg-accent-400/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }} />
       <svg className="absolute inset-0 w-full h-full opacity-[0.08] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 800">
-        <path d="M0,250 C360,150 720,350 1440,250" stroke="#8b47f0" strokeWidth="1.5" fill="none" />
+        <path d="M0,250 C360,150 720,350 1440,250" stroke="#8929AC" strokeWidth="1.5" fill="none" />
         <path d="M0,550 C360,450 720,650 1440,550" stroke="#eab308" strokeWidth="1" fill="none" />
       </svg>
 
@@ -517,7 +517,7 @@ function ValuesSection() {
       <SpinningGear className="absolute top-12 right-20 hidden lg:block" size={80} />
       <OrbitRing className="absolute bottom-20 left-12 hidden lg:block" size={100} color="#eab308" />
       <FloatingDiamond className="absolute top-[30%] left-8 w-6 h-6 hidden md:block" />
-      <RotatingCross className="absolute bottom-[25%] right-12 w-7 h-7 hidden md:block" color="#8b47f0" />
+      <RotatingCross className="absolute bottom-[25%] right-12 w-7 h-7 hidden md:block" color="#8929AC" />
 
       {/* Floating filler images */}
       <motion.div className="absolute top-16 left-[60%] hidden xl:block" animate={{ y: [-5, 5, -5] }} transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}>
@@ -591,8 +591,8 @@ function EcosystemSection() {
 
         <div className="hidden lg:block relative h-12 mb-6 max-w-3xl mx-auto">
           <svg className="w-full h-full" viewBox="0 0 600 48" preserveAspectRatio="xMidYMid meet">
-            <line x1="100" y1="24" x2="290" y2="24" stroke="#8b47f0" strokeWidth="2" />
-            <circle cx="300" cy="24" r="4" fill="#8b47f0" />
+            <line x1="100" y1="24" x2="290" y2="24" stroke="#8929AC" strokeWidth="2" />
+            <circle cx="300" cy="24" r="4" fill="#8929AC" />
             <line x1="310" y1="24" x2="500" y2="24" stroke="#6366f1" strokeWidth="2" />
           </svg>
         </div>
@@ -744,11 +744,11 @@ function TeamSection() {
   const bgY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden border-y border-slate-200" style={{ background: 'linear-gradient(180deg, #fafafa 0%, #f1f0fb 40%, #faf5ff 70%, #fafafa 100%)' }}>
+    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden border-y border-slate-200" style={{ background: 'linear-gradient(180deg, #fafafa 0%, #faf5ff 40%, #faf5ff 70%, #fafafa 100%)' }}>
       {/* Animated dot grid background */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04]" preserveAspectRatio="none" viewBox="0 0 1440 800">
-          <pattern id="teamDotPat" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="#a414e7" /></pattern>
+          <pattern id="teamDotPat" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="#8929AC" /></pattern>
           <rect width="100%" height="100%" fill="url(#teamDotPat)" />
         </svg>
       </motion.div>
@@ -758,11 +758,11 @@ function TeamSection() {
       <div className="absolute bottom-20 right-[10%] w-72 h-72 bg-accent-400/8 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '3s' }} />
 
       {/* Widgets */}
-      <OrbitRing className="absolute top-12 right-16 hidden lg:block" size={110} color="#8b47f0" />
+      <OrbitRing className="absolute top-12 right-16 hidden lg:block" size={110} color="#8929AC" />
       <OrbitRing className="absolute bottom-24 left-12 hidden lg:block" size={80} color="#eab308" />
       <SpinningGear className="absolute top-[40%] left-8 hidden xl:block" size={60} />
       <FloatingDiamond className="absolute bottom-16 right-[20%] w-7 h-7 hidden md:block" />
-      <RotatingCross className="absolute top-32 left-[30%] w-6 h-6 hidden lg:block" color="#8b47f0" />
+      <RotatingCross className="absolute top-32 left-[30%] w-6 h-6 hidden lg:block" color="#8929AC" />
       <FlowingLine className="absolute top-4 left-0 right-0 h-12 opacity-30" />
 
       <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
@@ -1007,7 +1007,7 @@ function CTASection() {
     <section ref={ref} className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-6 md:px-12 xl:px-20">
         <motion.div style={{ scale, borderRadius }} className="relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #a414e7 0%, #b01eeb 50%, #c25aff 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #8929AC 0%, #C010DA 50%, #E473BA 100%)' }} />
           <div className="absolute -right-8 -bottom-16 font-[family-name:var(--font-playfair)] italic text-[16rem] md:text-[22rem] font-bold text-white/[0.05] leading-none select-none pointer-events-none">D</div>
           <div className="absolute top-12 right-20 w-40 h-40 border border-white/10 rounded-full" />
           <div className="absolute top-24 right-12 w-56 h-56 border border-white/5 rounded-full" />

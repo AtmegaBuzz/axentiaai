@@ -1,27 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #faf4ff;
-  --color-brand-100: #f3e5ff;
-  --color-brand-200: #e9caff;
-  --color-brand-300: #d89aff;
-  --color-brand-400: #c25aff;
-  --color-brand-500: #b030f5;
-  --color-brand-600: #b01eeb;
-  --color-brand-700: #a414e7;
-  --color-brand-800: #8610bb;
-  --color-brand-900: #6d0d99;
+  /* Brand — logo purple → pink spectrum */
+  --color-brand-50: #faf5ff;
+  --color-brand-100: #f3e8ff;
+  --color-brand-200: #e9d0ff;
+  --color-brand-300: #E473BA;
+  --color-brand-400: #D44DC8;
+  --color-brand-500: #C010DA;
+  --color-brand-600: #A20EBF;
+  --color-brand-700: #8929AC;
+  --color-brand-800: #6B1D8E;
+  --color-brand-900: #58179B;
 
-  --color-accent-50: #fefce8;
-  --color-accent-100: #fef9c3;
-  --color-accent-200: #fef08a;
-  --color-accent-300: #fde047;
-  --color-accent-400: #facc15;
-  --color-accent-500: #eab308;
-  --color-accent-600: #ca8a04;
-  --color-accent-700: #a16207;
-  --color-accent-800: #854d0e;
-  --color-accent-900: #713f12;
+  /* Accent — logo golden orange spectrum */
+  --color-accent-50: #fef8ec;
+  --color-accent-100: #fdefc5;
+  --color-accent-200: #fce09a;
+  --color-accent-300: #F7C87A;
+  --color-accent-400: #F3B15F;
+  --color-accent-500: #E89B3A;
+  --color-accent-600: #D08425;
+  --color-accent-700: #AD6A1B;
+  --color-accent-800: #8C5416;
+  --color-accent-900: #734412;
+
+  /* Soft pink from logo — utility color */
+  --color-pink-300: #E473BA;
+  --color-pink-400: #D44DC8;
 
   --font-sans: var(--font-inter);
   --font-cursive: var(--font-playfair);

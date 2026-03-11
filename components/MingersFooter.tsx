@@ -35,9 +35,9 @@ const socials = [
 
 export function MingersFooter() {
     return (
-        <footer className="font-sans relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0a0118 0%, #130228 40%, #1a0333 70%, #0d011f 100%)' }}>
+        <footer className="font-sans relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #2a0845 0%, #3b1068 40%, #4a1580 70%, #2a0845 100%)' }}>
             {/* Ambient glow */}
-            <div className="absolute bottom-0 left-1/3 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(164,20,231,0.12) 0%, transparent 70%)' }} />
+            <div className="absolute bottom-0 left-1/3 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(192,16,218,0.12) 0%, transparent 70%)' }} />
 
             {/* ── FOOTER LINKS GRID ── */}
             <div className="container mx-auto px-4 md:px-8 xl:px-12 py-16 relative z-10">

@@ -72,15 +72,15 @@ function HeroSection({ activeTab, setActiveTab }: { activeTab: ProgramTab; setAc
 
   return (
     <section className="relative pt-32 pb-20 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #1e1b4b 0%, #2d1054 30%, #4a1985 60%, #3d156e 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #58179B 0%, #8929AC 40%, #C010DA 100%)' }} />
       <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-500/20 rounded-full blur-[120px]" />
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent-400/15 rounded-full blur-[100px]" />
       <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 600">
         <path d="M0,200 Q360,100 720,200 T1440,200" stroke="url(#hg1)" strokeWidth="2" fill="none" />
         <path d="M0,400 Q360,300 720,400 T1440,400" stroke="url(#hg2)" strokeWidth="1.5" fill="none" />
         <defs>
-          <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#a876ff" /><stop offset="100%" stopColor="#facc15" /></linearGradient>
-          <linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#facc15" /><stop offset="100%" stopColor="#a876ff" /></linearGradient>
+          <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#C010DA" /><stop offset="100%" stopColor="#F3B15F" /></linearGradient>
+          <linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#F3B15F" /><stop offset="100%" stopColor="#C010DA" /></linearGradient>
         </defs>
       </svg>
 
@@ -812,7 +812,7 @@ function ImpactSection() {
 
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #6d0d99 0%, #a414e7 40%, #8610bb 70%, #550a7a 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(120deg, #58179B 0%, #8929AC 30%, #C010DA 60%, #E473BA 100%)' }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-400/20 rounded-full blur-[150px]" />
       <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 400">
         {Array.from({ length: 13 }).map((_, i) => <line key={`v${i}`} x1={i * 120} y1="0" x2={i * 120} y2="400" stroke="white" strokeWidth="1" />)}
@@ -1255,7 +1255,7 @@ function CTASection() {
     <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-6 md:px-12 xl:px-20">
         <div className="relative overflow-hidden rounded-[2rem] shadow-2xl">
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #a414e7 0%, #b01eeb 50%, #c25aff 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #8929AC 0%, #C010DA 50%, #E473BA 100%)' }} />
           <div className="absolute -right-8 -bottom-16 font-[family-name:var(--font-playfair)] italic text-[16rem] md:text-[22rem] font-bold text-white/[0.05] leading-none select-none pointer-events-none">D</div>
           <div className="absolute top-12 right-20 w-40 h-40 border border-white/10 rounded-full" />
           <div className="absolute top-24 right-12 w-56 h-56 border border-white/5 rounded-full" />
