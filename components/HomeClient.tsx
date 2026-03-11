@@ -21,8 +21,8 @@ export function HomeClient() {
             <main className="flex min-h-screen flex-col">
                 <Hero loaderDone={loaderDone} />
                 <WhyAxentiaAI />
-                <StatementBanner />
                 <WhyDaksha />
+                <StatementBanner />
                 <Programs />
                 <Timeline />
                 <Audience />
