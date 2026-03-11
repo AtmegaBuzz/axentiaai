@@ -17,7 +17,7 @@ const nonFits = [
 
 export function Audience() {
     return (
-        <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-white relative overflow-hidden">
             <div className="container mx-auto px-4 md:px-8 xl:px-12">
 
                 {/* ── WHO IS THIS FOR (BENTO BOX) ── */}
@@ -91,8 +91,8 @@ export function Audience() {
                 </div>
 
                 {/* ── IS THIS RIGHT FOR YOU ── */}
-                <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 lg:p-16 border border-slate-200 shadow-xl shadow-slate-200/40">
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-slate-50/80 to-transparent pointer-events-none rounded-r-[2.5rem]" />
+                <div className="relative bg-white rounded-3xl p-8 md:p-12 lg:p-16 border border-slate-200 shadow-xl shadow-slate-200/40">
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-slate-50/80 to-transparent pointer-events-none rounded-r-3xl" />
 
                     <div className="relative z-10">
                         <div className="max-w-2xl mb-14">

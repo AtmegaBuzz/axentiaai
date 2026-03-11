@@ -90,9 +90,8 @@ function TimelineItem({
   /* Shared card block */
   const card = (
     <div
-      className={`bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group/card max-w-md ${
-        isEven ? 'ml-auto' : 'mr-auto'
-      }`}
+      className={`bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group/card max-w-md ${isEven ? 'ml-auto' : 'mr-auto'
+        }`}
     >
       <div className="p-5">
         <div className="flex items-center gap-3 mb-2">
@@ -141,9 +140,8 @@ function TimelineItem({
       <div className="hidden md:grid md:grid-cols-[1fr_60px_1fr] md:gap-8 items-start pb-20">
         {/* Left column */}
         <div
-          className={`transition-all duration-700 ease-out ${
-            isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-6'
-          }`}
+          className={`transition-all duration-700 ease-out ${isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-6'
+            }`}
         >
           {isEven ? card : periodAndImage}
         </div>
@@ -154,7 +152,7 @@ function TimelineItem({
             ref={dotRef}
             className="w-5 h-5 rounded-full z-20 transition-all duration-500"
             style={{
-              border: `3px solid ${isActive ? 'var(--color-brand-500, #8b47f0)' : '#cbd5e1'}`,
+              border: `4px solid ${isActive ? 'var(--color-brand-500, #8b47f0)' : '#cbd5e1'}`,
               backgroundColor: isActive ? 'var(--color-brand-500, #8b47f0)' : '#f8fafc',
               boxShadow: isActive
                 ? '0 0 0 6px rgba(217, 70, 239, 0.15), 0 0 20px rgba(217, 70, 239, 0.3)'
@@ -165,9 +163,8 @@ function TimelineItem({
 
         {/* Right column */}
         <div
-          className={`transition-all duration-700 ease-out ${
-            isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-6'
-          }`}
+          className={`transition-all duration-700 ease-out ${isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-6'
+            }`}
         >
           {isEven ? periodAndImage : card}
         </div>
@@ -181,7 +178,7 @@ function TimelineItem({
             ref={index === 0 ? dotRef : undefined}
             className="w-4 h-4 rounded-full z-20 transition-all duration-500"
             style={{
-              border: `3px solid ${isActive ? 'var(--color-brand-500, #8b47f0)' : '#cbd5e1'}`,
+              border: `4px solid ${isActive ? 'var(--color-brand-500, #8b47f0)' : '#cbd5e1'}`,
               backgroundColor: isActive ? 'var(--color-brand-500, #8b47f0)' : '#f8fafc',
               boxShadow: isActive
                 ? '0 0 0 4px rgba(217, 70, 239, 0.15), 0 0 12px rgba(217, 70, 239, 0.3)'
@@ -192,9 +189,8 @@ function TimelineItem({
 
         {/* Content */}
         <div
-          className={`transition-all duration-700 ease-out ${
-            isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-4'
-          }`}
+          className={`transition-all duration-700 ease-out ${isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-4'
+            }`}
         >
           <span
             className="text-xs font-mono tracking-wider uppercase block mb-1 transition-colors duration-500"
@@ -291,7 +287,7 @@ export function Timeline() {
   )
 
   return (
-    <section className="py-20 md:py-28 bg-white relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-slate-50 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 xl:px-12">
         {/* Header */}
         <div className="max-w-3xl mb-20 md:mb-28">
@@ -310,7 +306,7 @@ export function Timeline() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-5"
           >
-            Your Career Timeline
+            Your Career <span className="font-cursive italic text-brand-600 text-[1.1em]">Timeline</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -327,7 +323,7 @@ export function Timeline() {
         {/* Timeline */}
         <div ref={containerRef} className="relative">
           {/* Center vertical line — background track (desktop) */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-slate-200">
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[4px] bg-slate-200">
             <motion.div
               className="w-full origin-top"
               style={{
@@ -339,7 +335,7 @@ export function Timeline() {
           </div>
 
           {/* Left vertical line (mobile) */}
-          <div className="md:hidden absolute left-[12px] top-0 bottom-0 w-[3px] bg-slate-200">
+          <div className="md:hidden absolute left-[12px] top-0 bottom-0 w-[4px] bg-slate-200">
             <motion.div
               className="w-full origin-top"
               style={{

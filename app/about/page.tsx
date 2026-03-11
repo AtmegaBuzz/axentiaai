@@ -423,7 +423,7 @@ function JourneySection() {
 
 function NumbersSection() {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 30%'] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 85%', 'center 40%'] });
   const counterProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const stats = [
@@ -589,15 +589,13 @@ function EcosystemSection() {
           <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">We build consultants who join real delivery teams — connected to an ecosystem that grows together.</p></FadeIn>
         </div>
 
-        <FadeIn delay={0.15}>
-          <div className="hidden lg:block relative h-12 mb-6 max-w-3xl mx-auto">
-            <svg className="w-full h-full" viewBox="0 0 600 48" preserveAspectRatio="xMidYMid meet">
-              <motion.path d="M100,8 L100,28 Q100,44 160,44 L300,44 Q340,44 340,28 L340,8" stroke="#8b47f0" strokeWidth="2" fill="none" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, delay: 0.3 }} />
-              <motion.path d="M340,8 L340,28 Q340,44 400,44 L500,44 Q540,44 540,28 L540,8" stroke="#6366f1" strokeWidth="2" fill="none" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, delay: 0.6 }} />
-              <motion.circle cx="300" cy="44" r="4" fill="#8b47f0" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: 1 }} />
-            </svg>
-          </div>
-        </FadeIn>
+        <div className="hidden lg:block relative h-12 mb-6 max-w-3xl mx-auto">
+          <svg className="w-full h-full" viewBox="0 0 600 48" preserveAspectRatio="xMidYMid meet">
+            <line x1="100" y1="24" x2="290" y2="24" stroke="#8b47f0" strokeWidth="2" />
+            <circle cx="300" cy="24" r="4" fill="#8b47f0" />
+            <line x1="310" y1="24" x2="500" y2="24" stroke="#6366f1" strokeWidth="2" />
+          </svg>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {ecosystem.map((e, i) => (
@@ -923,10 +921,10 @@ function TeamSection() {
           </motion.div>
         </motion.div>
 
-        {/* ── Team grid with crazy snap animations ── */}
+        {/* ── Team grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {teamMembers.map((member, i) => (
-            <TiltCard key={member.name} index={i}>
+            <div key={member.name}>
               <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(124,58,237,0.15)] transition-shadow duration-500 group h-full flex flex-col">
                 {/* Photo with overlay */}
                 <div className="relative h-56 overflow-hidden">
@@ -940,18 +938,12 @@ function TeamSection() {
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                  {/* Company badge — snaps in with rotation */}
-                  <motion.div
-                    className="absolute top-3 right-3"
-                    initial={{ opacity: 0, scale: 0, rotate: -180 }}
-                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.12, type: 'spring', stiffness: 250, damping: 15 }}
-                  >
+                  {/* Company badge */}
+                  <div className="absolute top-3 right-3">
                     <span className={`text-[10px] font-bold uppercase tracking-wider text-white bg-gradient-to-r ${member.color} px-3 py-1 rounded-full shadow-lg`}>
                       {member.company}
                     </span>
-                  </motion.div>
+                  </div>
 
                   {/* LinkedIn icon that slides up on hover */}
                   <div className="absolute bottom-3 right-3 translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
@@ -990,7 +982,7 @@ function TeamSection() {
                   </motion.div>
                 </div>
               </div>
-            </TiltCard>
+            </div>
           ))}
         </div>
       </div>

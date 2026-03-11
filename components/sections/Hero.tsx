@@ -4,13 +4,31 @@ import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Play, Download } from 'lucide-react';
 
+const companies = [
+    { name: 'SAP',          domain: 'sap.com' },
+    { name: 'Deloitte',     domain: 'deloitte.com' },
+    { name: 'Accenture',    domain: 'accenture.com' },
+    { name: 'TCS',          domain: 'tcs.com' },
+    { name: 'Infosys',      domain: 'infosys.com' },
+    { name: 'Wipro',        domain: 'wipro.com' },
+    { name: 'IBM',          domain: 'ibm.com' },
+    { name: 'Capgemini',    domain: 'capgemini.com' },
+    { name: 'HCL',          domain: 'hcltech.com' },
+    { name: 'Cognizant',    domain: 'cognizant.com' },
+    { name: 'EY',           domain: 'ey.com' },
+    { name: 'PwC',          domain: 'pwc.com' },
+    { name: 'KPMG',         domain: 'kpmg.com' },
+    { name: 'LTIMindtree',  domain: 'ltimindtree.com' },
+    { name: 'Tech Mahindra',domain: 'techmahindra.com' },
+];
+
 interface HeroProps {
     loaderDone?: boolean;
 }
 
 export function Hero({ loaderDone = false }: HeroProps) {
     return (
-        <section className="relative min-h-screen flex flex-col overflow-hidden bg-white">
+        <section className="relative min-h-screen flex flex-col overflow-hidden bg-black">
             {/* Background Video */}
             <div className="absolute inset-0 z-0">
                 <video
@@ -22,14 +40,13 @@ export function Hero({ loaderDone = false }: HeroProps) {
                 >
                     <source src="/hero_video.mp4" type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/45" />
             </div>
 
             {/* Hero Content */}
             <div className="relative z-10 flex-1 flex items-center">
-                <div className="container mx-auto px-4 md:px-6 pt-32 pb-20">
+                <div className="container mx-auto px-4 md:px-6 pt-32 pb-16">
                     <div className="max-w-5xl">
-                        {/* Main Heading — transparent during loader to allow perfectly overlaying loader text */}
                         <h1
                             id="hero-heading"
                             className="text-left"
@@ -46,12 +63,20 @@ export function Hero({ loaderDone = false }: HeroProps) {
                             </div>
                         </h1>
 
-                        {/* CTA Buttons — fade in after loader */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                            className="text-lg md:text-xl text-white/70 font-medium mt-6 max-w-xl"
+                        >
+                            Enterprise consulting education built on 30 years of real delivery experience.
+                        </motion.p>
+
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="flex flex-col sm:flex-row gap-4 mt-12"
+                            className="flex flex-col sm:flex-row gap-4 mt-10"
                         >
                             <Button
                                 size="lg"
@@ -73,6 +98,46 @@ export function Hero({ loaderDone = false }: HeroProps) {
                     </div>
                 </div>
             </div>
+
+            {/* Scrolling logos — no background, directly over the video */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={loaderDone ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 1, delay: 0.6 }}
+                className="relative z-10 pb-10 overflow-hidden"
+            >
+                {/* Dark edge fades — match video, not white */}
+                <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black/60 to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black/60 to-transparent z-10 pointer-events-none" />
+
+                <div className="flex w-max animate-marquee-reverse will-change-transform items-center">
+                    {[...companies, ...companies, ...companies].map((company, idx) => (
+                        <div
+                            key={idx}
+                            className="inline-flex items-center justify-center mx-10 h-8 opacity-40 hover:opacity-80 transition-opacity duration-300"
+                        >
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={`https://logo.clearbit.com/${company.domain}`}
+                                alt={company.name}
+                                className="h-6 w-auto max-w-[100px] object-contain"
+                                style={{ filter: 'brightness(0) invert(1)' }}
+                                loading="eager"
+                                onLoad={(e) => {
+                                    const el = e.currentTarget.nextElementSibling as HTMLElement | null;
+                                    if (el) el.style.display = 'none';
+                                }}
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                }}
+                            />
+                            <span className="text-[11px] font-bold uppercase tracking-widest text-white whitespace-nowrap">
+                                {company.name}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            </motion.div>
         </section>
     );
 }

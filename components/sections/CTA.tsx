@@ -10,7 +10,7 @@ export function CTA() {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 40%'] });
     const scale = useTransform(scrollYProgress, [0, 1], [0.88, 1]);
-    const borderRadius = useTransform(scrollYProgress, [0, 1], [48, 32]);
+    const borderRadius = 32; // Fixed to rounded-3xl for consistency
 
     return (
         <section id="cta" ref={ref} className="py-16 md:py-20 bg-white">
@@ -21,13 +21,13 @@ export function CTA() {
                 >
                     {/* Watermark letter */}
                     <div className="absolute -top-10 right-0 xl:right-[15%] text-[16rem] md:text-[24rem] font-[family-name:var(--font-playfair)] italic font-bold text-white/10 leading-none pointer-events-none select-none">
-                        D
+                        A
                     </div>
 
                     {/* Left Content */}
                     <div className="relative z-10 p-10 md:p-16 xl:w-3/5 flex flex-col items-start justify-center h-full">
                         <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">
-                            Let&apos;s get you to the <span className="font-[family-name:var(--font-playfair)] italic">right place.</span>
+                            Let&apos;s get you to the <span className="font-cursive italic text-accent-300 text-[1.1em]">right place.</span>
                         </h2>
                         <p className="text-lg md:text-xl text-brand-100 mb-8 font-medium">
                             No pressure. Just a conversation about your goals, where you are now, and whether Daksha might be the right next step.
