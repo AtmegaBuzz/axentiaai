@@ -7,8 +7,7 @@ import { TrustedBy } from '@/components/sections/TrustedBy';
 import { WhyAxentiaAI } from '@/components/sections/WhyMastersUnion';
 import { WhyDaksha } from '@/components/sections/WhyDaksha';
 import { Programs } from '@/components/sections/Programs';
-import { EnterprisePartnerships } from '@/components/sections/EnterprisePartnerships';
-import { HowItWorks } from '@/components/sections/HowItWorks';
+import { StatementBanner } from '@/components/sections/StatementBanner';
 import { Timeline } from '@/components/sections/Timeline';
 import { Audience } from '@/components/sections/Audience';
 import Testimonials from '@/components/sections/Testimonials';
@@ -26,8 +25,7 @@ export function HomeClient() {
                 <TrustedBy />
                 <WhyDaksha />
                 <Programs />
-                <EnterprisePartnerships />
-                <HowItWorks />
+                <StatementBanner />
                 <Timeline />
                 <Audience />
                 <Testimonials />

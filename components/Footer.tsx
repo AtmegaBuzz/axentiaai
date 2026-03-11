@@ -37,7 +37,7 @@ export function Footer() {
                     {/* Brand */}
                     <div className="lg:col-span-2 flex flex-col gap-4">
                         <Link href="/" className="flex items-center mb-2">
-                            <Image src="/logo.png" alt="Axentia.AI" width={160} height={40} className="h-10 w-auto brightness-110" />
+                            <Image src="/Axentia-logo-white.png" alt="Axentia.AI" width={160} height={40} className="h-6 w-auto" />
                         </Link>
                         <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
                             Division of Axentia.AI Private Limited<br />
