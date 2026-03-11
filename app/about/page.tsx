@@ -200,7 +200,7 @@ function HeroSection() {
         <motion.div style={{ opacity, y, scale }} className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 xl:px-20">
           <div className="max-w-5xl">
             <FadeIn>
-              <Image src="/logo.png" alt="Axentia AI" width={180} height={50} className="h-12 w-auto brightness-0 invert mb-8" />
+              <Image src="/Axentia-logo-white.png" alt="Axentia AI" width={180} height={50} className="h-6 w-auto mb-8" />
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="text-brand-300 font-semibold uppercase tracking-[0.2em] text-sm mb-5">Our Story</p>
@@ -435,7 +435,7 @@ function NumbersSection() {
 
   return (
     <section ref={ref} className="relative py-24 md:py-36 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #3d156e 0%, #561C9C 40%, #4a1985 70%, #2d1054 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #6d0d99 0%, #a414e7 40%, #8610bb 70%, #550a7a 100%)' }} />
       <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 600">
         {Array.from({ length: 13 }).map((_, i) => <line key={`v${i}`} x1={i * 120} y1="0" x2={i * 120} y2="600" stroke="white" strokeWidth="1" />)}
         {Array.from({ length: 7 }).map((_, i) => <line key={`h${i}`} x1="0" y1={i * 100} x2="1440" y2={i * 100} stroke="white" strokeWidth="1" />)}
@@ -750,7 +750,7 @@ function TeamSection() {
       {/* Animated dot grid background */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04]" preserveAspectRatio="none" viewBox="0 0 1440 800">
-          <pattern id="teamDotPat" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="#561C9C" /></pattern>
+          <pattern id="teamDotPat" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="#a414e7" /></pattern>
           <rect width="100%" height="100%" fill="url(#teamDotPat)" />
         </svg>
       </motion.div>
@@ -1015,7 +1015,7 @@ function CTASection() {
     <section ref={ref} className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-6 md:px-12 xl:px-20">
         <motion.div style={{ scale, borderRadius }} className="relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #561C9C 0%, #7630d9 50%, #8b47f0 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #a414e7 0%, #b01eeb 50%, #c25aff 100%)' }} />
           <div className="absolute -right-8 -bottom-16 font-[family-name:var(--font-playfair)] italic text-[16rem] md:text-[22rem] font-bold text-white/[0.05] leading-none select-none pointer-events-none">D</div>
           <div className="absolute top-12 right-20 w-40 h-40 border border-white/10 rounded-full" />
           <div className="absolute top-24 right-12 w-56 h-56 border border-white/5 rounded-full" />

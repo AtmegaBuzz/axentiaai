@@ -27,7 +27,7 @@ export function Audience() {
                             Who It&apos;s For
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
-                            Designed for the <span className="text-brand-600">Dedicated</span>
+                            Designed for the <span className="font-cursive italic text-brand-600 text-[1.1em]">Dedicated</span>
                         </h2>
                     </div>
 
@@ -45,7 +45,6 @@ export function Audience() {
                                     B.Tech, B.E., BBA, B.Com, BCA, B.Sc, MCA, MBA with 0–2 years experience looking to jumpstart an enterprise career.
                                 </p>
                             </div>
-                            <GraduationCap className="absolute -bottom-10 -right-10 w-48 h-48 text-white/5 pointer-events-none transition-transform duration-700 group-hover:scale-110" strokeWidth={1} />
                         </div>
 
                         {/* Tile 2: Career Changers (Wide) */}
@@ -61,7 +60,6 @@ export function Audience() {
                                     </p>
                                 </div>
                             </div>
-                            <BriefcaseBusiness className="absolute -top-12 -right-12 w-48 h-48 text-slate-50 pointer-events-none transition-transform duration-700 group-hover:-rotate-6" strokeWidth={1} />
                         </div>
 
                         {/* Tile 3: Noida-Based (Square) */}
@@ -99,7 +97,7 @@ export function Audience() {
                     <div className="relative z-10">
                         <div className="max-w-2xl mb-14">
                             <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">
-                                Is This Right For <span className="text-brand-600">You?</span>
+                                Is This Right For <span className="font-cursive italic text-brand-600 text-[1.1em]">You?</span>
                             </h3>
                             <p className="text-slate-600 text-lg">
                                 We&apos;re looking for individuals who think long-term. Daksha requires immense focus and commitment to transform your career foundation.

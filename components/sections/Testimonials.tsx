@@ -97,8 +97,12 @@ export default function Testimonials() {
   const t = testimonials[active];
 
   return (
-    <section className="relative py-16 md:py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 xl:px-12">
+    <section className="relative py-16 md:py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f3e8ff 100%)' }}>
+      {/* Ambient glow orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(176,48,245,0.08) 0%, transparent 70%)' }} />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(164,20,231,0.05) 0%, transparent 70%)' }} />
+
+      <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
 
         {/* ── header ── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -108,7 +112,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-              className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3"
+              className="text-sm font-semibold uppercase tracking-widest text-brand-600 mb-3"
             >
               Testimonials
             </motion.p>
@@ -120,7 +124,7 @@ export default function Testimonials() {
               className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
             >
               See how learners get career-ready with{' '}
-              <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Daksha</span>
+              <span className="font-cursive italic text-brand-600 text-[1.1em]">Daksha</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -136,7 +140,7 @@ export default function Testimonials() {
           <div className="shrink-0">
             <a
               href="#stories"
-              className="inline-flex items-center justify-center px-6 py-3 border border-slate-200 rounded-full text-slate-800 font-semibold text-sm hover:bg-white hover:border-slate-300 hover:shadow-sm transition-all duration-200"
+              className="inline-flex items-center justify-center px-6 py-3 border border-brand-200 rounded-full text-brand-700 font-semibold text-sm hover:bg-brand-50 hover:border-brand-300 transition-all duration-200"
             >
               See all success stories
             </a>
@@ -144,9 +148,9 @@ export default function Testimonials() {
         </div>
 
         {/* ── content card ── */}
-        <div className="relative bg-white rounded-3xl p-6 sm:p-10 md:p-14 border border-slate-200 shadow-sm">
+        <div className="relative rounded-3xl p-6 sm:p-10 md:p-14 border border-white shadow-xl backdrop-blur-sm bg-white/60">
           {/* Quote watermark */}
-          <Quote className="absolute top-6 right-6 md:top-10 md:right-10 w-16 h-16 md:w-20 md:h-20 text-brand-100 pointer-events-none" strokeWidth={1} />
+          <Quote className="absolute top-6 right-6 md:top-10 md:right-10 w-16 h-16 md:w-20 md:h-20 text-brand-200 pointer-events-none" strokeWidth={1} />
 
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[340px] md:min-h-[380px]">
             {/* Left: Text content — crossfade only */}
@@ -160,7 +164,7 @@ export default function Testimonials() {
                   transition={{ duration: 0.35, ease: 'easeInOut' }}
                 >
                   <div className="mb-6">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold tracking-wide uppercase border border-brand-100">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-bold tracking-wide uppercase border border-brand-200">
                       {t.company}
                     </span>
                   </div>
@@ -170,12 +174,12 @@ export default function Testimonials() {
                   </h3>
 
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 font-bold text-lg">
                       {t.name.charAt(0)}
                     </div>
                     <div>
                       <h4 className="text-slate-900 font-bold text-lg">{t.name}</h4>
-                      <p className="text-slate-500 text-sm">{t.role}</p>
+                      <p className="text-slate-600 text-sm">{t.role}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -249,11 +253,10 @@ export default function Testimonials() {
                     setActive(i);
                   }}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`h-2.5 rounded-full transition-transform transition-colors duration-300 origin-left ${
-                    i === active
+                  className={`h-2.5 rounded-full transition-transform transition-colors duration-300 origin-left ${i === active
                       ? 'w-2.5 scale-x-[3.2] bg-brand-500'
-                      : 'w-2.5 scale-x-100 bg-slate-300 hover:bg-slate-400'
-                  }`}
+                      : 'w-2.5 scale-x-100 bg-brand-200 hover:bg-brand-300'
+                    }`}
                 />
               ))}
             </div>
@@ -263,14 +266,14 @@ export default function Testimonials() {
               <button
                 onClick={prev}
                 aria-label="Previous testimonial"
-                className="w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-600 hover:text-brand-600 hover:border-brand-200 hover:shadow-md transition-all"
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-brand-300 hover:bg-brand-50 shadow-sm transition-all"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={next}
                 aria-label="Next testimonial"
-                className="w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-600 hover:text-brand-600 hover:border-brand-200 hover:shadow-md transition-all"
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-brand-300 hover:bg-brand-50 shadow-sm transition-all"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

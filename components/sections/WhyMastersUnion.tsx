@@ -27,7 +27,7 @@ export function WhyAxentiaAI() {
             {/* ── FloatingLines WebGL background with mouse interaction ── */}
             <div className="absolute inset-0 z-0 opacity-60">
                 <FloatingLines
-                    linesGradient={['#8b47f0', '#a876ff', '#facc15', '#fbbf24', '#7630d9', '#561C9C']}
+                    linesGradient={['#b030f5', '#c25aff', '#facc15', '#fbbf24', '#b01eeb', '#a414e7']}
                     enabledWaves={['top', 'middle', 'bottom']}
                     lineCount={[4, 5, 3]}
                     lineDistance={[4, 5, 4]}
