@@ -22,11 +22,7 @@ const companies = [
     { name: 'Tech Mahindra',domain: 'techmahindra.com' },
 ];
 
-interface HeroProps {
-    loaderDone?: boolean;
-}
-
-export function Hero({ loaderDone = false }: HeroProps) {
+export function Hero() {
     return (
         <section className="relative min-h-screen flex flex-col overflow-hidden bg-black">
             {/* Background Video */}
@@ -43,15 +39,11 @@ export function Hero({ loaderDone = false }: HeroProps) {
                 <div className="absolute inset-0 bg-black/45" />
             </div>
 
-            {/* Hero Content */}
+            {/* Hero Content — visible immediately */}
             <div className="relative z-10 flex-1 flex items-center">
                 <div className="container mx-auto px-4 md:px-6 pt-32 pb-16">
                     <div className="max-w-5xl">
-                        <h1
-                            id="hero-heading"
-                            className="text-left"
-                            style={{ opacity: loaderDone ? 1 : 0 }}
-                        >
+                        <h1 id="hero-heading" className="text-left">
                             <div className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[0.9] tracking-tight">
                                 Learn AI
                             </div>
@@ -65,7 +57,7 @@ export function Hero({ loaderDone = false }: HeroProps) {
 
                         <motion.p
                             initial={{ opacity: 0, y: 16 }}
-                            animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.1 }}
                             className="text-lg md:text-xl text-white/70 font-medium mt-6 max-w-xl"
                         >
@@ -74,7 +66,7 @@ export function Hero({ loaderDone = false }: HeroProps) {
 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
-                            animate={loaderDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="flex flex-col sm:flex-row gap-4 mt-10"
                         >
@@ -99,14 +91,13 @@ export function Hero({ loaderDone = false }: HeroProps) {
                 </div>
             </div>
 
-            {/* Scrolling logos — no background, directly over the video */}
+            {/* Scrolling logos */}
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={loaderDone ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 1, delay: 0.6 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.4 }}
                 className="relative z-10 pb-10 overflow-hidden"
             >
-                {/* Dark edge fades — match video, not white */}
                 <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black/60 to-transparent z-10 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black/60 to-transparent z-10 pointer-events-none" />
 
@@ -122,7 +113,7 @@ export function Hero({ loaderDone = false }: HeroProps) {
                                 alt={company.name}
                                 className="h-6 w-auto max-w-[100px] object-contain"
                                 style={{ filter: 'brightness(0) invert(1)' }}
-                                loading="eager"
+                                loading="lazy"
                                 onLoad={(e) => {
                                     const el = e.currentTarget.nextElementSibling as HTMLElement | null;
                                     if (el) el.style.display = 'none';

@@ -384,28 +384,40 @@ export default function FloatingLines({
     }
 
     let raf = 0;
+    let isVisible = true;
+
+    // Pause render loop when off-screen to save GPU/CPU
+    const io = new IntersectionObserver(
+      ([entry]) => { isVisible = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    io.observe(container);
+
     const renderLoop = () => {
-      (uniforms.iTime.value as number) = clock.getElapsedTime();
+      if (isVisible) {
+        (uniforms.iTime.value as number) = clock.getElapsedTime();
 
-      if (interactive) {
-        currentMouseRef.current.lerp(targetMouseRef.current, mouseDamping);
-        (uniforms.iMouse.value as Vector2).copy(currentMouseRef.current);
-        currentInfluenceRef.current += (targetInfluenceRef.current - currentInfluenceRef.current) * mouseDamping;
-        uniforms.bendInfluence.value = currentInfluenceRef.current;
+        if (interactive) {
+          currentMouseRef.current.lerp(targetMouseRef.current, mouseDamping);
+          (uniforms.iMouse.value as Vector2).copy(currentMouseRef.current);
+          currentInfluenceRef.current += (targetInfluenceRef.current - currentInfluenceRef.current) * mouseDamping;
+          uniforms.bendInfluence.value = currentInfluenceRef.current;
+        }
+
+        if (parallax) {
+          currentParallaxRef.current.lerp(targetParallaxRef.current, mouseDamping);
+          (uniforms.parallaxOffset.value as Vector2).copy(currentParallaxRef.current);
+        }
+
+        renderer.render(scene, camera);
       }
-
-      if (parallax) {
-        currentParallaxRef.current.lerp(targetParallaxRef.current, mouseDamping);
-        (uniforms.parallaxOffset.value as Vector2).copy(currentParallaxRef.current);
-      }
-
-      renderer.render(scene, camera);
       raf = requestAnimationFrame(renderLoop);
     };
     renderLoop();
 
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       if (ro) ro.disconnect();
       if (interactive) {
         renderer.domElement.removeEventListener('pointermove', handlePointerMove);
