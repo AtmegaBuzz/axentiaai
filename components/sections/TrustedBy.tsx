@@ -7,24 +7,29 @@ const companies = [
 
 export function TrustedBy() {
     return (
-        <section className="py-12 bg-white border-b border-slate-100 overflow-hidden">
-            <div className="container mx-auto px-4 md:px-8 mb-8">
-                <p className="text-center text-base md:text-lg text-slate-500 font-medium">
-                    500+ consultants trained across leading enterprises worldwide.
-                </p>
+        <section className="pb-10 bg-white overflow-hidden">
+            {/* Label row */}
+            <div className="container mx-auto px-4 md:px-8 mb-5">
+                <div className="flex items-center gap-3">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                        500+ consultants trained across
+                    </span>
+                    <div className="flex-1 h-px bg-slate-100" />
+                </div>
             </div>
 
+            {/* Marquee */}
             <div className="relative">
-                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
                 <div className="flex w-max animate-marquee will-change-transform">
                     {[...companies, ...companies, ...companies].map((company, idx) => (
                         <div
                             key={idx}
-                            className="inline-flex items-center justify-center mx-6 h-10 px-2 opacity-40 hover:opacity-100 transition-opacity duration-200"
+                            className="inline-flex items-center justify-center mx-8 h-8 opacity-30 hover:opacity-70 transition-opacity duration-200"
                         >
-                            <span className="text-lg font-bold text-slate-800 whitespace-nowrap tracking-tight">{company}</span>
+                            <span className="text-sm font-semibold text-slate-700 whitespace-nowrap tracking-wide uppercase">{company}</span>
                         </div>
                     ))}
                 </div>

@@ -24,20 +24,18 @@ const megaMenuData = {
     },
     'Programs': {
         items: [
-            { name: 'SAP Consulting Apprenticeship', href: '/programs/sap-consulting', description: 'Enterprise SAP consulting career track' },
-            { name: 'Data & AI for Enterprise', href: '/programs/data-ai-enterprise', description: 'Deep learning and AI for business impact' },
-            { name: 'ERP Business Analyst Track', href: '/programs/erp-analyst', description: 'End-to-end business process analysis' },
-            { name: 'Program Overview', href: '/programs', description: 'Explore our full range of programs' },
-            { name: 'Curriculum', href: '/programs/curriculum', description: 'Detailed course structure and modules' },
-            { name: 'Tools Taught', href: '/programs/tools', description: 'Industry-standard tools and platforms' },
-            { name: 'Mentors', href: '/programs/mentors', description: 'Learn from experienced industry professionals' },
-            { name: 'Outcomes', href: '/programs/outcomes', description: 'Real results from our latest cohorts' },
+            { name: 'DCAP — Career Accelerator', href: '/programs?tab=dcap', description: '10-month foundation training + paid apprenticeship' },
+            { name: 'EAP — Elite Acceleration', href: '/programs?tab=eap', description: 'Merit-based advanced track for high performers' },
+            { name: 'Online Program', href: '/programs?tab=online', description: 'Self-paced SAP fundamentals, pathway to DCAP' },
+            { name: 'Compare Programs', href: '/programs?tab=compare', description: 'Side-by-side comparison of all programs' },
+            { name: 'Application Process', href: '/programs#apply', description: 'How to apply for DCAP in 4 steps' },
+            { name: 'Faculty & Mentors', href: '/programs#faculty', description: 'Industry veterans behind the program' },
         ],
         featured: {
-            label: "GUIDE",
-            title: "From Learner to AI Professional",
-            description: "Download our career transformation playbook",
-            href: "/programs"
+            label: "FLAGSHIP",
+            title: "DCAP — The Full System",
+            description: "4 months classroom + 6-8 months paid apprenticeship. This is how consultants are built.",
+            href: "/programs?tab=dcap"
         }
     },
     'Student Life': {
@@ -287,6 +285,14 @@ export function Navbar() {
                             </button>
                         </div>
                     ))}
+                    <Link
+                        href="/forum"
+                        className={`px-4 py-2 text-sm font-medium transition-all duration-200 ease-out ${
+                            (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
+                        }`}
+                    >
+                        Forum
+                    </Link>
                 </nav>
                 
                 {/* Full-width dropdowns positioned relative to viewport */}
@@ -352,7 +358,18 @@ export function Navbar() {
                                     </div>
                                 </div>
                             ))}
-                            <div className="pt-4 border-t border-slate-200">
+                            <div className="pt-4 border-t border-slate-200 space-y-3">
+                                <Link
+                                    href="/forum"
+                                    className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
+                                    <div>
+                                        <span className="text-sm font-medium text-slate-700">Community Forum</span>
+                                        <p className="text-xs text-slate-400">Join discussions with fellow consultants</p>
+                                    </div>
+                                </Link>
                                 <Link 
                                     href="/contact" 
                                     className="w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center justify-center gap-2"

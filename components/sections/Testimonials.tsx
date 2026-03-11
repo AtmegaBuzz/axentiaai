@@ -97,7 +97,7 @@ export default function Testimonials() {
   const t = testimonials[active];
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f3e8ff 100%)' }}>
+    <section className="relative py-16 md:pt-24 md:pb-32 overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f3e8ff 100%)' }}>
       {/* Ambient glow orbs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(176,48,245,0.08) 0%, transparent 70%)' }} />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(164,20,231,0.05) 0%, transparent 70%)' }} />
@@ -254,8 +254,8 @@ export default function Testimonials() {
                   }}
                   aria-label={`Go to testimonial ${i + 1}`}
                   className={`h-2.5 rounded-full transition-transform transition-colors duration-300 origin-left ${i === active
-                      ? 'w-2.5 scale-x-[3.2] bg-brand-500'
-                      : 'w-2.5 scale-x-100 bg-brand-200 hover:bg-brand-300'
+                    ? 'w-2.5 scale-x-[3.2] bg-brand-500'
+                    : 'w-2.5 scale-x-100 bg-brand-200 hover:bg-brand-300'
                     }`}
                 />
               ))}

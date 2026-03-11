@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { OpeningLoader } from '@/components/OpeningLoader';
 import { Hero } from '@/components/sections/Hero';
-import { TrustedBy } from '@/components/sections/TrustedBy';
 import { WhyAxentiaAI } from '@/components/sections/WhyMastersUnion';
 import { WhyDaksha } from '@/components/sections/WhyDaksha';
 import { Programs } from '@/components/sections/Programs';
@@ -22,10 +21,9 @@ export function HomeClient() {
             <main className="flex min-h-screen flex-col">
                 <Hero loaderDone={loaderDone} />
                 <WhyAxentiaAI />
-                <TrustedBy />
                 <WhyDaksha />
-                <Programs />
                 <StatementBanner />
+                <Programs />
                 <Timeline />
                 <Audience />
                 <Testimonials />

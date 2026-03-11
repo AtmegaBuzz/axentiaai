@@ -144,7 +144,7 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
             {/* Content */}
             <div className="flex flex-col flex-grow p-6">
                 <h3 className="text-xl font-bold text-slate-900 mb-1">{prog.title}</h3>
-                <p className="text-sm font-semibold text-brand-600 mb-3">{prog.subtitle}</p>
+                <p className="text-sm font-semibold text-slate-900 mb-3">{prog.subtitle}</p>
                 <p className="text-sm text-slate-600 leading-relaxed mb-4 flex-grow">{prog.desc}</p>
                 <p className="text-xs text-slate-400 font-medium mb-4">{prog.meta}</p>
                 <button
@@ -180,7 +180,7 @@ export function Programs() {
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
                         className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6"
                     >
-                        Choose your path.
+                        Choose your <span className="font-cursive italic text-brand-600 text-[1.1em]">path</span>.
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
