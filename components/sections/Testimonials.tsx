@@ -97,10 +97,10 @@ export default function Testimonials() {
   const t = testimonials[active];
 
   return (
-    <section className="relative py-16 md:pt-24 md:pb-32 overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f3e8ff 100%)' }}>
+    <section className="relative py-16 md:pt-24 md:pb-32 overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 100%)' }}>
       {/* Ambient glow orbs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(176,48,245,0.08) 0%, transparent 70%)' }} />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(164,20,231,0.05) 0%, transparent 70%)' }} />
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(137,41,172,0.08) 0%, transparent 70%)' }} />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(192,16,218,0.05) 0%, transparent 70%)' }} />
 
       <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
 

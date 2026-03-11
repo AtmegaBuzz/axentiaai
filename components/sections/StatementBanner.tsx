@@ -13,7 +13,7 @@ export function StatementBanner() {
                     transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                     className="mx-auto rounded-3xl p-10 md:p-14 lg:p-16 relative overflow-hidden"
                     style={{
-                        background: 'linear-gradient(135deg, #f5eeff 0%, #fde8f8 35%, #fff0e6 70%, #fffbe6 100%)',
+                        background: 'linear-gradient(135deg, #faf5ff 0%, #fce8f5 35%, #fef8ec 70%, #fef8ec 100%)',
                         maxWidth: '90%',
                     }}
                 >
@@ -21,14 +21,14 @@ export function StatementBanner() {
                     <div className="absolute inset-0 rounded-3xl border border-purple-100 pointer-events-none" />
 
                     {/* Decorative glow blobs */}
-                    <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(220,140,255,0.18)' }} />
-                    <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(255,200,100,0.18)' }} />
+                    <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(192,16,218,0.12)' }} />
+                    <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(243,177,95,0.15)' }} />
 
                     <div className="relative z-10 grid md:grid-cols-[auto_1fr] gap-8 md:gap-14 items-start">
 
                         {/* Left — accent line + stat */}
                         <div className="flex flex-col gap-3 md:pt-1">
-                            <div className="w-10 h-1 rounded-full" style={{ background: 'linear-gradient(90deg, #a414e7, #ff9100)' }} />
+                            <div className="w-10 h-1 rounded-full" style={{ background: 'linear-gradient(90deg, #8929AC, #F3B15F)' }} />
                             <p className="text-6xl md:text-7xl font-black leading-none tracking-tighter text-slate-900">
                                 2–3
                             </p>

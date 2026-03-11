@@ -44,8 +44,8 @@ export function WhyDaksha() {
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-400 via-accent-300 to-brand-400" />
 
             {/* Subtle warm glow */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(250,204,21,0.10) 0%, transparent 70%)' }} />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(164,20,231,0.05) 0%, transparent 70%)' }} />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(243,177,95,0.10) 0%, transparent 70%)' }} />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(192,16,218,0.05) 0%, transparent 70%)' }} />
 
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
                 <div className="max-w-3xl mb-14">

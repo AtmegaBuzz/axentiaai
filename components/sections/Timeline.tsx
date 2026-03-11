@@ -111,7 +111,7 @@ function TimelineItem({
       <div className="mb-3">
         <span
           className="text-xs font-mono tracking-wider uppercase block mb-1 transition-colors duration-500"
-          style={{ color: isActive ? 'var(--color-brand-400, #a876ff)' : '#cbd5e1' }}
+          style={{ color: isActive ? 'var(--color-brand-400, #D44DC8)' : '#cbd5e1' }}
         >
           Step {item.step}
         </span>
@@ -152,11 +152,11 @@ function TimelineItem({
             ref={dotRef}
             className="w-5 h-5 rounded-full z-20 transition-all duration-500"
             style={{
-              border: `4px solid ${isActive ? 'var(--color-brand-500, #8b47f0)' : '#cbd5e1'}`,
-              backgroundColor: isActive ? 'var(--color-brand-500, #8b47f0)' : '#f8fafc',
-              boxShadow: isActive
-                ? '0 0 0 6px rgba(217, 70, 239, 0.15), 0 0 20px rgba(217, 70, 239, 0.3)'
-                : '0 0 0 4px rgba(203, 213, 225, 0.15)',
+               border: `4px solid ${isActive ? 'var(--color-brand-500, #C010DA)' : '#cbd5e1'}`,
+               backgroundColor: isActive ? 'var(--color-brand-500, #C010DA)' : '#f8fafc',
+               boxShadow: isActive
+                 ? '0 0 0 6px rgba(192, 16, 218, 0.15), 0 0 20px rgba(192, 16, 218, 0.3)'
+                 : '0 0 0 4px rgba(203, 213, 225, 0.15)',
             }}
           />
         </div>
@@ -178,11 +178,11 @@ function TimelineItem({
             ref={index === 0 ? dotRef : undefined}
             className="w-4 h-4 rounded-full z-20 transition-all duration-500"
             style={{
-              border: `4px solid ${isActive ? 'var(--color-brand-500, #8b47f0)' : '#cbd5e1'}`,
-              backgroundColor: isActive ? 'var(--color-brand-500, #8b47f0)' : '#f8fafc',
-              boxShadow: isActive
-                ? '0 0 0 4px rgba(217, 70, 239, 0.15), 0 0 12px rgba(217, 70, 239, 0.3)'
-                : 'none',
+               border: `4px solid ${isActive ? 'var(--color-brand-500, #C010DA)' : '#cbd5e1'}`,
+               backgroundColor: isActive ? 'var(--color-brand-500, #C010DA)' : '#f8fafc',
+               boxShadow: isActive
+                 ? '0 0 0 4px rgba(192, 16, 218, 0.15), 0 0 12px rgba(192, 16, 218, 0.3)'
+                 : 'none',
             }}
           />
         </div>
@@ -194,7 +194,7 @@ function TimelineItem({
         >
           <span
             className="text-xs font-mono tracking-wider uppercase block mb-1 transition-colors duration-500"
-            style={{ color: isActive ? 'var(--color-brand-400, #a876ff)' : '#d1d5db' }}
+            style={{ color: isActive ? 'var(--color-brand-400, #D44DC8)' : '#d1d5db' }}
           >
             Step {item.step}
           </span>
@@ -329,7 +329,7 @@ export function Timeline() {
               style={{
                 height: lineHeight,
                 background:
-                  'linear-gradient(to bottom, var(--color-brand-400, #a876ff), var(--color-brand-600, #7630d9))',
+                  'linear-gradient(to bottom, var(--color-brand-400, #D44DC8), var(--color-brand-600, #A20EBF))',
               }}
             />
           </div>
@@ -341,7 +341,7 @@ export function Timeline() {
               style={{
                 height: lineHeight,
                 background:
-                  'linear-gradient(to bottom, var(--color-brand-400, #a876ff), var(--color-brand-600, #7630d9))',
+                  'linear-gradient(to bottom, var(--color-brand-400, #D44DC8), var(--color-brand-600, #A20EBF))',
               }}
             />
           </div>
