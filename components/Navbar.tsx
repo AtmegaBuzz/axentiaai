@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
-import { Button } from './ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const megaMenuData = {
@@ -25,30 +24,29 @@ const megaMenuData = {
     'Programs': {
         items: [
             { name: 'DCAP — Career Accelerator', href: '/programs?tab=dcap', description: '10-month foundation training + paid apprenticeship' },
-            { name: 'EAP — Elite Acceleration', href: '/programs?tab=eap', description: 'Merit-based advanced track for high performers' },
-            { name: 'Online Program', href: '/programs?tab=online', description: 'Self-paced SAP fundamentals, pathway to DCAP' },
+            { name: 'EAP — Enterprise Acceleration', href: '/programs?tab=eap', description: 'Advanced programme for DCAP graduates' },
+            { name: 'Online Foundation', href: '/programs?tab=online', description: 'Self-paced SAP fundamentals (Upcoming)' },
             { name: 'Compare Programs', href: '/programs?tab=compare', description: 'Side-by-side comparison of all programs' },
             { name: 'Application Process', href: '/programs#apply', description: 'How to apply for DCAP in 4 steps' },
-            { name: 'Faculty & Mentors', href: '/programs#faculty', description: 'Industry veterans behind the program' },
         ],
         featured: {
             label: "FLAGSHIP",
-            title: "DCAP — The Full System",
-            description: "4 months classroom + 6-8 months paid apprenticeship. This is how consultants are built.",
+            title: "DCAP — Our Flagship Program",
+            description: "4 months classroom + 6 months paid apprenticeship. This is how consultants are built.",
             href: "/programs?tab=dcap"
         }
     },
     'Student Life': {
         items: [
-            { name: 'Campus Experience', href: '/student-life/campus', description: 'Discover our learning environment' },
-            { name: 'Community', href: '/student-life/community', description: 'Connect with fellow learners' },
-            { name: 'Events & Workshops', href: '/student-life/events', description: 'Hands-on sessions and networking' },
-            { name: 'Student Stories', href: '/student-life/stories', description: 'Real experiences from our students' },
+            { name: 'Student Life', href: '/student-life', description: 'Learning starts to feel real here' },
+            { name: 'Learning Journey', href: '/student-life/learning-journey', description: 'Five phases from awareness to enterprise readiness' },
+            { name: 'Culture & Activities', href: '/student-life/culture', description: 'Community, celebrations, and learning beyond the classroom' },
+            { name: 'Join the Community', href: '/student-life#alumni', description: 'Connect with alumni and fellow students' },
         ],
         featured: {
             label: "SPOTLIGHT",
-            title: "A Day in the Life at AxentiaAI",
-            description: "See what it's like to learn with us",
+            title: "95% Placement Success Rate",
+            description: "Our graduates join SAP practices across India and globally.",
             href: "/student-life"
         }
     },
@@ -90,21 +88,11 @@ function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { men
     if (!menuData) return null;
 
     const createHeading = (text: string) => {
-        if (text === 'Why AxentiaAI') {
-            return (<>Why <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">AxentiaAI</span></>);
-        }
-        if (text === 'Programs') {
-            return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Programs</span></>);
-        }
-        if (text === 'Student Life') {
-            return (<><span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Student</span> Life</>);
-        }
-        if (text === 'Faculty') {
-            return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Faculty</span></>);
-        }
-        if (text === 'Enterprises') {
-            return (<>For <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Enterprises</span></>);
-        }
+        if (text === 'Why AxentiaAI') return (<>Why <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">AxentiaAI</span></>);
+        if (text === 'Programs') return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Programs</span></>);
+        if (text === 'Student Life') return (<><span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Student</span> Life</>);
+        if (text === 'Faculty') return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Faculty</span></>);
+        if (text === 'Enterprises') return (<>For <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Enterprises</span></>);
         return text;
     };
 
@@ -122,7 +110,7 @@ function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { men
                         style={{ top: '64px', willChange: 'opacity', transform: 'translateZ(0)' }}
                         onMouseEnter={onMouseLeave}
                     />
-                    
+
                     {/* Dropdown panel */}
                     <motion.div
                         initial={{ scaleY: 0, opacity: 0 }}
@@ -135,11 +123,11 @@ function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { men
                         onMouseLeave={onMouseLeave}
                     >
                         <div className="bg-white border-b border-slate-200 shadow-xl">
-                            <div className="container mx-auto px-4 md:px-8 py-10">
+                            <div className="px-[5%] py-10">
                                 <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10">
                                     {/* Left: heading + links grid */}
                                     <div className="space-y-6">
-                                        <motion.h2 
+                                        <motion.h2
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: 0.15, duration: 0.3 }}
@@ -147,7 +135,6 @@ function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { men
                                         >
                                             {createHeading(menuKey)}
                                         </motion.h2>
-                                        
                                         <div className="grid grid-cols-2 gap-x-8 gap-y-2">
                                             {menuData.items.map((item, i) => (
                                                 <motion.div
@@ -174,9 +161,9 @@ function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { men
                                             ))}
                                         </div>
                                     </div>
-                                    
+
                                     {/* Right: featured card */}
-                                    <motion.div 
+                                    <motion.div
                                         initial={{ opacity: 0, x: 10 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 0.25, duration: 0.35 }}
@@ -184,7 +171,6 @@ function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { men
                                     >
                                         <Link href={menuData.featured.href} className="group block">
                                             <div className="rounded-xl border border-slate-200 overflow-hidden hover:border-slate-300 hover:shadow-md transition-all duration-300">
-                                                {/* Image placeholder */}
                                                 <div className="w-full aspect-[16/9] bg-gradient-to-br from-brand-600/20 via-brand-500/10 to-accent-400/20 flex items-center justify-center">
                                                     <div className="w-12 h-12 bg-brand-600/20 rounded-xl flex items-center justify-center">
                                                         <div className="w-5 h-5 bg-brand-600 rounded-md" />
@@ -230,7 +216,7 @@ export function Navbar() {
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -252,7 +238,7 @@ export function Navbar() {
             }`}
             style={{ transform: 'translateZ(0)' }}
         >
-            <div className="container mx-auto px-4 md:px-6 flex items-center justify-between h-16">
+            <div className="px-[5%] flex items-center justify-between h-16">
                 <Link href="/" className="flex items-center">
                     <Image
                         src={(isScrolled || openDropdown) ? '/Axentia-logo.png' : '/Axentia-logo-white.png'}
@@ -271,13 +257,13 @@ export function Navbar() {
                             key={item.name}
                             className="relative"
                             onMouseEnter={() => handleMouseEnter(item.name)}
-                            onMouseLeave={() => handleMouseLeave()}
+                            onMouseLeave={handleMouseLeave}
                         >
                             <button
                                 className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-all duration-200 ease-out cursor-default ${
                                     openDropdown === item.name
                                         ? 'text-brand-600'
-                                        : ((isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white')
+                                        : (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
                                 }`}
                             >
                                 {item.name}
@@ -294,23 +280,25 @@ export function Navbar() {
                         Forum
                     </Link>
                 </nav>
-                
+
                 {/* Full-width dropdowns positioned relative to viewport */}
                 {menuItems.map((item) => (
-                    <MegaMenuDropdown 
+                    <MegaMenuDropdown
                         key={`dropdown-${item.name}`}
-                        menuKey={item.name} 
+                        menuKey={item.name}
                         isOpen={openDropdown === item.name}
                         onMouseEnter={() => handleMouseEnter(item.name)}
-                        onMouseLeave={() => handleMouseLeave()}
+                        onMouseLeave={handleMouseLeave}
                     />
                 ))}
 
-                {/* CTA Buttons */}
+                {/* CTA Button */}
                 <div className="hidden xl:flex items-center">
-                    <Link href="/contact" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center gap-2">
+                    <Link href="/contact" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold pl-6 pr-2 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center gap-3">
                         Contact Us
-                        <ArrowRight className="w-4 h-4" />
+                        <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0">
+                            <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
+                        </span>
                     </Link>
                 </div>
 
@@ -334,7 +322,7 @@ export function Navbar() {
                         style={{ transformOrigin: 'top', willChange: 'transform, opacity' }}
                         className="xl:hidden overflow-hidden bg-white border-b border-slate-200 shadow-xl"
                     >
-                        <div className="container mx-auto px-4 py-6 space-y-5">
+                        <div className="px-[5%] py-6 space-y-5">
                             {menuItems.map((item) => (
                                 <div key={item.name}>
                                     <div className="space-y-2">
@@ -370,8 +358,8 @@ export function Navbar() {
                                         <p className="text-xs text-slate-400">Join discussions with fellow consultants</p>
                                     </div>
                                 </Link>
-                                <Link 
-                                    href="/contact" 
+                                <Link
+                                    href="/contact"
                                     className="w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center justify-center gap-2"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >

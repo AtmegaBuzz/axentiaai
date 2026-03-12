@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import {
@@ -268,11 +268,20 @@ function AuthModal({ isOpen, onClose, initialMode = 'login' }: { isOpen: boolean
 
 function UserMenu({ user, profile }: { user: SupabaseUser; profile: Profile | null }) {
   const [open, setOpen] = useState(false);
+  const [btnRect, setBtnRect] = useState<DOMRect | null>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
   const supabase = createClient();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     window.location.reload();
+  };
+
+  const handleToggle = () => {
+    if (!open && btnRef.current) {
+      setBtnRect(btnRef.current.getBoundingClientRect());
+    }
+    setOpen(!open);
   };
 
   const displayName = profile?.full_name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
@@ -281,7 +290,8 @@ function UserMenu({ user, profile }: { user: SupabaseUser; profile: Profile | nu
   return (
     <div className="relative">
       <button
-        onClick={() => setOpen(!open)}
+        ref={btnRef}
+        onClick={handleToggle}
         className="flex items-center gap-2 bg-white border border-slate-200 rounded-full pl-1 pr-3 py-1 hover:border-brand-300 transition-colors"
       >
         {avatarUrl ? (
@@ -297,14 +307,19 @@ function UserMenu({ user, profile }: { user: SupabaseUser; profile: Profile | nu
       </button>
 
       <AnimatePresence>
-        {open && (
+        {open && btnRect && (
           <>
-            <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+            <div className="fixed inset-0 z-[199]" onClick={() => setOpen(false)} />
             <motion.div
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="absolute right-0 top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-lg z-50 w-56 overflow-hidden"
+              style={{
+                position: 'fixed',
+                top: btnRect.bottom + 8,
+                right: window.innerWidth - btnRect.right,
+              }}
+              className="bg-white border border-slate-200 rounded-xl shadow-xl z-[200] w-56 overflow-hidden"
             >
               <div className="px-4 py-3 border-b border-slate-100">
                 <p className="text-sm font-semibold text-slate-900">{displayName}</p>
@@ -489,11 +504,13 @@ function ThreadView({
   thread,
   onBack,
   user,
+  isApproved,
   onAuthRequired,
 }: {
   thread: Thread;
   onBack: () => void;
   user: SupabaseUser | null;
+  isApproved: boolean;
   onAuthRequired: () => void;
 }) {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -543,6 +560,7 @@ function ThreadView({
   const handleReply = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) { onAuthRequired(); return; }
+    if (!isApproved) return;
     if (!replyContent.trim()) return;
     setSubmitting(true);
 
@@ -702,25 +720,43 @@ function ThreadView({
       {/* Reply form */}
       {!thread.is_locked && (
         <div className="mt-6 bg-white rounded-2xl border border-slate-200 overflow-hidden">
-          <form onSubmit={handleReply} className="p-6">
-            <label className="block text-sm font-semibold text-slate-900 mb-3">Reply to this thread</label>
-            <textarea
-              value={replyContent}
-              onChange={(e) => setReplyContent(e.target.value)}
-              className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm h-28 resize-none mb-4"
-              placeholder={user ? 'Share your thoughts...' : 'Sign in to reply'}
-              disabled={!user}
-            />
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                disabled={submitting || !replyContent.trim() || !user}
-                className="px-6 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-xl hover:bg-brand-700 transition-colors disabled:opacity-50 shadow-lg shadow-brand-600/25"
-              >
-                {submitting ? 'Posting...' : 'Post Reply'}
+          {!user ? (
+            <div className="p-6 text-center">
+              <p className="text-sm text-slate-500 mb-3">Sign in to join the discussion</p>
+              <button onClick={onAuthRequired} className="px-5 py-2 bg-brand-600 text-white text-sm font-semibold rounded-xl hover:bg-brand-700 transition-colors">
+                Sign In
               </button>
             </div>
-          </form>
+          ) : !isApproved ? (
+            <div className="p-6 flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" /></svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-slate-900">Approval required to post</p>
+                <p className="text-xs text-slate-500 mt-0.5">Your account is pending admin approval. You can still like posts while you wait.</p>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleReply} className="p-6">
+              <label className="block text-sm font-semibold text-slate-900 mb-3">Reply to this thread</label>
+              <textarea
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
+                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm h-28 resize-none mb-4"
+                placeholder="Share your thoughts..."
+              />
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  disabled={submitting || !replyContent.trim()}
+                  className="px-6 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-xl hover:bg-brand-700 transition-colors disabled:opacity-50 shadow-lg shadow-brand-600/25"
+                >
+                  {submitting ? 'Posting...' : 'Post Reply'}
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       )}
     </div>
@@ -819,8 +855,11 @@ export default function ForumPage() {
     setShowAuthModal(true);
   };
 
+  const isApproved = profile?.forum_approved ?? false;
+
   const handleNewThread = () => {
     if (!user) { openAuth('login'); return; }
+    if (!isApproved) return;
     setShowCreateThread(true);
   };
 
@@ -858,12 +897,14 @@ export default function ForumPage() {
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                 {user ? (
                   <>
-                    <button
-                      onClick={handleNewThread}
-                      className="flex items-center gap-2 bg-white text-slate-900 font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-full hover:shadow-lg transition-all text-sm"
-                    >
-                      <Plus className="w-4 h-4" /> New Discussion
-                    </button>
+                    {isApproved && (
+                      <button
+                        onClick={handleNewThread}
+                        className="flex items-center gap-2 bg-white text-slate-900 font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-full hover:shadow-lg transition-all text-sm"
+                      >
+                        <Plus className="w-4 h-4" /> New Discussion
+                      </button>
+                    )}
                     <UserMenu user={user} profile={profile} />
                   </>
                 ) : (
@@ -895,6 +936,7 @@ export default function ForumPage() {
                 thread={selectedThread}
                 onBack={() => setSelectedThread(null)}
                 user={user}
+                isApproved={isApproved}
                 onAuthRequired={() => openAuth('login')}
               />
             ) : (
@@ -984,7 +1026,7 @@ export default function ForumPage() {
                         ? categories.find((c) => c.id === selectedCategory)?.name || 'Discussions'
                         : 'All Discussions'}
                     </h2>
-                    {user && (
+                    {user && isApproved && (
                       <button
                         onClick={handleNewThread}
                         className="flex items-center gap-2 bg-brand-600 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-brand-700 transition-colors text-sm shadow-lg shadow-brand-600/25"
@@ -1014,7 +1056,7 @@ export default function ForumPage() {
                       <p className="text-sm text-slate-500 mb-6">
                         {searchQuery ? 'No threads match your search.' : 'Be the first to start a conversation!'}
                       </p>
-                      {user && !searchQuery && (
+                      {user && isApproved && !searchQuery && (
                         <button
                           onClick={handleNewThread}
                           className="inline-flex items-center gap-2 bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-brand-700 transition-colors text-sm"

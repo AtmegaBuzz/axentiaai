@@ -2,8 +2,194 @@
 
 import dynamic from 'next/dynamic';
 import { usePerformance } from '@/lib/usePerformance';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
+
+/* ── TrustedBy / Partners section ─────────────────────────────── */
+
+const placementPartners = [
+    { name: 'SAP', domain: 'sap.com' },
+    { name: 'Deloitte', domain: 'deloitte.com' },
+    { name: 'Accenture', domain: 'accenture.com' },
+    { name: 'TCS', domain: 'tcs.com' },
+    { name: 'Infosys', domain: 'infosys.com' },
+    { name: 'Wipro', domain: 'wipro.com' },
+    { name: 'IBM', domain: 'ibm.com' },
+    { name: 'Capgemini', domain: 'capgemini.com' },
+    { name: 'HCL', domain: 'hcltech.com' },
+    { name: 'Cognizant', domain: 'cognizant.com' },
+    { name: 'EY', domain: 'ey.com' },
+    { name: 'PwC', domain: 'pwc.com' },
+    { name: 'KPMG', domain: 'kpmg.com' },
+    { name: 'LTIMindtree', domain: 'ltimindtree.com' },
+    { name: 'Tech Mahindra', domain: 'techmahindra.com' },
+];
+
+const certifications = [
+    {
+        name: 'CMMI',
+        tagline: 'Capability Maturity Model Integration',
+        file: '/cmmi-logo.png',
+        bg: 'from-blue-50 to-blue-100/60',
+        border: 'border-blue-200',
+        badge: 'bg-blue-600',
+        badgeText: 'Process Excellence',
+    },
+    {
+        name: 'NASSCOM',
+        tagline: 'National Association of Software & Service Companies',
+        file: '/NASSCOM-logo.gif',
+        bg: 'from-indigo-50 to-indigo-100/60',
+        border: 'border-indigo-200',
+        badge: 'bg-indigo-600',
+        badgeText: 'Industry Member',
+    },
+    {
+        name: 'ISO 9001',
+        tagline: 'Quality Management System',
+        file: '/iso-9001-logo.png',
+        bg: 'from-emerald-50 to-emerald-100/60',
+        border: 'border-emerald-200',
+        badge: 'bg-emerald-600',
+        badgeText: 'Quality Assurance',
+    },
+    {
+        name: 'ISO 27001',
+        tagline: 'Information Security Management',
+        file: '/pngtree-iso-27001-certified-logo.png',
+        bg: 'from-teal-50 to-teal-100/60',
+        border: 'border-teal-200',
+        badge: 'bg-teal-600',
+        badgeText: 'Data Security',
+    },
+];
+
+export function TrustedBy() {
+    return (
+        <section className="py-16 md:py-24 bg-white border-b border-slate-100 overflow-hidden">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12">
+
+                {/* Label */}
+                <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center text-xs font-bold uppercase tracking-[0.25em] text-slate-400 mb-8"
+                >
+                    Relied On By Leading Enterprises
+                </motion.p>
+
+                {/* Marquee: placement partners */}
+                <div className="relative overflow-hidden mb-16">
+                    <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+                    <div className="flex w-max animate-marquee items-center">
+                        {[...placementPartners, ...placementPartners, ...placementPartners].map((company, idx) => (
+                            <div
+                                key={idx}
+                                className="inline-flex items-center justify-center mx-8 h-8 opacity-50 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                            >
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src={`https://logo.clearbit.com/${company.domain}`}
+                                    alt={company.name}
+                                    className="h-6 w-auto max-w-[90px] object-contain"
+                                    loading="lazy"
+                                    onError={(e) => {
+                                        e.currentTarget.style.display = 'none';
+                                        const sib = e.currentTarget.nextElementSibling as HTMLElement | null;
+                                        if (sib) sib.style.display = 'block';
+                                    }}
+                                />
+                                <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 hidden">{company.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* ── Certifications ── */}
+                <div className="text-center mb-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold uppercase tracking-[0.2em] px-5 py-2.5 rounded-full mb-5"
+                    >
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Certified &amp; Recognised
+                    </motion.div>
+                    <motion.h3
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.06 }}
+                        className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight"
+                    >
+                        Standards We Are Held To
+                    </motion.h3>
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-slate-400 text-sm mt-2 max-w-lg mx-auto"
+                    >
+                        Every certification reflects a commitment to quality, security, and professional standards
+                        across our organisation and programs.
+                    </motion.p>
+                </div>
+
+                {/* 4-card certifications grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+                    {certifications.map((cert, i) => (
+                        <motion.div
+                            key={cert.name}
+                            initial={{ opacity: 0, y: 30, scale: 0.93 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                            viewport={{ once: true, margin: '-40px' }}
+                            transition={{ type: 'spring', stiffness: 160, damping: 18, delay: i * 0.08 }}
+                            whileHover={{ y: -6, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
+                            className={`group relative bg-gradient-to-br ${cert.bg} border ${cert.border} rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden`}
+                        >
+                            {/* Subtle corner glow on hover */}
+                            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+
+                            {/* Logo */}
+                            <div className="relative w-full h-20 mb-5 flex items-center justify-center">
+                                <Image
+                                    src={cert.file}
+                                    alt={cert.name}
+                                    width={120}
+                                    height={80}
+                                    className="max-h-16 w-auto object-contain drop-shadow-sm"
+                                    unoptimized={cert.file.endsWith('.gif')}
+                                />
+                            </div>
+
+                            {/* Name */}
+                            <h4 className="text-lg font-bold text-slate-900 mb-1 tracking-tight">{cert.name}</h4>
+
+                            {/* Tagline */}
+                            <p className="text-[11px] text-slate-500 leading-snug mb-4 font-medium">{cert.tagline}</p>
+
+                            {/* Badge */}
+                            <span className={`mt-auto inline-flex items-center gap-1.5 ${cert.badge} text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full`}>
+                                <span className="w-1 h-1 rounded-full bg-white/60" />
+                                {cert.badgeText}
+                            </span>
+                        </motion.div>
+                    ))}
+                </div>
+
+            </div>
+        </section>
+    );
+}
+
+
+
 
 /* ── shared styles ─────────────────────────────────────────────────── */
 const glass =
@@ -46,28 +232,31 @@ export function WhyAxentiaAI() {
                 </div>
             )}
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pointer-events-none">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
                 {/* ── Header ── */}
                 <div className="text-center mb-14 md:mb-20">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3">
-                        Why Choose Us
-                    </p>
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-                        Why <span className="text-brand-600">AxentiaAI</span>
+                        The Axentia{' '}
+                        <span
+                            className="inline-block px-3 py-1 rounded-md font-bold"
+                            style={{ background: '#F7C87A', color: '#232322' }}
+                        >
+                            Approach
+                        </span>
                     </h2>
                     <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-                        A data-backed approach to enterprise consulting education, built on 30 years of delivery experience.
+                        A data-backed approach to enterprise consulting education, built on 25 years of delivery experience.
                     </p>
                 </div>
 
                 {/* ── Bento Grid ── */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 auto-rows-min pointer-events-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 auto-rows-min">
 
-                    {/* Card 1 — 500+ Consultants */}
+                    {/* Card 1 — 100+ Careers */}
                     <div className={`${glass} h-full`}>
                         <div className="mb-5">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">500+</h3>
-                            <p className="font-semibold text-slate-800">Consultants Trained</p>
+                            <h3 className="text-4xl font-black text-slate-900 mb-1">100+</h3>
+                            <p className="font-semibold text-slate-800">Careers Launched</p>
                             <p className="text-slate-400 text-sm mt-1">Across Enterprise Projects</p>
                         </div>
                         <div className="grid grid-cols-2 gap-2 mt-auto">
@@ -81,8 +270,8 @@ export function WhyAxentiaAI() {
                     <div className={`${glass} h-full`}>
                         <div className="mb-5">
                             <h3 className="text-4xl font-black text-slate-900 mb-1">95%</h3>
-                            <p className="font-semibold text-slate-800">Placement Rate</p>
-                            <p className="text-slate-400 text-sm mt-1">Industry-Leading Outcomes</p>
+                            <p className="font-semibold text-slate-800">Placement Success</p>
+                            <p className="text-slate-400 text-sm mt-1">Consultants Deployed</p>
                         </div>
                         <div className="grid grid-cols-2 gap-2 mt-auto">
                             {['Orane', 'Accenture', 'Deloitte', 'TCS'].map(tag => (
@@ -91,10 +280,10 @@ export function WhyAxentiaAI() {
                         </div>
                     </div>
 
-                    {/* Card 3 — 10+ Countries */}
+                    {/* Card 3 — 4+ Countries */}
                     <div className={`${glass} h-full`}>
                         <div className="mb-5">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">10+</h3>
+                            <h3 className="text-4xl font-black text-slate-900 mb-1">4+</h3>
                             <p className="font-semibold text-slate-800">Countries Served</p>
                             <p className="text-slate-400 text-sm mt-1">Global Delivery Presence</p>
                         </div>
@@ -105,13 +294,8 @@ export function WhyAxentiaAI() {
                         </div>
                     </div>
 
-                    {/* Card 4 — 30+ Years (tall, with image) */}
+                    {/* Card 4 — 25+ Years (tall, with image first) */}
                     <div className={`${glass} lg:row-span-2 overflow-hidden`}>
-                        <div className="mb-4">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">30+</h3>
-                            <p className="font-semibold text-slate-800">Years of Enterprise Experience</p>
-                            <p className="text-slate-400 text-sm mt-1">From Orane Consulting Legacy</p>
-                        </div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=260&fit=crop&q=80"
@@ -119,6 +303,11 @@ export function WhyAxentiaAI() {
                             className="w-full h-36 object-cover rounded-xl mb-4"
                             loading="lazy"
                         />
+                        <div className="mb-4">
+                            <h3 className="text-4xl font-black text-slate-900 mb-1">25+</h3>
+                            <p className="font-semibold text-slate-800">Years of Experience</p>
+                            <p className="text-slate-400 text-sm mt-1">Built on the legacy of Orane Consulting</p>
+                        </div>
                         <div className="grid grid-cols-2 gap-2 mt-auto">
                             {['SAP', 'AI/ML', 'Data Analytics', 'ERP', 'Cloud', 'Automation'].map(tag => (
                                 <div key={tag} className={`${chipBrand} flex items-center justify-center py-2.5`}>{tag}</div>

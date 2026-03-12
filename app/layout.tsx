@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import { Navbar } from "@/components/Navbar";
-import { MingersFooter } from "@/components/MingersFooter";
+import { NavbarWrapper } from "@/components/NavbarWrapper";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,8 +17,8 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Daksha - Consulting Career Accelerator",
-  description: "Where Enterprise Consultants Are Built. Built by Consultants, For Consultants.",
+  title: "Axentia.AI — Capability Platform for the AI Era",
+  description: "Enterprise consulting education built on 25+ years of real SAP project delivery experience. Prepare for the AI era with AxentiaAI.",
 };
 
 export default function RootLayout({
@@ -30,9 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${playfairDisplay.variable} font-sans`}>
-        <Navbar />
-        {children}
-        <MingersFooter />
+        <NavbarWrapper>
+          {children}
+        </NavbarWrapper>
       </body>
     </html>
   );
