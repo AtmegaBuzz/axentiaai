@@ -241,7 +241,7 @@ export function Navbar() {
             <div className="px-[5%] flex items-center justify-between h-16">
                 <Link href="/" className="flex items-center">
                     <Image
-                        src={(isScrolled || openDropdown) ? '/Axentia-logo.png' : '/Axentia-logo-white.png'}
+                        src={(isScrolled || openDropdown) ? '/brand/axentia-logo.png' : '/brand/axentia-logo-white.png'}
                         alt="AxentiaAI"
                         width={360}
                         height={96}

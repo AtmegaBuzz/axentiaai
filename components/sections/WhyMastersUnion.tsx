@@ -31,7 +31,7 @@ const certifications = [
     {
         name: 'CMMI',
         tagline: 'Capability Maturity Model Integration',
-        file: '/cmmi-logo.png',
+        file: '/certifications/cmmi-logo.png',
         bg: 'from-blue-50 to-blue-100/60',
         border: 'border-blue-200',
         badge: 'bg-blue-600',
@@ -40,7 +40,7 @@ const certifications = [
     {
         name: 'NASSCOM',
         tagline: 'National Association of Software & Service Companies',
-        file: '/NASSCOM-logo.gif',
+        file: '/certifications/nasscom-logo.gif',
         bg: 'from-indigo-50 to-indigo-100/60',
         border: 'border-indigo-200',
         badge: 'bg-indigo-600',
@@ -49,7 +49,7 @@ const certifications = [
     {
         name: 'ISO 9001',
         tagline: 'Quality Management System',
-        file: '/iso-9001-logo.png',
+        file: '/certifications/iso-9001-logo.png',
         bg: 'from-emerald-50 to-emerald-100/60',
         border: 'border-emerald-200',
         badge: 'bg-emerald-600',
@@ -58,7 +58,7 @@ const certifications = [
     {
         name: 'ISO 27001',
         tagline: 'Information Security Management',
-        file: '/pngtree-iso-27001-certified-logo.png',
+        file: '/certifications/iso-27001-logo.png',
         bg: 'from-teal-50 to-teal-100/60',
         border: 'border-teal-200',
         badge: 'bg-teal-600',

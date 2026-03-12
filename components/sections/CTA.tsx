@@ -53,7 +53,7 @@ export function CTA() {
                     {/* Right Image — Desktop */}
                     <div className="hidden xl:block absolute -top-12 -right-6 w-64 h-64 lg:w-80 lg:h-80 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20">
                         <Image
-                            src="/mingers-woman.png"
+                            src="/images/cta-woman.png"
                             alt="Daksha Student"
                             fill
                             className="object-cover object-top"
@@ -63,7 +63,7 @@ export function CTA() {
                     {/* Right Image — Mobile */}
                     <div className="xl:hidden mt-8 mb-10 w-48 h-48 sm:w-64 sm:h-64 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20 relative self-center">
                         <Image
-                            src="/mingers-woman.png"
+                            src="/images/cta-woman.png"
                             alt="Daksha Student"
                             fill
                             className="object-cover object-top"
