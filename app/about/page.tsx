@@ -207,14 +207,13 @@ function HeroSection() {
             </FadeIn>
             <FadeIn delay={0.2}>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8">
-                Built by{' '}
-                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">Consultants</span>,
-                <br />For Consultants.
+                The Story of{' '}
+                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">Axentia.AI</span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.3}>
               <p className="text-xl md:text-2xl text-indigo-200/80 max-w-3xl leading-relaxed mb-10">
-                Most graduates understand concepts, but enterprise projects demand something more — the ability to handle real tasks, meet deadlines, document clearly, and work effectively within team expectations.
+                Building the capability infrastructure required for the AI era — one enterprise consultant at a time.
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
@@ -264,8 +263,8 @@ function LegacySection() {
                 <svg className="absolute -top-3 -left-3 w-12 h-12 text-brand-100" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
                 <blockquote className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium pl-6 border-l-4 border-brand-300">
                   In enterprise consulting, readiness shows in the details — how you document, how you communicate, how you handle responsibility inside a team.{' '}
-                  <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Daksha</span>{' '}
-                  was created to build that preparation deliberately.
+                  <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Axentia AI</span>{' '}
+                  was created to build that preparation deliberately — for the AI era.
                 </blockquote>
               </div>
             </FadeIn>
@@ -427,10 +426,10 @@ function NumbersSection() {
   const counterProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const stats = [
-    { end: 100, suffix: '+', label: 'Careers Launched', sub: 'Through Daksha' },
+    { end: 100, suffix: '+', label: 'Careers Launched', sub: 'Through Axentia' },
     { end: 10, suffix: '+', label: 'Months Training', sub: 'Structured pathway' },
     { end: 500, suffix: '+', label: 'Consultants', sub: 'Active at Orane' },
-    { end: 15, suffix: '+', label: 'Years Legacy', sub: 'Enterprise delivery' },
+    { end: 25, suffix: '+', label: 'Years Legacy', sub: 'SAP Delivery' },
   ];
 
   return (
@@ -494,12 +493,12 @@ function CounterDisplay({ progress, end, suffix }: { progress: ReturnType<typeof
    ═══════════════════════════════════════════════════════════════ */
 
 const valuesData = [
-  { icon: <TargetIcon className="w-6 h-6" />, title: 'Practice Over Theory', desc: 'Consulting is learned by doing, not just studying.' },
-  { icon: <HeartIcon className="w-6 h-6" />, title: 'Commitment to Growth', desc: 'Structured, honest mentorship and a clear pathway.' },
-  { icon: <LightbulbIcon className="w-6 h-6" />, title: 'Innovation in Education', desc: 'Enterprise-grade practices and AI in learning.' },
-  { icon: <GlobeIcon className="w-6 h-6" />, title: 'Global Perspective', desc: 'International standards from day one.' },
-  { icon: <ShieldIcon className="w-6 h-6" />, title: 'Accountability', desc: 'Quality of every deliverable matters.' },
-  { icon: <SAPIcon className="w-6 h-6" />, title: 'Enterprise-Ready', desc: 'Prepared for SAP project delivery realities.' },
+  { icon: <TargetIcon className="w-6 h-6" />, title: 'Capability, Not AI Hype', desc: 'We believe the world does not need more surface-level AI content. It needs people who understand how technology integrates with real business systems.' },
+  { icon: <HeartIcon className="w-6 h-6" />, title: 'Enterprise Relevance', desc: 'Learning should not happen in isolation from the environments where it will be applied. Everything we build is designed with enterprise workflows in mind.' },
+  { icon: <LightbulbIcon className="w-6 h-6" />, title: 'Pathways, Not Programs', desc: 'Careers are not built through isolated courses. They are built through structured journeys that move from awareness to capability to real-world application.' },
+  { icon: <GlobeIcon className="w-6 h-6" />, title: 'Ecosystems, Not Silos', desc: 'Transformation happens when enterprises, institutions, technology partners, and talent ecosystems move together.' },
+  { icon: <ShieldIcon className="w-6 h-6" />, title: 'Practical Transformation', desc: 'Real change happens through capability, systems understanding, and workforce readiness, not technology theater.' },
+  { icon: <SAPIcon className="w-6 h-6" />, title: 'Enterprise-Ready', desc: 'Prepared for SAP project delivery realities from day one — not in 12-18 months.' },
 ];
 
 function ValuesSection() {
@@ -538,10 +537,10 @@ function ValuesSection() {
           <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600 mb-3">What We Stand For</p></FadeIn>
           <FadeIn delay={0.05}>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-              Our <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Mission</span> & Values
+              What Axentia{' '}<span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Stands For</span>
             </h2>
           </FadeIn>
-          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">Bridging academic learning and enterprise readiness through mentorship-driven apprenticeship.</p></FadeIn>
+          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">Five principles that define how we build capability at the intersection of enterprise AI and workforce development.</p></FadeIn>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {valuesData.map((v, i) => (
@@ -586,7 +585,7 @@ function EcosystemSection() {
               Be Part of Something <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Bigger</span>
             </h2>
           </FadeIn>
-          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">We build consultants who join real delivery teams — connected to an ecosystem that grows together.</p></FadeIn>
+          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">We build the capability infrastructure required for the AI era. Our mission is simple: Turn AI potential into real capability.</p></FadeIn>
         </div>
 
         <div className="hidden lg:block relative h-12 mb-6 max-w-3xl mx-auto">
@@ -1018,12 +1017,12 @@ function CTASection() {
           <div className="relative z-10 px-8 md:px-16 py-16 md:py-20">
             <FadeIn>
               <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight max-w-2xl">
-                Ready to build a career that <span className="font-[family-name:var(--font-playfair)] italic text-accent-300">lasts</span>?
+                Start a{' '}<span className="font-[family-name:var(--font-playfair)] italic text-accent-300">Conversation</span>.
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <p className="text-lg text-white/70 mb-8 leading-relaxed max-w-xl">
-                The next step is a conversation. No pressure, just clarity about your goals and whether Daksha might be the right next step.
+              <p className="text-lg text-white/70 mb-8 leading-relaxed max-w-2xl">
+                Whether you are exploring enterprise transformation programs, workforce development initiatives, institutional partnerships, or industry alliances — Axentia is built for capability. If you are building the future of AI adoption, enterprise transformation, or talent ecosystems, we would welcome the conversation.
               </p>
             </FadeIn>
             <FadeIn delay={0.15}>

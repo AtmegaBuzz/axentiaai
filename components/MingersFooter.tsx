@@ -1,28 +1,28 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Facebook, Instagram, Linkedin, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import { SubscribeForm } from '@/components/SubscribeForm';
 
 const footerLinks = {
     Company: [
         { name: 'About Us', href: '/about' },
         { name: 'Our Mission', href: '/about#mission' },
         { name: 'Leadership', href: '/about#team' },
-        { name: 'Outcomes', href: '/outcomes' },
+        { name: 'The Story', href: '/about#story' },
         { name: 'Contact Us', href: '#cta' },
     ],
     Programs: [
-        { name: 'SAP Consulting', href: '/programs#sap' },
-        { name: 'Data & AI', href: '/programs#ai' },
-        { name: 'ERP Analyst', href: '/programs#erp' },
-        { name: 'All Programs', href: '/programs' },
-        { name: 'How It Works', href: '/#how-it-works' },
+        { name: 'DCAP — Career Accelerator', href: '/programs?tab=dcap' },
+        { name: 'EAP — Enterprise Acceleration', href: '/programs?tab=eap' },
+        { name: 'Online Foundation', href: '/programs?tab=online' },
+        { name: 'Compare Programs', href: '/programs?tab=compare' },
+        { name: 'Apply Now', href: '/programs#apply' },
     ],
-    Enterprise: [
-        { name: 'Hire Talent', href: '/enterprises' },
-        { name: 'Partnerships', href: '/enterprises#partnerships' },
-        { name: 'Custom Training', href: '/enterprises#training' },
-        { name: 'Case Studies', href: '/enterprises#case-studies' },
-        { name: 'Talent Pipeline', href: '/enterprises#pipeline' },
+    'Student Life': [
+        { name: 'Student Life', href: '/student-life' },
+        { name: 'Learning Journey', href: '/student-life/learning-journey' },
+        { name: 'Culture & Activities', href: '/student-life/culture' },
+        { name: 'Alumni Network', href: '/student-life#alumni' },
     ],
 };
 
@@ -39,9 +39,44 @@ export function MingersFooter() {
             {/* Ambient glow */}
             <div className="absolute bottom-0 left-1/3 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(192,16,218,0.12) 0%, transparent 70%)' }} />
 
-            {/* ── FOOTER LINKS GRID ── */}
+            {/* ── JOIN COMMUNITY BANNER ── */}
+            <div className="relative z-10 border-b border-white/10">
+                <div className="container mx-auto px-4 md:px-8 xl:px-12 py-16 md:py-20">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <p className="text-xs font-bold uppercase tracking-[0.25em] text-brand-300 mb-4">Community</p>
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
+                            Join the Axentia.AI{' '}
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">
+                                Community
+                            </span>
+                        </h2>
+                        <p className="text-xl text-white/60 mb-10 leading-relaxed">
+                            Connect with thousands of SAP consultants, enterprise professionals, and students building careers for the AI era. Share insights, get mentored, and grow together.
+                        </p>
+                        <div className="flex flex-wrap gap-4 justify-center">
+                            <Link
+                                href="/student-life"
+                                className="inline-flex items-center gap-2 bg-white text-slate-900 font-bold px-8 py-4 rounded-full shadow-xl hover:-translate-y-1 transition-all duration-200"
+                            >
+                                Join the Community
+                                <span className="text-brand-600">&rarr;</span>
+                            </Link>
+                            <Link
+                                href="/forum"
+                                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/20 transition-all"
+                            >
+                                Community Forum
+                            </Link>
+                        </div>
+                        <p className="text-white/30 text-sm mt-8">
+                            200+ students &bull; 4+ countries &bull; Placement-first community
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div className="container mx-auto px-4 md:px-8 xl:px-12 py-16 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
 
                     {/* Link columns */}
                     {Object.entries(footerLinks).map(([title, links]) => (
@@ -65,24 +100,7 @@ export function MingersFooter() {
                         <p className="text-slate-400 font-medium mb-6">
                             Get the latest on programs, events, and enterprise consulting insights.
                         </p>
-
-                        <form className="flex flex-col sm:flex-row gap-3">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="flex-1 px-5 py-3 rounded-full border border-white/10 bg-white/5 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all font-medium"
-                                required
-                            />
-                            <button
-                                type="submit"
-                                className="bg-brand-600 hover:bg-brand-700 text-white px-8 py-3 rounded-full font-bold transition-colors whitespace-nowrap"
-                            >
-                                Subscribe
-                            </button>
-                        </form>
-                        <p className="text-xs text-slate-500 mt-4 leading-relaxed">
-                            By subscribing, you agree to our <Link href="#" className="underline hover:text-slate-300">Privacy Policy.</Link>
-                        </p>
+                        <SubscribeForm />
                     </div>
 
                 </div>
@@ -95,8 +113,8 @@ export function MingersFooter() {
                         <a href="tel:+919355181110" className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
                             <Phone className="w-4 h-4 text-brand-500" /> +91-9355181110
                         </a>
-                        <a href="mailto:info@axentiaai.in" className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
-                            <Mail className="w-4 h-4 text-brand-500" /> Info@axentiaai.in
+                        <a href="mailto:sap-apprentice@axentia.ai" className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
+                            <Mail className="w-4 h-4 text-brand-500" /> sap-apprentice@axentia.ai
                         </a>
                         <div className="flex items-center gap-2 font-medium">
                             <MapPin className="w-4 h-4 text-brand-500 shrink-0" />
