@@ -7,11 +7,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const partnerLogos = [
-    { src: '/orane-logo.png',     alt: 'Orane',     width: 120, height: 40 },
-    { src: '/aws-logo.png',       alt: 'AWS',        width: 80,  height: 40 },
-    { src: '/microsoft-logo.png', alt: 'Microsoft',  width: 140, height: 40 },
-    { src: '/oddo_logo.png',      alt: 'Odoo',       width: 100, height: 40 },
-    { src: '/sap-logo.png',       alt: 'SAP',        width: 80,  height: 40 },
+    { src: '/partners/orane-logo.png',     alt: 'Orane',     width: 120, height: 40 },
+    { src: '/partners/aws-logo.png',       alt: 'AWS',        width: 80,  height: 40 },
+    { src: '/partners/microsoft-logo.png', alt: 'Microsoft',  width: 140, height: 40 },
+    { src: '/partners/odoo-logo.png',      alt: 'Odoo',       width: 100, height: 40 },
+    { src: '/partners/sap-logo.png',       alt: 'SAP',        width: 80,  height: 40 },
 ];
 
 export function Hero() {
@@ -25,10 +25,10 @@ export function Hero() {
                     loop
                     playsInline
                     preload="metadata"
-                    poster="/hero_poster.jpg"
+                    poster="/videos/hero-poster.jpg"
                     className="w-full h-full object-cover"
                 >
-                    <source src="/hero_video2_opt.mp4" type="video/mp4" />
+                    <source src="/videos/hero-video.mp4" type="video/mp4" />
                 </video>
                 <div className="absolute inset-0 bg-black/50" />
             </div>

@@ -200,7 +200,7 @@ function HeroSection() {
         <motion.div style={{ opacity, y, scale }} className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 xl:px-20">
           <div className="max-w-5xl">
             <FadeIn>
-              <Image src="/Axentia-logo-white.png" alt="Axentia AI" width={180} height={50} className="h-6 w-auto mb-8" />
+              <Image src="/brand/axentia-logo-white.png" alt="Axentia AI" width={180} height={50} className="h-6 w-auto mb-8" />
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="text-brand-300 font-semibold uppercase tracking-[0.2em] text-sm mb-5">Our Story</p>

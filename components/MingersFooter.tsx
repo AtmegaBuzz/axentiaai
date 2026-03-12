@@ -130,7 +130,7 @@ export function MingersFooter() {
                 {/* Logo & Socials */}
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-6">
                     <Link href="/" className="flex items-center">
-                        <Image src="/Axentia-logo-white.png" alt="Axentia.AI" width={320} height={96} className="h-8 w-auto" />
+                        <Image src="/brand/axentia-logo-white.png" alt="Axentia.AI" width={320} height={96} className="h-8 w-auto" />
                     </Link>
                     <div className="flex items-center gap-4">
                         {socials.map(({ icon: Icon, href }, i) => (

@@ -180,10 +180,10 @@ export function Programs() {
                     loop
                     playsInline
                     preload="metadata"
-                    poster="/graduation-poster.jpg"
+                    poster="/videos/graduation-poster.jpg"
                     className="w-full h-full object-cover"
                 >
-                    <source src="/graduation-celebration-opt.mp4" type="video/mp4" />
+                    <source src="/videos/graduation-celebration.mp4" type="video/mp4" />
                 </video>
                 <div className="absolute inset-0 bg-black/65" />
             </div>

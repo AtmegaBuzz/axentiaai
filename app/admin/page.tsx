@@ -134,7 +134,7 @@ export default function AdminPage() {
         <div className="w-full max-w-sm">
           <div className="text-center mb-8">
             <Image
-              src="/Axentia-logo-white.png"
+              src="/brand/axentia-logo-white.png"
               alt="AxentiaAI"
               width={180}
               height={48}
@@ -203,7 +203,7 @@ export default function AdminPage() {
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src="/Axentia-logo-white.png"
+              src="/brand/axentia-logo-white.png"
               alt="AxentiaAI"
               width={140}
               height={40}

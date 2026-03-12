@@ -80,10 +80,10 @@ function HeroSection({ activeTab, setActiveTab }: { activeTab: ProgramTab; setAc
           loop
           playsInline
           preload="metadata"
-          poster="/graduation-poster.jpg"
+          poster="/videos/graduation-poster.jpg"
           className="w-full h-full object-cover"
         >
-          <source src="/graduation-celebration.mp4" type="video/mp4" />
+          <source src="/videos/graduation-celebration.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/50" />
       </div>
@@ -1161,7 +1161,7 @@ function CeremonySection() {
 
           {/* Axentia Logo watermark */}
           <FadeIn delay={0.3} className="flex justify-center mt-10">
-            <Image src="/Axentia-logo.png" alt="Axentia AI" width={120} height={40} className="opacity-30" />
+            <Image src="/brand/axentia-logo.png" alt="Axentia AI" width={120} height={40} className="opacity-30" />
           </FadeIn>
         </div>
       </div>
