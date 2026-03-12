@@ -112,9 +112,11 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-              className="text-sm font-semibold uppercase tracking-widest text-brand-600 mb-3"
+              className="text-sm font-semibold uppercase tracking-widest mb-3"
             >
-              Testimonials
+              <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>
+                Testimonials
+              </span>
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 30, scale: 0.97 }}

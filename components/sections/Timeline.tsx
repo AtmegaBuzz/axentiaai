@@ -17,40 +17,40 @@ interface TimelineEntry {
 const timelineItems: TimelineEntry[] = [
   {
     step: 1,
-    period: 'Month 0-4',
+    period: 'Month 0–4',
     title: 'Trainee',
     description:
-      'Learn enterprise process flows, SAP basics, and structured documentation practices in an immersive classroom setting.',
+      'You begin by understanding how enterprises actually operate. Students learn SAP fundamentals, enterprise process flows, and how consulting teams document and structure their work. This stage builds the foundation needed to work inside real project environments.',
     image:
       'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&q=80',
     icon: BookOpen,
   },
   {
     step: 2,
-    period: 'Month 4-10',
+    period: 'Month 4–10',
     title: 'Apprentice',
     description:
-      'Work on supervised project tasks with pay. Deliverables reviewed by senior consultants on live engagements.',
+      'Learning turns into real project exposure. You start working on supervised project tasks and contribute to live engagements. Your deliverables are reviewed by senior consultants, and you begin building confidence through real responsibility.',
     image:
       'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
     icon: Wrench,
   },
   {
     step: 3,
-    period: 'Year 1-2',
+    period: 'Year 1–2',
     title: 'Associate Consultant',
     description:
-      'Support UAT cycles, prepare dashboards, handle structured client communication, and manage defined tasks independently.',
+      'At this stage, you start owning defined tasks within projects. You support testing cycles, prepare dashboards, handle structured client communication, and deliver work independently. This is where many consultants truly begin to find their rhythm inside enterprise teams.',
     image:
       'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80',
     icon: BarChart3,
   },
   {
     step: 4,
-    period: 'Year 2-4',
+    period: 'Year 2–4',
     title: 'Consultant',
     description:
-      'Own specific process areas, manage configuration and testing cycles, coordinate across cross-functional teams.',
+      'Your role expands from supporting tasks to owning specific process areas. You manage configurations, coordinate across teams, and contribute directly to project delivery. By now, you are a trusted contributor within consulting engagements.',
     image:
       'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
     icon: Settings,
@@ -60,7 +60,7 @@ const timelineItems: TimelineEntry[] = [
     period: 'Year 4+',
     title: 'Senior / Lead',
     description:
-      'Drive module-level decisions, guide junior consultants, and manage client-facing responsibilities at scale.',
+      'With experience comes leadership. Senior consultants guide junior team members, drive module-level decisions, and manage client-facing responsibilities across projects. This is where consultants move from execution to leadership.',
     image:
       'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&q=80',
     icon: Crown,
@@ -295,9 +295,11 @@ export function Timeline() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-sm font-semibold uppercase tracking-widest text-brand-500 mb-3"
+            className="text-sm font-semibold uppercase tracking-widest mb-3"
           >
-            Student Path
+            <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>
+              Student Path
+            </span>
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
@@ -306,7 +308,8 @@ export function Timeline() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-5"
           >
-            Your Career <span className="font-cursive italic text-brand-600 text-[1.1em]">Timeline</span>
+            How Your Consulting{' '}
+            <span className="font-cursive italic text-brand-600 text-[1.1em]">Career Grows</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -315,8 +318,7 @@ export function Timeline() {
             transition={{ delay: 0.15 }}
             className="text-lg text-slate-600"
           >
-            A structured progression from classroom learning to enterprise
-            leadership — each stage earned through performance.
+            Every consulting career starts with learning. But growth comes from doing real work, taking responsibility, and solving real problems. At AxentiaAI, your journey follows the same path most successful consultants take inside enterprise teams.
           </motion.p>
         </div>
 

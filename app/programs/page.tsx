@@ -72,17 +72,23 @@ function HeroSection({ activeTab, setActiveTab }: { activeTab: ProgramTab; setAc
 
   return (
     <section className="relative pt-32 pb-20 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #58179B 0%, #8929AC 40%, #C010DA 100%)' }} />
-      <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-500/20 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent-400/15 rounded-full blur-[100px]" />
-      <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 600">
-        <path d="M0,200 Q360,100 720,200 T1440,200" stroke="url(#hg1)" strokeWidth="2" fill="none" />
-        <path d="M0,400 Q360,300 720,400 T1440,400" stroke="url(#hg2)" strokeWidth="1.5" fill="none" />
-        <defs>
-          <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#C010DA" /><stop offset="100%" stopColor="#F3B15F" /></linearGradient>
-          <linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#F3B15F" /><stop offset="100%" stopColor="#C010DA" /></linearGradient>
-        </defs>
-      </svg>
+      {/* Graduation video background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/graduation-poster.jpg"
+          className="w-full h-full object-cover"
+        >
+          <source src="/graduation-celebration.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+      <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-500/20 rounded-full blur-[120px] z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent-400/15 rounded-full blur-[100px] z-0" />
 
       <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
         <FadeIn>
@@ -144,7 +150,7 @@ function DCAPSection() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-10 max-w-3xl">
-                The full system. 4 months of intensive foundation training followed by 6-8 months of paid apprenticeship on real projects. This is how consultants are built.
+                Our flagship program. A 10-month pathway designed to turn graduates into enterprise-ready SAP consultants. 4 months classroom learning followed by 6 months paid apprenticeship on real projects.
               </p>
             </FadeIn>
 
@@ -187,11 +193,11 @@ function DCAPSection() {
             </FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                'SAP S/4HANA core modules (MM, FICO, SD)',
-                'Business process fundamentals (P2P, O2C, R2R)',
-                '6-8 months paid apprenticeship',
-                'Real project work, practitioner-reviewed',
-                'Deployment to Orane and partners',
+                '✅ Learn how SAP supports real business',
+                '✅ Enterprise process flows (P2P, O2C, R2R, H2R)',
+                '✅ SAP S/4HANA core modules (MM, FICO, SD)',
+                '✅ 6 months paid apprenticeship',
+                '✅ Real project work, practitioner-reviewed',
               ].map((item, i) => (
                 <FadeIn key={i} delay={i * 0.05}>
                   <div className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl p-5">
@@ -401,11 +407,11 @@ function EAPSection() {
             </FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                'Cross-module integration scenarios',
-                'Industry-specific solutioning',
-                'Presales & estimation exposure',
-                'AI-driven enterprise use cases',
-                'Leadership & ownership development',
+                '🔗 Cross-module integration across SAP processes',
+                '📊 Presales support and effort estimation',
+                '🤖 AI use cases within enterprise environments',
+                '🎯 Managing larger responsibilities within project teams',
+                '🚀 Leadership & ownership development',
               ].map((item, i) => (
                 <FadeIn key={i} delay={i * 0.05}>
                   <div className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl p-5">
@@ -503,6 +509,11 @@ function OnlineSection() {
               </p>
             </FadeIn>
 
+            <FadeIn delay={0.1}>
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-10 max-w-3xl">
+                Start with the Basics. A self-paced introduction to SAP fundamentals and enterprise processes for those exploring a career in enterprise consulting.
+              </p>
+            </FadeIn>
             <FadeIn delay={0.15}>
               <div className="flex flex-wrap gap-4 mb-12">
                 <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-xl px-5 py-3">
@@ -513,9 +524,8 @@ function OnlineSection() {
                   <Clock className="w-5 h-5 text-teal-600" />
                   <span className="text-sm font-semibold text-slate-700">Self-paced</span>
                 </div>
-                <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-xl px-5 py-3">
-                  <MapPin className="w-5 h-5 text-teal-600" />
-                  <span className="text-sm font-semibold text-slate-700">Learn anywhere</span>
+                <div className="flex items-center gap-2.5 bg-teal-50 border border-teal-200 rounded-xl px-5 py-3">
+                  <span className="text-sm font-semibold text-teal-700">🔜 Upcoming</span>
                 </div>
               </div>
             </FadeIn>
@@ -541,11 +551,10 @@ function OnlineSection() {
             </FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                'SAP fundamentals curriculum',
-                'Business process basics',
-                'Self-assessment modules',
-                'Pathway to DCAP application',
-                'No apprenticeship included',
+                '📚 SAP fundamentals and core concepts',
+                '🏭 How enterprise business processes work',
+                '📋 Structured introductory learning modules',
+                '🔑 The basics needed to understand SAP consulting environments',
               ].map((item, i) => (
                 <FadeIn key={i} delay={i * 0.05}>
                   <div className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl p-5">

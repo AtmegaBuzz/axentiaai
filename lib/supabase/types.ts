@@ -3,6 +3,7 @@ export interface Profile {
   full_name: string | null;
   avatar_url: string | null;
   bio: string | null;
+  forum_approved: boolean;
   created_at: string;
 }
 

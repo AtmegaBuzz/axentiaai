@@ -9,6 +9,7 @@ create table if not exists public.profiles (
   full_name text,
   avatar_url text,
   bio text,
+  forum_approved boolean default false not null,
   created_at timestamptz default now() not null
 );
 
@@ -122,22 +123,33 @@ alter table public.threads enable row level security;
 alter table public.posts enable row level security;
 alter table public.reactions enable row level security;
 
--- Profiles: anyone can read, users can update their own
+-- Profiles: anyone can read, users can update their own, admin can update any
 create policy "Profiles are viewable by everyone" on public.profiles for select using (true);
 create policy "Users can update own profile" on public.profiles for update using (auth.uid() = id);
+create policy "Admin can update any profile" on public.profiles for update using (auth.email() = 'admin@axentiaai.in');
 
 -- Categories: anyone can read
 create policy "Categories are viewable by everyone" on public.categories for select using (true);
 
--- Threads: anyone can read, authenticated users can create, authors can update
+-- Threads: anyone can read, approved users can create, authors can update/delete
 create policy "Threads are viewable by everyone" on public.threads for select using (true);
-create policy "Authenticated users can create threads" on public.threads for insert with check (auth.uid() = author_id);
+create policy "Approved users can create threads" on public.threads for insert with check (
+  auth.uid() = author_id and (
+    (select forum_approved from public.profiles where id = auth.uid()) = true
+    or auth.email() = 'admin@axentiaai.in'
+  )
+);
 create policy "Authors can update own threads" on public.threads for update using (auth.uid() = author_id);
 create policy "Authors can delete own threads" on public.threads for delete using (auth.uid() = author_id);
 
--- Posts: anyone can read, authenticated users can create, authors can update/delete
+-- Posts: anyone can read, approved users can create, authors can update/delete
 create policy "Posts are viewable by everyone" on public.posts for select using (true);
-create policy "Authenticated users can create posts" on public.posts for insert with check (auth.uid() = author_id);
+create policy "Approved users can create posts" on public.posts for insert with check (
+  auth.uid() = author_id and (
+    (select forum_approved from public.profiles where id = auth.uid()) = true
+    or auth.email() = 'admin@axentiaai.in'
+  )
+);
 create policy "Authors can update own posts" on public.posts for update using (auth.uid() = author_id);
 create policy "Authors can delete own posts" on public.posts for delete using (auth.uid() = author_id);
 
