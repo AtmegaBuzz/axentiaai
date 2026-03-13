@@ -19,7 +19,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP SF Consultant',
     company: 'Orane Consulting',
     quote:
-      'From HR roles to SAP consulting — Daksha helped me restart my career with confidence and real project skills.',
+      'DCAP offers the best classroom experience with experienced teachers from the SAP industry. This is exactly what I needed to enhance my skills.',
     videoId: 'tTpmml4ndWM',
   },
   {
@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP ABAP Consultant',
     company: 'Orane Consulting',
     quote:
-      'As a CS grad, I wanted a career with impact. Daksha made me industry-ready and fast-tracked my entry into SAP consulting.',
+      'As a CS graduate, I wanted to look for something different, to stand out from the crowd and improve my skills. Without a doubt, joining Axentia.AI was the right choice. The exposure and environment here are amazing.',
     videoId: 'XX-Qx3yx3ZE',
   },
   {
@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP MM Consultant',
     company: 'Orane Consulting',
     quote:
-      'From learning fundamentals to optimizing business operations — Daksha helped me transform curiosity into consulting skills.',
+      'I have been working for the past seven years, but after AI emerged, every company wants employees trained in AI. Axentia has been my supportive hand. The best thing is you get paid for the projects you complete.',
     videoId: 'vM23wbWFL4E',
   },
   {
@@ -43,7 +43,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP ABAP Consultant',
     company: 'Orane Consulting',
     quote:
-      "Daksha didn't just teach me ABAP — it turned me into a professional who can build real solutions for enterprise clients.",
+      'I am not only trained in FICO now, but I also have exposure to and knowledge of every sector in SAP. DCAP is closing the real gap in the market. It is a truly recommended program.',
     videoId: 'JbsyTIxOh6I',
   },
   {
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     role: 'Trainee',
     company: 'Daksha Career Accelerator',
     quote:
-      'Every week, I see myself becoming more confident, more skilled, and more future-ready. Daksha is shaping my tomorrow.',
+      "Six weeks in, I'm thinking differently about problems, especially after learning about AI. I'm not where I want to be yet, but I know I'm making progress.",
     videoId: 'bffdXIDsR3U',
   },
 ];

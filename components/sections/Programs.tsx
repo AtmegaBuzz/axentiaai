@@ -1,79 +1,71 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, Play, Clock, CalendarDays, GraduationCap, MonitorPlay, Briefcase, Layers, BookOpen, Brain, Target, Users, Cpu, FileText } from 'lucide-react';
 import Link from 'next/link';
+
+interface InfoItem {
+    label: string;
+    value: string;
+    Icon: React.ComponentType<{ className?: string }>;
+}
 
 interface Program {
     id: string;
     title: string;
-    subtitle: string;
-    badge: string;
-    badgeColor: string;
-    subhead: string;
-    duration: string;
+    titleAccent: string;
     description: string;
-    bullets: { emoji: string; text: string }[];
-    gradient: string;
+    info: InfoItem[];
     image: string;
 }
 
 const programs: Program[] = [
     {
         id: 'dcap',
-        title: 'DCAP',
-        subtitle: 'Daksha Career Accelerator Program',
-        badge: 'Flagship',
-        badgeColor: 'bg-white/90 text-brand-700',
-        subhead: 'Our flagship program.',
-        duration: '10 Months · Classroom + Paid Apprenticeship',
+        title: 'Daksha Career',
+        titleAccent: 'Accelerator',
         description:
-            'A 10-month pathway designed to turn graduates into enterprise-ready SAP consultants. 4 months learning, 6 months paid apprenticeship.',
-        bullets: [
-            { emoji: '🏢', text: 'Learn how SAP supports real business' },
-            { emoji: '🔄', text: 'Enterprise process flows (P2P, O2C, R2R, H2R)' },
-            { emoji: '⚙️', text: 'SAP S/4HANA core modules (MM, FICO, SD)' },
-            { emoji: '💼', text: '6 months paid apprenticeship' },
+            'Turn graduates into enterprise-ready SAP consultants through classroom learning and paid apprenticeship.',
+        info: [
+            { label: 'Format', value: 'Classroom + Apprenticeship', Icon: MonitorPlay },
+            { label: 'Eligibility', value: 'Fresh Graduates', Icon: GraduationCap },
+            { label: 'Duration', value: '10 Months', Icon: Clock },
+            { label: 'Apprenticeship', value: '6 Months Paid', Icon: Briefcase },
+            { label: 'Modules', value: 'MM, FICO, SD', Icon: Layers },
+            { label: 'Processes', value: 'P2P, O2C, R2R, H2R', Icon: Target },
         ],
-        gradient: 'from-brand-500 to-purple-600',
         image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
     },
     {
         id: 'eap',
-        title: 'EAP',
-        subtitle: 'Enterprise Acceleration Program',
-        badge: 'Advanced',
-        badgeColor: 'bg-white/90 text-indigo-700',
-        subhead: 'Our Advanced Programme.',
-        duration: 'Performance-based selection',
+        title: 'Enterprise',
+        titleAccent: 'Acceleration',
         description:
-            'For DCAP graduates ready to move beyond basics and work on complex enterprise scenarios. This program deepens your consulting capabilities and prepares you for larger responsibilities within SAP project teams.',
-        bullets: [
-            { emoji: '🔗', text: 'Cross-module integration across SAP processes' },
-            { emoji: '📊', text: 'Presales support and effort estimation' },
-            { emoji: '🤖', text: 'AI use cases within enterprise environments' },
-            { emoji: '🎯', text: 'Managing larger responsibilities within project teams' },
+            'Deepen consulting capabilities with complex enterprise scenarios and larger SAP project responsibilities.',
+        info: [
+            { label: 'Format', value: 'Advanced Cohort', Icon: MonitorPlay },
+            { label: 'Eligibility', value: 'DCAP Graduates', Icon: GraduationCap },
+            { label: 'Selection', value: 'Performance-based', Icon: Target },
+            { label: 'Focus', value: 'Cross-module Integration', Icon: Layers },
+            { label: 'Skills', value: 'Presales & Estimation', Icon: FileText },
+            { label: 'AI/ML', value: 'Enterprise AI Use Cases', Icon: Brain },
         ],
-        gradient: 'from-purple-600 to-indigo-700',
         image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
     },
     {
         id: 'online',
-        title: 'Online Foundation',
-        subtitle: 'Start with the Basics',
-        badge: 'Upcoming',
-        badgeColor: 'bg-white/90 text-teal-700',
-        subhead: 'A self-paced introduction.',
-        duration: 'Self-paced · Online',
+        title: 'Online',
+        titleAccent: 'Foundation',
         description:
-            'A self-paced introduction to SAP fundamentals and enterprise processes for those exploring a career in enterprise consulting.',
-        bullets: [
-            { emoji: '📚', text: 'SAP fundamentals and core concepts' },
-            { emoji: '🏭', text: 'How enterprise business processes work' },
-            { emoji: '📋', text: 'Structured introductory learning modules' },
-            { emoji: '🔑', text: 'The basics needed to understand SAP consulting environments' },
+            'Self-paced introduction to SAP fundamentals and enterprise processes for aspiring consultants.',
+        info: [
+            { label: 'Format', value: 'Self-paced Online', Icon: MonitorPlay },
+            { label: 'Eligibility', value: 'Anyone', Icon: Users },
+            { label: 'Duration', value: 'Flexible', Icon: Clock },
+            { label: 'Covers', value: 'SAP Fundamentals', Icon: BookOpen },
+            { label: 'Processes', value: 'Enterprise Workflows', Icon: Layers },
+            { label: 'Access', value: 'Always Open', Icon: CalendarDays },
         ],
-        gradient: 'from-teal-500 to-cyan-500',
         image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=600&h=400&fit=crop&q=80',
     },
 ];
@@ -104,66 +96,59 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
                 scale: 1.02,
                 transition: { type: 'spring', stiffness: 300, damping: 22 },
             }}
-            className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden"
+            className="group relative bg-white rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden"
         >
-            {/* Image area */}
+            {/* Thumbnail with play button */}
             <div className="relative h-52 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={prog.image}
-                    alt={prog.subtitle}
+                    alt={prog.title}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                 />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
-                {/* Badge */}
-                <motion.span
-                    className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm ${prog.badgeColor}`}
-                    initial={{ opacity: 0, scale: 0, rotate: -90 }}
-                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', stiffness: 250, damping: 15, delay: 0.3 + index * 0.08 }}
-                >
-                    {prog.badge}
-                </motion.span>
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
+                {/* Centered play button */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <Play className="w-6 h-6 text-slate-900 fill-current ml-0.5" />
+                    </div>
+                </div>
             </div>
 
             {/* Content */}
             <div className="flex flex-col flex-grow p-6">
-                <div className="mb-1">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-brand-500">{prog.duration}</span>
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-0.5">{prog.title}</h3>
-                <p className="text-sm font-semibold text-slate-600 mb-1">{prog.subtitle}</p>
-                <p className="text-xs text-brand-600 font-medium italic mb-3">{prog.subhead}</p>
-                <p className="text-sm text-slate-600 leading-relaxed mb-4">{prog.description}</p>
+                {/* Heading */}
+                <h3 className="text-2xl font-bold text-slate-900 leading-tight mb-2">
+                    {prog.title} {prog.titleAccent}
+                </h3>
 
-                {/* Bullet points */}
-                <ul className="space-y-2 mb-5 flex-grow">
-                    {prog.bullets.map((b, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                            <span className="text-base leading-none mt-0.5">{b.emoji}</span>
-                            <span>{b.text}</span>
-                        </li>
+                {/* Description */}
+                <p className="text-sm text-slate-500 leading-relaxed mb-6">{prog.description}</p>
+
+                {/* Info grid */}
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                    {prog.info.map(({ label, value, Icon }) => (
+                        <div key={label} className="flex items-start gap-3">
+                            <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+                                <Icon className="w-4 h-4 text-slate-600" />
+                            </div>
+                            <div>
+                                <p className="text-xs font-bold text-slate-900 leading-tight">{label}</p>
+                                <p className="text-xs text-slate-400 leading-tight mt-0.5">{value}</p>
+                            </div>
+                        </div>
                     ))}
-                </ul>
-
-                {/* CTA Buttons */}
-                <div className="flex gap-3 mt-auto pt-4 border-t border-slate-100">
-                    <Link
-                        href={`/programs?tab=${prog.id}`}
-                        className="flex-1 text-center text-sm font-semibold text-brand-600 border border-brand-200 hover:bg-brand-50 hover:border-brand-400 py-2.5 px-4 rounded-xl transition-all duration-200"
-                    >
-                        Explore More
-                    </Link>
-                    <Link
-                        href={`/programs?tab=${prog.id}#apply`}
-                        className="flex-1 text-center inline-flex items-center justify-center gap-1.5 text-sm font-semibold bg-brand-600 hover:bg-brand-700 text-white py-2.5 px-4 rounded-xl transition-all duration-200"
-                    >
-                        Enroll Now
-                        <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
                 </div>
+
+                {/* CTA */}
+                <Link
+                    href={`/programs?tab=${prog.id}`}
+                    className="mt-auto inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 rounded-full w-fit transition-colors duration-200"
+                >
+                    Explore Program
+                    <ArrowUpRight className="w-4 h-4" />
+                </Link>
             </div>
         </motion.div>
     );
@@ -172,19 +157,14 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
 export function Programs() {
     return (
         <section id="programs" className="relative py-16 md:py-24 overflow-hidden">
-            {/* Background video */}
+            {/* Background image */}
             <div className="absolute inset-0 z-0">
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    poster="/videos/graduation-poster.jpg"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src="/images/programs-bg.jpg"
+                    alt=""
                     className="w-full h-full object-cover"
-                >
-                    <source src="/videos/graduation-celebration.mp4" type="video/mp4" />
-                </video>
+                />
                 <div className="absolute inset-0 bg-black/65" />
             </div>
 
@@ -206,17 +186,16 @@ export function Programs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
+                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 whitespace-nowrap"
                     >
-                        Six programs designed for every{' '}
-                        <span className="font-cursive italic text-accent-300 text-[1.1em]">stage.</span>
+                        Six programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
-                        className="text-lg text-white/70"
+                        className="text-lg text-white/70 italic"
                     >
                         Six programs are designed for different stages of an enterprise consulting career.
                     </motion.p>

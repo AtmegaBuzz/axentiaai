@@ -51,7 +51,7 @@ export function MingersFooter() {
                             </span>
                         </h2>
                         <p className="text-xl text-white/60 mb-10 leading-relaxed">
-                            Connect with thousands of SAP consultants, enterprise professionals, and students building careers for the AI era. Share insights, get mentored, and grow together.
+                            Connect with thousands of SAP consultants, enterprise professionals, and students building careers for the AI era. Share insights, get mentored, and grow together!
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">
                             <Link
@@ -68,7 +68,7 @@ export function MingersFooter() {
                                 Community Forum
                             </Link>
                         </div>
-                        <p className="text-white/30 text-sm mt-8">
+                        <p className="text-white/70 text-sm mt-8">
                             200+ students &bull; 4+ countries &bull; Placement-first community
                         </p>
                     </div>

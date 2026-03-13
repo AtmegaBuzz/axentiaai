@@ -121,7 +121,7 @@ export default function AdminPage() {
   // Loading session check
   if (checkingSession) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="w-6 h-6 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -130,52 +130,52 @@ export default function AdminPage() {
   // Login screen
   if (!isLoggedIn) {
     return (
-      <main className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50/30 flex items-center justify-center p-4">
         <div className="w-full max-w-sm">
           <div className="text-center mb-8">
             <Image
-              src="/brand/axentia-logo-white.png"
+              src="/brand/axentia-logo.png"
               alt="AxentiaAI"
               width={180}
               height={48}
               className="h-8 w-auto mx-auto mb-6"
               priority
             />
-            <h1 className="text-xl font-bold text-white">Admin Portal</h1>
-            <p className="text-slate-500 text-sm mt-1">Forum Management</p>
+            <h1 className="text-xl font-bold text-slate-900">Admin Portal</h1>
+            <p className="text-slate-400 text-sm mt-1">Forum Management</p>
           </div>
 
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-8">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-lg p-8">
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   Email
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent placeholder:text-slate-600 transition-colors"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent placeholder:text-slate-400 transition-colors"
                   placeholder="admin@axentiaai.in"
                   required
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                   Password
                 </label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent placeholder:text-slate-600 transition-colors"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent placeholder:text-slate-400 transition-colors"
                   placeholder="••••••••"
                   required
                 />
               </div>
 
               {loginError && (
-                <div className="flex items-center gap-2 text-sm text-red-400 bg-red-950/40 border border-red-900/60 rounded-xl px-4 py-3">
+                <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
                   <XCircle className="w-4 h-4 shrink-0" />
                   {loginError}
                 </div>
@@ -197,34 +197,34 @@ export default function AdminPage() {
 
   // Admin Dashboard
   return (
-    <main className="min-h-screen bg-slate-950">
+    <main className="min-h-screen bg-slate-50">
       {/* Top bar */}
-      <div className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/95 backdrop-blur-md">
+      <div className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur-md">
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src="/brand/axentia-logo-white.png"
+              src="/brand/axentia-logo.png"
               alt="AxentiaAI"
               width={140}
               height={40}
               className="h-6 w-auto"
               priority
             />
-            <span className="text-slate-700">|</span>
-            <span className="text-sm font-semibold text-slate-400">Forum Admin</span>
+            <span className="text-slate-300">|</span>
+            <span className="text-sm font-semibold text-slate-500">Forum Admin</span>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={fetchUsers}
               disabled={loadingUsers}
-              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors"
+              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-700 transition-colors"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loadingUsers ? 'animate-spin' : ''}`} />
               Refresh
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-red-400 transition-colors"
+              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-red-500 transition-colors"
             >
               <LogOut className="w-3.5 h-3.5" />
               Sign Out
@@ -235,53 +235,53 @@ export default function AdminPage() {
 
       <div className="max-w-5xl mx-auto px-6 py-10">
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center">
-                <Users className="w-4 h-4 text-slate-400" />
+              <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center">
+                <Users className="w-4 h-4 text-slate-500" />
               </div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Users</span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Users</span>
             </div>
-            <p className="text-3xl font-bold text-white">{users.length}</p>
+            <p className="text-3xl font-bold text-slate-900">{users.length}</p>
           </div>
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-emerald-950 flex items-center justify-center">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
               </div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Approved</span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Approved</span>
             </div>
-            <p className="text-3xl font-bold text-emerald-400">{approvedCount}</p>
+            <p className="text-3xl font-bold text-emerald-600">{approvedCount}</p>
           </div>
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-amber-950 flex items-center justify-center">
-                <Clock className="w-4 h-4 text-amber-400" />
+              <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
+                <Clock className="w-4 h-4 text-amber-500" />
               </div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Pending</span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Pending</span>
             </div>
-            <p className="text-3xl font-bold text-amber-400">{pendingCount}</p>
+            <p className="text-3xl font-bold text-amber-600">{pendingCount}</p>
           </div>
         </div>
 
         {/* Users table */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-          <div className="px-6 py-5 border-b border-slate-800 flex items-center justify-between gap-4 flex-wrap">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <h2 className="text-base font-bold text-white">Forum Members</h2>
-              <p className="text-xs text-slate-500 mt-0.5">Approve or revoke users&apos; ability to post and comment</p>
+              <h2 className="text-base font-bold text-slate-900">Forum Members</h2>
+              <p className="text-xs text-slate-400 mt-0.5">Approve or revoke users&apos; ability to post and comment</p>
             </div>
             {/* Filter tabs */}
-            <div className="flex items-center gap-1 bg-slate-800 rounded-xl p-1">
+            <div className="flex items-center gap-1 bg-slate-100 rounded-xl p-1">
               {(['all', 'pending', 'approved'] as const).map((f) => (
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors capitalize ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all capitalize ${
                     filter === f
-                      ? 'bg-slate-700 text-white'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'bg-white text-slate-900 shadow-sm'
+                      : 'text-slate-400 hover:text-slate-600'
                   }`}
                 >
                   {f} {f === 'all' ? `(${users.length})` : f === 'approved' ? `(${approvedCount})` : `(${pendingCount})`}
@@ -293,24 +293,24 @@ export default function AdminPage() {
           {loadingUsers ? (
             <div className="p-16 text-center">
               <div className="w-7 h-7 border-2 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-              <p className="text-slate-500 text-sm">Loading users...</p>
+              <p className="text-slate-400 text-sm">Loading users...</p>
             </div>
           ) : fetchError ? (
             <div className="p-10 text-center">
-              <p className="text-red-400 text-sm font-semibold mb-1">Failed to load users</p>
-              <p className="text-slate-500 text-xs">{fetchError}</p>
-              <p className="text-slate-600 text-xs mt-3">Make sure you have run the database migration SQL in Supabase.</p>
+              <p className="text-red-500 text-sm font-semibold mb-1">Failed to load users</p>
+              <p className="text-slate-400 text-xs">{fetchError}</p>
+              <p className="text-slate-300 text-xs mt-3">Make sure you have run the database migration SQL in Supabase.</p>
             </div>
           ) : filteredUsers.length === 0 ? (
             <div className="p-16 text-center">
-              <p className="text-slate-500 text-sm">{users.length === 0 ? 'No users have signed up yet.' : 'No users match this filter.'}</p>
+              <p className="text-slate-400 text-sm">{users.length === 0 ? 'No users have signed up yet.' : 'No users match this filter.'}</p>
             </div>
           ) : (
-            <div className="divide-y divide-slate-800/60">
+            <div className="divide-y divide-slate-100">
               {filteredUsers.map((u) => (
-                <div key={u.id} className="px-6 py-4 flex items-center gap-4 hover:bg-slate-800/30 transition-colors">
+                <div key={u.id} className="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
                   {/* Avatar */}
-                  <div className="w-9 h-9 rounded-full bg-brand-900 flex items-center justify-center text-brand-400 text-sm font-bold shrink-0 overflow-hidden">
+                  <div className="w-9 h-9 rounded-full bg-brand-50 flex items-center justify-center text-brand-600 text-sm font-bold shrink-0 overflow-hidden">
                     {u.avatar_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={u.avatar_url} alt="" className="w-full h-full object-cover" />
@@ -321,10 +321,10 @@ export default function AdminPage() {
 
                   {/* Name + date */}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-white truncate">
-                      {u.full_name || <span className="text-slate-500 italic">Unnamed User</span>}
+                    <p className="text-sm font-semibold text-slate-900 truncate">
+                      {u.full_name || <span className="text-slate-400 italic">Unnamed User</span>}
                     </p>
-                    <p className="text-xs text-slate-600">
+                    <p className="text-xs text-slate-400">
                       Joined {new Date(u.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </p>
                   </div>
@@ -332,8 +332,8 @@ export default function AdminPage() {
                   {/* Status badge */}
                   <span className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${
                     u.forum_approved
-                      ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-900/60'
-                      : 'bg-amber-950/80 text-amber-400 border border-amber-900/60'
+                      ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                      : 'bg-amber-50 text-amber-600 border border-amber-200'
                   }`}>
                     {u.forum_approved ? (
                       <><CheckCircle2 className="w-3 h-3" /> Approved</>
@@ -347,7 +347,7 @@ export default function AdminPage() {
                     <button
                       onClick={() => handleRevoke(u.id)}
                       disabled={actionLoading === u.id}
-                      className="shrink-0 px-4 py-1.5 text-xs font-semibold text-red-400 border border-red-900/60 hover:bg-red-950/50 rounded-lg transition-colors disabled:opacity-50"
+                      className="shrink-0 px-4 py-1.5 text-xs font-semibold text-red-500 border border-red-200 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
                     >
                       {actionLoading === u.id ? '...' : 'Revoke'}
                     </button>
@@ -355,7 +355,7 @@ export default function AdminPage() {
                     <button
                       onClick={() => handleApprove(u.id)}
                       disabled={actionLoading === u.id}
-                      className="shrink-0 px-4 py-1.5 text-xs font-semibold text-emerald-400 border border-emerald-900/60 hover:bg-emerald-950/50 rounded-lg transition-colors disabled:opacity-50"
+                      className="shrink-0 px-4 py-1.5 text-xs font-semibold text-emerald-600 border border-emerald-200 hover:bg-emerald-50 rounded-lg transition-colors disabled:opacity-50"
                     >
                       {actionLoading === u.id ? '...' : 'Approve'}
                     </button>
