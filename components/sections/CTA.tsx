@@ -30,7 +30,7 @@ export function CTA() {
                             Let&apos;s get you to the <span className="font-cursive italic text-accent-300 text-[1.1em]">right place.</span>
                         </h2>
                         <p className="text-lg md:text-xl text-brand-100 mb-8 font-medium">
-                            No pressure. Just a conversation about your goals, where you are now, and whether Daksha might be the right next step.
+                            Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia is the right fit — and if it&apos;s not, we&apos;ll say that too.
                         </p>
 
                         <div className="flex flex-wrap items-center gap-6">

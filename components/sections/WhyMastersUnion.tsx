@@ -32,36 +32,24 @@ const certifications = [
         name: 'CMMI',
         tagline: 'Capability Maturity Model Integration',
         file: '/certifications/cmmi-logo.png',
-        bg: 'from-blue-50 to-blue-100/60',
-        border: 'border-blue-200',
-        badge: 'bg-blue-600',
         badgeText: 'Process Excellence',
     },
     {
         name: 'NASSCOM',
         tagline: 'National Association of Software & Service Companies',
         file: '/certifications/nasscom-logo.gif',
-        bg: 'from-indigo-50 to-indigo-100/60',
-        border: 'border-indigo-200',
-        badge: 'bg-indigo-600',
         badgeText: 'Industry Member',
     },
     {
         name: 'ISO 9001',
         tagline: 'Quality Management System',
-        file: '/certifications/iso-9001-logo.png',
-        bg: 'from-emerald-50 to-emerald-100/60',
-        border: 'border-emerald-200',
-        badge: 'bg-emerald-600',
+        file: '/certifications/ISO_9001-2015.png',
         badgeText: 'Quality Assurance',
     },
     {
         name: 'ISO 27001',
         tagline: 'Information Security Management',
-        file: '/certifications/iso-27001-logo.png',
-        bg: 'from-teal-50 to-teal-100/60',
-        border: 'border-teal-200',
-        badge: 'bg-teal-600',
+        file: '/certifications/ISO-2018.svg',
         badgeText: 'Data Security',
     },
 ];
@@ -70,44 +58,6 @@ export function TrustedBy() {
     return (
         <section className="py-16 md:py-24 bg-white border-b border-slate-100 overflow-hidden">
             <div className="container mx-auto px-4 md:px-8 xl:px-12">
-
-                {/* Label */}
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center text-xs font-bold uppercase tracking-[0.25em] text-slate-400 mb-8"
-                >
-                    Relied On By Leading Enterprises
-                </motion.p>
-
-                {/* Marquee: placement partners */}
-                <div className="relative overflow-hidden mb-16">
-                    <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-                    <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-                    <div className="flex w-max animate-marquee items-center">
-                        {[...placementPartners, ...placementPartners, ...placementPartners].map((company, idx) => (
-                            <div
-                                key={idx}
-                                className="inline-flex items-center justify-center mx-8 h-8 opacity-50 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-                            >
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={`https://logo.clearbit.com/${company.domain}`}
-                                    alt={company.name}
-                                    className="h-6 w-auto max-w-[90px] object-contain"
-                                    loading="lazy"
-                                    onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                        const sib = e.currentTarget.nextElementSibling as HTMLElement | null;
-                                        if (sib) sib.style.display = 'block';
-                                    }}
-                                />
-                                <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 hidden">{company.name}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
 
                 {/* ── Certifications ── */}
                 <div className="text-center mb-10">
@@ -134,7 +84,7 @@ export function TrustedBy() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-slate-400 text-sm mt-2 max-w-lg mx-auto"
+                        className="text-slate-400 text-sm mt-2 max-w-lg mx-auto italic"
                     >
                         Every certification reflects a commitment to quality, security, and professional standards
                         across our organisation and programs.
@@ -151,11 +101,8 @@ export function TrustedBy() {
                             viewport={{ once: true, margin: '-40px' }}
                             transition={{ type: 'spring', stiffness: 160, damping: 18, delay: i * 0.08 }}
                             whileHover={{ y: -6, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
-                            className={`group relative bg-gradient-to-br ${cert.bg} border ${cert.border} rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden`}
+                            className="group relative bg-white border border-slate-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 overflow-hidden"
                         >
-                            {/* Subtle corner glow on hover */}
-                            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-
                             {/* Logo */}
                             <div className="relative w-full h-20 mb-5 flex items-center justify-center">
                                 <Image
@@ -163,8 +110,8 @@ export function TrustedBy() {
                                     alt={cert.name}
                                     width={120}
                                     height={80}
-                                    className="max-h-16 w-auto object-contain drop-shadow-sm"
-                                    unoptimized={cert.file.endsWith('.gif')}
+                                    className="max-h-16 w-auto object-contain"
+                                    unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
                                 />
                             </div>
 
@@ -175,8 +122,7 @@ export function TrustedBy() {
                             <p className="text-[11px] text-slate-500 leading-snug mb-4 font-medium">{cert.tagline}</p>
 
                             {/* Badge */}
-                            <span className={`mt-auto inline-flex items-center gap-1.5 ${cert.badge} text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full`}>
-                                <span className="w-1 h-1 rounded-full bg-white/60" />
+                            <span className="mt-auto inline-flex items-center gap-1.5 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
                                 {cert.badgeText}
                             </span>
                         </motion.div>
@@ -212,7 +158,7 @@ export function WhyAxentiaAI() {
             style={{
                 backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 25%, #f1f5f9 50%, #fef8ec 75%, #f8fafc 100%)',
             }}
-            className="relative py-20 md:py-28 overflow-hidden animate-gradient-loop"
+            className="relative h-screen overflow-hidden animate-gradient-loop flex flex-col justify-center"
         >
             {/* ── FloatingLines WebGL background — skipped on low-end devices ── */}
             {!isLowEnd && (
@@ -232,10 +178,10 @@ export function WhyAxentiaAI() {
                 </div>
             )}
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
+            <div className="mx-auto px-3 md:px-4 lg:px-6 relative z-10">
                 {/* ── Header ── */}
-                <div className="text-center mb-14 md:mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+                <div className="text-center mb-8 md:mb-10">
+                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-3">
                         The Axentia{' '}
                         <span
                             className="inline-block px-3 py-1 rounded-md font-bold"
@@ -244,22 +190,22 @@ export function WhyAxentiaAI() {
                             Approach
                         </span>
                     </h2>
-                    <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-                        A data-backed approach to enterprise consulting education, built on 25 years of delivery experience.
+                    <p className="text-slate-500 text-lg max-w-2xl mx-auto italic">
+                        Explore the numbers behind our story
                     </p>
                 </div>
 
                 {/* ── Bento Grid ── */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 auto-rows-min">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 auto-rows-min">
 
                     {/* Card 1 — 100+ Careers */}
                     <div className={`${glass} h-full`}>
-                        <div className="mb-5">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">100+</h3>
+                        <div className="mb-3">
+                            <h3 className="text-4xl font-black text-slate-900 mb-0">100+</h3>
                             <p className="font-semibold text-slate-800">Careers Launched</p>
-                            <p className="text-slate-400 text-sm mt-1">Across Enterprise Projects</p>
+                            <p className="text-slate-400 text-sm mt-0">Across Enterprise Projects</p>
                         </div>
-                        <div className="grid grid-cols-2 gap-2 mt-auto">
+                        <div className="grid grid-cols-2 gap-1 mt-auto">
                             {['SAP S/4HANA', 'FICO', 'ABAP', 'MM/SD'].map(tag => (
                                 <div key={tag} className={chipBrand}>{tag}</div>
                             ))}
@@ -268,12 +214,12 @@ export function WhyAxentiaAI() {
 
                     {/* Card 2 — 95% Placement */}
                     <div className={`${glass} h-full`}>
-                        <div className="mb-5">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">95%</h3>
+                        <div className="mb-3">
+                            <h3 className="text-4xl font-black text-slate-900 mb-0">95%</h3>
                             <p className="font-semibold text-slate-800">Placement Success</p>
-                            <p className="text-slate-400 text-sm mt-1">Consultants Deployed</p>
+                            <p className="text-slate-400 text-sm mt-0">Consultants Deployed</p>
                         </div>
-                        <div className="grid grid-cols-2 gap-2 mt-auto">
+                        <div className="grid grid-cols-2 gap-1 mt-auto">
                             {['Orane', 'Accenture', 'Deloitte', 'TCS'].map(tag => (
                                 <div key={tag} className={chipAccent}>{tag}</div>
                             ))}
@@ -282,12 +228,12 @@ export function WhyAxentiaAI() {
 
                     {/* Card 3 — 4+ Countries */}
                     <div className={`${glass} h-full`}>
-                        <div className="mb-5">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">4+</h3>
+                        <div className="mb-3">
+                            <h3 className="text-4xl font-black text-slate-900 mb-0">4+</h3>
                             <p className="font-semibold text-slate-800">Countries Served</p>
-                            <p className="text-slate-400 text-sm mt-1">Global Delivery Presence</p>
+                            <p className="text-slate-400 text-sm mt-0">Global Delivery Presence</p>
                         </div>
-                        <div className="grid grid-cols-2 gap-2 mt-auto">
+                        <div className="grid grid-cols-2 gap-1 mt-auto">
                             {['India', 'Canada', 'Portugal', 'Kenya'].map(tag => (
                                 <div key={tag} className={chipBrand}>{tag}</div>
                             ))}
@@ -300,15 +246,15 @@ export function WhyAxentiaAI() {
                         <img
                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=260&fit=crop&q=80"
                             alt="Team collaboration"
-                            className="w-full h-36 object-cover rounded-xl mb-4"
+                            className="w-full h-32 object-cover rounded-xl mb-3"
                             loading="lazy"
                         />
-                        <div className="mb-4">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">25+</h3>
+                        <div className="mb-2">
+                            <h3 className="text-4xl font-black text-slate-900 mb-0">25+</h3>
                             <p className="font-semibold text-slate-800">Years of Experience</p>
-                            <p className="text-slate-400 text-sm mt-1">Built on the legacy of Orane Consulting</p>
+                            <p className="text-slate-400 text-sm mt-0">Built on the legacy of Orane Consulting</p>
                         </div>
-                        <div className="grid grid-cols-2 gap-2 mt-auto">
+                        <div className="grid grid-cols-2 gap-1 mt-auto">
                             {['SAP', 'AI/ML', 'Data Analytics', 'ERP', 'Cloud', 'Automation'].map(tag => (
                                 <div key={tag} className={`${chipBrand} flex items-center justify-center py-2.5`}>{tag}</div>
                             ))}
@@ -317,26 +263,26 @@ export function WhyAxentiaAI() {
 
                     {/* Card 5 — CTC (with image) */}
                     <div className={`${glass} h-full overflow-hidden`}>
-                        <div className="mb-4">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">&#8377;6-12 LPA</h3>
+                        <div className="mb-2">
+                            <h3 className="text-4xl font-black text-slate-900 mb-0">&#8377;6-12 LPA</h3>
                             <p className="font-semibold text-slate-800">Average Starting CTC</p>
-                            <p className="text-slate-400 text-sm mt-1">For Daksha Graduates</p>
+                            <p className="text-slate-400 text-sm mt-0">For Daksha Graduates</p>
                         </div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&q=80"
                             alt="Career growth"
-                            className="w-full h-24 object-cover rounded-xl mt-auto"
+                            className="w-full h-20 object-cover rounded-xl mt-auto"
                             loading="lazy"
                         />
                     </div>
 
                     {/* Card 6 — 30+ Hiring Partners */}
                     <div className={`${glass} h-full`}>
-                        <div className="mb-4">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">30+</h3>
+                        <div className="mb-2">
+                            <h3 className="text-4xl font-black text-slate-900 mb-0">30+</h3>
                             <p className="font-semibold text-slate-800">Hiring Partners</p>
-                            <p className="text-slate-400 text-sm mt-1">Leading Enterprises Trust Us</p>
+                            <p className="text-slate-400 text-sm mt-0">Leading Enterprises Trust Us</p>
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2 mt-auto">
                             {['SAP', 'Infosys', 'Wipro', 'HCL', 'Capgemini', 'LTIMindtree', 'EY', 'PwC'].map(tag => (
@@ -347,27 +293,27 @@ export function WhyAxentiaAI() {
 
                     {/* Card 7 — 100+ Enterprise Projects (with image) */}
                     <div className={`${glass} h-full overflow-hidden`}>
-                        <div className="mb-4">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">100+</h3>
+                        <div className="mb-2">
+                            <h3 className="text-4xl font-black text-slate-900 mb-0">100+</h3>
                             <p className="font-semibold text-slate-800">Enterprise Projects</p>
-                            <p className="text-slate-400 text-sm mt-1">Real-World Delivery</p>
+                            <p className="text-slate-400 text-sm mt-0">Real-World Delivery</p>
                         </div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=200&fit=crop&q=80"
                             alt="Enterprise project delivery"
-                            className="w-full h-24 object-cover rounded-xl mt-auto"
+                            className="w-full h-20 object-cover rounded-xl mt-auto"
                             loading="lazy"
                         />
                     </div>
 
                     {/* Card 8 — Programs (full width) */}
-                    <div className={`${glass} lg:col-span-4 flex-col md:flex-row items-start md:items-center gap-6 md:gap-10`}>
+                    <div className={`${glass} lg:col-span-4 flex-col md:flex-row items-start md:items-center gap-4 md:gap-6`}>
                         <div className="shrink-0 md:w-1/4">
-                            <h3 className="text-4xl font-black text-slate-900 mb-1">6</h3>
+                            <h3 className="text-4xl font-black text-slate-900 mb-0">6</h3>
                             <p className="font-semibold text-slate-800">Industry-Aligned Programs</p>
                         </div>
-                        <div className="flex-1 flex flex-wrap gap-2.5">
+                        <div className="flex-1 flex flex-wrap gap-2">
                             {['DCAP', 'EAP', 'SAP Consulting', 'Data & AI', 'ERP Analyst', 'Online Foundation', 'Paid Apprenticeship', 'Mentorship Track', 'Certification Prep'].map(tag => (
                                 <div key={tag} className="bg-white/40 backdrop-blur-sm text-brand-700 text-sm font-medium py-2 px-4 rounded-full border border-brand-200/30 hover:bg-white/60 transition-colors">{tag}</div>
                             ))}

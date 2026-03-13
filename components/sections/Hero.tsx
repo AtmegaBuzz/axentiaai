@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Play, Download, Users } from 'lucide-react';
 import Link from 'next/link';
@@ -12,9 +13,14 @@ const partnerLogos = [
     { src: '/partners/microsoft-logo.png', alt: 'Microsoft',  width: 140, height: 40 },
     { src: '/partners/odoo-logo.png',      alt: 'Odoo',       width: 100, height: 40 },
     { src: '/partners/sap-logo.png',       alt: 'SAP',        width: 80,  height: 40 },
+    { src: '/certifications/iso-9001-logo.png', alt: 'ISO 9001', width: 100, height: 40 },
+    { src: '/certifications/nasscom-logo.gif',  alt: 'NASSCOM',  width: 120, height: 40 },
+    { src: '/certifications/cmmi-logo.png',     alt: 'CMMI',     width: 100, height: 40 },
 ];
 
 export function Hero() {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
         <section className="relative min-h-screen flex flex-col overflow-hidden bg-black">
             {/* Background Video */}
@@ -61,17 +67,9 @@ export function Hero() {
                             transition={{ duration: 0.6, delay: 0.1 }}
                             className="mt-6 text-base sm:text-lg md:text-xl text-white/80 max-w-xl leading-relaxed"
                         >
-                            Enterprise consulting education built on 25+ years of real SAP project delivery experience.
+                            Driven by 25+ years of Orane&apos;s SAP excellence.
                         </motion.p>
-                        <motion.p
-                            initial={{ opacity: 0, y: 12 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.18 }}
-                            className="mt-2 text-sm text-white/50"
-                        >
-                            Built on the consulting legacy of{' '}
-                            <span className="text-yellow-300 font-semibold">Orane</span>
-                        </motion.p>
+
 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -95,13 +93,42 @@ export function Hero() {
                                 <Download className="w-5 h-5" />
                                 Download Brochure
                             </Button>
-                            <Link
-                                href="/student-life"
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-yellow-400/15 backdrop-blur-md border border-yellow-400/30 text-yellow-300 hover:bg-yellow-400/25 font-semibold py-4 px-8 rounded-full shadow-xl transition-all duration-200"
+                            <div
+                                className="relative w-full sm:w-auto flex items-center overflow-visible"
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}
                             >
-                                <Users className="w-5 h-5" />
-                                Join Community
-                            </Link>
+                                <Link
+                                    href="/forum"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-yellow-400/15 backdrop-blur-md border border-yellow-400/30 text-yellow-300 hover:bg-yellow-400/25 font-semibold py-4 px-8 rounded-full shadow-xl transition-all duration-200"
+                                >
+                                    <Users className="w-5 h-5" />
+                                    Join Community
+                                </Link>
+                                <AnimatePresence>
+                                    {isHovered && (
+                                        <motion.button
+                                            type="button"
+                                            aria-label="Scroll to community video"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                document.getElementById('community-video')?.scrollIntoView({ behavior: 'smooth' });
+                                            }}
+                                            initial={{ scale: 0, opacity: 0, x: -80 }}
+                                            animate={{ scale: 1, opacity: 1, x: 0 }}
+                                            exit={{ scale: 0, opacity: 0, x: -80 }}
+                                            transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+                                            whileHover={{ scale: 1.12 }}
+                                            whileTap={{ scale: 0.88 }}
+                                            style={{ transformOrigin: '0% 50%' }}
+                                            className="ml-3 flex-shrink-0 flex items-center gap-2 px-4 h-11 bg-yellow-400 text-slate-900 rounded-full hover:bg-yellow-300 shadow-xl cursor-pointer font-semibold text-sm"
+                                        >
+                                            <Play className="w-4 h-4 fill-current flex-shrink-0" />
+                                            Play
+                                        </motion.button>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         </motion.div>
                     </div>
                 </div>

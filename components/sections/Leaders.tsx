@@ -86,8 +86,7 @@ export function Leaders() {
                         transition={{ delay: 0.08 }}
                         className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
                     >
-                        Backbone of{' '}
-                        <span className="font-cursive italic text-brand-600 text-[1.1em]">Axentia.AI</span>
+                        Backbone of Axentia.AI
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 15 }}
@@ -96,7 +95,7 @@ export function Leaders() {
                         transition={{ delay: 0.14 }}
                         className="text-lg text-slate-500 max-w-xl mx-auto"
                     >
-                        Industry veterans building the next generation of enterprise-ready SAP consultants.
+                        Industry veterans building the next generation for AI Era
                     </motion.p>
                 </div>
 

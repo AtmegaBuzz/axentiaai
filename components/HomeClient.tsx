@@ -9,6 +9,7 @@ const Programs = dynamic(() => import('@/components/sections/Programs').then(m =
 const Timeline = dynamic(() => import('@/components/sections/Timeline').then(m => ({ default: m.Timeline })), { ssr: true });
 const Leaders = dynamic(() => import('@/components/sections/Leaders').then(m => ({ default: m.Leaders })), { ssr: true });
 const Testimonials = dynamic(() => import('@/components/sections/Testimonials'), { ssr: true });
+const CommunityVideo = dynamic(() => import('@/components/sections/CommunityVideo').then(m => ({ default: m.CommunityVideo })), { ssr: true });
 const CTA = dynamic(() => import('@/components/sections/CTA').then(m => ({ default: m.CTA })), { ssr: true });
 
 export function HomeClient() {
@@ -18,7 +19,7 @@ export function HomeClient() {
             <Hero />
             {/* Section 2: The Axentia Approach */}
             <WhyAxentiaAI />
-            {/* Section 3: Trusted By / Partners / Certificates */}
+            {/* Section 3: Certificates */}
             <TrustedBy />
             {/* Section 4: Our Programmes */}
             <Programs />
@@ -28,6 +29,8 @@ export function HomeClient() {
             <Leaders />
             {/* Section 7: Testimonials */}
             <Testimonials />
+            {/* Section 8: Community Video */}
+            <CommunityVideo />
             {/* CTA */}
             <CTA />
         </main>
