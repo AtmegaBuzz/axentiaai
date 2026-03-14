@@ -92,7 +92,7 @@ export function TrustedBy() {
                 </div>
 
                 {/* 4-card certifications grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
                     {certifications.map((cert, i) => (
                         <motion.div
                             key={cert.name}
@@ -158,7 +158,7 @@ export function WhyAxentiaAI() {
             style={{
                 backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 25%, #f1f5f9 50%, #fef8ec 75%, #f8fafc 100%)',
             }}
-            className="relative h-screen overflow-hidden animate-gradient-loop flex flex-col justify-center"
+            className="relative animate-gradient-loop flex flex-col justify-center py-16 md:py-0 md:h-screen overflow-hidden"
         >
             {/* ── FloatingLines WebGL background — skipped on low-end devices ── */}
             {!isLowEnd && (
@@ -178,7 +178,7 @@ export function WhyAxentiaAI() {
                 </div>
             )}
 
-            <div className="mx-auto px-3 md:px-4 lg:px-6 relative z-10">
+            <div className="w-full mx-auto px-3 md:px-4 lg:px-6 relative z-10">
                 {/* ── Header ── */}
                 <div className="text-center mb-8 md:mb-10">
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-3">
