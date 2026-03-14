@@ -239,7 +239,7 @@ export function Navbar() {
                         alt="AxentiaAI"
                         width={360}
                         height={96}
-                        className={`${(isScrolled || openDropdown) ? 'h-5' : 'h-7'} w-auto transition-all duration-300`}
+                        className={`${(isScrolled || openDropdown) ? 'h-5' : 'h-7'} w-auto`}
                         priority
                     />
                 </Link>
