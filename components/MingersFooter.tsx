@@ -7,9 +7,9 @@ const footerLinks = {
     Company: [
         { name: 'About Us', href: '/about' },
         { name: 'Our Mission', href: '/about#mission' },
-        { name: 'Leadership', href: '/about#team' },
-        { name: 'The Story', href: '/about#story' },
-        { name: 'Contact Us', href: '#cta' },
+        { name: 'Faculty', href: '/faculty' },
+        { name: 'Enterprises', href: '/enterprises' },
+        { name: 'Community Forum', href: '/forum' },
     ],
     Programs: [
         { name: 'DCAP — Career Accelerator', href: '/programs?tab=dcap' },

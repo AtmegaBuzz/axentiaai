@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/sections/Hero';
+import { ReliedOnBy } from '@/components/sections/ReliedOnBy';
 import { WhyAxentiaAI, TrustedBy } from '@/components/sections/WhyMastersUnion';
 
 /* Below-fold sections — lazy loaded so they don't block initial paint */
@@ -17,6 +18,8 @@ export function HomeClient() {
         <main className="flex min-h-screen flex-col">
             {/* Section 1: Hero */}
             <Hero />
+            {/* Section 1B: Relied on by — enterprise marquee */}
+            <ReliedOnBy />
             {/* Section 2: The Axentia Approach */}
             <WhyAxentiaAI />
             {/* Section 3: Certificates */}
