@@ -17,21 +17,21 @@ const megaMenuData = {
         featured: {
             label: "OUR EDGE",
             title: "25+ Years of SAP Enterprise Delivery",
-            description: "Built on Orane Consulting's legacy — real projects, real mentors, real outcomes.",
+            description: "Built on Orane Consulting's legacy, real projects, real mentors, real outcomes.",
             href: "/about"
         }
     },
     'Programs': {
         items: [
-            { name: 'DCAP — Career Accelerator', href: '/programs?tab=dcap', description: '10-month foundation training + paid apprenticeship' },
-            { name: 'EAP — Enterprise Acceleration', href: '/programs?tab=eap', description: 'Advanced programme for DCAP graduates' },
+            { name: 'DCAP, Career Accelerator', href: '/programs?tab=dcap', description: '10-month foundation training + paid apprenticeship' },
+            { name: 'EAP, Enterprise Acceleration', href: '/programs?tab=eap', description: 'Advanced programme for DCAP graduates' },
             { name: 'Online Foundation', href: '/programs?tab=online', description: 'Self-paced SAP fundamentals (Upcoming)' },
             { name: 'Compare Programs', href: '/programs?tab=compare', description: 'Side-by-side comparison of all programs' },
             { name: 'Application Process', href: '/programs#apply', description: 'How to apply for DCAP in 4 steps' },
         ],
         featured: {
             label: "FLAGSHIP",
-            title: "DCAP — Our Flagship Program",
+            title: "DCAP, Our Flagship Program",
             description: "4 months classroom + 6 months paid apprenticeship. This is how consultants are built.",
             href: "/programs?tab=dcap"
         }

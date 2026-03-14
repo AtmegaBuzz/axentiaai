@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP ABAP Consultant',
     company: 'Orane Consulting',
     quote:
-      'As a CS graduate, I wanted to stand out from the crowd. Without a doubt, joining Axentia.AI was the right choice. The exposure and environment here are amazing — I went from a fresher to a billable consultant in under a year.',
+      'As a CS graduate, I wanted to stand out from the crowd. Without a doubt, joining Axentia.AI was the right choice. The exposure and environment here are amazing, I went from a fresher to a billable consultant in under a year.',
     videoId: 'XX-Qx3yx3ZE',
   },
   {
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP Trainee',
     company: 'Daksha Career Accelerator',
     quote:
-      "Six weeks in, I'm thinking differently about enterprise problems — especially after understanding how AI fits into SAP workflows. I'm not where I want to be yet, but I know I'm making real progress.",
+      "Six weeks in, I'm thinking differently about enterprise problems, especially after understanding how AI fits into SAP workflows. I'm not where I want to be yet, but I know I'm making real progress.",
     videoId: 'bffdXIDsR3U',
   },
 ];
@@ -135,7 +135,7 @@ export default function Testimonials() {
               transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.1 }}
               className="text-base text-slate-500"
             >
-              From fresh graduates to career changers — hear how professionals
+              From fresh graduates to career changers, hear how professionals
               are building enterprise consulting careers with Axentia.AI.
             </motion.p>
           </div>

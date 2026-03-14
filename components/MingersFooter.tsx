@@ -12,8 +12,8 @@ const footerLinks = {
         { name: 'Community Forum', href: '/forum' },
     ],
     Programs: [
-        { name: 'DCAP — Career Accelerator', href: '/programs?tab=dcap' },
-        { name: 'EAP — Enterprise Acceleration', href: '/programs?tab=eap' },
+        { name: 'DCAP, Career Accelerator', href: '/programs?tab=dcap' },
+        { name: 'EAP, Enterprise Acceleration', href: '/programs?tab=eap' },
         { name: 'Online Foundation', href: '/programs?tab=online' },
         { name: 'Compare Programs', href: '/programs?tab=compare' },
         { name: 'Apply Now', href: '/programs#apply' },

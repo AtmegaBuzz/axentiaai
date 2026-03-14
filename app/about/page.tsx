@@ -341,12 +341,12 @@ function LegacySection() {
    ═══════════════════════════════════════════════════════════════ */
 
 const milestones = [
-  { year: '2000', title: 'Orane\'s SAP Legacy Begins', desc: 'Orane Consulting starts delivering enterprise SAP projects across India — building 25+ years of real-world consulting expertise.', icon: <BuildingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&h=160&fit=crop&q=80' },
-  { year: '2012', title: 'Global Expansion', desc: 'Operations extend to Canada, Portugal, and Kenya — becoming a truly international SAP delivery organisation.', icon: <GlobeIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?w=300&h=160&fit=crop&q=80' },
+  { year: '2000', title: 'Orane\'s SAP Legacy Begins', desc: 'Orane Consulting starts delivering enterprise SAP projects across India, building 25+ years of real-world consulting expertise.', icon: <BuildingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&h=160&fit=crop&q=80' },
+  { year: '2012', title: 'Global Expansion', desc: 'Operations extend to Canada, Portugal, and Kenya, becoming a truly international SAP delivery organisation.', icon: <GlobeIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?w=300&h=160&fit=crop&q=80' },
   { year: '2022', title: 'The Talent Gap Emerges', desc: '500+ consultants deployed, but the market demand for AI-ready SAP talent far outpaces what traditional hiring can deliver.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=300&h=160&fit=crop&q=80' },
-  { year: '2024', title: 'Axentia.AI Begins', desc: 'A new idea takes shape — what if we could build consultants, not just hire them? Axentia.AI is founded to solve the capability gap at its source.', icon: <BrainIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&h=160&fit=crop&q=80' },
-  { year: '2025', title: 'Daksha Launches', desc: 'The Daksha Career Accelerator launches — 10 months of classroom training plus paid apprenticeship. First cohort placed in enterprise roles.', icon: <TargetIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300&h=160&fit=crop&q=80' },
-  { year: '2026', title: 'AI-Ready Consultants', desc: '100+ careers launched. Graduates working across SAP S/4HANA, FICO, MM, SD — building the next generation of enterprise consulting talent.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=300&h=160&fit=crop&q=80' },
+  { year: '2024', title: 'Axentia.AI Begins', desc: 'A new idea takes shape: what if we could build consultants, not just hire them? Axentia.AI is founded to solve the capability gap at its source.', icon: <BrainIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&h=160&fit=crop&q=80' },
+  { year: '2025', title: 'Daksha Launches', desc: 'The Daksha Career Accelerator launches: 10 months of classroom training plus paid apprenticeship. First cohort placed in enterprise roles.', icon: <TargetIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300&h=160&fit=crop&q=80' },
+  { year: '2026', title: 'AI-Ready Consultants', desc: '100+ careers launched. Graduates working across SAP S/4HANA, FICO, MM, SD, building the next generation of enterprise consulting talent.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=300&h=160&fit=crop&q=80' },
   { year: 'Next', title: 'The Road Ahead', desc: 'Expanding programs, deepening enterprise partnerships, and building the capability infrastructure needed for the AI era of consulting.', icon: <LightbulbIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=300&h=160&fit=crop&q=80' },
 ];
 
@@ -497,7 +497,7 @@ const valuesData = [
   { icon: <LightbulbIcon className="w-6 h-6" />, title: 'Pathways, Not Programs', desc: 'Careers are not built through isolated courses. They are built through structured journeys that move from awareness to capability to real-world application.' },
   { icon: <GlobeIcon className="w-6 h-6" />, title: 'Ecosystems, Not Silos', desc: 'Transformation happens when enterprises, institutions, technology partners, and talent ecosystems move together.' },
   { icon: <ShieldIcon className="w-6 h-6" />, title: 'Practical Transformation', desc: 'Real change happens through capability, systems understanding, and workforce readiness, not technology theater.' },
-  { icon: <SAPIcon className="w-6 h-6" />, title: 'Enterprise-Ready', desc: 'Prepared for SAP project delivery realities from day one — not in 12-18 months.' },
+  { icon: <SAPIcon className="w-6 h-6" />, title: 'Enterprise-Ready', desc: 'Prepared for SAP project delivery realities from day one, not in 12-18 months.' },
 ];
 
 function ValuesSection() {
