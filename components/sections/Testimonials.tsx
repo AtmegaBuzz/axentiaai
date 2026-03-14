@@ -154,9 +154,9 @@ export default function Testimonials() {
           {/* Quote watermark */}
           <Quote className="absolute top-6 right-6 md:top-10 md:right-10 w-14 h-14 md:w-16 md:h-16 text-brand-100 pointer-events-none" strokeWidth={1} />
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center h-[420px] md:h-[380px]">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center md:min-h-[380px]">
             {/* Left: Text content — absolutely positioned to prevent height shifts */}
-            <div className="order-2 lg:order-1 relative h-full">
+            <div className="order-2 lg:order-1 relative md:h-full">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={active}
@@ -164,7 +164,7 @@ export default function Testimonials() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.35, ease: 'easeInOut' }}
-                  className="absolute inset-0 flex flex-col justify-center"
+                  className="md:absolute md:inset-0 flex flex-col justify-center"
                 >
                   <div className="mb-4">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-600 text-[11px] font-semibold tracking-wide uppercase border border-brand-100">
@@ -172,17 +172,17 @@ export default function Testimonials() {
                     </span>
                   </div>
 
-                  <p className="text-lg sm:text-xl md:text-[22px] leading-relaxed font-medium text-slate-800 mb-8">
+                  <p className="text-base sm:text-lg md:text-[22px] leading-relaxed font-medium text-slate-800 mb-4 md:mb-8">
                     &ldquo;{t.quote}&rdquo;
                   </p>
 
-                  <div className="flex items-center gap-3 mt-auto">
-                    <div className="w-10 h-10 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 font-semibold text-sm">
+                  <div className="flex items-center gap-3 mt-auto min-h-[48px]">
+                    <div className="w-10 h-10 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 font-semibold text-sm shrink-0">
                       {t.name.charAt(0)}
                     </div>
-                    <div>
-                      <h4 className="text-slate-900 font-semibold text-sm">{t.name}</h4>
-                      <p className="text-slate-400 text-xs">{t.role}</p>
+                    <div className="min-w-0 flex-1">
+                      <h4 className="text-slate-900 font-semibold text-sm truncate">{t.name}</h4>
+                      <p className="text-slate-400 text-xs truncate">{t.role}</p>
                     </div>
                   </div>
                 </motion.div>

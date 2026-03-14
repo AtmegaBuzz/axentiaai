@@ -24,16 +24,27 @@ export function CTA() {
                         A
                     </div>
 
-                    {/* Left Content */}
-                    <div className="relative z-10 p-10 md:p-16 xl:w-3/5 flex flex-col items-start justify-center h-full">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">
+                    {/* Image — Mobile (shown first above text) */}
+                    <div className="xl:hidden pt-8 pb-2 w-48 h-48 sm:w-64 sm:h-64 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20 relative self-center shrink-0">
+                        <Image
+                            src="/images/cta-woman.png"
+                            alt="Daksha Student"
+                            fill
+                            className="object-cover object-top"
+                            priority
+                        />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10 p-8 md:p-16 xl:w-3/5 flex flex-col items-start justify-center h-full">
+                        <h2 className="text-2xl md:text-5xl font-bold text-white tracking-tight mb-4">
                             Let&apos;s get you to the <span className="font-cursive italic text-accent-300 text-[1.1em]">right place.</span>
                         </h2>
-                        <p className="text-lg md:text-xl text-brand-100 mb-8 font-medium">
+                        <p className="text-base md:text-xl text-brand-100 mb-6 md:mb-8 font-medium">
                             Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia is the right fit — and if it&apos;s not, we&apos;ll say that too.
                         </p>
 
-                        <div className="flex flex-wrap items-center gap-6">
+                        <div className="flex flex-wrap items-center gap-4 md:gap-6">
                             <Link
                                 href="#"
                                 className="bg-white text-slate-900 border-2 border-white font-bold py-3 px-8 rounded-full hover:bg-brand-50 transition-colors"
@@ -50,18 +61,8 @@ export function CTA() {
                         </div>
                     </div>
 
-                    {/* Right Image — Desktop */}
+                    {/* Image — Desktop (absolute positioned) */}
                     <div className="hidden xl:block absolute -top-12 -right-6 w-64 h-64 lg:w-80 lg:h-80 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20">
-                        <Image
-                            src="/images/cta-woman.png"
-                            alt="Daksha Student"
-                            fill
-                            className="object-cover object-top"
-                            priority
-                        />
-                    </div>
-                    {/* Right Image — Mobile */}
-                    <div className="xl:hidden mt-8 mb-10 w-48 h-48 sm:w-64 sm:h-64 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20 relative self-center">
                         <Image
                             src="/images/cta-woman.png"
                             alt="Daksha Student"

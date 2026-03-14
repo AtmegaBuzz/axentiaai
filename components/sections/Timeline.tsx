@@ -306,7 +306,7 @@ export function Timeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-5 whitespace-nowrap"
+            className="text-lg sm:text-2xl md:text-5xl font-bold text-slate-900 tracking-tight mb-5 break-words leading-snug"
           >
             How Your Consulting{' '}
             <span className="font-cursive italic text-brand-600 text-[1.1em]">Career Grows</span>
