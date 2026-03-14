@@ -22,7 +22,7 @@ export function ReliedOnBy() {
     const logos = [...enterpriseLogos, ...enterpriseLogos, ...enterpriseLogos];
 
     return (
-        <section className="py-12 bg-slate-50 border-y border-slate-100 overflow-hidden">
+        <section className="hidden md:block py-12 bg-slate-50 border-y border-slate-100 overflow-hidden">
             <div className="container mx-auto px-4 md:px-6 mb-8 text-center">
                 <p className="text-sm font-semibold uppercase tracking-widest text-slate-400">
                     Our graduates work at
