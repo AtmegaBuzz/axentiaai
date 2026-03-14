@@ -9,15 +9,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 const megaMenuData = {
     'Why AxentiaAI': {
         items: [
-            { name: 'Why AxentiaAI', href: '/about', description: 'Your partner for future-ready workforce skills' },
-            { name: 'How it works', href: '/how-it-works', description: 'Identify, close, and prevent skills gaps' },
-            { name: 'The Apprenticeship Levy', href: '/apprenticeship-levy', description: 'Your guide to funding workforce skills training' },
-            { name: 'Case studies', href: '/case-studies', description: 'Explore success stories from our programs' },
+            { name: 'About Axentia.AI', href: '/about', description: 'Our story, mission, and the team behind the platform' },
+            { name: 'Our Programs', href: '/programs', description: 'Three programs built for every stage of your career' },
+            { name: 'Student Life', href: '/student-life', description: 'Community, culture, and learning beyond the classroom' },
+            { name: 'Enterprises', href: '/enterprises', description: 'Build capability pipelines with Axentia.AI' },
         ],
         featured: {
-            label: "NEWS",
-            title: "AxentiaAI Launches New AI Campus",
-            description: "Discover our state-of-the-art learning environment",
+            label: "OUR EDGE",
+            title: "25+ Years of SAP Enterprise Delivery",
+            description: "Built on Orane Consulting's legacy — real projects, real mentors, real outcomes.",
             href: "/about"
         }
     },
@@ -52,32 +52,29 @@ const megaMenuData = {
     },
     'Faculty': {
         items: [
-            { name: 'Our Instructors', href: '/faculty/instructors', description: 'Industry experts and thought leaders' },
-            { name: 'Advisory Board', href: '/faculty/advisory', description: 'Guiding our academic excellence' },
-            { name: 'Research', href: '/faculty/research', description: 'Cutting-edge AI and tech research' },
-            { name: 'Guest Speakers', href: '/faculty/speakers', description: 'Learn from global industry leaders' },
+            { name: 'Meet the Faculty', href: '/faculty', description: 'Program directors, domain experts, and industry mentors' },
+            { name: 'Student Life', href: '/student-life', description: 'Learning starts to feel real here' },
+            { name: 'Learning Journey', href: '/student-life/learning-journey', description: 'Five phases from awareness to enterprise readiness' },
+            { name: 'Culture & Activities', href: '/student-life/culture', description: 'Community, celebrations, and learning beyond the classroom' },
         ],
         featured: {
-            label: "FEATURE",
-            title: "Meet Our World-Class Faculty",
-            description: "Experts from leading tech companies",
+            label: "FACULTY",
+            title: "Learn From People Who Have Built Enterprise Systems",
+            description: "Our faculty bring decades of real SAP delivery experience into every session.",
             href: "/faculty"
         }
     },
     'Enterprises': {
         items: [
-            { name: 'Hire Enterprise-Ready Talent', href: '/enterprises/hiring', description: 'Access our skilled talent pipeline' },
-            { name: 'Corporate Partnerships', href: '/enterprises/partnerships', description: 'Strategic collaboration opportunities' },
-            { name: 'Talent Pipeline Model', href: '/enterprises/talent-pipeline', description: 'End-to-end workforce development' },
-            { name: 'Custom Enterprise Training', href: '/enterprises/training', description: 'Tailored programs for your needs' },
-            { name: 'Case Studies', href: '/enterprises/case-studies', description: 'See how companies measure impact' },
-            { name: 'Enterprise Partners', href: '/enterprises/partners', description: 'Our corporate partner network' },
-            { name: 'Enterprise Contact Form', href: '/enterprises/contact', description: 'Get in touch with our team' },
+            { name: 'For Enterprises', href: '/enterprises', description: 'Build capability pipelines with Axentia.AI' },
+            { name: 'Talent Pipeline', href: '/enterprises#talent-pipeline', description: 'End-to-end workforce development model' },
+            { name: 'Partnership Models', href: '/enterprises#partnerships', description: 'Apprenticeship collaborations and capability development' },
+            { name: 'Work With Us', href: '/enterprises#contact', description: 'Start a conversation with our enterprise team' },
         ],
         featured: {
-            label: "REPORT",
-            title: "Enterprise AI Training ROI Report 2026",
-            description: "See how companies measure training impact",
+            label: "FOR BUSINESS",
+            title: "Building Capability Together",
+            description: "From talent pipelines to apprenticeship collaborations — partner with us to build your SAP workforce.",
             href: "/enterprises"
         }
     }

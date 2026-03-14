@@ -13,9 +13,6 @@ const partnerLogos = [
     { src: '/partners/microsoft-logo.png', alt: 'Microsoft',  width: 140, height: 40 },
     { src: '/partners/odoo-logo.png',      alt: 'Odoo',       width: 100, height: 40 },
     { src: '/partners/sap-logo.png',       alt: 'SAP',        width: 80,  height: 40 },
-    { src: '/certifications/iso-9001-logo.png', alt: 'ISO 9001', width: 100, height: 40 },
-    { src: '/certifications/nasscom-logo.gif',  alt: 'NASSCOM',  width: 120, height: 40 },
-    { src: '/certifications/cmmi-logo.png',     alt: 'CMMI',     width: 100, height: 40 },
 ];
 
 export function Hero() {
@@ -43,6 +40,16 @@ export function Hero() {
             <div className="relative z-10 flex-1 flex items-center">
                 <div className="container mx-auto px-4 md:px-6 pt-32 pb-16">
                     <div className="max-w-5xl">
+                        <motion.div
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
+                        >
+                            <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+                            <span className="text-sm font-semibold text-white/90 tracking-wide">Built for the AI Era</span>
+                        </motion.div>
+
                         <motion.h1
                             id="hero-heading"
                             initial={{ opacity: 0, y: 24 }}
@@ -51,12 +58,12 @@ export function Hero() {
                             className="text-left"
                         >
                             <div className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[100px] font-black text-white leading-[0.9] tracking-tight">
-                                Enable SAP
+                                Where Enterprise
                             </div>
                             <div className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[100px] font-black leading-[0.9] tracking-tight mt-2">
-                                <span className="text-white">for the</span>{' '}
+                                <span className="text-white">Consultants Are</span>{' '}
                                 <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-accent-400 bg-clip-text text-transparent">
-                                    AI Era
+                                    Built
                                 </span>
                             </div>
                         </motion.h1>

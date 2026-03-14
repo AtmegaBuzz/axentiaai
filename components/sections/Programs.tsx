@@ -186,9 +186,9 @@ export function Programs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 whitespace-nowrap"
+                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
                     >
-                        Six programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
+                        Three programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -197,7 +197,7 @@ export function Programs() {
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
                         className="text-lg text-white/70 italic"
                     >
-                        Six programs are designed for different stages of an enterprise consulting career.
+                        From first steps to senior consulting — a clear path for every stage of your enterprise career.
                     </motion.p>
                 </div>
 

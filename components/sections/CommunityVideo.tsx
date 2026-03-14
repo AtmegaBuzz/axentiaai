@@ -47,7 +47,11 @@ export function CommunityVideo() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.2 }}
+                    className="flex flex-col items-center gap-4"
                 >
+                    <p className="text-white/60 text-sm font-medium tracking-wide">
+                        200+ students &bull; 4+ countries &bull; Placement-first community
+                    </p>
                     <Link
                         href="/forum"
                         className="inline-flex items-center justify-center gap-3 bg-yellow-400/15 backdrop-blur-md border border-yellow-400/30 text-yellow-300 hover:bg-yellow-400/25 font-semibold py-4 px-8 rounded-full shadow-xl transition-all duration-200"

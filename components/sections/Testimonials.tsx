@@ -19,7 +19,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP SF Consultant',
     company: 'Orane Consulting',
     quote:
-      'DCAP offers the best classroom experience with experienced teachers from the SAP industry. This is exactly what I needed to enhance my skills.',
+      'DCAP offers the best classroom experience with experienced teachers from the SAP industry. This is exactly what I needed to enhance my skills and transition into a consulting career.',
     videoId: 'tTpmml4ndWM',
   },
   {
@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP ABAP Consultant',
     company: 'Orane Consulting',
     quote:
-      'As a CS graduate, I wanted to look for something different, to stand out from the crowd and improve my skills. Without a doubt, joining Axentia.AI was the right choice. The exposure and environment here are amazing.',
+      'As a CS graduate, I wanted to stand out from the crowd. Without a doubt, joining Axentia.AI was the right choice. The exposure and environment here are amazing — I went from a fresher to a billable consultant in under a year.',
     videoId: 'XX-Qx3yx3ZE',
   },
   {
@@ -35,12 +35,12 @@ const testimonials: Testimonial[] = [
     role: 'SAP MM Consultant',
     company: 'Orane Consulting',
     quote:
-      'I have been working for the past seven years, but after AI emerged, every company wants employees trained in AI. Axentia has been my supportive hand. The best thing is you get paid for the projects you complete.',
+      'I have been working for seven years, but after AI emerged, every company wants employees trained in AI. Axentia has been my supportive hand. The best thing is you get paid for the projects you complete.',
     videoId: 'vM23wbWFL4E',
   },
   {
     name: 'Sakshi Patodi',
-    role: 'SAP ABAP Consultant',
+    role: 'SAP FICO & ABAP Consultant',
     company: 'Orane Consulting',
     quote:
       'I am not only trained in FICO now, but I also have exposure to and knowledge of every sector in SAP. DCAP is closing the real gap in the market. It is a truly recommended program.',
@@ -48,10 +48,10 @@ const testimonials: Testimonial[] = [
   },
   {
     name: 'Deeksha',
-    role: 'Trainee',
+    role: 'SAP Trainee',
     company: 'Daksha Career Accelerator',
     quote:
-      "Six weeks in, I'm thinking differently about problems, especially after learning about AI. I'm not where I want to be yet, but I know I'm making progress.",
+      "Six weeks in, I'm thinking differently about enterprise problems — especially after understanding how AI fits into SAP workflows. I'm not where I want to be yet, but I know I'm making real progress.",
     videoId: 'bffdXIDsR3U',
   },
 ];
@@ -125,23 +125,23 @@ export default function Testimonials() {
               transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
               className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
             >
-              See how learners get career-ready with{' '}
-              <span className="font-cursive italic text-brand-600 text-[1.1em]">Daksha</span>
+              Real people, real{' '}
+              <span className="font-cursive italic text-brand-600 text-[1.1em]">careers</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.1 }}
-              className="text-lg text-slate-600"
+              className="text-base text-slate-500"
             >
-              From fresh graduates to career changers, see how professionals
-              transform the way they build enterprise careers.
+              From fresh graduates to career changers — hear how professionals
+              are building enterprise consulting careers with Axentia.AI.
             </motion.p>
           </div>
           <div className="shrink-0">
             <a
-              href="#stories"
+              href="/student-life#alumni"
               className="inline-flex items-center justify-center px-6 py-3 border border-brand-200 rounded-full text-brand-700 font-semibold text-sm hover:bg-brand-50 hover:border-brand-300 transition-all duration-200"
             >
               See all success stories
@@ -150,13 +150,13 @@ export default function Testimonials() {
         </div>
 
         {/* ── content card ── */}
-        <div className="relative rounded-3xl p-6 sm:p-10 md:p-14 border border-white shadow-xl backdrop-blur-sm bg-white/60">
+        <div className="relative rounded-3xl p-6 sm:p-8 md:p-12 border border-white shadow-xl backdrop-blur-sm bg-white/60">
           {/* Quote watermark */}
-          <Quote className="absolute top-6 right-6 md:top-10 md:right-10 w-16 h-16 md:w-20 md:h-20 text-brand-200 pointer-events-none" strokeWidth={1} />
+          <Quote className="absolute top-6 right-6 md:top-10 md:right-10 w-14 h-14 md:w-16 md:h-16 text-brand-100 pointer-events-none" strokeWidth={1} />
 
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[340px] md:min-h-[380px]">
-            {/* Left: Text content — crossfade only */}
-            <div className="order-2 lg:order-1 flex flex-col justify-center h-full relative">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center h-[420px] md:h-[380px]">
+            {/* Left: Text content — absolutely positioned to prevent height shifts */}
+            <div className="order-2 lg:order-1 relative h-full">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={active}
@@ -164,32 +164,33 @@ export default function Testimonials() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.35, ease: 'easeInOut' }}
+                  className="absolute inset-0 flex flex-col justify-center"
                 >
-                  <div className="mb-6">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-bold tracking-wide uppercase border border-brand-200">
+                  <div className="mb-4">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-600 text-[11px] font-semibold tracking-wide uppercase border border-brand-100">
                       {t.company}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl md:text-[32px] leading-snug font-semibold text-slate-900 mb-8">
+                  <p className="text-lg sm:text-xl md:text-[22px] leading-relaxed font-medium text-slate-800 mb-8">
                     &ldquo;{t.quote}&rdquo;
-                  </h3>
+                  </p>
 
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 font-bold text-lg">
+                  <div className="flex items-center gap-3 mt-auto">
+                    <div className="w-10 h-10 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 font-semibold text-sm">
                       {t.name.charAt(0)}
                     </div>
                     <div>
-                      <h4 className="text-slate-900 font-bold text-lg">{t.name}</h4>
-                      <p className="text-slate-600 text-sm">{t.role}</p>
+                      <h4 className="text-slate-900 font-semibold text-sm">{t.name}</h4>
+                      <p className="text-slate-400 text-xs">{t.role}</p>
                     </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Right: Video — inline playback, no modal */}
-            <div className="order-1 lg:order-2 relative overflow-hidden rounded-2xl aspect-video bg-black">
+            {/* Right: Video — full 16:9 aspect ratio */}
+            <div className="order-1 lg:order-2 relative overflow-hidden rounded-2xl aspect-video bg-black shadow-lg">
               <AnimatePresence mode="wait" initial={false} custom={direction}>
                 <motion.div
                   key={`${active}-${isPlaying}`}
@@ -230,8 +231,8 @@ export default function Testimonials() {
 
                       {/* Play Button */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-brand-600 transition-all duration-300 text-brand-600 group-hover:text-white">
-                          <Play className="w-6 h-6 sm:w-8 sm:h-8 ml-1 fill-current" />
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-brand-600 transition-all duration-300 text-brand-600 group-hover:text-white">
+                          <Play className="w-5 h-5 sm:w-6 sm:h-6 ml-0.5 fill-current" />
                         </div>
                       </div>
                     </div>
@@ -242,7 +243,7 @@ export default function Testimonials() {
           </div>
 
           {/* Controls + indicators */}
-          <div className="flex items-center justify-between mt-10">
+          <div className="flex items-center justify-between mt-8">
             {/* Dot indicators */}
             <div className="flex items-center gap-2">
               {testimonials.map((_, i) => (
@@ -255,9 +256,9 @@ export default function Testimonials() {
                     setActive(i);
                   }}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`h-2.5 rounded-full transition-transform transition-colors duration-300 origin-left ${i === active
-                    ? 'w-2.5 scale-x-[3.2] bg-brand-500'
-                    : 'w-2.5 scale-x-100 bg-brand-200 hover:bg-brand-300'
+                  className={`h-2 rounded-full transition-all duration-300 ${i === active
+                    ? 'w-7 bg-brand-500'
+                    : 'w-2 bg-brand-200 hover:bg-brand-300'
                     }`}
                 />
               ))}
@@ -268,16 +269,16 @@ export default function Testimonials() {
               <button
                 onClick={prev}
                 aria-label="Previous testimonial"
-                className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-brand-300 hover:bg-brand-50 shadow-sm transition-all"
+                className="w-10 h-10 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-slate-900 hover:border-brand-300 hover:bg-brand-50 shadow-sm transition-all"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={next}
                 aria-label="Next testimonial"
-                className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-brand-300 hover:bg-brand-50 shadow-sm transition-all"
+                className="w-10 h-10 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-slate-900 hover:border-brand-300 hover:bg-brand-50 shadow-sm transition-all"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
