@@ -10,7 +10,7 @@ const valuePropCards = [
     {
         icon: <GraduationCap className="w-7 h-7 text-brand-500" />,
         title: 'Pre-trained, Deployment-Ready Talent',
-        desc: 'Our graduates arrive with 10 months of hands-on SAP training and apprenticeship experience — not just classroom theory.',
+        desc: 'Our graduates arrive with 10 months of hands-on SAP training and apprenticeship experience, not just classroom theory.',
     },
     {
         icon: <Cpu className="w-7 h-7 text-brand-500" />,
@@ -20,7 +20,7 @@ const valuePropCards = [
     {
         icon: <Network className="w-7 h-7 text-brand-500" />,
         title: 'Backed by 25+ Years of Delivery',
-        desc: 'Axentia.AI is built on Orane Consulting\'s enterprise SAP legacy — giving us unique credibility and curriculum depth.',
+        desc: 'Axentia.AI is built on Orane Consulting\'s enterprise SAP legacy, giving us unique credibility and curriculum depth.',
     },
     {
         icon: <Target className="w-7 h-7 text-brand-500" />,
@@ -85,7 +85,7 @@ export default function EnterprisesPage() {
                                 </span>
                             </h1>
                             <p className="text-xl text-slate-300 leading-relaxed mb-8">
-                                Whether you need deployment-ready SAP consultants, apprenticeship collaborations, or capability development programs — Axentia.AI builds the talent infrastructure your enterprise needs.
+                                Whether you need deployment-ready SAP consultants, apprenticeship collaborations, or capability development programs, Axentia.AI builds the talent infrastructure your enterprise needs.
                             </p>
                             <div className="flex flex-wrap gap-4">
                                 <Link href="#contact" className="inline-flex items-center gap-2 bg-white text-slate-900 font-bold px-8 py-4 rounded-full shadow-xl hover:-translate-y-1 transition-all duration-200">

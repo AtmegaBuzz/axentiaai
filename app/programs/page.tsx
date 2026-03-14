@@ -145,7 +145,7 @@ function DCAPSection() {
             </FadeIn>
             <FadeIn delay={0.05}>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-                DCAP — Daksha Career Accelerator Program
+                DCAP, Daksha Career Accelerator Program
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
@@ -360,7 +360,7 @@ function EAPSection() {
             </FadeIn>
             <FadeIn delay={0.05}>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-                EAP — Elite Acceleration Program
+                EAP, Elite Acceleration Program
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
@@ -439,7 +439,7 @@ function EAPSection() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="text-lg text-slate-600 mb-12 max-w-2xl">
-                EAP isn&apos;t applied for — it&apos;s earned. Here&apos;s what we look for.
+                EAP isn&apos;t applied for, it&apos;s earned. Here&apos;s what we look for.
               </p>
             </FadeIn>
 
@@ -1184,7 +1184,7 @@ const faqs = [
   },
   {
     q: 'Is placement guaranteed?',
-    a: "We don't guarantee placement — we prepare you for it. Graduates who complete the full program and meet performance standards are deployed to Orane Consulting and partner firms. Our track record speaks for itself.",
+    a: "We don't guarantee placement, we prepare you for it. Graduates who complete the full program and meet performance standards are deployed to Orane Consulting and partner firms. Our track record speaks for itself.",
   },
   {
     q: 'When does the next batch start?',

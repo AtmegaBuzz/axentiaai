@@ -41,7 +41,7 @@ export function CTA() {
                             Let&apos;s get you to the <span className="font-cursive italic text-accent-300 text-[1.1em]">right place.</span>
                         </h2>
                         <p className="text-base md:text-xl text-brand-100 mb-6 md:mb-8 font-medium">
-                            Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia is the right fit — and if it&apos;s not, we&apos;ll say that too.
+                            Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia is the right fit, and if it&apos;s not, we&apos;ll say that too.
                         </p>
 
                         <div className="flex flex-wrap items-center gap-4 md:gap-6">
