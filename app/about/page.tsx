@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Linkedin, ExternalLink, ChevronDown } from 'lucide-react';
@@ -161,7 +161,7 @@ function HeroSection() {
   const imgRotate = useTransform(scrollYProgress, [0, 0.6], [0, -5]);
 
   return (
-    <section ref={ref} className="relative h-[160vh]">
+    <section ref={ref} className="relative h-[120vh] md:h-[160vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #58179B 0%, #8929AC 40%, #C010DA 100%)' }} />
         {/* SVG curves */}
@@ -206,13 +206,13 @@ function HeroSection() {
               <p className="text-brand-300 font-semibold uppercase tracking-[0.2em] text-sm mb-5">Our Story</p>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8">
                 The Story of{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">Axentia.AI</span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.3}>
-              <p className="text-xl md:text-2xl text-indigo-200/80 max-w-3xl leading-relaxed mb-10">
+              <p className="text-base md:text-xl lg:text-2xl text-indigo-200/80 max-w-3xl leading-relaxed mb-10">
                 Building the capability infrastructure required for the AI era — one enterprise consultant at a time.
               </p>
             </FadeIn>
@@ -355,7 +355,62 @@ function JourneySection() {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
   const x = useTransform(scrollYProgress, [0, 1], ['5%', '-60%']);
   const lineWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  /* ── Mobile: vertical timeline ── */
+  if (isMobile) {
+    return (
+      <section className="relative py-16 bg-gradient-to-b from-slate-50 via-brand-50/20 to-slate-50 overflow-hidden">
+        <div className="px-6">
+          <div className="mb-10">
+            <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500 mb-3">Our Journey</p></FadeIn>
+            <FadeIn delay={0.1}>
+              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+                Built on Orane&apos;s{' '}
+                <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">25+ Year Enterprise SAP Legacy</span>
+              </h2>
+            </FadeIn>
+          </div>
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute top-0 bottom-0 left-[18px] w-[2px] bg-slate-200" />
+            <div className="space-y-6">
+              {milestones.map((m, i) => (
+                <FadeIn key={m.year} delay={i * 0.05}>
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center shrink-0">
+                      <div className={`w-[38px] h-[38px] rounded-full border-[3px] flex items-center justify-center z-10 bg-white ${m.hl ? 'border-brand-500' : 'border-brand-300'}`}>
+                        <span className={`text-xs font-bold ${m.hl ? 'text-brand-600' : 'text-slate-500'}`}>{m.year.slice(-2)}</span>
+                      </div>
+                    </div>
+                    <div className={`${m.hl ? 'bg-brand-50 border-brand-200' : 'bg-white border-slate-200'} border rounded-2xl overflow-hidden flex-1`}>
+                      <div className="h-28 overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={m.img} alt={m.title} className="w-full h-full object-cover" loading="lazy" />
+                      </div>
+                      <div className="p-4">
+                        <p className={`text-lg font-bold mb-1 ${m.hl ? 'text-brand-600' : 'text-slate-900'}`}>{m.year} — {m.title}</p>
+                        <p className="text-xs text-slate-500 leading-relaxed">{m.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  /* ── Desktop: horizontal scroll-jacking ── */
   return (
     <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
       <div className="sticky top-0 h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-brand-50/20 to-slate-50">
@@ -386,7 +441,7 @@ function JourneySection() {
 
             <motion.div style={{ x }} className="flex gap-6 md:gap-8 pt-0 will-change-transform">
               {milestones.map((m) => (
-                <div key={m.year} className="flex-shrink-0 w-[280px] md:w-[320px]">
+                <div key={m.year} className="flex-shrink-0 w-[320px]">
                   <div className="flex justify-start mb-4 pl-1">
                     <div className={`w-4 h-4 rounded-full border-[3px] ${m.hl ? 'border-brand-500 bg-brand-500 shadow-[0_0_0_4px_rgba(217,70,239,0.2)]' : 'border-brand-400 bg-brand-400'}`} />
                   </div>
@@ -460,12 +515,12 @@ function NumbersSection() {
       <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
         <FadeIn className="text-center mb-16">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-300 mb-3">In the Last Year</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">The Numbers Speak</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight">The Numbers Speak</h2>
         </FadeIn>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-5xl mx-auto">
           {stats.map((s, i) => (
             <FadeIn key={s.label} delay={i * 0.08} className="text-center">
-              <motion.p className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-2">
+              <motion.p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2">
                 <CounterDisplay progress={counterProgress} end={s.end} suffix={s.suffix} />
               </motion.p>
               <p className="text-lg font-semibold text-white/90 mb-1">{s.label}</p>
@@ -776,7 +831,7 @@ function TeamSection() {
             Leadership
           </motion.p>
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-5"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 tracking-tight mb-5"
             initial={{ opacity: 0, y: 60, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}

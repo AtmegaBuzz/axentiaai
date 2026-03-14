@@ -58,7 +58,7 @@ export default function FacultyPage() {
     return (
         <main className="pt-24">
             {/* Hero */}
-            <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e0735 0%, #2a0845 50%, #1a0630 100%)' }}>
+            <section className="relative py-16 md:py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e0735 0%, #2a0845 50%, #1a0630 100%)' }}>
                 <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(192,16,218,0.12) 0%, transparent 60%)' }} />
                 <div className="container mx-auto px-4 md:px-6 relative z-10">
                     <motion.div
@@ -70,13 +70,13 @@ export default function FacultyPage() {
                         <span className="inline-block px-3 py-1 rounded-full bg-brand-500/20 border border-brand-500/30 text-brand-300 text-sm font-semibold mb-6">
                             Faculty & Mentors
                         </span>
-                        <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
                             Learn From People Who Have{' '}
                             <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
                                 Built Enterprise Systems
                             </span>
                         </h1>
-                        <p className="text-xl text-slate-300 leading-relaxed mb-8">
+                        <p className="text-base md:text-xl text-slate-300 leading-relaxed mb-8">
                             Our faculty aren&apos;t academics. They are practitioners — people who have spent years on the floor of enterprise SAP projects, managing complexity, leading teams, and delivering outcomes at scale.
                         </p>
                         <Link
@@ -109,7 +109,7 @@ export default function FacultyPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.05 }}
-                            className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
+                            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4"
                         >
                             Four roles, one mission
                         </motion.h2>
@@ -153,7 +153,7 @@ export default function FacultyPage() {
                             initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
+                            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4"
                         >
                             The leadership team
                         </motion.h2>
@@ -203,13 +203,13 @@ export default function FacultyPage() {
                         <span className="inline-block px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-sm font-semibold mb-6">
                             More Than Teachers
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-6">
                             We don&apos;t just teach SAP.{' '}
                             <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">
                                 We build consultants.
                             </span>
                         </h2>
-                        <p className="text-xl text-slate-600 leading-relaxed mb-10">
+                        <p className="text-base md:text-xl text-slate-600 leading-relaxed mb-10">
                             Our faculty understand that a consultant is more than someone who knows the software. They are communicators, problem-solvers, and delivery partners. Every session is designed to build that broader capability — not just technical skill.
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">

@@ -79,7 +79,7 @@ export default function CulturePage() {
             ].map((stat, i) => (
               <FadeIn key={stat.label} delay={i * 0.07}>
                 <motion.p
-                  className="text-4xl md:text-5xl font-black text-brand-600 mb-2"
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-brand-600 mb-2"
                   initial={{ opacity: 0, scale: 0.6 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -114,7 +114,7 @@ export default function CulturePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <FadeIn>
               <p className="text-xs font-bold uppercase tracking-widest text-brand-500 mb-4">Life at Axentia</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-6">
                 Beyond Mastering AI{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">& Enterprise Systems</span>
               </h2>
@@ -143,7 +143,7 @@ export default function CulturePage() {
           {/* Celebrating Moments Together */}
           <div className="mb-20">
             <FadeIn className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight">
                 Celebrating Moments{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Together</span>
               </h2>
@@ -166,7 +166,7 @@ export default function CulturePage() {
           {/* Learning Beyond the Classroom */}
           <div>
             <FadeIn className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight">
                 Learning Beyond the{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Classroom</span>
               </h2>

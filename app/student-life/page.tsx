@@ -48,7 +48,7 @@ export default function StudentLifePage() {
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-500">Student Life</span>
           </FadeIn>
           <FadeIn delay={0.08} className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 tracking-tight leading-tight">
               This Is Where Learning{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Starts to Feel Real</span>
             </h1>
@@ -112,7 +112,7 @@ export default function StudentLifePage() {
           <FadeIn>
             <div className="mb-4">
               <motion.span
-                className="text-8xl md:text-9xl font-black text-white leading-none"
+                className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-white leading-none"
                 initial={{ opacity: 0, scale: 0.5 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -156,11 +156,11 @@ export default function StudentLifePage() {
           <div className="text-center mb-16">
             <FadeIn>
               <span className="text-xs font-bold uppercase tracking-widest text-brand-500 block mb-3">Community</span>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-3">
                 Axentia.AI{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Alumni Network</span>
               </h2>
-              <p className="text-xl text-slate-500">A Growing Community of Consultants</p>
+              <p className="text-base md:text-xl text-slate-500">A Growing Community of Consultants</p>
             </FadeIn>
           </div>
 

@@ -78,13 +78,13 @@ export default function EnterprisesPage() {
                             <span className="inline-block px-3 py-1 rounded-full bg-brand-500/20 border border-brand-500/30 text-brand-300 text-sm font-semibold mb-6">
                                 For Enterprises
                             </span>
-                            <h1 className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
                                 Building Capability{' '}
                                 <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
                                     Together
                                 </span>
                             </h1>
-                            <p className="text-xl text-slate-300 leading-relaxed mb-8">
+                            <p className="text-base md:text-xl text-slate-300 leading-relaxed mb-8">
                                 Whether you need deployment-ready SAP consultants, apprenticeship collaborations, or capability development programs, Axentia.AI builds the talent infrastructure your enterprise needs.
                             </p>
                             <div className="flex flex-wrap gap-4">
@@ -107,7 +107,7 @@ export default function EnterprisesPage() {
                             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-sm font-semibold uppercase tracking-widest mb-3">
                                 <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>Why Us</span>
                             </motion.p>
-                            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-4xl font-bold text-slate-900 tracking-tight mb-4">
+                            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                                 Why Enterprises Work With Axentia.AI
                             </motion.h2>
                             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-slate-600">
@@ -131,10 +131,10 @@ export default function EnterprisesPage() {
                     <div className="container mx-auto px-4 md:px-6">
                         <div className="grid lg:grid-cols-2 gap-16 items-center">
                             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                                <h2 className="text-4xl font-bold text-white tracking-tight mb-6">
+                                <h2 className="text-2xl md:text-4xl font-bold text-white tracking-tight mb-6">
                                     What We Bring to the Ecosystem
                                 </h2>
-                                <p className="text-xl text-brand-100 leading-relaxed mb-8">
+                                <p className="text-base md:text-xl text-brand-100 leading-relaxed mb-8">
                                     Axentia.AI sits at the intersection of talent development, enterprise delivery, and AI-era capability building. When you partner with us, you get access to the entire ecosystem.
                                 </p>
                                 <ul className="space-y-4">
@@ -165,7 +165,7 @@ export default function EnterprisesPage() {
                 <section id="partnerships" className="py-24 bg-white border-b border-slate-200">
                     <div className="container mx-auto px-4 md:px-6">
                         <div className="text-center max-w-2xl mx-auto mb-16">
-                            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-4xl font-bold text-slate-900 tracking-tight mb-4">
+                            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                                 Partnership Models
                             </motion.h2>
                             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-lg text-slate-600">
@@ -198,7 +198,7 @@ export default function EnterprisesPage() {
                 <section id="talent-pipeline" className="py-24 bg-slate-50 border-b border-slate-200">
                     <div className="container mx-auto px-4 md:px-6 max-w-5xl">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl font-bold text-slate-900 tracking-tight mb-4">How the Talent Pipeline Works</h2>
+                            <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">How the Talent Pipeline Works</h2>
                             <p className="text-lg text-slate-600">From training intake to deployment — a structured, transparent model.</p>
                         </div>
                         <div className="flex flex-col md:flex-row items-stretch justify-center gap-4">
@@ -225,13 +225,13 @@ export default function EnterprisesPage() {
                 <section className="py-24 bg-white border-b border-slate-200">
                     <div className="container mx-auto px-4 md:px-6">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl font-bold text-slate-900 tracking-tight mb-4">The Impact of Collaboration</h2>
+                            <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">The Impact of Collaboration</h2>
                             <p className="text-lg text-slate-600">Numbers that reflect what happens when enterprises and Axentia.AI build together.</p>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
                             {impactStats.map((stat, idx) => (
                                 <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="text-center">
-                                    <p className="text-4xl font-black text-brand-600 mb-2">{stat.value}</p>
+                                    <p className="text-3xl md:text-4xl font-black text-brand-600 mb-2">{stat.value}</p>
                                     <p className="text-slate-600 text-sm leading-relaxed">{stat.label}</p>
                                 </motion.div>
                             ))}
@@ -243,7 +243,7 @@ export default function EnterprisesPage() {
                 <section id="contact" className="py-24 bg-slate-50">
                     <div className="container mx-auto px-4 md:px-6 max-w-2xl">
                         <div className="text-center mb-12">
-                            <h2 className="text-4xl font-bold text-slate-900 tracking-tight mb-4">Work With Axentia.AI</h2>
+                            <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">Work With Axentia.AI</h2>
                             <p className="text-lg text-slate-600">Tell us about your enterprise needs and we&apos;ll set up a conversation with our team.</p>
                         </div>
                         <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">

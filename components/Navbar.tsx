@@ -53,9 +53,6 @@ const megaMenuData = {
     'Faculty': {
         items: [
             { name: 'Meet the Faculty', href: '/faculty', description: 'Program directors, domain experts, and industry mentors' },
-            { name: 'Student Life', href: '/student-life', description: 'Learning starts to feel real here' },
-            { name: 'Learning Journey', href: '/student-life/learning-journey', description: 'Five phases from awareness to enterprise readiness' },
-            { name: 'Culture & Activities', href: '/student-life/culture', description: 'Community, celebrations, and learning beyond the classroom' },
         ],
         featured: {
             label: "FACULTY",
@@ -291,8 +288,8 @@ export function Navbar() {
 
                 {/* CTA Button */}
                 <div className="hidden xl:flex items-center">
-                    <Link href="/contact" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold pl-6 pr-2 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center gap-3">
-                        Contact Us
+                    <Link href="/programs#apply" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold pl-6 pr-2 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center gap-3">
+                        Apply Now
                         <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0">
                             <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
                         </span>
@@ -355,11 +352,11 @@ export function Navbar() {
                                     </div>
                                 </Link>
                                 <Link
-                                    href="/contact"
+                                    href="/programs#apply"
                                     className="w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center justify-center gap-2"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
-                                    Contact Us
+                                    Apply Now
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
                             </div>
