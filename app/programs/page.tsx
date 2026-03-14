@@ -95,7 +95,7 @@ function HeroSection({ activeTab, setActiveTab }: { activeTab: ProgramTab; setAc
           <p className="text-brand-300 font-semibold uppercase tracking-[0.2em] text-sm mb-5">Programs</p>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
             Choose your{' '}
             <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">path</span>.
           </h1>
@@ -144,7 +144,7 @@ function DCAPSection() {
               <span className="inline-block px-3 py-1 bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider rounded-full mb-6">Most Popular</span>
             </FadeIn>
             <FadeIn delay={0.05}>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
                 DCAP, Daksha Career Accelerator Program
               </h2>
             </FadeIn>
@@ -219,7 +219,7 @@ function DCAPSection() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">DCAP Curriculum</p>
             </FadeIn>
             <FadeIn delay={0.05}>
-              <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                 What you&apos;ll learn.
               </h3>
             </FadeIn>
@@ -287,7 +287,7 @@ function DCAPSection() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">DCAP Journey</p>
             </FadeIn>
             <FadeIn delay={0.05}>
-              <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-12">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-12">
                 From trainee to consultant.
               </h3>
             </FadeIn>
@@ -359,7 +359,7 @@ function EAPSection() {
               <span className="inline-block px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-wider rounded-full mb-6">Merit-Based</span>
             </FadeIn>
             <FadeIn delay={0.05}>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
                 EAP, Elite Acceleration Program
               </h2>
             </FadeIn>
@@ -433,7 +433,7 @@ function EAPSection() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600 mb-3">Selection Criteria</p>
             </FadeIn>
             <FadeIn delay={0.05}>
-              <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                 How do you qualify?
               </h3>
             </FadeIn>
@@ -499,7 +499,7 @@ function OnlineSection() {
               <span className="inline-block px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold uppercase tracking-wider rounded-full mb-6">Self-Paced</span>
             </FadeIn>
             <FadeIn delay={0.05}>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
                 Online Program
               </h2>
             </FadeIn>
@@ -576,7 +576,7 @@ function OnlineSection() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-600 mb-3">Important Note</p>
             </FadeIn>
             <FadeIn delay={0.05}>
-              <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                 What Online doesn&apos;t include.
               </h3>
             </FadeIn>
@@ -669,7 +669,7 @@ function CompareSection() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Compare Programs</p>
           </FadeIn>
           <FadeIn delay={0.05}>
-            <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">
               Side-by-side.
             </h3>
           </FadeIn>
@@ -775,7 +775,7 @@ function ApplicationSection() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Application Process</p>
           </FadeIn>
           <FadeIn delay={0.05}>
-            <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">
               How to apply for DCAP.
             </h3>
           </FadeIn>
@@ -831,12 +831,12 @@ function ImpactSection() {
       <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
         <FadeIn className="text-center mb-14">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-300 mb-3">Impact</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">The Numbers Speak</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight">The Numbers Speak</h2>
         </FadeIn>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-5xl mx-auto">
           {stats.map((s, i) => (
             <FadeIn key={s.label} delay={i * 0.08} className="text-center">
-              <p className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2">{s.value}</p>
+              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2">{s.value}</p>
               <p className="text-lg font-semibold text-white/90 mb-1">{s.label}</p>
               <p className="text-sm text-white/50">{s.sub}</p>
             </FadeIn>
@@ -909,7 +909,7 @@ function FacultySection() {
         <div className="max-w-6xl mx-auto">
           <FadeIn className="text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Faculty</p>
-            <h3 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
               The People Behind the{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Program</span>
             </h3>
@@ -1032,7 +1032,7 @@ function CeremonySection() {
         <div className="max-w-6xl mx-auto">
           <FadeIn className="text-center mb-6">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Life at Daksha</p>
-            <h3 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
               Inside the{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Experience</span>
             </h3>
@@ -1211,7 +1211,7 @@ function FAQSection() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">FAQ</p>
           </FadeIn>
           <FadeIn delay={0.05}>
-            <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-12">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-12">
               Common questions.
             </h3>
           </FadeIn>
@@ -1271,7 +1271,7 @@ function CTASection() {
 
           <div className="relative z-10 px-8 md:px-16 py-16 md:py-20">
             <FadeIn>
-              <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight max-w-2xl">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 leading-tight max-w-2xl">
                 Ready to start your{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-accent-300">journey</span>?
               </h2>

@@ -111,7 +111,7 @@ export default function LearningJourneyPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight mb-6 max-w-3xl"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-tight mb-6 max-w-3xl"
           >
             Preparing Students for the{' '}
             <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">
@@ -155,7 +155,7 @@ export default function LearningJourneyPage() {
           <div className="text-center mb-16">
             <FadeIn>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-500 mb-3 block">The Journey</span>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
                 Five Phases of{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Development</span>
               </h2>
@@ -214,7 +214,7 @@ export default function LearningJourneyPage() {
       <section id="discuss" className="py-20 bg-slate-50 border-t border-slate-100">
         <div className="container mx-auto px-4 md:px-8 xl:px-12 text-center">
           <FadeIn>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
               Ready to Start Your Journey?
             </h2>
             <p className="text-lg text-slate-500 mb-10 max-w-xl mx-auto">

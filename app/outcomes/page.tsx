@@ -35,20 +35,20 @@ export default function OutcomesPage() {
     return (
         <>
             <main className="pt-24">
-                <section className="py-24 bg-gradient-to-br from-slate-900 to-brand-950">
+                <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-brand-950">
                     <div className="container mx-auto px-4 md:px-6">
-                        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6">Outcomes</motion.h1>
-                        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-slate-300 max-w-2xl">Real results from real consultants. Here&apos;s what our alumni achieve.</motion.p>
+                        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">Outcomes</motion.h1>
+                        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-base md:text-xl text-slate-300 max-w-2xl">Real results from real consultants. Here&apos;s what our alumni achieve.</motion.p>
                     </div>
                 </section>
 
                 {/* Stats */}
-                <section className="py-24 bg-white border-b border-slate-200">
+                <section className="py-16 md:py-24 bg-white border-b border-slate-200">
                     <div className="container mx-auto px-4 md:px-6">
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
                             {stats.map((s, idx) => (
                                 <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="text-center">
-                                    <div className="text-5xl md:text-6xl font-black text-brand-500 mb-3">{s.value}</div>
+                                    <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-brand-500 mb-3">{s.value}</div>
                                     <p className="text-slate-600 font-medium text-lg">{s.label}</p>
                                 </motion.div>
                             ))}
@@ -59,7 +59,7 @@ export default function OutcomesPage() {
                 {/* Alumni Roles */}
                 <section className="py-24 bg-slate-50 border-b border-slate-200">
                     <div className="container mx-auto px-4 md:px-6">
-                        <h2 className="text-4xl font-bold text-slate-900 tracking-tight text-center mb-12">Alumni Roles</h2>
+                        <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight text-center mb-12">Alumni Roles</h2>
                         <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
                             {roles.map((role) => (
                                 <span key={role} className="px-6 py-3 bg-white border border-slate-200 rounded-full text-slate-700 font-medium hover:border-brand-300 hover:text-brand-600 transition-colors">{role}</span>
@@ -71,7 +71,7 @@ export default function OutcomesPage() {
                 {/* Student Journeys */}
                 <section className="py-24 bg-white border-b border-slate-200">
                     <div className="container mx-auto px-4 md:px-6">
-                        <h2 className="text-4xl font-bold text-slate-900 tracking-tight text-center mb-16">Student Journeys</h2>
+                        <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight text-center mb-16">Student Journeys</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {journeys.map((j, idx) => (
                                 <motion.div key={j.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="bg-slate-50 rounded-2xl p-8 border border-slate-200 text-center">
@@ -90,7 +90,7 @@ export default function OutcomesPage() {
                 <section className="py-24 bg-slate-50 border-b border-slate-200">
                     <div className="container mx-auto px-4 md:px-6 text-center">
                         <Linkedin className="w-12 h-12 text-brand-500 mx-auto mb-6" />
-                        <h2 className="text-4xl font-bold text-slate-900 tracking-tight mb-6">LinkedIn Success Stories</h2>
+                        <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">LinkedIn Success Stories</h2>
                         <p className="text-lg text-slate-600 max-w-xl mx-auto mb-8">Our alumni regularly share their career transformations on LinkedIn. Follow #DakshaAlumni to see their stories.</p>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                             {[1, 2, 3].map((i) => (
@@ -103,7 +103,7 @@ export default function OutcomesPage() {
                 {/* Industry Projects */}
                 <section className="py-24 bg-white">
                     <div className="container mx-auto px-4 md:px-6">
-                        <h2 className="text-4xl font-bold text-slate-900 tracking-tight text-center mb-12">Industry Project Showcase</h2>
+                        <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight text-center mb-12">Industry Project Showcase</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
                             {projects.map((p) => (
                                 <div key={p} className="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex items-start gap-3">
