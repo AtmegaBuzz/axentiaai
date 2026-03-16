@@ -299,138 +299,95 @@ export default function AdminPage() {
 
   // Admin Dashboard
   return (
-    <main className="min-h-screen bg-slate-50">
-      {/* Top bar */}
-      <div className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur-md">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/brand/axentia-logo.png"
-              alt="AxentiaAI"
-              width={140}
-              height={40}
-              className="h-6 w-auto"
-              priority
-            />
-            <span className="text-slate-300">|</span>
-            <span className="text-sm font-semibold text-slate-500">Admin Portal</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => { fetchUsers(); fetchSubscribers(); fetchInquiries(); }}
-              disabled={loadingUsers || loadingSubscribers || loadingInquiries}
-              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-700 transition-colors"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 ${(loadingUsers || loadingSubscribers || loadingInquiries) ? 'animate-spin' : ''}`} />
-              Refresh
-            </button>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-red-500 transition-colors"
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-slate-100 flex">
 
-      <div className="max-w-5xl mx-auto px-6 py-10">
-        {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center">
-                <Users className="w-4 h-4 text-slate-500" />
-              </div>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Users</span>
-            </div>
-            <p className="text-3xl font-bold text-slate-900">{users.length}</p>
-          </div>
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-              </div>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Approved</span>
-            </div>
-            <p className="text-3xl font-bold text-emerald-600">{approvedCount}</p>
-          </div>
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
-                <Clock className="w-4 h-4 text-amber-500" />
-              </div>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Pending</span>
-            </div>
-            <p className="text-3xl font-bold text-amber-600">{pendingCount}</p>
-          </div>
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center">
-                <Mail className="w-4 h-4 text-violet-500" />
-              </div>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Subscribers</span>
-            </div>
-            <p className="text-3xl font-bold text-violet-600">{subscribers.length}</p>
-          </div>
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                <Building2 className="w-4 h-4 text-blue-500" />
-              </div>
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Inquiries</span>
-            </div>
-            <p className="text-3xl font-bold text-blue-600">{inquiries.length}</p>
-          </div>
+      {/* ── SIDEBAR ── */}
+      <aside className="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+        {/* Logo */}
+        <div className="px-5 py-5 border-b border-slate-100">
+          <Image src="/brand/axentia-logo.png" alt="AxentiaAI" width={140} height={40} className="h-6 w-auto" priority />
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Admin Portal</p>
         </div>
 
-        {/* Section Tabs */}
-        <div className="flex items-center gap-1 bg-slate-100 rounded-xl p-1 mb-6 w-fit">
+        {/* Nav */}
+        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+          <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Sections</p>
+
+          {([
+            { id: 'forum',       label: 'Forum Members',         icon: Users,      count: users.length,       color: 'text-slate-500'  },
+            { id: 'subscribers', label: 'Newsletter Subscribers', icon: Mail,       count: subscribers.length, color: 'text-violet-500' },
+            { id: 'inquiries',   label: 'Enterprise Inquiries',   icon: Building2,  count: inquiries.length,   color: 'text-blue-500'   },
+          ] as const).map(({ id, label, icon: Icon, count, color }) => (
+            <button
+              key={id}
+              onClick={() => setActiveTab(id)}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                activeTab === id
+                  ? 'bg-brand-50 text-brand-700'
+                  : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+              }`}
+            >
+              <Icon className={`w-4 h-4 shrink-0 ${activeTab === id ? 'text-brand-600' : color}`} />
+              <span className="flex-1 text-left truncate">{label}</span>
+              {count > 0 && (
+                <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                  activeTab === id ? 'bg-brand-100 text-brand-600' : 'bg-slate-100 text-slate-400'
+                }`}>
+                  {count}
+                </span>
+              )}
+            </button>
+          ))}
+        </nav>
+
+        {/* Bottom actions */}
+        <div className="px-3 py-4 border-t border-slate-100 space-y-1">
           <button
-            onClick={() => setActiveTab('forum')}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
-              activeTab === 'forum'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-400 hover:text-slate-600'
-            }`}
+            onClick={() => { fetchUsers(); fetchSubscribers(); fetchInquiries(); }}
+            disabled={loadingUsers || loadingSubscribers || loadingInquiries}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-500 hover:bg-slate-50 hover:text-slate-800 transition-all disabled:opacity-50"
           >
-            <Users className="w-4 h-4" />
-            Forum Members
+            <RefreshCw className={`w-4 h-4 shrink-0 ${(loadingUsers || loadingSubscribers || loadingInquiries) ? 'animate-spin' : ''}`} />
+            Refresh Data
           </button>
           <button
-            onClick={() => setActiveTab('subscribers')}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
-              activeTab === 'subscribers'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-400 hover:text-slate-600'
-            }`}
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-500 hover:bg-red-50 hover:text-red-500 transition-all"
           >
-            <Mail className="w-4 h-4" />
-            Newsletter Subscribers
-            {subscribers.length > 0 && (
-              <span className="ml-1 bg-violet-100 text-violet-600 text-xs font-bold px-2 py-0.5 rounded-full">
-                {subscribers.length}
-              </span>
-            )}
-          </button>
-          <button
-            onClick={() => setActiveTab('inquiries')}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
-              activeTab === 'inquiries'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-400 hover:text-slate-600'
-            }`}
-          >
-            <Building2 className="w-4 h-4" />
-            Enterprise Inquiries
-            {inquiries.length > 0 && (
-              <span className="ml-1 bg-blue-100 text-blue-600 text-xs font-bold px-2 py-0.5 rounded-full">
-                {inquiries.length}
-              </span>
-            )}
+            <LogOut className="w-4 h-4 shrink-0" />
+            Sign Out
           </button>
         </div>
+      </aside>
+
+      {/* ── MAIN CONTENT ── */}
+      <div className="flex-1 min-w-0 flex flex-col">
+
+        {/* Top header */}
+        <header className="bg-white border-b border-slate-200 px-8 h-14 flex items-center justify-between shrink-0">
+          <h1 className="text-sm font-bold text-slate-800">
+            {activeTab === 'forum' && 'Forum Members'}
+            {activeTab === 'subscribers' && 'Newsletter Subscribers'}
+            {activeTab === 'inquiries' && 'Enterprise Inquiries'}
+          </h1>
+          {/* Stats row */}
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1.5 text-xs text-slate-400">
+              <Users className="w-3.5 h-3.5" />
+              <span><span className="font-bold text-slate-700">{users.length}</span> users</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-slate-400">
+              <Mail className="w-3.5 h-3.5" />
+              <span><span className="font-bold text-violet-600">{subscribers.length}</span> subscribers</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-slate-400">
+              <Building2 className="w-3.5 h-3.5" />
+              <span><span className="font-bold text-blue-600">{inquiries.length}</span> inquiries</span>
+            </div>
+          </div>
+        </header>
+
+        <main className="flex-1 p-8 overflow-y-auto">
 
         {/* Forum Members Table */}
         {activeTab === 'forum' && (
@@ -683,7 +640,8 @@ export default function AdminPage() {
             )}
           </div>
         )}
+        </main>
       </div>
-    </main>
+    </div>
   );
 }
