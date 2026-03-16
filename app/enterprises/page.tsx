@@ -6,6 +6,8 @@ import { Users, Briefcase, GraduationCap, Building2, ArrowRight, CheckCircle2, C
 import { useState } from 'react';
 import Link from 'next/link';
 
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+
 const valuePropCards = [
     {
         icon: <GraduationCap className="w-7 h-7 text-brand-500" />,
@@ -66,6 +68,32 @@ const impactStats = [
 
 export default function EnterprisesPage() {
     const [form, setForm] = useState({ name: '', email: '', company: '', message: '' });
+    const [status, setStatus] = useState<FormStatus>('idle');
+    const [errorMsg, setErrorMsg] = useState('');
+
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        setStatus('loading');
+        setErrorMsg('');
+        try {
+            const res = await fetch('/api/enterprise-inquiry', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setStatus('success');
+                setForm({ name: '', email: '', company: '', message: '' });
+            } else {
+                setStatus('error');
+                setErrorMsg(data.error ?? 'Something went wrong. Please try again.');
+            }
+        } catch {
+            setStatus('error');
+            setErrorMsg('Network error. Please try again.');
+        }
+    }
 
     return (
         <>
@@ -294,13 +322,40 @@ export default function EnterprisesPage() {
                             <p className="text-lg text-slate-600">Tell us about your enterprise needs and we&apos;ll set up a conversation with our team.</p>
                         </div>
                         <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-                            <div className="space-y-6">
-                                <div><label className="block text-sm font-medium text-slate-700 mb-2">Name</label><input type="text" className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></div>
-                                <div><label className="block text-sm font-medium text-slate-700 mb-2">Email</label><input type="email" className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="you@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></div>
-                                <div><label className="block text-sm font-medium text-slate-700 mb-2">Company</label><input type="text" className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Your company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} /></div>
-                                <div><label className="block text-sm font-medium text-slate-700 mb-2">Message</label><textarea className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 h-32" placeholder="What are you looking for?" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} /></div>
-                                <Button variant="primary" className="w-full">Submit Inquiry</Button>
-                            </div>
+                            {status === 'success' ? (
+                                <div className="py-10 text-center">
+                                    <div className="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto mb-4">
+                                        <CheckCircle2 className="w-7 h-7 text-emerald-500" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 mb-2">Inquiry Received!</h3>
+                                    <p className="text-slate-500 text-sm">Thanks for reaching out. Our team will be in touch within 1–2 business days.</p>
+                                </div>
+                            ) : (
+                                <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-2">Name</label>
+                                        <input type="text" required className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} disabled={status === 'loading'} />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-2">Email</label>
+                                        <input type="email" required className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="you@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} disabled={status === 'loading'} />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-2">Company</label>
+                                        <input type="text" required className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Your company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} disabled={status === 'loading'} />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-2">Message</label>
+                                        <textarea required className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 h-32 resize-none" placeholder="What are you looking for?" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} disabled={status === 'loading'} />
+                                    </div>
+                                    {status === 'error' && (
+                                        <p className="text-red-500 text-sm font-medium">{errorMsg}</p>
+                                    )}
+                                    <Button variant="primary" className="w-full" disabled={status === 'loading'}>
+                                        {status === 'loading' ? 'Submitting…' : 'Submit Inquiry'}
+                                    </Button>
+                                </form>
+                            )}
                         </div>
                     </div>
                 </section>
