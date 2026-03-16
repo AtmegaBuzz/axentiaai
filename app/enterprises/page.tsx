@@ -195,27 +195,74 @@ export default function EnterprisesPage() {
                 </section>
 
                 {/* Talent Pipeline Model — Steps */}
-                <section id="talent-pipeline" className="py-24 bg-slate-50 border-b border-slate-200">
-                    <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-                        <div className="text-center mb-16">
+                <section id="talent-pipeline" className="py-16 md:py-24 bg-slate-50 border-b border-slate-200">
+                    <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
                             <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">How the Talent Pipeline Works</h2>
                             <p className="text-lg text-slate-600">From training intake to deployment — a structured, transparent model.</p>
+                        </motion.div>
+
+                        {/* Desktop: horizontal steps with connecting line */}
+                        <div className="hidden md:block relative">
+                            {/* Connecting line */}
+                            <div className="absolute top-12 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-brand-200 via-brand-400 to-brand-200" />
+
+                            <div className="grid grid-cols-4 gap-8 relative">
+                                {[
+                                    { step: '01', title: 'Identify Needs', desc: 'Tell us your requirements — module expertise, batch size, timeline.' },
+                                    { step: '02', title: 'Train Talent', desc: 'We enroll and train candidates matched to your requirements.' },
+                                    { step: '03', title: 'Apprenticeship', desc: 'Candidates complete paid apprenticeship — on real or shadow projects.' },
+                                    { step: '04', title: 'Deploy', desc: 'Deployment-ready consultants join your team, credentialled and experienced.' },
+                                ].map((item, idx) => (
+                                    <motion.div
+                                        key={item.step}
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: idx * 0.1 }}
+                                        className="flex flex-col items-center text-center"
+                                    >
+                                        {/* Step circle */}
+                                        <div className="relative z-10 w-24 h-24 rounded-full bg-white border-2 border-brand-200 flex items-center justify-center mb-6 shadow-md group-hover:shadow-lg transition-shadow">
+                                            <span className="text-2xl font-black text-brand-600">{item.step}</span>
+                                        </div>
+                                        {/* Content */}
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
+                                        <p className="text-sm text-slate-500 leading-relaxed max-w-[200px]">{item.desc}</p>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="flex flex-col md:flex-row items-stretch justify-center gap-4">
+
+                        {/* Mobile: vertical timeline */}
+                        <div className="md:hidden space-y-0">
                             {[
                                 { step: '01', title: 'Identify Needs', desc: 'Tell us your requirements — module expertise, batch size, timeline.' },
                                 { step: '02', title: 'Train Talent', desc: 'We enroll and train candidates matched to your requirements.' },
                                 { step: '03', title: 'Apprenticeship', desc: 'Candidates complete paid apprenticeship — on real or shadow projects.' },
                                 { step: '04', title: 'Deploy', desc: 'Deployment-ready consultants join your team, credentialled and experienced.' },
                             ].map((item, idx) => (
-                                <div key={item.step} className="flex md:flex-col items-center gap-4 flex-1">
-                                    <div className="bg-white border-2 border-brand-200 rounded-2xl p-6 text-center flex-1 w-full">
-                                        <div className="text-3xl font-black text-brand-200 mb-2">{item.step}</div>
-                                        <p className="font-bold text-slate-900 mb-2">{item.title}</p>
-                                        <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+                                <motion.div
+                                    key={item.step}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    className="flex gap-5"
+                                >
+                                    {/* Timeline */}
+                                    <div className="flex flex-col items-center">
+                                        <div className="w-12 h-12 rounded-full bg-white border-2 border-brand-200 flex items-center justify-center shrink-0 shadow-sm">
+                                            <span className="text-sm font-black text-brand-600">{item.step}</span>
+                                        </div>
+                                        {idx < 3 && <div className="w-0.5 flex-1 bg-brand-200 min-h-[32px]" />}
                                     </div>
-                                    {idx < 3 && <ArrowRight className="w-5 h-5 text-brand-300 flex-shrink-0 hidden md:block rotate-0" />}
-                                </div>
+                                    {/* Content */}
+                                    <div className="pb-8">
+                                        <h3 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h3>
+                                        <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
+                                    </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
