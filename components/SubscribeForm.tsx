@@ -13,7 +13,6 @@ export function SubscribeForm() {
         e.preventDefault();
         const trimmed = email.trim();
 
-        // Client-side basic check
         if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
             setStatus('error');
             setMessage('Please enter a valid email address.');
@@ -31,13 +30,13 @@ export function SubscribeForm() {
 
             if (res.ok) {
                 setStatus('success');
-                setMessage("You're on the list! We'll keep you posted.");
+                setMessage('Subscribed!');
             } else if (res.status === 409) {
                 setStatus('duplicate');
-                setMessage(data.error ?? "You're already subscribed.");
+                setMessage("Already subscribed.");
             } else {
                 setStatus('error');
-                setMessage(data.error ?? 'Something went wrong. Please try again.');
+                setMessage(data.error ?? 'Something went wrong. Try again.');
             }
         } catch {
             setStatus('error');
@@ -45,22 +44,7 @@ export function SubscribeForm() {
         }
     }
 
-    // ── Success state ─────────────────────────────────────────────
-    if (status === 'success' || status === 'duplicate') {
-        return (
-            <div className="flex items-start gap-3 bg-white/10 border border-white/20 rounded-2xl px-6 py-5">
-                <span className="text-2xl mt-0.5">{status === 'success' ? '✅' : '👋'}</span>
-                <div>
-                    <p className="text-white font-semibold text-sm">{message}</p>
-                    {status === 'success' && (
-                        <p className="text-white/50 text-xs mt-1">
-                            Expect updates on programs, events, and consulting insights.
-                        </p>
-                    )}
-                </div>
-            </div>
-        );
-    }
+    const isSuccess = status === 'success' || status === 'duplicate';
 
     return (
         <form onSubmit={handleSubmit} noValidate>
@@ -76,15 +60,20 @@ export function SubscribeForm() {
                     className={`flex-1 px-5 py-3 rounded-full border bg-white/5 text-white placeholder-slate-500 focus:outline-none focus:ring-1 transition-all font-medium ${
                         status === 'error'
                             ? 'border-red-400/70 focus:border-red-400 focus:ring-red-400/40'
+                            : isSuccess
+                            ? 'border-emerald-500/40'
                             : 'border-white/10 focus:border-brand-500 focus:ring-brand-500'
                     }`}
-                    required
-                    disabled={status === 'loading'}
+                    disabled={status === 'loading' || isSuccess}
                 />
                 <button
                     type="submit"
-                    disabled={status === 'loading'}
-                    className="bg-brand-600 hover:bg-brand-700 disabled:opacity-60 disabled:cursor-not-allowed text-white px-8 py-3 rounded-full font-bold transition-colors whitespace-nowrap flex items-center justify-center gap-2 min-w-[130px]"
+                    disabled={status === 'loading' || isSuccess}
+                    className={`px-8 py-3 rounded-full font-bold transition-colors whitespace-nowrap flex items-center justify-center gap-2 min-w-[130px] disabled:cursor-not-allowed ${
+                        isSuccess
+                            ? 'bg-emerald-500 text-white opacity-100'
+                            : 'bg-brand-600 hover:bg-brand-700 text-white disabled:opacity-60'
+                    }`}
                 >
                     {status === 'loading' ? (
                         <>
@@ -94,13 +83,19 @@ export function SubscribeForm() {
                             </svg>
                             Sending…
                         </>
+                    ) : isSuccess ? (
+                        <>
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                            {message}
+                        </>
                     ) : (
                         'Subscribe'
                     )}
                 </button>
             </div>
 
-            {/* Inline error */}
             {status === 'error' && (
                 <p className="text-red-400 text-xs mt-2.5 ml-1 font-medium">{message}</p>
             )}
