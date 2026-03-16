@@ -25,50 +25,48 @@ export function CTA() {
                     </div>
 
                     {/* Image — Mobile (shown first above text) */}
-                    <div className="xl:hidden pt-8 pb-2 w-48 h-48 sm:w-64 sm:h-64 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20 relative self-center shrink-0">
+                    <div className="xl:hidden pt-6 pb-2 w-40 h-40 sm:w-56 sm:h-56 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20 relative self-center shrink-0">
                         <Image
-                            src="/images/cta-woman.png"
+                            src="/images/cta-woman.jpg"
                             alt="Daksha Student"
                             fill
                             className="object-cover object-top"
-                            priority
                         />
                     </div>
 
                     {/* Content */}
-                    <div className="relative z-10 p-8 md:p-16 xl:w-3/5 flex flex-col items-start justify-center h-full">
-                        <h2 className="text-2xl md:text-5xl font-bold text-white tracking-tight mb-4">
+                    <div className="relative z-10 p-6 md:p-10 xl:py-8 xl:px-12 xl:w-3/5 flex flex-col items-start justify-center h-full">
+                        <h2 className="text-xl md:text-3xl xl:text-4xl font-bold text-white tracking-tight mb-3">
                             Let&apos;s get you to the <span className="font-cursive italic text-accent-300 text-[1.1em]">right place.</span>
                         </h2>
-                        <p className="text-base md:text-xl text-brand-100 mb-6 md:mb-8 font-medium">
+                        <p className="text-sm md:text-base text-brand-100 mb-5 md:mb-6 font-medium leading-relaxed">
                             Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia is the right fit, and if it&apos;s not, we&apos;ll say that too.
                         </p>
 
-                        <div className="flex flex-wrap items-center gap-4 md:gap-6">
+                        <div className="flex flex-wrap items-center gap-3 md:gap-5">
                             <Link
                                 href="#"
-                                className="bg-white text-slate-900 border-2 border-white font-bold py-3 px-8 rounded-full hover:bg-brand-50 transition-colors"
+                                className="bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-6 rounded-full hover:bg-brand-50 transition-colors text-sm"
                             >
                                 Schedule a Consultation
                             </Link>
                             <Link
                                 href="/programs"
-                                className="text-white font-semibold flex items-center gap-2 hover:text-brand-100 transition-colors group"
+                                className="text-white font-semibold flex items-center gap-2 hover:text-brand-100 transition-colors group text-sm"
                             >
                                 Explore Programs
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </div>
                     </div>
 
-                    {/* Image — Desktop (absolute positioned) */}
-                    <div className="hidden xl:block absolute -top-12 -right-6 w-64 h-64 lg:w-80 lg:h-80 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20">
+                    {/* Image — Desktop (right edge, vertically centered, circle fills full div height) */}
+                    <div className="hidden xl:block absolute top-0 right-0 w-[320px] h-[320px] rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20">
                         <Image
-                            src="/images/cta-woman.png"
+                            src="/images/cta-woman.jpg"
                             alt="Daksha Student"
                             fill
                             className="object-cover object-top"
-                            priority
                         />
                     </div>
                 </motion.div>

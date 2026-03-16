@@ -913,8 +913,8 @@ function FacultySection() {
               The People Behind the{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Program</span>
             </h3>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Industry veterans who&apos;ve delivered on real enterprise projects, now mentoring the next generation.
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto text-justify">
+               Industry veterans who&apos;ve delivered on real enterprise projects, now mentoring the next generation.
             </p>
           </FadeIn>
 
@@ -1036,8 +1036,8 @@ function CeremonySection() {
               Inside the{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Experience</span>
             </h3>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4">
-              A first-hand look at how our cohorts learn, collaborate, and graduate into consulting careers.
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4 text-justify">
+               A first-hand look at how our cohorts learn, collaborate, and graduate into consulting careers.
             </p>
           </FadeIn>
 

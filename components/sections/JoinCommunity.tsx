@@ -47,7 +47,7 @@ export function JoinCommunity() {
                         transition={{ delay: 0.3 }}
                         className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
-                        <Link href="/forum">
+                        <Link href="/forum" target="_blank">
                             <Button size="lg" className="bg-white text-brand-700 hover:bg-slate-100 font-bold shadow-lg gap-2">
                                 Visit Forum <ArrowRight className="w-5 h-5" />
                             </Button>

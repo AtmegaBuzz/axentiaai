@@ -40,16 +40,6 @@ export function Hero() {
             <div className="relative z-10 flex-1 flex items-center">
                 <div className="container mx-auto px-4 md:px-6 pt-32 pb-16">
                     <div className="max-w-5xl">
-                        <motion.div
-                            initial={{ opacity: 0, y: 12 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
-                        >
-                            <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-                            <span className="text-sm font-semibold text-white/90 tracking-wide">Built for the AI Era</span>
-                        </motion.div>
-
                         <motion.h1
                             id="hero-heading"
                             initial={{ opacity: 0, y: 24 }}
@@ -57,14 +47,9 @@ export function Hero() {
                             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                             className="text-left"
                         >
-                            <div className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[100px] font-black text-white leading-[0.9] tracking-tight">
-                                Where Enterprise
-                            </div>
-                            <div className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[100px] font-black leading-[0.9] tracking-tight mt-2">
-                                <span className="text-white">Consultants Are</span>{' '}
-                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-accent-400 bg-clip-text text-transparent">
-                                    Built
-                                </span>
+                            <div className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[80px] font-black leading-[0.9] tracking-tight">
+                                <span className="text-white">Level up for </span>
+                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-accent-400 bg-clip-text text-transparent">AI Era</span>
                             </div>
                         </motion.h1>
 
@@ -107,6 +92,7 @@ export function Hero() {
                             >
                                 <Link
                                     href="/forum"
+                                    target="_blank"
                                     className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-yellow-400/15 backdrop-blur-md border border-yellow-400/30 text-yellow-300 hover:bg-yellow-400/25 font-semibold py-4 px-8 rounded-full shadow-xl transition-all duration-200"
                                 >
                                     <Users className="w-5 h-5" />

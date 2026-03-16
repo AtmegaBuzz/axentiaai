@@ -163,57 +163,31 @@ function HeroSection() {
   return (
     <section ref={ref} className="relative h-[120vh] md:h-[160vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #58179B 0%, #8929AC 40%, #C010DA 100%)' }} />
-        {/* SVG curves */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.08] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 900">
-          <path d="M0,300 Q360,100 720,300 T1440,300" stroke="url(#hg1)" strokeWidth="2" fill="none" />
-          <path d="M0,500 Q360,300 720,500 T1440,500" stroke="url(#hg2)" strokeWidth="1.5" fill="none" />
-          <path d="M0,700 Q360,500 720,700 T1440,700" stroke="url(#hg1)" strokeWidth="1" fill="none" />
-          <defs>
-            <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#C010DA" /><stop offset="100%" stopColor="#F3B15F" /></linearGradient>
-            <linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#F3B15F" /><stop offset="100%" stopColor="#C010DA" /></linearGradient>
-          </defs>
-        </svg>
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-500/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent-400/15 rounded-full blur-[100px]" />
-
-        {/* Rotating widgets */}
-        <OrbitRing className="absolute top-20 right-[15%] hidden lg:block" size={140} color="#C010DA" />
-        <SpinningGear className="absolute bottom-32 left-[10%] hidden lg:block" size={90} />
-        <RotatingCross className="absolute top-[40%] right-[8%] w-8 h-8 hidden md:block" color="#F3B15F" />
-        <FloatingDiamond className="absolute bottom-[20%] right-[25%] w-6 h-6 hidden md:block" color="#C010DA" />
-
-        {/* Floating filler images */}
-        <motion.div style={{ y: imgY, rotate: imgRotate }} className="absolute top-[12%] right-[8%] hidden xl:block">
-          <div className="w-48 h-32 rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl rotate-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=280&fit=crop&q=80" alt="Team collaboration" className="w-full h-full object-cover" />
-          </div>
-        </motion.div>
-        <motion.div style={{ y: useTransform(scrollYProgress, [0, 0.6], [0, 40]) }} className="absolute bottom-[18%] right-[12%] hidden xl:block">
-          <div className="w-36 h-24 rounded-xl overflow-hidden border-2 border-white/10 shadow-xl -rotate-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=300&h=200&fit=crop&q=80" alt="Office work" className="w-full h-full object-cover" />
-          </div>
-        </motion.div>
+        {/* Background photo */}
+        <Image
+          src="/images/about-us-hero.jpg"
+          alt="Axentia.AI About Hero"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        {/* Dark overlay — same pattern as landing hero video */}
+        <div className="absolute inset-0 bg-black/55" />
 
         <motion.div style={{ opacity, y, scale }} className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 xl:px-20">
           <div className="max-w-5xl">
-            <FadeIn>
-              <Image src="/brand/axentia-logo-white.png" alt="Axentia AI" width={180} height={50} className="h-6 w-auto mb-8" />
-            </FadeIn>
             <FadeIn delay={0.1}>
               <p className="text-brand-300 font-semibold uppercase tracking-[0.2em] text-sm mb-5">Our Story</p>
             </FadeIn>
             <FadeIn delay={0.2}>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8">
                 The Story of{' '}
-                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">Axentia.AI</span>
+                <span className="bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">Axentia.AI</span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.3}>
               <p className="text-base md:text-xl lg:text-2xl text-indigo-200/80 max-w-3xl leading-relaxed mb-10">
-                Building the capability infrastructure required for the AI era — one enterprise consultant at a time.
+                Building the capability infrastructure required for the AI era, one enterprise consultant at a time.
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
@@ -260,11 +234,11 @@ function LegacySection() {
             <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500 mb-4">Our Legacy</p></FadeIn>
             <FadeIn delay={0.05}>
               <div className="relative mb-8">
-                <svg className="absolute -top-3 -left-3 w-12 h-12 text-brand-100" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
+                <svg className="absolute -top-2 -left-1 w-6 h-6 text-brand-200" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
                 <blockquote className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium pl-6 border-l-4 border-brand-300">
                   In enterprise consulting, readiness shows in the details — how you document, how you communicate, how you handle responsibility inside a team.{' '}
                   <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Axentia AI</span>{' '}
-                  was created to build that preparation deliberately — for the AI era.
+                  was created to build that preparation deliberately, for the AI era.
                 </blockquote>
               </div>
             </FadeIn>
@@ -309,18 +283,17 @@ function LegacySection() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=500&fit=crop&q=60" alt="Enterprise building" className="w-full h-full object-cover" />
               </div>
-              <div className="grid grid-cols-2 gap-4 relative">
+              <div className="grid grid-cols-2 gap-3 relative p-6 bg-slate-50 rounded-3xl border border-slate-100">
                 {[
-                  { value: '30+', label: 'Years', sub: 'Enterprise Experience', icon: <ShieldIcon className="w-5 h-5" /> },
-                  { value: '500+', label: 'Consultants', sub: 'At Orane Consulting', icon: <ConsultingIcon className="w-5 h-5" /> },
-                  { value: '10+', label: 'Countries', sub: 'Global Delivery', icon: <GlobeIcon className="w-5 h-5" /> },
-                  { value: '2009', label: 'Founded', sub: 'Orane Consulting', icon: <BuildingIcon className="w-5 h-5" /> },
+                  { value: '30+', label: 'Years', sub: 'Enterprise Experience' },
+                  { value: '500+', label: 'Consultants', sub: 'At Orane Consulting' },
+                  { value: '10+', label: 'Countries', sub: 'Global Delivery' },
+                  { value: '2009', label: 'Founded', sub: 'Orane Consulting' },
                 ].map((s) => (
-                  <div key={s.label} className="bg-white/90 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-brand-200 transition-all group">
-                    <div className="w-9 h-9 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center mb-3 text-brand-600 group-hover:scale-110 transition-transform">{s.icon}</div>
-                    <p className="text-3xl font-bold text-slate-900 mb-0.5">{s.value}</p>
-                    <p className="text-sm font-semibold text-slate-700">{s.label}</p>
-                    <p className="text-xs text-slate-500">{s.sub}</p>
+                  <div key={s.label} className="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-brand-200 transition-all duration-200">
+                    <p className="text-4xl font-black text-brand-700 leading-none mb-1 tracking-tight">{s.value}</p>
+                    <p className="text-sm font-bold text-slate-800 mt-1">{s.label}</p>
+                    <p className="text-[11px] font-medium text-slate-400 mt-0.5 leading-tight">{s.sub}</p>
                   </div>
                 ))}
               </div>
@@ -594,7 +567,7 @@ function ValuesSection() {
               What Axentia{' '}<span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Stands For</span>
             </h2>
           </FadeIn>
-          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">Five principles that define how we build capability at the intersection of enterprise AI and workforce development.</p></FadeIn>
+          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto text-center">Five principles that define how we build capability at the intersection of enterprise AI and workforce development.</p></FadeIn>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {valuesData.map((v, i) => (
@@ -639,7 +612,7 @@ function EcosystemSection() {
               Be Part of Something <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Bigger</span>
             </h2>
           </FadeIn>
-          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">We build the capability infrastructure required for the AI era. Our mission is simple: Turn AI potential into real capability.</p></FadeIn>
+          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto text-center">We build the capability infrastructure required for the AI era. Our mission is simple: Turn AI potential into real capability.</p></FadeIn>
         </div>
 
         <div className="hidden lg:block relative h-12 mb-6 max-w-3xl mx-auto">

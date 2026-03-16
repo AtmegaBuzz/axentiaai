@@ -1,17 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import {
-  Scene,
-  OrthographicCamera,
-  WebGLRenderer,
-  PlaneGeometry,
-  Mesh,
-  ShaderMaterial,
-  Vector3,
-  Vector2,
-  Clock
-} from 'three';
 
 import './FloatingLines.css';
 
@@ -188,7 +177,7 @@ void main() {
 
 const MAX_GRADIENT_STOPS = 8;
 
-function hexToVec3(hex: string): Vector3 {
+function hexToVec3(hex: string, Vector3Cls: typeof import('three').Vector3): InstanceType<typeof import('three').Vector3> {
   let value = hex.trim();
   if (value.startsWith('#')) value = value.slice(1);
 
@@ -202,7 +191,7 @@ function hexToVec3(hex: string): Vector3 {
     g = parseInt(value.slice(2, 4), 16);
     b = parseInt(value.slice(4, 6), 16);
   }
-  return new Vector3(r / 255, g / 255, b / 255);
+  return new Vector3Cls(r / 255, g / 255, b / 255);
 }
 
 interface WavePosition {
@@ -247,12 +236,12 @@ export default function FloatingLines({
   mixBlendMode = 'screen'
 }: FloatingLinesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const targetMouseRef = useRef(new Vector2(-1000, -1000));
-  const currentMouseRef = useRef(new Vector2(-1000, -1000));
+  const targetMouseRef = useRef({ x: -1000, y: -1000 });
+  const currentMouseRef = useRef({ x: -1000, y: -1000 });
   const targetInfluenceRef = useRef(0);
   const currentInfluenceRef = useRef(0);
-  const targetParallaxRef = useRef(new Vector2(0, 0));
-  const currentParallaxRef = useRef(new Vector2(0, 0));
+  const targetParallaxRef = useRef({ x: 0, y: 0 });
+  const currentParallaxRef = useRef({ x: 0, y: 0 });
 
   const getLineCount = (waveType: string): number => {
     if (typeof lineCount === 'number') return lineCount;
@@ -280,6 +269,21 @@ export default function FloatingLines({
     if (!containerRef.current) return;
 
     const container = containerRef.current;
+    let cancelled = false;
+
+    import('three').then(({
+      Scene,
+      OrthographicCamera,
+      WebGLRenderer,
+      PlaneGeometry,
+      Mesh,
+      ShaderMaterial,
+      Vector3,
+      Vector2,
+      Clock,
+    }) => {
+    if (cancelled || !containerRef.current) return;
+
     const scene = new Scene();
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
@@ -330,8 +334,8 @@ export default function FloatingLines({
       const stops = linesGradient.slice(0, MAX_GRADIENT_STOPS);
       uniforms.lineGradientCount.value = stops.length;
       stops.forEach((hex, i) => {
-        const color = hexToVec3(hex);
-        (uniforms.lineGradient.value as Vector3[])[i].set(color.x, color.y, color.z);
+        const color = hexToVec3(hex, Vector3);
+        (uniforms.lineGradient.value as InstanceType<typeof import('three').Vector3>[])[i].set(color.x, color.y, color.z);
       });
     }
 
@@ -374,15 +378,15 @@ export default function FloatingLines({
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
       const dpr = renderer.getPixelRatio();
-      targetMouseRef.current.set(x * dpr, (rect.height - y) * dpr);
+      targetMouseRef.current.x = x * dpr;
+      targetMouseRef.current.y = (rect.height - y) * dpr;
       targetInfluenceRef.current = 1.0;
 
       if (parallax) {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const offsetX = (x - centerX) / rect.width;
-        const offsetY = -(y - centerY) / rect.height;
-        targetParallaxRef.current.set(offsetX * parallaxStrength, offsetY * parallaxStrength);
+        targetParallaxRef.current.x = ((x - centerX) / rect.width) * parallaxStrength;
+        targetParallaxRef.current.y = (-(y - centerY) / rect.height) * parallaxStrength;
       }
     };
 
@@ -411,15 +415,19 @@ export default function FloatingLines({
         (uniforms.iTime.value as number) = clock.getElapsedTime();
 
         if (interactive) {
-          currentMouseRef.current.lerp(targetMouseRef.current, mouseDamping);
-          (uniforms.iMouse.value as Vector2).copy(currentMouseRef.current);
+          currentMouseRef.current.x += (targetMouseRef.current.x - currentMouseRef.current.x) * mouseDamping;
+          currentMouseRef.current.y += (targetMouseRef.current.y - currentMouseRef.current.y) * mouseDamping;
+          (uniforms.iMouse.value as { x: number; y: number }).x = currentMouseRef.current.x;
+          (uniforms.iMouse.value as { x: number; y: number }).y = currentMouseRef.current.y;
           currentInfluenceRef.current += (targetInfluenceRef.current - currentInfluenceRef.current) * mouseDamping;
           uniforms.bendInfluence.value = currentInfluenceRef.current;
         }
 
         if (parallax) {
-          currentParallaxRef.current.lerp(targetParallaxRef.current, mouseDamping);
-          (uniforms.parallaxOffset.value as Vector2).copy(currentParallaxRef.current);
+          currentParallaxRef.current.x += (targetParallaxRef.current.x - currentParallaxRef.current.x) * mouseDamping;
+          currentParallaxRef.current.y += (targetParallaxRef.current.y - currentParallaxRef.current.y) * mouseDamping;
+          (uniforms.parallaxOffset.value as { x: number; y: number }).x = currentParallaxRef.current.x;
+          (uniforms.parallaxOffset.value as { x: number; y: number }).y = currentParallaxRef.current.y;
         }
 
         renderer.render(scene, camera);
@@ -428,7 +436,8 @@ export default function FloatingLines({
     };
     renderLoop();
 
-    return () => {
+    // Store cleanup in a way the outer return can trigger it
+    (container as HTMLDivElement & { __threeCleanup?: () => void }).__threeCleanup = () => {
       cancelAnimationFrame(raf);
       io.disconnect();
       if (ro) ro.disconnect();
@@ -442,6 +451,14 @@ export default function FloatingLines({
       if (renderer.domElement.parentElement) {
         renderer.domElement.parentElement.removeChild(renderer.domElement);
       }
+    };
+
+    }); // end import('three')
+
+    return () => {
+      cancelled = true;
+      const el = container as HTMLDivElement & { __threeCleanup?: () => void };
+      el.__threeCleanup?.();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [

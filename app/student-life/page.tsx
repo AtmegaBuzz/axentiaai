@@ -81,7 +81,7 @@ export default function StudentLifePage() {
           {/* Descriptive text */}
           <div className="max-w-3xl mx-auto">
             <FadeIn>
-              <p className="text-lg text-slate-600 leading-relaxed mb-6 text-center">
+              <p className="text-lg text-slate-600 leading-relaxed mb-6 text-justify">
                 Most programs teach concepts, but at Axentia.AI, you start applying them almost immediately. Student life here isn't about sitting through lectures all day. It's about building the habits, thinking, and confidence needed to work in real consulting environments.
               </p>
             </FadeIn>
@@ -218,6 +218,7 @@ export default function StudentLifePage() {
                 </div>
                 <Link
                   href="/forum"
+                  target="_blank"
                   className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-8 py-4 rounded-full shadow-lg shadow-brand-600/25 transition-all hover:-translate-y-0.5"
                 >
                   <Users className="w-5 h-5" />
