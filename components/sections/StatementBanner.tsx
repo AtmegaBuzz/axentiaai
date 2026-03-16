@@ -46,7 +46,7 @@ export function StatementBanner() {
                                 The first few years of your career determine how confident and capable you become.
                             </p>
                             <p className="text-slate-500 text-base md:text-lg leading-relaxed">
-                                Daksha is designed around those critical early years — to build the resilience, judgment, and autonomy that no short course can give you.
+                                Axentia.AI is designed around those critical early years — to build the resilience, judgment, and autonomy that no short course can give you.
                             </p>
                         </div>
 

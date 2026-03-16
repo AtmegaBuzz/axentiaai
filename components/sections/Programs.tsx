@@ -119,7 +119,7 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
             {/* Content */}
             <div className="flex flex-col flex-grow p-6">
                 {/* Heading */}
-                <h3 className="text-2xl font-bold text-slate-900 leading-tight mb-2">
+                <h3 className="text-2xl font-bold text-slate-900 leading-tight mb-2 text-left">
                     {prog.title} {prog.titleAccent}
                 </h3>
 
@@ -186,9 +186,9 @@ export function Programs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 whitespace-nowrap"
+                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
                     >
-                        Three programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
+                        3 programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -197,7 +197,7 @@ export function Programs() {
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
                         className="text-lg text-white/70 italic"
                     >
-                        From first steps to senior consulting — a clear path for every stage of your enterprise career.
+                        From first steps to senior consulting, a clear path for every stage of your enterprise career.
                     </motion.p>
                 </div>
 

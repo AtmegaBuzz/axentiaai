@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { usePerformance } from '@/lib/usePerformance';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
 const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
 
@@ -158,11 +159,11 @@ export function WhyAxentiaAI() {
             style={{
                 backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 25%, #f1f5f9 50%, #fef8ec 75%, #f8fafc 100%)',
             }}
-            className="relative animate-gradient-loop flex flex-col justify-center py-16 md:py-0 md:h-screen overflow-hidden"
+            className="relative animate-gradient-loop flex flex-col justify-center py-16 md:py-0 md:h-screen"
         >
             {/* ── FloatingLines WebGL background — skipped on low-end devices ── */}
             {!isLowEnd && (
-                <div className="absolute inset-0 z-0 opacity-60">
+                <div className="absolute inset-0 z-0 opacity-60 overflow-hidden">
                     <FloatingLines
                         linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}
                         enabledWaves={['top', 'middle', 'bottom']}
@@ -201,7 +202,7 @@ export function WhyAxentiaAI() {
                     {/* Card 1 — 100+ Careers */}
                     <div className={`${glass} h-full`}>
                         <div className="mb-2">
-                            <h3 className="text-3xl font-black text-slate-900 mb-0">100+</h3>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0"><AnimatedCounter end={100} suffix="+" /></h3>
                             <p className="text-sm font-semibold text-slate-800">Careers Launched</p>
                             <p className="text-slate-400 text-xs mt-0">Across Enterprise Projects</p>
                         </div>
@@ -215,7 +216,7 @@ export function WhyAxentiaAI() {
                     {/* Card 2 — 95% Placement */}
                     <div className={`${glass} h-full`}>
                         <div className="mb-2">
-                            <h3 className="text-3xl font-black text-slate-900 mb-0">95%</h3>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0"><AnimatedCounter end={95} suffix="%" /></h3>
                             <p className="text-sm font-semibold text-slate-800">Placement Success</p>
                             <p className="text-slate-400 text-xs mt-0">Consultants Deployed</p>
                         </div>
@@ -229,7 +230,7 @@ export function WhyAxentiaAI() {
                     {/* Card 3 — 4+ Countries */}
                     <div className={`${glass} h-full`}>
                         <div className="mb-2">
-                            <h3 className="text-3xl font-black text-slate-900 mb-0">4+</h3>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0"><AnimatedCounter end={4} suffix="+" /></h3>
                             <p className="text-sm font-semibold text-slate-800">Countries Served</p>
                             <p className="text-slate-400 text-xs mt-0">Global Delivery Presence</p>
                         </div>
@@ -250,7 +251,7 @@ export function WhyAxentiaAI() {
                             loading="lazy"
                         />
                         <div className="mb-2">
-                            <h3 className="text-3xl font-black text-slate-900 mb-0">25+</h3>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0"><AnimatedCounter end={25} suffix="+" /></h3>
                             <p className="text-sm font-semibold text-slate-800">Years of Experience</p>
                             <p className="text-slate-400 text-xs mt-0">Built on the legacy of Orane Consulting</p>
                         </div>
@@ -266,7 +267,7 @@ export function WhyAxentiaAI() {
                         <div className="mb-2">
                             <h3 className="text-3xl font-black text-slate-900 mb-0">&#8377;6-12 LPA</h3>
                             <p className="text-sm font-semibold text-slate-800">Average Starting CTC</p>
-                            <p className="text-slate-400 text-xs mt-0">For Daksha Graduates</p>
+                            <p className="text-slate-400 text-xs mt-0">For Axentia.AI Graduates</p>
                         </div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -280,7 +281,7 @@ export function WhyAxentiaAI() {
                     {/* Card 6 — 30+ Hiring Partners */}
                     <div className={`${glass} h-full`}>
                         <div className="mb-2">
-                            <h3 className="text-3xl font-black text-slate-900 mb-0">30+</h3>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0"><AnimatedCounter end={30} suffix="+" /></h3>
                             <p className="text-sm font-semibold text-slate-800">Hiring Partners</p>
                             <p className="text-slate-400 text-xs mt-0">Leading Enterprises Trust Us</p>
                         </div>
@@ -294,7 +295,7 @@ export function WhyAxentiaAI() {
                     {/* Card 7 — 100+ Enterprise Projects (with image) */}
                     <div className={`${glass} h-full overflow-hidden`}>
                         <div className="mb-2">
-                            <h3 className="text-3xl font-black text-slate-900 mb-0">100+</h3>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0"><AnimatedCounter end={100} suffix="+" /></h3>
                             <p className="text-sm font-semibold text-slate-800">Enterprise Projects</p>
                             <p className="text-slate-400 text-xs mt-0">Real-World Delivery</p>
                         </div>

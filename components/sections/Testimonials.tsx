@@ -49,7 +49,7 @@ const testimonials: Testimonial[] = [
   {
     name: 'Deeksha',
     role: 'SAP Trainee',
-    company: 'Daksha Career Accelerator',
+    company: 'Axentia.AI',
     quote:
       "Six weeks in, I'm thinking differently about enterprise problems, especially after understanding how AI fits into SAP workflows. I'm not where I want to be yet, but I know I'm making real progress.",
     videoId: 'bffdXIDsR3U',
@@ -123,7 +123,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-              className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
+              className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4 text-left"
             >
               Real people, real{' '}
               <span className="font-cursive italic text-brand-600 text-[1.1em]">careers</span>

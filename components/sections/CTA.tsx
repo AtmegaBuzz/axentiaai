@@ -28,7 +28,7 @@ export function CTA() {
                     <div className="xl:hidden pt-6 pb-2 w-40 h-40 sm:w-56 sm:h-56 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20 relative self-center shrink-0">
                         <Image
                             src="/images/cta-woman.jpg"
-                            alt="Daksha Student"
+                            alt="Axentia.AI Student"
                             fill
                             className="object-cover object-top"
                         />
@@ -48,7 +48,7 @@ export function CTA() {
                                 href="#"
                                 className="bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-6 rounded-full hover:bg-brand-50 transition-colors text-sm"
                             >
-                                Schedule a Consultation
+                                Schedule a consultation
                             </Link>
                             <Link
                                 href="/programs"
@@ -64,7 +64,7 @@ export function CTA() {
                     <div className="hidden xl:block absolute top-0 right-0 w-[320px] h-[320px] rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20">
                         <Image
                             src="/images/cta-woman.jpg"
-                            alt="Daksha Student"
+                            alt="Axentia.AI Student"
                             fill
                             className="object-cover object-top"
                         />

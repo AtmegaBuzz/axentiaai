@@ -34,10 +34,10 @@ const slideDirections = [
     { x: 120 },
 ];
 
-export function WhyDaksha() {
+export function WhyAxentiaAI() {
     return (
         <section
-            id="why-daksha"
+            id="why-axentia"
             className="py-16 md:py-24 relative overflow-hidden bg-accent-50"
         >
             {/* Decorative accent stripe at top */}
@@ -49,7 +49,7 @@ export function WhyDaksha() {
 
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
                 <div className="max-w-3xl mb-14">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-accent-600 mb-3">Why Daksha Works</p>
+                    <p className="text-sm font-semibold uppercase tracking-widest text-accent-600 mb-3">Why Axentia.AI Works</p>
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
                         Built by consultants,{' '}
                         <span className="font-cursive italic text-brand-600 text-[1.1em]">for careers.</span>

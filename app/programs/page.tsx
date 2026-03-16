@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import {
   ArrowRight,
   Clock,
@@ -99,7 +100,7 @@ function HeroSection({ activeTab, setActiveTab }: { activeTab: ProgramTab; setAc
         <FadeIn delay={0.1}>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
             Choose your{' '}
-            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">path</span>.
+            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">path</span>
           </h1>
         </FadeIn>
         <FadeIn delay={0.15}>
@@ -115,11 +116,10 @@ function HeroSection({ activeTab, setActiveTab }: { activeTab: ProgramTab; setAc
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-full text-sm font-semibold transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-white text-slate-900 shadow-lg'
-                    : 'bg-white/10 text-white/80 hover:bg-white/20 border border-white/10'
-                }`}
+                className={`px-6 py-3 rounded-full text-sm font-semibold transition-all ${activeTab === tab.id
+                  ? 'bg-white text-slate-900 shadow-lg'
+                  : 'bg-white/10 text-white/80 hover:bg-white/20 border border-white/10'
+                  }`}
               >
                 {tab.label}
               </button>
@@ -263,8 +263,8 @@ function DCAPSection() {
                 <FadeIn key={block.title} delay={i * 0.08}>
                   <div className="group bg-white border border-slate-200 rounded-2xl overflow-hidden h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     <div className="relative h-40 overflow-hidden">
-                      <img 
-                        src={block.image} 
+                      <img
+                        src={block.image}
                         alt={block.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
@@ -653,6 +653,30 @@ function OnlineSection() {
    ═══════════════════════════════════════════════════════════════ */
 
 function CompareSection() {
+  const programs = [
+    {
+      id: 'dcap',
+      name: 'DCAP',
+      fullName: 'Daksha Career Accelerator',
+      image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=500&fit=crop&q=80',
+      accentColor: 'brand',
+    },
+    {
+      id: 'eap',
+      name: 'EAP',
+      fullName: 'Elite Acceleration Program',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop&q=80',
+      accentColor: 'indigo',
+    },
+    {
+      id: 'online',
+      name: 'Online',
+      fullName: 'Self-Paced Learning',
+      image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=800&h=500&fit=crop&q=80',
+      accentColor: 'teal',
+    },
+  ];
+
   const features = [
     { name: 'Duration', dcap: '10-12 months', eap: 'Ongoing (post-DCAP)', online: 'Self-paced' },
     { name: 'Format', dcap: 'In-person, Noida', eap: 'In-person + Projects', online: 'Fully remote' },
@@ -669,91 +693,174 @@ function CompareSection() {
   const renderCell = (val: string | boolean | undefined, note?: string) => {
     if (typeof val === 'boolean') {
       return (
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
           {val ? (
-            <CheckCircle2 className="w-5 h-5 text-brand-500" />
+            <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
+              <CheckCircle2 className="w-4 h-4 text-white" />
+            </div>
           ) : (
-            <span className="w-5 h-5 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 text-xs font-bold">&times;</span>
+            <div className="w-5 h-5 rounded-full bg-slate-200 flex items-center justify-center">
+              <span className="text-slate-400 text-sm font-bold">&times;</span>
+            </div>
           )}
           {note && <span className="text-xs text-slate-500">{note}</span>}
         </div>
       );
     }
-    return <span className="text-sm text-slate-700">{val}</span>;
+    return <span className="text-sm text-slate-700 font-medium">{val}</span>;
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white border-b border-slate-100">
+    <section className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
       <div className="container mx-auto px-6 md:px-12 xl:px-20">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <FadeIn>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Compare Programs</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3 text-center">Compare Programs</p>
           </FadeIn>
           <FadeIn delay={0.05}>
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4 text-center">
               Side-by-side.
             </h3>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <p className="text-lg text-slate-600 mb-12 max-w-2xl">
+            <p className="text-lg text-slate-600 mb-16 max-w-2xl mx-auto text-center">
               Not sure which program fits? Here&apos;s everything in one view.
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.15}>
-            <div className="overflow-x-auto -mx-6 px-6">
-              <table className="w-full min-w-[640px]">
-                <thead>
-                  <tr className="border-b-2 border-slate-200">
-                    <th className="text-left py-4 pr-4 text-sm font-bold text-slate-500 uppercase tracking-wider w-[200px]">Feature</th>
-                    <th className="text-left py-4 px-4 text-sm font-bold text-brand-600 uppercase tracking-wider">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-brand-500" />
-                        DCAP
-                      </div>
-                    </th>
-                    <th className="text-left py-4 px-4 text-sm font-bold text-indigo-600 uppercase tracking-wider">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-indigo-500" />
-                        EAP
-                      </div>
-                    </th>
-                    <th className="text-left py-4 px-4 text-sm font-bold text-teal-600 uppercase tracking-wider">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-teal-500" />
-                        Online
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* DCAP Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: 0, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02 }}
+              className="group h-full"
+            >
+              <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden h-full flex flex-col shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                {/* Image Header */}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={programs[0].image}
+                    alt={programs[0].name}
+                    width={800}
+                    height={500}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h4 className="text-2xl font-bold text-white mb-1">{programs[0].name}</h4>
+                    <p className="text-white/90 font-medium text-sm">{programs[0].fullName}</p>
+                  </div>
+                </div>
+
+                {/* Features List */}
+                <div className="flex-1 flex flex-col">
                   {features.map((f, i) => (
-                    <tr key={f.name} className={`border-b border-slate-100 ${i % 2 === 0 ? 'bg-slate-50/50' : ''}`}>
-                      <td className="py-4 pr-4 text-sm font-semibold text-slate-900">{f.name}</td>
-                      <td className="py-4 px-4">
-                        {renderCell(
-                          typeof f.dcap === 'string' ? f.dcap : f.dcap,
-                          'dcapNote' in f ? (f as Record<string, unknown>).dcapNote as string : undefined
-                        )}
-                      </td>
-                      <td className="py-4 px-4">
-                        {renderCell(
-                          typeof f.eap === 'string' ? f.eap : f.eap,
-                          'eapNote' in f ? (f as Record<string, unknown>).eapNote as string : undefined
-                        )}
-                      </td>
-                      <td className="py-4 px-4">
-                        {renderCell(
-                          typeof f.online === 'string' ? f.online : f.online,
-                          'onlineNote' in f ? (f as Record<string, unknown>).onlineNote as string : undefined
-                        )}
-                      </td>
-                    </tr>
+                    <div
+                      key={i}
+                      className={`flex items-center justify-between px-6 py-4 ${i !== features.length - 1 ? 'border-b border-slate-100' : ''
+                        }`}
+                    >
+                      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{f.name}</span>
+                      <div className="text-right">
+                        {renderCell(typeof f.dcap === 'string' ? f.dcap : f.dcap, 'dcapNote' in f ? f.dcapNote : undefined)}
+                      </div>
+                    </div>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          </FadeIn>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* EAP Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02 }}
+              className="group h-full"
+            >
+              <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden h-full flex flex-col shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                {/* Image Header */}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={programs[1].image}
+                    alt={programs[1].name}
+                    width={800}
+                    height={500}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h4 className="text-2xl font-bold text-white mb-1">{programs[1].name}</h4>
+                    <p className="text-white/90 font-medium text-sm">{programs[1].fullName}</p>
+                  </div>
+                </div>
+
+                {/* Features List */}
+                <div className="flex-1 flex flex-col">
+                  {features.map((f, i) => (
+                    <div
+                      key={i}
+                      className={`flex items-center justify-between px-6 py-4 ${i !== features.length - 1 ? 'border-b border-slate-100' : ''
+                        }`}
+                    >
+                      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{f.name}</span>
+                      <div className="text-right">
+                        {renderCell(typeof f.eap === 'string' ? f.eap : f.eap, 'eapNote' in f ? f.eapNote : undefined)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Online Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02 }}
+              className="group h-full"
+            >
+              <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden h-full flex flex-col shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                {/* Image Header */}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={programs[2].image}
+                    alt={programs[2].name}
+                    width={800}
+                    height={500}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h4 className="text-2xl font-bold text-white mb-1">{programs[2].name}</h4>
+                    <p className="text-white/90 font-medium text-sm">{programs[2].fullName}</p>
+                  </div>
+                </div>
+
+                {/* Features List */}
+                <div className="flex-1 flex flex-col">
+                  {features.map((f, i) => (
+                    <div
+                      key={i}
+                      className={`flex items-center justify-between px-6 py-4 ${i !== features.length - 1 ? 'border-b border-slate-100' : ''
+                        }`}
+                    >
+                      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{f.name}</span>
+                      <div className="text-right">
+                        {renderCell(typeof f.online === 'string' ? f.online : f.online, 'onlineNote' in f ? f.onlineNote : undefined)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -841,10 +948,10 @@ function ApplicationSection() {
 
 function ImpactSection() {
   const stats = [
-    { value: '100+', label: 'Careers Launched', sub: 'Through Daksha programs' },
-    { value: '95%', label: 'Placement Rate', sub: 'Within 3 months of completion' },
-    { value: '500+', label: 'Active Consultants', sub: 'At Orane Consulting' },
-    { value: '30+', label: 'Years Experience', sub: 'Enterprise delivery legacy' },
+    { end: 100, suffix: '+', label: 'Careers Launched', sub: 'Through Axentia.AI programs' },
+    { end: 95, suffix: '%', label: 'Placement Rate', sub: 'Within 3 months of completion' },
+    { end: 500, suffix: '+', label: 'Active Consultants', sub: 'At Orane Consulting' },
+    { end: 30, suffix: '+', label: 'Years Experience', sub: 'Enterprise delivery legacy' },
   ];
 
   return (
@@ -864,7 +971,9 @@ function ImpactSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-5xl mx-auto">
           {stats.map((s, i) => (
             <FadeIn key={s.label} delay={i * 0.08} className="text-center">
-              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2">{s.value}</p>
+              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2">
+                <AnimatedCounter end={s.end} suffix={s.suffix} />
+              </p>
               <p className="text-lg font-semibold text-white/90 mb-1">{s.label}</p>
               <p className="text-sm text-white/50">{s.sub}</p>
             </FadeIn>
@@ -936,13 +1045,13 @@ function FacultySection() {
       <div className="container mx-auto px-6 md:px-12 xl:px-20">
         <div className="max-w-6xl mx-auto">
           <FadeIn className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Faculty</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Our Mentors</p>
             <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
               The People Behind the{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Program</span>
             </h3>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto text-justify">
-               Industry veterans who&apos;ve delivered on real enterprise projects, now mentoring the next generation.
+              Industry veterans who&apos;ve delivered on real enterprise projects, now mentoring the next generation.
             </p>
           </FadeIn>
 
@@ -968,18 +1077,17 @@ function FacultySection() {
                   <div className="flex flex-wrap gap-2 mb-4">
                     <span className="text-[11px] font-bold uppercase tracking-wider text-brand-600 bg-brand-50 border border-brand-100 px-3 py-1 rounded-lg">Orane Consulting</span>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-lg">Axentia AI</span>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 border border-amber-100 px-3 py-1 rounded-lg">Daksha</span>
                   </div>
                   <p className="text-xs text-brand-600 font-semibold uppercase tracking-wider mb-2">{faculty[0].specialization}</p>
                   <p className="text-slate-600 leading-relaxed mb-6">{faculty[0].bio}</p>
                   <div className="grid grid-cols-3 gap-3 mb-6">
                     {[
-                      { n: '30+', l: 'Years Experience' },
-                      { n: '500+', l: 'Consultants Led' },
-                      { n: '10+', l: 'Countries' },
+                      { end: 30, suffix: '+', l: 'Years Experience' },
+                      { end: 500, suffix: '+', l: 'Consultants Led' },
+                      { end: 10, suffix: '+', l: 'Countries' },
                     ].map((s) => (
                       <div key={s.l} className="text-center bg-white rounded-xl p-3 border border-slate-100">
-                        <p className="text-xl font-bold text-slate-900">{s.n}</p>
+                        <p className="text-xl font-bold text-slate-900"><AnimatedCounter end={s.end} suffix={s.suffix} /></p>
                         <p className="text-[10px] text-slate-500 font-medium">{s.l}</p>
                       </div>
                     ))}
@@ -1100,13 +1208,13 @@ function CeremonySection() {
       <div className="container mx-auto px-6 md:px-12 xl:px-20">
         <div className="max-w-6xl mx-auto">
           <FadeIn className="text-center mb-6">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Life at Daksha</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Life at Axentia.AI</p>
             <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4">
               Inside the{' '}
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Experience</span>
             </h3>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-4 text-justify">
-               A first-hand look at how our cohorts learn, collaborate, and graduate into consulting careers.
+              A first-hand look at how our cohorts learn, collaborate, and graduate into consulting careers.
             </p>
           </FadeIn>
 
@@ -1115,7 +1223,7 @@ function CeremonySection() {
             <div className="relative max-w-4xl mx-auto mb-14 rounded-2xl overflow-hidden shadow-xl border border-slate-200 aspect-video bg-slate-900">
               <iframe
                 src="https://www.youtube.com/embed/tTpmml4ndWM"
-                title="Daksha Career Accelerator"
+                title="Axentia.AI Career Accelerator"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full"
@@ -1239,7 +1347,7 @@ function FAQSection() {
           </FadeIn>
           <FadeIn delay={0.05}>
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-12">
-              Common questions.
+              Commonly Asked Questions
             </h3>
           </FadeIn>
 
@@ -1300,7 +1408,7 @@ function CTASection() {
             <FadeIn>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 leading-tight max-w-2xl">
                 Ready to start your{' '}
-                <span className="font-[family-name:var(--font-playfair)] italic text-accent-300">journey</span>?
+                <span className="font-[family-name:var(--font-playfair)] italic text-accent-300">journey?</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>

@@ -53,7 +53,7 @@ export function HowItWorks() {
                         Learn. Apply. Accelerate.
                     </h2>
                     <p className="text-lg text-slate-600 max-w-2xl">
-                        Daksha follows a clear progression. You begin with structured learning and move into supervised project work seamlessly.
+                        Axentia.AI follows a clear progression. You begin with structured learning and move into supervised project work seamlessly.
                     </p>
                 </div>
 

@@ -1,31 +1,33 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { Button } from '@/components/ui/Button';
-import { Users, Briefcase, GraduationCap, Building2, ArrowRight, CheckCircle2, Cpu, Target, Layers, Network } from 'lucide-react';
+import { Users, Briefcase, Building2, ArrowRight, CheckCircle2, Cpu, Layers } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 const valuePropCards = [
     {
-        icon: <GraduationCap className="w-7 h-7 text-brand-500" />,
+        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop&q=80',
         title: 'Pre-trained, Deployment-Ready Talent',
         desc: 'Our graduates arrive with 10 months of hands-on SAP training and apprenticeship experience, not just classroom theory.',
     },
     {
-        icon: <Cpu className="w-7 h-7 text-brand-500" />,
+        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop&q=80',
         title: 'AI-Era Consulting Capability',
         desc: 'Every program integrates AI tools and thinking into the SAP consulting process, so graduates are prepared for what enterprises actually need.',
     },
     {
-        icon: <Network className="w-7 h-7 text-brand-500" />,
+        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&q=80',
         title: 'Backed by 25+ Years of Delivery',
         desc: 'Axentia.AI is built on Orane Consulting\'s enterprise SAP legacy, giving us unique credibility and curriculum depth.',
     },
     {
-        icon: <Target className="w-7 h-7 text-brand-500" />,
+        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop&q=80',
         title: 'Placement-First by Design',
         desc: 'Our model is structured around outcomes. Every cohort is prepared specifically for enterprise deployment, not generic employability.',
     },
@@ -60,10 +62,10 @@ const partnershipModels = [
 ];
 
 const impactStats = [
-    { value: '100+', label: 'Careers launched through our programs' },
-    { value: '95%', label: 'Placement success rate' },
-    { value: '4+', label: 'Countries where graduates are working' },
-    { value: '30+', label: 'Enterprise hiring partners' },
+    { end: 100, suffix: '+', label: 'Careers launched through our programs' },
+    { end: 95, suffix: '%', label: 'Placement success rate' },
+    { end: 4, suffix: '+', label: 'Countries where graduates are working' },
+    { end: 30, suffix: '+', label: 'Enterprise hiring partners' },
 ];
 
 export default function EnterprisesPage() {
@@ -106,7 +108,7 @@ export default function EnterprisesPage() {
                             <span className="inline-block px-3 py-1 rounded-full bg-brand-500/20 border border-brand-500/30 text-brand-300 text-sm font-semibold mb-6">
                                 For Enterprises
                             </span>
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-tight text-left">
                                 Building Capability{' '}
                                 <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
                                     Together
@@ -138,16 +140,25 @@ export default function EnterprisesPage() {
                             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                                 Why Enterprises Work With Axentia.AI
                             </motion.h2>
-                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-slate-600 text-justify">
+                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-2xl text-slate-600 text-center">
                                 We don&apos;t just supply candidates. We build enterprise-ready consultants from the ground up.
                             </motion.p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {valuePropCards.map((card, idx) => (
-                                <motion.div key={card.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-brand-300 hover:shadow-lg transition-all group">
-                                    <div className="w-14 h-14 rounded-xl bg-brand-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">{card.icon}</div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3">{card.title}</h3>
-                                    <p className="text-slate-600 text-sm leading-relaxed">{card.desc}</p>
+                                <motion.div key={card.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-brand-300 hover:shadow-lg transition-all group">
+                                    <div className="relative w-full h-48 overflow-hidden">
+                                        <Image
+                                            src={card.image}
+                                            alt={card.title}
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                    </div>
+                                    <div className="p-8">
+                                        <h3 className="text-xl font-bold text-slate-900 mb-3 text-left">{card.title}</h3>
+                                        <p className="text-slate-600 text-sm leading-relaxed text-left">{card.desc}</p>
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>
@@ -192,12 +203,12 @@ export default function EnterprisesPage() {
                 {/* Partnership Models */}
                 <section id="partnerships" className="py-24 bg-white border-b border-slate-200">
                     <div className="container mx-auto px-4 md:px-6">
-                        <div className="text-center max-w-2xl mx-auto mb-16">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
                             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                                 Partnership Models
                             </motion.h2>
-                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-lg text-slate-600 text-justify">
-                                Three ways to work with Axentia.AI — choose the model that fits your enterprise needs.
+                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-xl text-slate-600 text-center">
+                                Three ways to work with Axentia.AI, choose the model that fits your enterprise needs.
                             </motion.p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -227,7 +238,7 @@ export default function EnterprisesPage() {
                     <div className="container mx-auto px-4 md:px-6 max-w-6xl">
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
                             <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">How the Talent Pipeline Works</h2>
-                            <p className="text-lg text-slate-600">From training intake to deployment — a structured, transparent model.</p>
+                            <p className="text-lg text-slate-600">From training intake to deployment, a structured, transparent model.</p>
                         </motion.div>
 
                         {/* Desktop: horizontal steps with connecting line */}
@@ -237,9 +248,9 @@ export default function EnterprisesPage() {
 
                             <div className="grid grid-cols-4 gap-8 relative">
                                 {[
-                                    { step: '01', title: 'Identify Needs', desc: 'Tell us your requirements — module expertise, batch size, timeline.' },
+                                    { step: '01', title: 'Identify Needs', desc: 'Tell us your requirements, module expertise, batch size, timeline.' },
                                     { step: '02', title: 'Train Talent', desc: 'We enroll and train candidates matched to your requirements.' },
-                                    { step: '03', title: 'Apprenticeship', desc: 'Candidates complete paid apprenticeship — on real or shadow projects.' },
+                                    { step: '03', title: 'Apprenticeship', desc: 'Candidates complete paid apprenticeship, on real or shadow projects.' },
                                     { step: '04', title: 'Deploy', desc: 'Deployment-ready consultants join your team, credentialled and experienced.' },
                                 ].map((item, idx) => (
                                     <motion.div
@@ -265,7 +276,7 @@ export default function EnterprisesPage() {
                         {/* Mobile: vertical timeline */}
                         <div className="md:hidden space-y-0">
                             {[
-                                { step: '01', title: 'Identify Needs', desc: 'Tell us your requirements — module expertise, batch size, timeline.' },
+                                { step: '01', title: 'Identify Needs', desc: 'Tell us your requirements, module expertise, batch size, timeline.' },
                                 { step: '02', title: 'Train Talent', desc: 'We enroll and train candidates matched to your requirements.' },
                                 { step: '03', title: 'Apprenticeship', desc: 'Candidates complete paid apprenticeship — on real or shadow projects.' },
                                 { step: '04', title: 'Deploy', desc: 'Deployment-ready consultants join your team, credentialled and experienced.' },
@@ -306,7 +317,7 @@ export default function EnterprisesPage() {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
                             {impactStats.map((stat, idx) => (
                                 <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="text-center">
-                                    <p className="text-3xl md:text-4xl font-black text-brand-600 mb-2">{stat.value}</p>
+                                    <p className="text-3xl md:text-4xl font-black text-brand-600 mb-2"><AnimatedCounter end={stat.end} suffix={stat.suffix} /></p>
                                     <p className="text-slate-600 text-sm leading-relaxed">{stat.label}</p>
                                 </motion.div>
                             ))}

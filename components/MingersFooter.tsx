@@ -7,7 +7,7 @@ const footerLinks = {
     Company: [
         { name: 'About Us', href: '/about' },
         { name: 'Our Mission', href: '/about#mission' },
-        { name: 'Faculty', href: '/faculty' },
+        { name: 'Mentors', href: '/faculty' },
         { name: 'Enterprises', href: '/enterprises' },
         { name: 'Community Forum', href: '/forum', target: '_blank' },
     ],
@@ -66,7 +66,7 @@ export function MingersFooter() {
                                 </Link>
                             </div>
                             <p className="text-slate-400 text-[10px] md:text-sm mt-2 md:mt-8">
-                                200+ students &bull; 4+ countries &bull; Placement-first community
+                                200+ students &bull; 4+ countries &bull; Capability enhancement platform
                             </p>
                         </div>
                     </div>
@@ -115,15 +115,15 @@ export function MingersFooter() {
                 <div className="container mx-auto px-4 md:px-8 xl:px-12 pb-4 md:pb-8 relative z-10">
                     <div className="border-t border-white/10 pt-4 md:pt-8">
                         <div className="flex flex-wrap gap-3 md:gap-8 text-xs md:text-sm text-slate-400">
-                            <a href="tel:+919355181110" className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
-                                <Phone className="w-4 h-4 text-brand-500" /> +91-9355181110
+                            <a href="tel:+9217665361" className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
+                                <Phone className="w-4 h-4 text-brand-500" /> +91-9217665361
                             </a>
-                            <a href="mailto:sap-apprentice@axentia.ai" className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
-                                <Mail className="w-4 h-4 text-brand-500" /> sap-apprentice@axentia.ai
+                            <a href="mailto:info@axentiaai.com " className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
+                                <Mail className="w-4 h-4 text-brand-500" /> info@axentiaai.com
                             </a>
                             <div className="flex items-center gap-2 font-medium">
                                 <MapPin className="w-4 h-4 text-brand-500 shrink-0" />
-                                1st Floor, Plot No. 01A, Sector-73, Noida - 201301
+                                1st Floor, IDEMIA Building, Plot No - 1 - A, Sector 73, Noida, Uttar Pradesh 201316
                             </div>
                         </div>
                     </div>
@@ -157,14 +157,14 @@ export function MingersFooter() {
                     {/* Legal & Copyright */}
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-2 md:gap-4 text-xs md:text-sm font-medium text-slate-500">
                         <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
-                            <Link href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
+                            <Link href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
                             <span className="text-white/10">|</span>
-                            <Link href="#" className="hover:text-slate-300 transition-colors">Terms & Conditions</Link>
+                            <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms & Conditions</Link>
                             <span className="text-white/10">|</span>
-                            <Link href="#" className="hover:text-slate-300 transition-colors">Refund Policy</Link>
+                            <Link href="/refund" className="hover:text-slate-300 transition-colors">Refund Policy</Link>
                         </div>
                         <p>
-                            &copy; 2026 Axentia.AI. All rights reserved.
+                            &copy; 2026 Axentia.AI | All rights reserved.
                         </p>
                     </div>
 

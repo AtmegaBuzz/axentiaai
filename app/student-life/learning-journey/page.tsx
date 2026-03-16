@@ -215,7 +215,7 @@ export default function LearningJourneyPage() {
         <div className="container mx-auto px-4 md:px-8 xl:px-12 text-center">
           <FadeIn>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
-              Ready to Start Your Journey?
+              Ready To Start Your Journey?
             </h2>
             <p className="text-lg text-slate-500 mb-10 max-w-xl mx-auto">
               Explore programs or book a conversation to find the right path for you.

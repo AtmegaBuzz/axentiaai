@@ -161,7 +161,7 @@ function AuthModal({ isOpen, onClose, initialMode = 'login' }: { isOpen: boolean
                     {mode === 'login' ? 'Welcome back' : 'Create an account'}
                   </h2>
                   <p className="text-sm text-slate-500 mt-1">
-                    {mode === 'login' ? 'Sign in to join the discussion' : 'Join the Daksha community'}
+                    {mode === 'login' ? 'Sign in to join the discussion' : 'Join the Axentia.AI community'}
                   </p>
                 </div>
                 <button onClick={onClose} className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors">

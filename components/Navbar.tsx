@@ -38,10 +38,10 @@ const megaMenuData = {
     },
     'Faculty': {
         items: [
-            { name: 'Meet the Faculty', href: '/faculty', description: 'Program directors, domain experts, and industry mentors' },
+            { name: 'Meet the Mentors', href: '/faculty', description: 'Program directors, domain experts, and industry mentors' },
         ],
         featured: {
-            label: "FACULTY",
+            label: "MENTORS",
             title: "Learn From People Who Have Built Enterprise Systems",
             description: "Our faculty bring decades of real SAP delivery experience into every session.",
             href: "/faculty"
@@ -211,11 +211,10 @@ export function Navbar() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-colors transition-shadow duration-300 will-change-transform ${
-                isScrolled || openDropdown
+            className={`fixed top-0 left-0 right-0 z-50 transition-colors transition-shadow duration-300 will-change-transform ${isScrolled || openDropdown
                     ? 'bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm'
                     : 'bg-transparent'
-            }`}
+                }`}
             style={{ transform: 'translateZ(0)' }}
         >
             <div className="px-[5%] flex items-center justify-between h-16">
@@ -237,9 +236,8 @@ export function Navbar() {
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 ease-out ${
-                                    (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
-                                }`}
+                                className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 ease-out ${(isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
+                                    }`}
                             >
                                 {item.name}
                             </Link>
@@ -251,11 +249,10 @@ export function Navbar() {
                                 onMouseLeave={handleMouseLeave}
                             >
                                 <button
-                                    className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-all duration-200 ease-out cursor-default ${
-                                        openDropdown === item.name
+                                    className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-all duration-200 ease-out cursor-default ${openDropdown === item.name
                                             ? 'text-brand-600'
                                             : (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
-                                    }`}
+                                        }`}
                                 >
                                     {item.name}
                                     <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${openDropdown === item.name ? 'rotate-180' : ''}`} />

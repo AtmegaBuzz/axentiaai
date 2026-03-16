@@ -50,7 +50,7 @@ export function CommunityVideo() {
                     className="flex flex-col items-center gap-4"
                 >
                     <p className="text-white/60 text-sm font-medium tracking-wide">
-                        200+ students &bull; 4+ countries &bull; Placement-first community
+                        200+ students &bull; 4+ countries &bull; Capability enhancement platform
                     </p>
                     <Link
                         href="/forum"

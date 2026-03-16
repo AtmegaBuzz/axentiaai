@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
 function FadeIn({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   return (
@@ -58,11 +59,10 @@ export default function CulturePage() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-white max-w-4xl mx-auto leading-tight"
           >
-            "More than skills — we build{' '}
+            "At Axentia.AI, we believe in the power of exposure to{' '}
             <span className="font-[family-name:var(--font-playfair)] italic text-accent-300">
-              confidence, community,
-            </span>{' '}
-            and character."
+              diverse cultures
+            </span>"
           </motion.blockquote>
         </div>
       </section>
@@ -72,10 +72,10 @@ export default function CulturePage() {
         <div className="container mx-auto px-4 md:px-8 xl:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { value: '4+', label: 'Countries Represented' },
-              { value: '200+', label: 'Students Enrolled' },
-              { value: '95%', label: 'Placement Success' },
-              { value: '10+', label: 'Months Career Journey' },
+              { end: 4, suffix: '+', label: 'Countries Represented' },
+              { end: 200, suffix: '+', label: 'Students Enrolled' },
+              { end: 95, suffix: '%', label: 'Placement Success' },
+              { end: 10, suffix: '+', label: 'Months Career Journey' },
             ].map((stat, i) => (
               <FadeIn key={stat.label} delay={i * 0.07}>
                 <motion.p
@@ -85,7 +85,7 @@ export default function CulturePage() {
                   viewport={{ once: true }}
                   transition={{ type: 'spring', stiffness: 120, damping: 14, delay: i * 0.08 }}
                 >
-                  {stat.value}
+                  <AnimatedCounter end={stat.end} suffix={stat.suffix} />
                 </motion.p>
                 <p className="text-sm font-semibold text-slate-600">{stat.label}</p>
               </FadeIn>
@@ -101,7 +101,7 @@ export default function CulturePage() {
             <div className="text-5xl text-brand-200 font-serif leading-none mb-2">&ldquo;</div>
             <p className="text-2xl md:text-3xl font-bold text-slate-900 leading-relaxed">
               Students from{' '}
-              <span className="text-brand-600 font-[family-name:var(--font-playfair)] italic text-[1.1em]">4+ countries</span>{' '}
+              <span className="text-brand-600 font-[family-name:var(--font-playfair)] italic text-[1.1em]">all across the country</span>{' '}
               come together at Axentia.AI, creating a diverse and global learning environment.
             </p>
           </FadeIn>
@@ -114,7 +114,7 @@ export default function CulturePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <FadeIn>
               <p className="text-xs font-bold uppercase tracking-widest text-brand-500 mb-4">Life at Axentia.AI</p>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-6 text-left">
                 Beyond Mastering AI{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">& Enterprise Systems</span>
               </h2>
