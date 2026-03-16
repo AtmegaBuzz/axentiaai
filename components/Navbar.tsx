@@ -7,20 +7,6 @@ import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const megaMenuData = {
-    'Why AxentiaAI': {
-        items: [
-            { name: 'About Axentia.AI', href: '/about', description: 'Our story, mission, and the team behind the platform' },
-            { name: 'Our Programs', href: '/programs', description: 'Three programs built for every stage of your career' },
-            { name: 'Student Life', href: '/student-life', description: 'Community, culture, and learning beyond the classroom' },
-            { name: 'Enterprises', href: '/enterprises', description: 'Build capability pipelines with Axentia.AI' },
-        ],
-        featured: {
-            label: "OUR EDGE",
-            title: "25+ Years of SAP Enterprise Delivery",
-            description: "Built on Orane Consulting's legacy, real projects, real mentors, real outcomes.",
-            href: "/about"
-        }
-    },
     'Programs': {
         items: [
             { name: 'DCAP, Career Accelerator', href: '/programs?tab=dcap', description: '10-month foundation training + paid apprenticeship' },
@@ -82,7 +68,6 @@ function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { men
     if (!menuData) return null;
 
     const createHeading = (text: string) => {
-        if (text === 'Why AxentiaAI') return (<>Why <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">AxentiaAI</span></>);
         if (text === 'Programs') return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Programs</span></>);
         if (text === 'Student Life') return (<><span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Student</span> Life</>);
         if (text === 'Faculty') return (<>Our <span className="bg-brand-600/10 px-2 py-1 rounded-md text-brand-600 font-bold">Faculty</span></>);
@@ -201,7 +186,7 @@ export function Navbar() {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const menuItems = [
-        { name: 'Why AxentiaAI' },
+        { name: 'Why AxentiaAI', href: '/about' },
         { name: 'Programs' },
         { name: 'Student Life' },
         { name: 'Faculty' },
@@ -247,29 +232,41 @@ export function Navbar() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden xl:flex items-center">
-                    {menuItems.map((item) => (
-                        <div
-                            key={item.name}
-                            className="relative"
-                            onMouseEnter={() => handleMouseEnter(item.name)}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            <button
-                                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-all duration-200 ease-out cursor-default ${
-                                    openDropdown === item.name
-                                        ? 'text-brand-600'
-                                        : (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
+                    {menuItems.map((item) =>
+                        item.href ? (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 ease-out ${
+                                    (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
                                 }`}
                             >
                                 {item.name}
-                                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${openDropdown === item.name ? 'rotate-180' : ''}`} />
-                            </button>
-                        </div>
-                    ))}
+                            </Link>
+                        ) : (
+                            <div
+                                key={item.name}
+                                className="relative"
+                                onMouseEnter={() => handleMouseEnter(item.name)}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                <button
+                                    className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-all duration-200 ease-out cursor-default ${
+                                        openDropdown === item.name
+                                            ? 'text-brand-600'
+                                            : (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
+                                    }`}
+                                >
+                                    {item.name}
+                                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${openDropdown === item.name ? 'rotate-180' : ''}`} />
+                                </button>
+                            </div>
+                        )
+                    )}
                 </nav>
 
                 {/* Full-width dropdowns positioned relative to viewport */}
-                {menuItems.map((item) => (
+                {menuItems.filter((item) => !item.href).map((item) => (
                     <MegaMenuDropdown
                         key={`dropdown-${item.name}`}
                         menuKey={item.name}
@@ -309,29 +306,41 @@ export function Navbar() {
                         className="xl:hidden bg-white border-b border-slate-200 shadow-xl max-h-[calc(100vh-4rem)] overflow-y-auto"
                     >
                         <div className="px-[5%] py-6 space-y-5">
-                            {menuItems.map((item) => (
-                                <div key={item.name}>
-                                    <div className="space-y-2">
-                                        <h3 className="text-sm font-bold text-brand-600 uppercase tracking-wider">
-                                            {item.name}
-                                        </h3>
-                                        {megaMenuData[item.name as keyof typeof megaMenuData]?.items.map((subItem) => (
-                                            <Link
-                                                key={subItem.name}
-                                                href={subItem.href}
-                                                className="flex items-center gap-3 p-2.5 ml-2 rounded-lg hover:bg-slate-50"
-                                                onClick={() => setMobileMenuOpen(false)}
-                                            >
-                                                <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
-                                                <div>
-                                                    <span className="text-sm font-medium text-slate-700">{subItem.name}</span>
-                                                    <p className="text-xs text-slate-400">{subItem.description}</p>
-                                                </div>
-                                            </Link>
-                                        ))}
+                            {menuItems.map((item) =>
+                                item.href ? (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
+                                        <span className="text-sm font-bold text-brand-600 uppercase tracking-wider">{item.name}</span>
+                                    </Link>
+                                ) : (
+                                    <div key={item.name}>
+                                        <div className="space-y-2">
+                                            <h3 className="text-sm font-bold text-brand-600 uppercase tracking-wider">
+                                                {item.name}
+                                            </h3>
+                                            {megaMenuData[item.name as keyof typeof megaMenuData]?.items.map((subItem) => (
+                                                <Link
+                                                    key={subItem.name}
+                                                    href={subItem.href}
+                                                    className="flex items-center gap-3 p-2.5 ml-2 rounded-lg hover:bg-slate-50"
+                                                    onClick={() => setMobileMenuOpen(false)}
+                                                >
+                                                    <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
+                                                    <div>
+                                                        <span className="text-sm font-medium text-slate-700">{subItem.name}</span>
+                                                        <p className="text-xs text-slate-400">{subItem.description}</p>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                )
+                            )}
                             <div className="pt-4 border-t border-slate-200 space-y-3">
                                 <Link
                                     href="/programs#apply"
