@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
 export function WhyChooseUs() {
     return (
@@ -67,12 +68,12 @@ export function WhyChooseUs() {
                             className="grid grid-cols-3 gap-4 mt-10"
                         >
                             {[
-                                { value: '25+', label: 'Years Experience', sub: 'SAP Project Delivery' },
-                                { value: '95%', label: 'Placement Rate', sub: 'Industry-Leading' },
-                                { value: '500+', label: 'Consultants', sub: 'Trained & Deployed' },
+                                { end: 25, suffix: '+', label: 'Years Experience', sub: 'SAP Project Delivery' },
+                                { end: 95, suffix: '%', label: 'Placement Rate', sub: 'Industry-Leading' },
+                                { end: 500, suffix: '+', label: 'Consultants', sub: 'Trained & Deployed' },
                             ].map((stat) => (
                                 <div key={stat.label} className="text-center">
-                                    <p className="text-2xl sm:text-3xl font-black text-brand-600">{stat.value}</p>
+                                    <p className="text-2xl sm:text-3xl font-black text-brand-600"><AnimatedCounter end={stat.end} suffix={stat.suffix} /></p>
                                     <p className="text-xs sm:text-sm font-semibold text-slate-800 mt-1">{stat.label}</p>
                                     <p className="text-xs text-slate-400 mt-0.5 hidden sm:block">{stat.sub}</p>
                                 </div>

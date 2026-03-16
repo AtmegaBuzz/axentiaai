@@ -100,7 +100,7 @@ export function Audience() {
                                 Is This Right For <span className="font-cursive italic text-brand-600 text-[1.1em]">You?</span>
                             </h3>
                             <p className="text-slate-600 text-lg">
-                                We&apos;re looking for individuals who think long-term. Daksha requires immense focus and commitment to transform your career foundation.
+                                We&apos;re looking for individuals who think long-term. Axentia.AI requires immense focus and commitment to transform your career foundation.
                             </p>
                         </div>
 
@@ -127,7 +127,7 @@ export function Audience() {
                             <div>
                                 <h4 className="font-bold text-rose-700 text-xl mb-8 flex items-center gap-3">
                                     <XCircle className="w-7 h-7 text-rose-500 fill-rose-100" />
-                                    Daksha may not fit if you:
+                                    Axentia.AI may not fit if you:
                                 </h4>
                                 <ul className="space-y-6">
                                     {nonFits.map((fit, i) => (

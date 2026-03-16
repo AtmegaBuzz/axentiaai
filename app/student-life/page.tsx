@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { ArrowRight, Users, Award } from 'lucide-react';
 import Link from 'next/link';
 import Testimonials from '@/components/sections/Testimonials';
@@ -55,7 +56,7 @@ export default function StudentLifePage() {
               <span className="font-[family-name:var(--font-playfair)] italic text-brand-300">Starts to Feel Real</span>
             </h1>
           </FadeIn>
-          <FadeIn delay={0.12} className="text-center max-w-2xl mx-auto mb-16">
+          <FadeIn delay={0.12} className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-white/70 text-lg">
               Where concepts meet reality, and students discover what consulting actually feels like.
             </p>
@@ -83,7 +84,7 @@ export default function StudentLifePage() {
           {/* Descriptive text */}
           <div className="max-w-3xl mx-auto">
             <FadeIn>
-              <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">
+              <p className="text-lg text-white/70 leading-relaxed mb-6 text-center">
                 Most programs teach concepts, but at Axentia.AI, you start applying them almost immediately. Student life here isn't about sitting through lectures all day. It's about building the habits, thinking, and confidence needed to work in real consulting environments.
               </p>
             </FadeIn>
@@ -92,7 +93,7 @@ export default function StudentLifePage() {
                 <p className="text-2xl font-bold text-white leading-relaxed">
                   You learn SAP.<br />
                   You use AI.<br />
-                  <span className="text-brand-300 font-[family-name:var(--font-playfair)] italic text-[1.1em]">
+                  <span className="text-accent-300 font-[family-name:var(--font-playfair)] italic text-[1.1em]">
                     And most importantly, you practice solving problems the way consultants actually do.
                   </span>
                 </p>
@@ -174,7 +175,7 @@ export default function StudentLifePage() {
                   config={{
                     width: 800,
                     height: 800,
-                    onRender: () => {},
+                    onRender: () => { },
                     devicePixelRatio: 2,
                     phi: 0,
                     theta: 0.3,
@@ -207,7 +208,7 @@ export default function StudentLifePage() {
 
             <FadeIn delay={0.1}>
               <div className="space-y-6">
-                <p className="text-2xl md:text-3xl font-bold text-slate-900 leading-snug">
+                <p className="text-2xl md:text-3xl font-bold text-slate-900 leading-snug text-left">
                   The Axentia.AI community begins in the classroom and continues throughout your career.
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed">
@@ -215,12 +216,12 @@ export default function StudentLifePage() {
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                   {[
-                    { label: 'Alumni Placed', value: '100+' },
-                    { label: 'Countries', value: '4+' },
-                    { label: 'Avg. First CTC', value: '₹6-12L' },
+                    { label: 'Alumni Placed', end: 100, suffix: '+' },
+                    { label: 'Countries', end: 4, suffix: '+' },
+                    { label: 'Avg. First CTC', end: 0, suffix: '', display: '₹6-12L' },
                   ].map((stat) => (
                     <div key={stat.label} className="bg-slate-50 rounded-2xl p-4 text-center border border-slate-100">
-                      <p className="text-2xl font-black text-brand-600">{stat.value}</p>
+                      <p className="text-2xl font-black text-brand-600">{'display' in stat && stat.display ? stat.display : <AnimatedCounter end={stat.end} suffix={stat.suffix} />}</p>
                       <p className="text-xs text-slate-500 mt-1 font-medium">{stat.label}</p>
                     </div>
                   ))}

@@ -51,7 +51,7 @@ export function Journey() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight"
                     >
-                        A typical progression after entering Daksha
+                        A typical progression after entering Axentia.AI
                     </motion.h2>
                 </div>
 

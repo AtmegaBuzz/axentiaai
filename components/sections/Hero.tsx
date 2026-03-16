@@ -31,14 +31,14 @@ export function Hero() {
                     poster="/videos/hero-poster.jpg"
                     className="w-full h-full object-cover"
                 >
-                    <source src="/videos/hero-video.mp4" type="video/mp4" />
+                    <source src="/videos/hero-section-2.mp4" type="video/mp4" />
                 </video>
                 <div className="absolute inset-0 bg-black/50" />
             </div>
 
             {/* Hero Content */}
-            <div className="relative z-10 flex-1 flex items-center">
-                <div className="container mx-auto px-4 md:px-6 pt-32 pb-16">
+            <div className="relative z-10 flex-1 flex items-end">
+                <div className="container mx-auto px-4 md:px-6 pt-32 pb-20 md:pb-28">
                     <div className="max-w-5xl">
                         <motion.h1
                             id="hero-heading"
@@ -146,7 +146,6 @@ export function Hero() {
                                 width={logo.width}
                                 height={logo.height}
                                 className="h-7 w-auto object-contain"
-                                style={{ filter: 'brightness(0) invert(1)', opacity: 0.35 }}
                                 priority
                             />
                         </div>

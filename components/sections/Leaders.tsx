@@ -86,7 +86,7 @@ export function Leaders() {
                         transition={{ delay: 0.08 }}
                         className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4"
                     >
-                        Backbone of Axentia.AI
+                        Backbone of <span className="bg-gradient-to-r from-brand-600 to-brand-400 bg-clip-text text-transparent">Axentia.AI</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 15 }}

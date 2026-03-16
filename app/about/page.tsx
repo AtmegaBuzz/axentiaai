@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Linkedin, ExternalLink, ChevronDown } from 'lucide-react';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
 /* ═══════════════════════════════════════════════════════════════
    INLINE SVG ICONS
@@ -234,7 +235,7 @@ function LegacySection() {
             <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500 mb-4">Our Legacy</p></FadeIn>
             <FadeIn delay={0.05}>
               <div className="relative mb-8">
-                <svg className="absolute -top-2 -left-1 w-6 h-6 text-brand-200" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
+                <svg className="w-4 h-4 text-brand-300 mb-2" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
                 <blockquote className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium pl-6 border-l-4 border-brand-300">
                   In enterprise consulting, readiness shows in the details — how you document, how you communicate, how you handle responsibility inside a team.{' '}
                   <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Axentia AI</span>{' '}
@@ -244,18 +245,26 @@ function LegacySection() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-brand-500/30">M</div>
+                <div className="w-14 h-14 rounded-full overflow-hidden shadow-lg shadow-brand-500/30">
+                  <Image
+                    src="/images/pfps/manuj_gupta.jpeg"
+                    alt="Manuj Gupta"
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div>
                   <p className="text-lg font-bold text-slate-900">Manuj Gupta</p>
                   <p className="text-sm text-slate-500">Founder & CEO, Orane Consulting</p>
                   <p className="text-sm text-brand-600 font-medium">Founder, Axentia.AI</p>
                 </div>
-                <a href="https://www.linkedin.com/in/manuj-gupta" target="_blank" rel="noopener noreferrer" className="ml-auto w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white hover:bg-[#004182] transition-colors"><Linkedin className="w-4 h-4" /></a>
+                <a href="https://www.linkedin.com/in/manuj123/" target="_blank" rel="noopener noreferrer" className="ml-auto w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white hover:bg-[#004182] transition-colors"><Linkedin className="w-4 h-4" /></a>
               </div>
             </FadeIn>
             <FadeIn delay={0.15}>
               <p className="text-slate-600 leading-relaxed mb-8">
-                Manuj Gupta founded Orane Consulting in 2009. The firm has grown into a 500+ consultant SAP practice with delivery presence across India, Canada, Portugal, and Kenya. Daksha extends those same delivery standards into a focused training and apprenticeship pathway.
+                Manuj Gupta founded Orane Consulting in 2009. The firm has grown into a 500+ consultant SAP practice with delivery presence across India, Canada, Portugal, and Kenya. Axentia.AI extends those same delivery standards into a focused training and apprenticeship pathway.
               </p>
             </FadeIn>
             {/* Filler image strip */}
@@ -285,13 +294,13 @@ function LegacySection() {
               </div>
               <div className="grid grid-cols-2 gap-3 relative p-6 bg-slate-50 rounded-3xl border border-slate-100">
                 {[
-                  { value: '30+', label: 'Years', sub: 'Enterprise Experience' },
-                  { value: '500+', label: 'Consultants', sub: 'At Orane Consulting' },
-                  { value: '10+', label: 'Countries', sub: 'Global Delivery' },
-                  { value: '2009', label: 'Founded', sub: 'Orane Consulting' },
+                  { end: 30, suffix: '+', label: 'Years', sub: 'Enterprise Experience' },
+                  { end: 500, suffix: '+', label: 'Consultants', sub: 'At Orane Consulting' },
+                  { end: 10, suffix: '+', label: 'Countries', sub: 'Global Delivery' },
+                  { end: 2009, suffix: '', label: 'Founded', sub: 'Orane Consulting' },
                 ].map((s) => (
                   <div key={s.label} className="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-brand-200 transition-all duration-200">
-                    <p className="text-4xl font-black text-brand-700 leading-none mb-1 tracking-tight">{s.value}</p>
+                    <p className="text-4xl font-black text-brand-700 leading-none mb-1 tracking-tight"><AnimatedCounter end={s.end} suffix={s.suffix} /></p>
                     <p className="text-sm font-bold text-slate-800 mt-1">{s.label}</p>
                     <p className="text-[11px] font-medium text-slate-400 mt-0.5 leading-tight">{s.sub}</p>
                   </div>
@@ -318,7 +327,7 @@ const milestones = [
   { year: '2012', title: 'Global Expansion', desc: 'Operations extend to Canada, Portugal, and Kenya, becoming a truly international SAP delivery organisation.', icon: <GlobeIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?w=300&h=160&fit=crop&q=80' },
   { year: '2022', title: 'The Talent Gap Emerges', desc: '500+ consultants deployed, but the market demand for AI-ready SAP talent far outpaces what traditional hiring can deliver.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=300&h=160&fit=crop&q=80' },
   { year: '2024', title: 'Axentia.AI Begins', desc: 'A new idea takes shape: what if we could build consultants, not just hire them? Axentia.AI is founded to solve the capability gap at its source.', icon: <BrainIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&h=160&fit=crop&q=80' },
-  { year: '2025', title: 'Daksha Launches', desc: 'The Daksha Career Accelerator launches: 10 months of classroom training plus paid apprenticeship. First cohort placed in enterprise roles.', icon: <TargetIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300&h=160&fit=crop&q=80' },
+  { year: '2025', title: 'Axentia.AI Launches', desc: 'The Daksha Career Accelerator launches: 10 months of classroom training plus paid apprenticeship. First cohort placed in enterprise roles.', icon: <TargetIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300&h=160&fit=crop&q=80' },
   { year: '2026', title: 'AI-Ready Consultants', desc: '100+ careers launched. Graduates working across SAP S/4HANA, FICO, MM, SD, building the next generation of enterprise consulting talent.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=300&h=160&fit=crop&q=80' },
   { year: 'Next', title: 'The Road Ahead', desc: 'Expanding programs, deepening enterprise partnerships, and building the capability infrastructure needed for the AI era of consulting.', icon: <LightbulbIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=300&h=160&fit=crop&q=80' },
 ];
@@ -588,11 +597,10 @@ function ValuesSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SECTION 6: ECOSYSTEM — Daksha + Axentia + Orane + images
+   SECTION 6: ECOSYSTEM — Axentia.AI + Axentia + Orane + images
    ═══════════════════════════════════════════════════════════════ */
 
 const ecosystem = [
-  { name: 'Daksha', tag: 'Training & Apprenticeship', info: 'DCAP, EAP, Online', desc: '10-month pathways combining classroom learning with supervised apprenticeship.', icon: <TargetIcon className="w-7 h-7" />, grad: 'from-brand-500 to-brand-700', img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=200&fit=crop&q=80' },
   { name: 'Axentia AI', tag: 'Enterprise AI & Automation', info: 'Data, AI, Automation', desc: 'AI-powered solutions for enterprise consulting and digital transformation.', icon: <BrainIcon className="w-7 h-7" />, grad: 'from-indigo-500 to-indigo-700', img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80' },
   { name: 'Orane Consulting', tag: 'SAP Enterprise Delivery', info: '500+ consultants, 4 countries', desc: '15+ year SAP practice — India, Canada, Portugal, Kenya.', icon: <BuildingIcon className="w-7 h-7" />, grad: 'from-accent-500 to-accent-700', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop&q=80' },
 ];
@@ -612,7 +620,7 @@ function EcosystemSection() {
               Be Part of Something <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Bigger</span>
             </h2>
           </FadeIn>
-          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto text-center">We build the capability infrastructure required for the AI era. Our mission is simple: Turn AI potential into real capability.</p></FadeIn>
+          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto text-center">We build the capability infrastructure required for the AI era. <br /> Our mission is simple: Turn AI potential into real capability.</p></FadeIn>
         </div>
 
         <div className="hidden lg:block relative h-12 mb-6 max-w-3xl mx-auto">
@@ -623,7 +631,7 @@ function EcosystemSection() {
           </svg>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {ecosystem.map((e, i) => (
             <FadeIn key={e.name} delay={i * 0.1}>
               <div className="bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl hover:border-brand-200 transition-all group h-full flex flex-col">
@@ -656,7 +664,7 @@ const teamMembers = [
   {
     name: 'Priya Sharma',
     role: 'Head of Academics',
-    company: 'Daksha',
+    company: 'Axentia.AI',
     desc: 'Former SAP Practice Lead with 15+ years of delivery experience.',
     photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&q=80',
     linkedin: '#',
@@ -674,7 +682,7 @@ const teamMembers = [
   {
     name: 'Anita Verma',
     role: 'Head of Placements',
-    company: 'Daksha',
+    company: 'Axentia.AI',
     desc: 'Built talent pipelines for Fortune 500 companies.',
     photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&q=80',
     linkedin: '#',
@@ -692,7 +700,7 @@ const teamMembers = [
   {
     name: 'Meera Patel',
     role: 'Head of Curriculum',
-    company: 'Daksha',
+    company: 'Axentia.AI',
     desc: 'Designed enterprise-grade training for 1000+ professionals.',
     photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&q=80',
     linkedin: '#',
@@ -889,7 +897,6 @@ function TeamSection() {
                   <div className="flex flex-wrap gap-2 mb-4">
                     <span className="text-[11px] font-bold uppercase tracking-wider text-brand-600 bg-brand-50 border border-brand-100 px-3 py-1 rounded-lg">Orane Consulting</span>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-lg">Axentia AI</span>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 border border-amber-100 px-3 py-1 rounded-lg">Daksha</span>
                   </div>
                   <p className="text-slate-600 leading-relaxed mb-6">
                     30+ years in enterprise consulting. Founded Orane Consulting in 2009, growing it into a 500+ consultant SAP practice across India, Canada, Portugal, and Kenya. Now building Axentia AI and the Daksha Career Accelerator.
@@ -898,9 +905,9 @@ function TeamSection() {
                   {/* Animated stats */}
                   <div className="grid grid-cols-3 gap-3 mb-6">
                     {[
-                      { n: '30+', l: 'Years Experience' },
-                      { n: '500+', l: 'Consultants Led' },
-                      { n: '10+', l: 'Countries' },
+                      { end: 30, suffix: '+', l: 'Years Experience' },
+                      { end: 500, suffix: '+', l: 'Consultants Led' },
+                      { end: 10, suffix: '+', l: 'Countries' },
                     ].map((s, si) => (
                       <motion.div
                         key={s.l}
@@ -910,7 +917,7 @@ function TeamSection() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.5 + si * 0.1, type: 'spring', stiffness: 200, damping: 20 }}
                       >
-                        <p className="text-xl font-bold text-slate-900">{s.n}</p>
+                        <p className="text-xl font-bold text-slate-900"><AnimatedCounter end={s.end} suffix={s.suffix} /></p>
                         <p className="text-[10px] text-slate-500 font-medium">{s.l}</p>
                       </motion.div>
                     ))}
@@ -1044,7 +1051,7 @@ function CTASection() {
           <div className="relative z-10 px-8 md:px-16 py-16 md:py-20">
             <FadeIn>
               <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight max-w-2xl">
-                Start a{' '}<span className="font-[family-name:var(--font-playfair)] italic text-accent-300">Conversation</span>.
+                Start a{' '}<span className="font-[family-name:var(--font-playfair)] italic text-accent-300">Conversation</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>

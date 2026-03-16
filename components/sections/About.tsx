@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
 export function About() {
     return (
@@ -30,15 +31,15 @@ export function About() {
 
                         <div className="grid grid-cols-3 gap-4">
                             <div className="p-6 bg-brand-50 rounded-2xl border border-brand-100 flex flex-col justify-center text-center hover:bg-brand-100 transition-colors">
-                                <span className="text-3xl font-bold text-brand-700 block mb-1">30+</span>
+                                <span className="text-3xl font-bold text-brand-700 block mb-1"><AnimatedCounter end={30} suffix="+" /></span>
                                 <span className="text-sm text-brand-600 font-medium">Years</span>
                             </div>
                             <div className="p-6 bg-accent-50 rounded-2xl border border-accent-100 flex flex-col justify-center text-center hover:bg-accent-100 transition-colors">
-                                <span className="text-3xl font-bold text-accent-700 block mb-1">500+</span>
+                                <span className="text-3xl font-bold text-accent-700 block mb-1"><AnimatedCounter end={500} suffix="+" /></span>
                                 <span className="text-sm text-accent-600 font-medium">Consultants</span>
                             </div>
                             <div className="p-6 bg-amber-50 rounded-2xl border border-amber-100 flex flex-col justify-center text-center hover:bg-amber-100 transition-colors">
-                                <span className="text-3xl font-bold text-amber-600 block mb-1">10+</span>
+                                <span className="text-3xl font-bold text-amber-600 block mb-1"><AnimatedCounter end={10} suffix="+" /></span>
                                 <span className="text-sm text-amber-600 font-medium">Countries</span>
                             </div>
                         </div>
@@ -65,7 +66,7 @@ export function About() {
                             Manuj Gupta founded Orane Consulting in 2009. The firm has grown into a 500+ consultant SAP practice with delivery presence across India, Canada, Portugal, and Kenya.
                         </p>
                         <p className="text-lg text-slate-600 leading-relaxed">
-                            As the organisation scaled, one insight remained consistent: structured exposure to real project expectations makes the difference in early careers. Daksha extends the same delivery standards we follow inside Orane into a focused training and apprenticeship pathway.
+                            As the organisation scaled, one insight remained consistent: structured exposure to real project expectations makes the difference in early careers. Axentia.AI extends the same delivery standards we follow inside Orane into a focused training and apprenticeship pathway.
                         </p>
                     </motion.div>
                 </div>
