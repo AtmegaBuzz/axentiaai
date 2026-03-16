@@ -91,7 +91,7 @@ export default function OutcomesPage() {
                     <div className="container mx-auto px-4 md:px-6 text-center">
                         <Linkedin className="w-12 h-12 text-brand-500 mx-auto mb-6" />
                         <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-6">LinkedIn Success Stories</h2>
-                        <p className="text-lg text-slate-600 max-w-xl mx-auto mb-8">Our alumni regularly share their career transformations on LinkedIn. Follow #DakshaAlumni to see their stories.</p>
+                        <p className="text-lg text-slate-600 max-w-xl mx-auto mb-8 text-justify">Our alumni regularly share their career transformations on LinkedIn. Follow #DakshaAlumni to see their stories.</p>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                             {[1, 2, 3].map((i) => (
                                 <div key={i} className="bg-white rounded-2xl p-8 border border-slate-200 h-48 flex items-center justify-center text-slate-400">LinkedIn Post Placeholder {i}</div>

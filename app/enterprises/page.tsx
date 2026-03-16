@@ -110,7 +110,7 @@ export default function EnterprisesPage() {
                             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                                 Why Enterprises Work With Axentia.AI
                             </motion.h2>
-                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-slate-600">
+                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-slate-600 text-justify">
                                 We don&apos;t just supply candidates. We build enterprise-ready consultants from the ground up.
                             </motion.p>
                         </div>
@@ -168,7 +168,7 @@ export default function EnterprisesPage() {
                             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
                                 Partnership Models
                             </motion.h2>
-                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-lg text-slate-600">
+                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-lg text-slate-600 text-justify">
                                 Three ways to work with Axentia.AI — choose the model that fits your enterprise needs.
                             </motion.p>
                         </div>

@@ -118,7 +118,7 @@ export default function FacultyPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-lg text-slate-600"
+                            className="text-lg text-slate-600 text-justify"
                         >
                             Every learner is supported by a structured network of experts at each stage of their journey.
                         </motion.p>
@@ -184,7 +184,7 @@ export default function FacultyPage() {
                                 <div className="text-center">
                                     <h3 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h3>
                                     <p className="text-brand-600 text-sm font-semibold mb-4">{member.role}</p>
-                                    <p className="text-slate-600 text-sm leading-relaxed">{member.bio}</p>
+                                    <p className="text-slate-600 text-sm leading-relaxed text-justify">{member.bio}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -209,7 +209,7 @@ export default function FacultyPage() {
                                 We build consultants.
                             </span>
                         </h2>
-                        <p className="text-base md:text-xl text-slate-600 leading-relaxed mb-10">
+                        <p className="text-base md:text-xl text-slate-600 leading-relaxed mb-10 text-justify">
                             Our faculty understand that a consultant is more than someone who knows the software. They are communicators, problem-solvers, and delivery partners. Every session is designed to build that broader capability — not just technical skill.
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">

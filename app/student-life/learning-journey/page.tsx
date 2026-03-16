@@ -159,7 +159,7 @@ export default function LearningJourneyPage() {
                 Five Phases of{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Development</span>
               </h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+              <p className="text-lg text-slate-500 max-w-2xl mx-auto text-justify">
                 A structured learning journey designed to take you from curious beginner to enterprise-ready consultant.
               </p>
             </FadeIn>

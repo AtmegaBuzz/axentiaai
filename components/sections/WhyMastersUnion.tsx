@@ -139,13 +139,13 @@ export function TrustedBy() {
 
 /* ── shared styles ─────────────────────────────────────────────────── */
 const glass =
-    'bg-white/30 backdrop-blur-md border border-white/40 rounded-2xl p-6 flex flex-col hover:bg-white/40 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)]';
+    'bg-white/30 backdrop-blur-md border border-white/40 rounded-xl p-4 flex flex-col hover:bg-white/40 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.12),0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)]';
 
 const chipBrand =
-    'bg-white/40 backdrop-blur-sm text-brand-700 text-xs font-semibold py-2 px-2 text-center rounded-lg border border-brand-200/30 truncate';
+    'bg-white/40 backdrop-blur-sm text-brand-700 text-[10px] font-semibold py-1.5 px-1.5 text-center rounded-md border border-brand-200/30 truncate';
 
 const chipAccent =
-    'bg-white/40 backdrop-blur-sm text-accent-700 text-xs font-semibold py-2 px-2 text-center rounded-lg border border-accent-200/30 truncate';
+    'bg-white/40 backdrop-blur-sm text-accent-700 text-[10px] font-semibold py-1.5 px-1.5 text-center rounded-md border border-accent-200/30 truncate';
 
 /* ── main component ────────────────────────────────────────────────── */
 export function WhyAxentiaAI() {
@@ -200,10 +200,10 @@ export function WhyAxentiaAI() {
 
                     {/* Card 1 — 100+ Careers */}
                     <div className={`${glass} h-full`}>
-                        <div className="mb-3">
-                            <h3 className="text-4xl font-black text-slate-900 mb-0">100+</h3>
-                            <p className="font-semibold text-slate-800">Careers Launched</p>
-                            <p className="text-slate-400 text-sm mt-0">Across Enterprise Projects</p>
+                        <div className="mb-2">
+                            <h3 className="text-3xl font-black text-slate-900 mb-0">100+</h3>
+                            <p className="text-sm font-semibold text-slate-800">Careers Launched</p>
+                            <p className="text-slate-400 text-xs mt-0">Across Enterprise Projects</p>
                         </div>
                         <div className="grid grid-cols-2 gap-1 mt-auto">
                             {['SAP S/4HANA', 'FICO', 'ABAP', 'MM/SD'].map(tag => (
@@ -214,10 +214,10 @@ export function WhyAxentiaAI() {
 
                     {/* Card 2 — 95% Placement */}
                     <div className={`${glass} h-full`}>
-                        <div className="mb-3">
-                            <h3 className="text-4xl font-black text-slate-900 mb-0">95%</h3>
-                            <p className="font-semibold text-slate-800">Placement Success</p>
-                            <p className="text-slate-400 text-sm mt-0">Consultants Deployed</p>
+                        <div className="mb-2">
+                            <h3 className="text-3xl font-black text-slate-900 mb-0">95%</h3>
+                            <p className="text-sm font-semibold text-slate-800">Placement Success</p>
+                            <p className="text-slate-400 text-xs mt-0">Consultants Deployed</p>
                         </div>
                         <div className="grid grid-cols-2 gap-1 mt-auto">
                             {['Orane', 'Accenture', 'Deloitte', 'TCS'].map(tag => (
@@ -228,10 +228,10 @@ export function WhyAxentiaAI() {
 
                     {/* Card 3 — 4+ Countries */}
                     <div className={`${glass} h-full`}>
-                        <div className="mb-3">
-                            <h3 className="text-4xl font-black text-slate-900 mb-0">4+</h3>
-                            <p className="font-semibold text-slate-800">Countries Served</p>
-                            <p className="text-slate-400 text-sm mt-0">Global Delivery Presence</p>
+                        <div className="mb-2">
+                            <h3 className="text-3xl font-black text-slate-900 mb-0">4+</h3>
+                            <p className="text-sm font-semibold text-slate-800">Countries Served</p>
+                            <p className="text-slate-400 text-xs mt-0">Global Delivery Presence</p>
                         </div>
                         <div className="grid grid-cols-2 gap-1 mt-auto">
                             {['India', 'Canada', 'Portugal', 'Kenya'].map(tag => (
@@ -246,17 +246,17 @@ export function WhyAxentiaAI() {
                         <img
                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=260&fit=crop&q=80"
                             alt="Team collaboration"
-                            className="w-full h-32 object-cover rounded-xl mb-3"
+                            className="w-full h-28 object-cover rounded-lg mb-2"
                             loading="lazy"
                         />
                         <div className="mb-2">
-                            <h3 className="text-4xl font-black text-slate-900 mb-0">25+</h3>
-                            <p className="font-semibold text-slate-800">Years of Experience</p>
-                            <p className="text-slate-400 text-sm mt-0">Built on the legacy of Orane Consulting</p>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0">25+</h3>
+                            <p className="text-sm font-semibold text-slate-800">Years of Experience</p>
+                            <p className="text-slate-400 text-xs mt-0">Built on the legacy of Orane Consulting</p>
                         </div>
                         <div className="grid grid-cols-2 gap-1 mt-auto">
                             {['SAP', 'AI/ML', 'Data Analytics', 'ERP', 'Cloud', 'Automation'].map(tag => (
-                                <div key={tag} className={`${chipBrand} flex items-center justify-center py-2.5`}>{tag}</div>
+                                <div key={tag} className={`${chipBrand} flex items-center justify-center`}>{tag}</div>
                             ))}
                         </div>
                     </div>
@@ -264,15 +264,15 @@ export function WhyAxentiaAI() {
                     {/* Card 5 — CTC (with image) */}
                     <div className={`${glass} h-full overflow-hidden`}>
                         <div className="mb-2">
-                            <h3 className="text-4xl font-black text-slate-900 mb-0">&#8377;6-12 LPA</h3>
-                            <p className="font-semibold text-slate-800">Average Starting CTC</p>
-                            <p className="text-slate-400 text-sm mt-0">For Daksha Graduates</p>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0">&#8377;6-12 LPA</h3>
+                            <p className="text-sm font-semibold text-slate-800">Average Starting CTC</p>
+                            <p className="text-slate-400 text-xs mt-0">For Daksha Graduates</p>
                         </div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&q=80"
                             alt="Career growth"
-                            className="w-full h-20 object-cover rounded-xl mt-auto"
+                            className="w-full h-16 object-cover rounded-lg mt-auto"
                             loading="lazy"
                         />
                     </div>
@@ -280,13 +280,13 @@ export function WhyAxentiaAI() {
                     {/* Card 6 — 30+ Hiring Partners */}
                     <div className={`${glass} h-full`}>
                         <div className="mb-2">
-                            <h3 className="text-4xl font-black text-slate-900 mb-0">30+</h3>
-                            <p className="font-semibold text-slate-800">Hiring Partners</p>
-                            <p className="text-slate-400 text-sm mt-0">Leading Enterprises Trust Us</p>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0">30+</h3>
+                            <p className="text-sm font-semibold text-slate-800">Hiring Partners</p>
+                            <p className="text-slate-400 text-xs mt-0">Leading Enterprises Trust Us</p>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2 mt-auto">
+                        <div className="grid grid-cols-4 gap-1 mt-auto">
                             {['SAP', 'Infosys', 'Wipro', 'HCL', 'Capgemini', 'LTIMindtree', 'EY', 'PwC'].map(tag => (
-                                <div key={tag} className="bg-white/40 backdrop-blur-sm text-accent-700 text-[10px] font-semibold py-1.5 px-1 text-center rounded-md border border-accent-200/30 truncate flex items-center justify-center">{tag}</div>
+                                <div key={tag} className={`${chipAccent} flex items-center justify-center`}>{tag}</div>
                             ))}
                         </div>
                     </div>
@@ -294,28 +294,28 @@ export function WhyAxentiaAI() {
                     {/* Card 7 — 100+ Enterprise Projects (with image) */}
                     <div className={`${glass} h-full overflow-hidden`}>
                         <div className="mb-2">
-                            <h3 className="text-4xl font-black text-slate-900 mb-0">100+</h3>
-                            <p className="font-semibold text-slate-800">Enterprise Projects</p>
-                            <p className="text-slate-400 text-sm mt-0">Real-World Delivery</p>
+                            <h3 className="text-3xl font-black text-slate-900 mb-0">100+</h3>
+                            <p className="text-sm font-semibold text-slate-800">Enterprise Projects</p>
+                            <p className="text-slate-400 text-xs mt-0">Real-World Delivery</p>
                         </div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=200&fit=crop&q=80"
                             alt="Enterprise project delivery"
-                            className="w-full h-20 object-cover rounded-xl mt-auto"
+                            className="w-full h-16 object-cover rounded-lg mt-auto"
                             loading="lazy"
                         />
                     </div>
 
                     {/* Card 8 — Programs (full width) */}
-                    <div className={`${glass} lg:col-span-4 flex-col md:flex-row items-start md:items-center gap-4 md:gap-6`}>
-                        <div className="shrink-0 md:w-1/4">
-                            <h3 className="text-4xl font-black text-slate-900 mb-0">6</h3>
-                            <p className="font-semibold text-slate-800">Industry-Aligned Programs</p>
+                    <div className="lg:col-span-4 bg-gradient-to-r from-brand-50/60 to-accent-50/60 backdrop-blur-md border border-white/40 rounded-xl p-5 hover:from-brand-50/80 hover:to-accent-50/80 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)]">
+                        <div className="flex items-center gap-3 mb-3">
+                            <span className="text-2xl font-black text-slate-900 leading-none">6</span>
+                            <span className="text-sm font-bold text-slate-800 tracking-tight">Industry-Aligned Programs</span>
                         </div>
-                        <div className="flex-1 flex flex-wrap gap-2">
+                        <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2">
                             {['DCAP', 'EAP', 'SAP Consulting', 'Data & AI', 'ERP Analyst', 'Online Foundation', 'Paid Apprenticeship', 'Mentorship Track', 'Certification Prep'].map(tag => (
-                                <div key={tag} className="bg-white/40 backdrop-blur-sm text-brand-700 text-sm font-medium py-2 px-4 rounded-full border border-brand-200/30 hover:bg-white/60 transition-colors">{tag}</div>
+                                <div key={tag} className="whitespace-nowrap bg-white/60 backdrop-blur-sm text-brand-700 text-[11px] font-semibold py-2 px-3 rounded-lg border border-brand-200/30 hover:bg-white/80 hover:border-brand-300/40 transition-all duration-200 text-center shadow-sm">{tag}</div>
                             ))}
                         </div>
                     </div>

@@ -24,7 +24,7 @@ const megaMenuData = {
     'Programs': {
         items: [
             { name: 'DCAP, Career Accelerator', href: '/programs?tab=dcap', description: '10-month foundation training + paid apprenticeship' },
-            { name: 'EAP, Enterprise Acceleration', href: '/programs?tab=eap', description: 'Advanced programme for DCAP graduates' },
+            { name: 'EAP, Enterprise Accelerator', href: '/programs?tab=eap', description: 'Advanced programme for DCAP graduates' },
             { name: 'Online Foundation', href: '/programs?tab=online', description: 'Self-paced SAP fundamentals (Upcoming)' },
             { name: 'Compare Programs', href: '/programs?tab=compare', description: 'Side-by-side comparison of all programs' },
             { name: 'Application Process', href: '/programs#apply', description: 'How to apply for DCAP in 4 steps' },
@@ -240,7 +240,7 @@ export function Navbar() {
                         alt="AxentiaAI"
                         width={360}
                         height={96}
-                        className={`${(isScrolled || openDropdown) ? 'h-5' : 'h-7'} w-auto`}
+                        className={`${(isScrolled || openDropdown) ? 'h-7' : 'h-9'} w-auto`}
                         priority
                     />
                 </Link>
@@ -266,14 +266,6 @@ export function Navbar() {
                             </button>
                         </div>
                     ))}
-                    <Link
-                        href="/forum"
-                        className={`px-4 py-2 text-sm font-medium transition-all duration-200 ease-out ${
-                            (isScrolled || openDropdown) ? 'text-slate-700 hover:text-brand-600' : 'text-white/90 hover:text-white'
-                        }`}
-                    >
-                        Forum
-                    </Link>
                 </nav>
 
                 {/* Full-width dropdowns positioned relative to viewport */}
@@ -341,17 +333,6 @@ export function Navbar() {
                                 </div>
                             ))}
                             <div className="pt-4 border-t border-slate-200 space-y-3">
-                                <Link
-                                    href="/forum"
-                                    className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    <ArrowRight className="w-3.5 h-3.5 text-brand-600" />
-                                    <div>
-                                        <span className="text-sm font-medium text-slate-700">Community Forum</span>
-                                        <p className="text-xs text-slate-400">Join discussions with fellow consultants</p>
-                                    </div>
-                                </Link>
                                 <Link
                                     href="/programs#apply"
                                     className="w-full text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-2 rounded-full shadow-lg shadow-brand-600/25 text-sm transition-all duration-200 inline-flex items-center justify-center gap-2"

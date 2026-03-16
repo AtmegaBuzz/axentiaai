@@ -54,6 +54,7 @@ export function CommunityVideo() {
                     </p>
                     <Link
                         href="/forum"
+                        target="_blank"
                         className="inline-flex items-center justify-center gap-3 bg-yellow-400/15 backdrop-blur-md border border-yellow-400/30 text-yellow-300 hover:bg-yellow-400/25 font-semibold py-4 px-8 rounded-full shadow-xl transition-all duration-200"
                     >
                         <Users className="w-5 h-5" />

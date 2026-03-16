@@ -39,7 +39,7 @@ const programs: Program[] = [
     {
         id: 'eap',
         title: 'Enterprise',
-        titleAccent: 'Acceleration',
+        titleAccent: 'Accelerator',
         description:
             'Deepen consulting capabilities with complex enterprise scenarios and larger SAP project responsibilities.',
         info: [
@@ -169,7 +169,7 @@ export function Programs() {
             </div>
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div className="text-center mx-auto mb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -186,7 +186,7 @@ export function Programs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
+                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 whitespace-nowrap"
                     >
                         Three programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
                     </motion.h2>
