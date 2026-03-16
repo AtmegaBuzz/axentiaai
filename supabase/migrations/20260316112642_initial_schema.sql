@@ -124,14 +124,22 @@ alter table public.posts enable row level security;
 alter table public.reactions enable row level security;
 
 -- Profiles: anyone can read, users can update their own, admin can update any
+drop policy if exists "Profiles are viewable by everyone" on public.profiles;
+drop policy if exists "Users can update own profile" on public.profiles;
+drop policy if exists "Admin can update any profile" on public.profiles;
 create policy "Profiles are viewable by everyone" on public.profiles for select using (true);
 create policy "Users can update own profile" on public.profiles for update using (auth.uid() = id);
 create policy "Admin can update any profile" on public.profiles for update using (auth.email() = 'admin@axentiaai.in');
 
 -- Categories: anyone can read
+drop policy if exists "Categories are viewable by everyone" on public.categories;
 create policy "Categories are viewable by everyone" on public.categories for select using (true);
 
 -- Threads: anyone can read, approved users can create, authors can update/delete
+drop policy if exists "Threads are viewable by everyone" on public.threads;
+drop policy if exists "Approved users can create threads" on public.threads;
+drop policy if exists "Authors can update own threads" on public.threads;
+drop policy if exists "Authors can delete own threads" on public.threads;
 create policy "Threads are viewable by everyone" on public.threads for select using (true);
 create policy "Approved users can create threads" on public.threads for insert with check (
   auth.uid() = author_id and (
@@ -143,6 +151,10 @@ create policy "Authors can update own threads" on public.threads for update usin
 create policy "Authors can delete own threads" on public.threads for delete using (auth.uid() = author_id);
 
 -- Posts: anyone can read, approved users can create, authors can update/delete
+drop policy if exists "Posts are viewable by everyone" on public.posts;
+drop policy if exists "Approved users can create posts" on public.posts;
+drop policy if exists "Authors can update own posts" on public.posts;
+drop policy if exists "Authors can delete own posts" on public.posts;
 create policy "Posts are viewable by everyone" on public.posts for select using (true);
 create policy "Approved users can create posts" on public.posts for insert with check (
   auth.uid() = author_id and (
@@ -154,6 +166,9 @@ create policy "Authors can update own posts" on public.posts for update using (a
 create policy "Authors can delete own posts" on public.posts for delete using (auth.uid() = author_id);
 
 -- Reactions: anyone can read, authenticated users can create/delete their own
+drop policy if exists "Reactions are viewable by everyone" on public.reactions;
+drop policy if exists "Authenticated users can react" on public.reactions;
+drop policy if exists "Users can remove own reactions" on public.reactions;
 create policy "Reactions are viewable by everyone" on public.reactions for select using (true);
 create policy "Authenticated users can react" on public.reactions for insert with check (auth.uid() = user_id);
 create policy "Users can remove own reactions" on public.reactions for delete using (auth.uid() = user_id);
@@ -174,9 +189,10 @@ create index if not exists idx_subscribers_subscribed_at on public.subscribers(s
 
 alter table public.subscribers enable row level security;
 
--- Only admin can read subscribers; anyone can insert (anon key used from API route)
+drop policy if exists "Admin can read subscribers" on public.subscribers;
+drop policy if exists "Service role can insert subscribers" on public.subscribers;
+drop policy if exists "Anyone can insert subscribers" on public.subscribers;
 create policy "Admin can read subscribers" on public.subscribers
   for select using (auth.email() = 'admin@axentiaai.in');
-
-create policy "Service role can insert subscribers" on public.subscribers
+create policy "Anyone can insert subscribers" on public.subscribers
   for insert with check (true);
