@@ -186,7 +186,7 @@ export function Navbar() {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const menuItems = [
-        { name: 'Why AxentiaAI', href: '/about' },
+        { name: 'Why Axentia.AI', href: '/about' },
         { name: 'Programs' },
         { name: 'Student Life' },
         { name: 'Faculty' },

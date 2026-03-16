@@ -51,7 +51,7 @@ export function WhyChooseUs() {
                                 Many professionals learn SAP, but struggle when they enter real projects.
                             </p>
                             <p className="text-xl font-semibold text-slate-900">
-                                AxentiaAI bridges that gap.
+                                Axentia.AI bridges that gap.
                             </p>
                             <p>
                                 We prepare SAP consultants for the AI era, ready to contribute from day one.

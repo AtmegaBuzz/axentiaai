@@ -317,7 +317,7 @@ export function Timeline() {
             transition={{ delay: 0.15 }}
             className="text-lg text-slate-600"
           >
-            Every consulting career starts with learning. But growth comes from doing real work, taking responsibility, and solving real problems. At AxentiaAI, your journey follows the same path most successful consultants take inside enterprise teams.
+            Every consulting career starts with learning. But growth comes from doing real work, taking responsibility, and solving real problems. At Axentia.AI, your journey follows the same path most successful consultants take inside enterprise teams.
           </motion.p>
         </div>
 

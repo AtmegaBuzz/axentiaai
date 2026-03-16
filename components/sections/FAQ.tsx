@@ -7,7 +7,7 @@ import { Plus, Minus } from 'lucide-react';
 const faqs = [
     {
         q: 'How do careers progress after Daksha?',
-        a: 'After completing the foundation and apprenticeship, participants typically move into Associate Consultant roles within Axentia or partner delivery environments. Growth depends on performance. As responsibility increases, roles expand from task support to process ownership and eventually to client-facing leadership.',
+        a: 'After completing the foundation and apprenticeship, participants typically move into Associate Consultant roles within Axentia.AI or partner delivery environments. Growth depends on performance. As responsibility increases, roles expand from task support to process ownership and eventually to client-facing leadership.',
     },
     {
         q: 'Can I do this part-time or remotely?',

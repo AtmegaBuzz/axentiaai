@@ -124,7 +124,7 @@ export default function LearningJourneyPage() {
             transition={{ delay: 0.2 }}
             className="text-xl text-white/75 max-w-2xl leading-relaxed mb-10"
           >
-            AxentiaAI helps students move from AI awareness to enterprise readiness through structured career pathways.
+            Axentia.AI helps students move from AI awareness to enterprise readiness through structured career pathways.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
