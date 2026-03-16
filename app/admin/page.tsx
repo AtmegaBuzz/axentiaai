@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
-import { CheckCircle2, XCircle, Users, Clock, LogOut, RefreshCw, Mail } from 'lucide-react';
+import { CheckCircle2, XCircle, Users, Clock, LogOut, RefreshCw, Mail, Download } from 'lucide-react';
 
 const ADMIN_EMAIL = 'admin@axentiaai.in';
 
@@ -61,6 +61,26 @@ export default function AdminPage() {
     }
     setLoadingUsers(false);
   }, [supabase]);
+
+  const exportCSV = () => {
+    const rows = [
+      ['#', 'Email', 'Source', 'Subscribed At'],
+      ...subscribers.map((s, i) => [
+        i + 1,
+        s.email,
+        s.source || 'footer',
+        new Date(s.subscribed_at).toLocaleString('en-IN'),
+      ]),
+    ];
+    const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `subscribers-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   const fetchSubscribers = useCallback(async () => {
     setLoadingSubscribers(true);
@@ -440,9 +460,20 @@ export default function AdminPage() {
         {/* Subscribers Table */}
         {activeTab === 'subscribers' && (
           <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-            <div className="px-6 py-5 border-b border-slate-100">
-              <h2 className="text-base font-bold text-slate-900">Newsletter Subscribers</h2>
-              <p className="text-xs text-slate-400 mt-0.5">Emails collected from the footer subscribe form</p>
+            <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <h2 className="text-base font-bold text-slate-900">Newsletter Subscribers</h2>
+                <p className="text-xs text-slate-400 mt-0.5">Emails collected from the footer subscribe form</p>
+              </div>
+              {subscribers.length > 0 && (
+                <button
+                  onClick={exportCSV}
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-violet-600 border border-violet-200 hover:bg-violet-50 rounded-xl transition-colors"
+                >
+                  <Download className="w-4 h-4" />
+                  Export CSV
+                </button>
+              )}
             </div>
 
             {loadingSubscribers ? (
