@@ -353,7 +353,7 @@ export default function FloatingLines({
       renderer.setSize(width, height, false);
       const canvasWidth = renderer.domElement.width;
       const canvasHeight = renderer.domElement.height;
-      (uniforms.iResolution.value as Vector3).set(canvasWidth, canvasHeight, 1);
+      (uniforms.iResolution.value as InstanceType<typeof Vector3>).set(canvasWidth, canvasHeight, 1);
     };
 
     setSize();
