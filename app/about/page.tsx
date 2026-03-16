@@ -248,7 +248,7 @@ function LegacySection() {
                 <div>
                   <p className="text-lg font-bold text-slate-900">Manuj Gupta</p>
                   <p className="text-sm text-slate-500">Founder & CEO, Orane Consulting</p>
-                  <p className="text-sm text-brand-600 font-medium">Founder, Axentia AI</p>
+                  <p className="text-sm text-brand-600 font-medium">Founder, Axentia.AI</p>
                 </div>
                 <a href="https://www.linkedin.com/in/manuj-gupta" target="_blank" rel="noopener noreferrer" className="ml-auto w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white hover:bg-[#004182] transition-colors"><Linkedin className="w-4 h-4" /></a>
               </div>
@@ -453,7 +453,7 @@ function NumbersSection() {
   const counterProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const stats = [
-    { end: 100, suffix: '+', label: 'Careers Launched', sub: 'Through Axentia' },
+    { end: 100, suffix: '+', label: 'Careers Launched', sub: 'Through Axentia.AI' },
     { end: 10, suffix: '+', label: 'Months Training', sub: 'Structured pathway' },
     { end: 500, suffix: '+', label: 'Consultants', sub: 'Active at Orane' },
     { end: 25, suffix: '+', label: 'Years Legacy', sub: 'SAP Delivery' },
@@ -564,7 +564,7 @@ function ValuesSection() {
           <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600 mb-3">What We Stand For</p></FadeIn>
           <FadeIn delay={0.05}>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-              What Axentia{' '}<span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Stands For</span>
+              What Axentia.AI{' '}<span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Stands For</span>
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto text-center">Five principles that define how we build capability at the intersection of enterprise AI and workforce development.</p></FadeIn>
@@ -1049,7 +1049,7 @@ function CTASection() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="text-lg text-white/70 mb-8 leading-relaxed max-w-2xl">
-                Whether you are exploring enterprise transformation programs, workforce development initiatives, institutional partnerships, or industry alliances — Axentia is built for capability. If you are building the future of AI adoption, enterprise transformation, or talent ecosystems, we would welcome the conversation.
+                Whether you are exploring enterprise transformation programs, workforce development initiatives, institutional partnerships, or industry alliances,  Axentia.AI is built for capability. If you are building the future of AI adoption, enterprise transformation, or talent ecosystems, we would welcome the conversation.
               </p>
             </FadeIn>
             <FadeIn delay={0.15}>

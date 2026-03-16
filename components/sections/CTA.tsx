@@ -40,7 +40,7 @@ export function CTA() {
                             Let&apos;s get you to the <span className="font-cursive italic text-accent-300 text-[1.1em]">right place.</span>
                         </h2>
                         <p className="text-sm md:text-base text-brand-100 mb-5 md:mb-6 font-medium leading-relaxed">
-                            Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia is the right fit, and if it&apos;s not, we&apos;ll say that too.
+                            Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia.AI is the right fit, and if it&apos;s not, we&apos;ll say that too.
                         </p>
 
                         <div className="flex flex-wrap items-center gap-3 md:gap-5">

@@ -164,7 +164,7 @@ export function MingersFooter() {
                             <Link href="#" className="hover:text-slate-300 transition-colors">Refund Policy</Link>
                         </div>
                         <p>
-                            &copy; 2026 AxentiaAI. All rights reserved.
+                            &copy; 2026 Axentia.AI. All rights reserved.
                         </p>
                     </div>
 

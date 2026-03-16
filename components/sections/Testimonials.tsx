@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
     role: 'SAP MM Consultant',
     company: 'Orane Consulting',
     quote:
-      'I have been working for seven years, but after AI emerged, every company wants employees trained in AI. Axentia has been my supportive hand. The best thing is you get paid for the projects you complete.',
+      'I have been working for seven years, but after AI emerged, every company wants employees trained in AI. Axentia.AI has been my supportive hand. The best thing is you get paid for the projects you complete.',
     videoId: 'vM23wbWFL4E',
   },
   {

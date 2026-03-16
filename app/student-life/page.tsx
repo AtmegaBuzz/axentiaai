@@ -208,7 +208,7 @@ export default function StudentLifePage() {
             <FadeIn delay={0.1}>
               <div className="space-y-6">
                 <p className="text-2xl md:text-3xl font-bold text-slate-900 leading-snug">
-                  The AxentiaAI community begins in the classroom and continues throughout your career.
+                  The Axentia.AI community begins in the classroom and continues throughout your career.
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed">
                   Our alumni go on to work with top SAP practices globally. They stay connected, support each other, and give back to the next generation of consultants.

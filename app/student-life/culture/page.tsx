@@ -39,7 +39,7 @@ export default function CulturePage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&h=800&fit=crop&q=80"
-            alt="Culture at Axentia AI"
+            alt="Culture at Axentia.AI"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/70" />
@@ -102,7 +102,7 @@ export default function CulturePage() {
             <p className="text-2xl md:text-3xl font-bold text-slate-900 leading-relaxed">
               Students from{' '}
               <span className="text-brand-600 font-[family-name:var(--font-playfair)] italic text-[1.1em]">4+ countries</span>{' '}
-              come together at AxentiaAI, creating a diverse and global learning environment.
+              come together at Axentia.AI, creating a diverse and global learning environment.
             </p>
           </FadeIn>
         </div>
@@ -113,13 +113,13 @@ export default function CulturePage() {
         <div className="container mx-auto px-4 md:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <FadeIn>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-500 mb-4">Life at Axentia</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-brand-500 mb-4">Life at Axentia.AI</p>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-6">
                 Beyond Mastering AI{' '}
                 <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">& Enterprise Systems</span>
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed">
-                Life at Axentia isn&apos;t only about mastering AI and enterprise systems. It&apos;s also about learning alongside people who are building similar career paths. Students collaborate on projects, share ideas, support each other through challenges, and celebrate milestones together.
+                Life at Axentia.AI isn&apos;t only about mastering AI and enterprise systems. It&apos;s also about learning alongside people who are building similar career paths. Students collaborate on projects, share ideas, support each other through challenges, and celebrate milestones together.
               </p>
             </FadeIn>
             <FadeIn delay={0.1}>

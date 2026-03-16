@@ -182,7 +182,7 @@ export function WhyAxentiaAI() {
                 {/* ── Header ── */}
                 <div className="text-center mb-8 md:mb-10">
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-3">
-                        The Axentia{' '}
+                        The Axentia.AI{' '}
                         <span
                             className="inline-block px-3 py-1 rounded-md font-bold"
                             style={{ background: '#F7C87A', color: '#232322' }}

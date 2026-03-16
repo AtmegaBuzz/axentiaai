@@ -18,7 +18,7 @@ const playfairDisplay = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Axentia.AI — Capability Platform for the AI Era",
-  description: "Enterprise consulting education built on 25+ years of real SAP project delivery experience. Prepare for the AI era with AxentiaAI.",
+  description: "Enterprise consulting education built on 25+ years of real SAP project delivery experience. Prepare for the AI era with Axentia.AI.",
   icons: {
     icon: [
       { url: "/brand/favicon_io/favicon.ico", sizes: "any" },

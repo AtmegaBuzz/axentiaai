@@ -59,7 +59,7 @@ export function Hero() {
                             transition={{ duration: 0.6, delay: 0.1 }}
                             className="mt-6 text-base sm:text-lg md:text-xl text-white/80 max-w-xl leading-relaxed"
                         >
-                            Driven by 25+ years of Orane&apos;s SAP excellence.
+                            Where enterprise consultants are built.
                         </motion.p>
 
 
