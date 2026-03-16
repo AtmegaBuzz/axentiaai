@@ -69,9 +69,9 @@ export default function EnterprisesPage() {
 
     return (
         <>
-            <main className="pt-24">
+            <main>
                 {/* Hero */}
-                <section className="relative py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e0735 0%, #2a0845 50%, #1a0630 100%)' }}>
+                <section className="relative pt-40 pb-24 md:pt-48 md:pb-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e0735 0%, #2a0845 50%, #1a0630 100%)' }}>
                     <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 70% 50%, rgba(192,16,218,0.12) 0%, transparent 60%)' }} />
                     <div className="container mx-auto px-4 md:px-6 relative z-10">
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">

@@ -78,3 +78,12 @@
   background-size: 300% 300%;
   animation: gradientPan 12s ease infinite;
 }
+
+/* Hide scrollbar for carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
