@@ -157,3 +157,26 @@ create policy "Authors can delete own posts" on public.posts for delete using (a
 create policy "Reactions are viewable by everyone" on public.reactions for select using (true);
 create policy "Authenticated users can react" on public.reactions for insert with check (auth.uid() = user_id);
 create policy "Users can remove own reactions" on public.reactions for delete using (auth.uid() = user_id);
+
+-- ============================================================
+-- 7. NEWSLETTER SUBSCRIBERS
+-- ============================================================
+
+create table if not exists public.subscribers (
+  id uuid default gen_random_uuid() primary key,
+  email text not null unique,
+  source text default 'footer',
+  subscribed_at timestamptz default now() not null
+);
+
+create index if not exists idx_subscribers_email on public.subscribers(email);
+create index if not exists idx_subscribers_subscribed_at on public.subscribers(subscribed_at desc);
+
+alter table public.subscribers enable row level security;
+
+-- Only admin can read subscribers; anyone can insert (anon key used from API route)
+create policy "Admin can read subscribers" on public.subscribers
+  for select using (auth.email() = 'admin@axentiaai.in');
+
+create policy "Service role can insert subscribers" on public.subscribers
+  for insert with check (true);
