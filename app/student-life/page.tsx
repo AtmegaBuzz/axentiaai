@@ -1,9 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Users, Globe, Award } from 'lucide-react';
+import { ArrowRight, Users, Award } from 'lucide-react';
 import Link from 'next/link';
 import Testimonials from '@/components/sections/Testimonials';
+import { Globe } from '@/components/ui/Globe';
 
 function FadeIn({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   return (
@@ -38,23 +39,24 @@ const placementCompanies = [
 
 export default function StudentLifePage() {
   return (
-    <main className="flex flex-col min-h-screen pt-16">
+    <main className="flex flex-col min-h-screen">
 
       {/* ── SECTION 1: Hero — Learning Starts to Feel Real ── */}
-      <section className="relative py-24 md:py-36 overflow-hidden bg-white">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, #faf5ff 0%, #fef8ec 50%, #f8fafc 100%)' }} />
+      <section className="relative pt-40 pb-24 md:pt-48 md:pb-36 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, #1e0735 0%, #2a0845 50%, #1a0630 100%)' }} />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(192,16,218,0.15),transparent_70%)]" />
         <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
           <FadeIn className="text-center mb-4">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-500">Student Life</span>
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-300">Student Life</span>
           </FadeIn>
           <FadeIn delay={0.08} className="text-center mb-8">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-tight">
               This Is Where Learning{' '}
-              <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Starts to Feel Real</span>
+              <span className="font-[family-name:var(--font-playfair)] italic text-brand-300">Starts to Feel Real</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.12} className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-slate-500 text-lg">
+            <p className="text-white/70 text-lg">
               Where concepts meet reality, and students discover what consulting actually feels like.
             </p>
           </FadeIn>
@@ -81,16 +83,16 @@ export default function StudentLifePage() {
           {/* Descriptive text */}
           <div className="max-w-3xl mx-auto">
             <FadeIn>
-              <p className="text-lg text-slate-600 leading-relaxed mb-6 text-justify">
+              <p className="text-lg text-white/70 leading-relaxed mb-6 text-justify">
                 Most programs teach concepts, but at Axentia.AI, you start applying them almost immediately. Student life here isn't about sitting through lectures all day. It's about building the habits, thinking, and confidence needed to work in real consulting environments.
               </p>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <div className="bg-gradient-to-r from-brand-50 to-accent-50 border border-brand-100 rounded-2xl p-8 text-center">
-                <p className="text-2xl font-bold text-slate-900 leading-relaxed">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center">
+                <p className="text-2xl font-bold text-white leading-relaxed">
                   You learn SAP.<br />
                   You use AI.<br />
-                  <span className="text-brand-600 font-[family-name:var(--font-playfair)] italic text-[1.1em]">
+                  <span className="text-brand-300 font-[family-name:var(--font-playfair)] italic text-[1.1em]">
                     And most importantly, you practice solving problems the way consultants actually do.
                   </span>
                 </p>
@@ -149,7 +151,7 @@ export default function StudentLifePage() {
       </section>
 
       {/* ── SECTION 3: Alumni Network ── */}
-      <section className="py-20 md:py-28 bg-white relative overflow-hidden">
+      <section id="alumni" className="py-20 md:py-28 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-brand-50/60 rounded-full blur-[100px]" />
 
         <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
@@ -164,34 +166,41 @@ export default function StudentLifePage() {
             </FadeIn>
           </div>
 
-          {/* Globe visualization placeholder + stats */}
+          {/* Globe + stats */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <FadeIn>
-              <div className="relative rounded-3xl overflow-hidden aspect-square bg-gradient-to-br from-brand-50 to-accent-50 border border-brand-100/50 flex items-center justify-center">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Globe className="w-48 h-48 text-brand-200/60" strokeWidth={0.5} />
-                </div>
-                {/* Alumni pins */}
-                {[
-                  { top: '20%', left: '55%', label: 'India' },
-                  { top: '15%', left: '35%', label: 'Canada' },
-                  { top: '35%', left: '48%', label: 'Portugal' },
-                  { top: '55%', left: '60%', label: 'Kenya' },
-                ].map((pin) => (
-                  <motion.div
-                    key={pin.label}
-                    className="absolute"
-                    style={{ top: pin.top, left: pin.left }}
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ repeat: Infinity, duration: 2 + Math.random() * 2, ease: 'easeInOut' }}
-                  >
-                    <div className="w-3 h-3 rounded-full bg-brand-500 shadow-[0_0_12px_rgba(192,16,218,0.6)]" />
-                    <span className="absolute top-4 left-1/2 -translate-x-1/2 text-[10px] font-semibold text-brand-600 whitespace-nowrap">{pin.label}</span>
-                  </motion.div>
-                ))}
-                <div className="absolute bottom-6 left-6 right-6 bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white">
+              <div className="relative aspect-square max-w-[500px] mx-auto">
+                <Globe
+                  config={{
+                    width: 800,
+                    height: 800,
+                    onRender: () => {},
+                    devicePixelRatio: 2,
+                    phi: 0,
+                    theta: 0.3,
+                    dark: 0,
+                    diffuse: 0.4,
+                    mapSamples: 36000,
+                    mapBrightness: 1.2,
+                    baseColor: [0.95, 0.95, 0.95],
+                    markerColor: [192 / 255, 16 / 255, 218 / 255],
+                    glowColor: [0.94, 0.91, 1],
+                    markers: [
+                      { location: [28.6139, 77.209], size: 0.12 },
+                      { location: [19.076, 72.8777], size: 0.1 },
+                      { location: [12.9716, 77.5946], size: 0.08 },
+                      { location: [43.6532, -79.3832], size: 0.08 },
+                      { location: [38.7223, -9.1393], size: 0.07 },
+                      { location: [-1.2921, 36.8219], size: 0.07 },
+                    ],
+                  }}
+                />
+
+                {/* Bottom overlay */}
+                <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white shadow-sm z-10">
                   <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Alumni in</p>
                   <p className="text-2xl font-black text-slate-900">4+ Countries</p>
+                  <p className="text-sm text-slate-500 font-medium mt-1">India &middot; Canada &middot; Portugal &middot; Kenya</p>
                 </div>
               </div>
             </FadeIn>

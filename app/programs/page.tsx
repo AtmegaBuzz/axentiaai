@@ -20,6 +20,8 @@ import {
   Globe,
   AlertTriangle,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Plus,
   Minus,
   Linkedin,
@@ -185,28 +187,30 @@ function DCAPSection() {
       </section>
 
       {/* Program Highlights */}
-      <section className="py-16 md:py-20 bg-slate-50 border-b border-slate-100">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-brand-50 to-slate-50 border-b border-slate-100">
         <div className="container mx-auto px-6 md:px-12 xl:px-20">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <FadeIn>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-4">Program Highlights</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-6">Program Highlights</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+                  {[
+                    'Learn how SAP supports real business',
+                    'Enterprise process flows (P2P, O2C, R2R, H2R)',
+                    'SAP S/4HANA core modules (MM, FICO, SD)',
+                    '6 months paid apprenticeship',
+                    'Real project work, practitioner-reviewed',
+                  ].map((item, i) => (
+                    <FadeIn key={i} delay={i * 0.03}>
+                      <div className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-brand-500 shrink-0 mt-0.5" />
+                        <span className="text-sm text-slate-700 font-medium leading-relaxed">{item}</span>
+                      </div>
+                    </FadeIn>
+                  ))}
+                </div>
+              </div>
             </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                '✅ Learn how SAP supports real business',
-                '✅ Enterprise process flows (P2P, O2C, R2R, H2R)',
-                '✅ SAP S/4HANA core modules (MM, FICO, SD)',
-                '✅ 6 months paid apprenticeship',
-                '✅ Real project work, practitioner-reviewed',
-              ].map((item, i) => (
-                <FadeIn key={i} delay={i * 0.05}>
-                  <div className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl p-5">
-                    <CheckCircle2 className="w-5 h-5 text-brand-500 shrink-0 mt-0.5" />
-                    <span className="text-sm text-slate-700 font-medium">{item}</span>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -214,7 +218,7 @@ function DCAPSection() {
       {/* DCAP Curriculum */}
       <section className="py-16 md:py-24 bg-white border-b border-slate-100">
         <div className="container mx-auto px-6 md:px-12 xl:px-20">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <FadeIn>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">DCAP Curriculum</p>
             </FadeIn>
@@ -232,45 +236,54 @@ function DCAPSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
-                  icon: <Briefcase className="w-6 h-6" />,
+                  image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=400&fit=crop&q=80',
                   title: 'Business Processes',
                   period: 'Weeks 1-3',
                   items: ['Procure-to-Pay (P2P)', 'Order-to-Cash (O2C)', 'Record-to-Report (R2R)', 'Hire-to-Retire (H2R)'],
                 },
                 {
-                  icon: <Settings className="w-6 h-6" />,
+                  image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop&q=80',
                   title: 'SAP Foundations',
                   period: 'Weeks 4-8',
                   items: ['S/4HANA architecture', 'Navigation & UI', 'Master data concepts', 'Integration basics'],
                 },
                 {
-                  icon: <Brain className="w-6 h-6" />,
+                  image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&q=80',
                   title: 'Module Deep-Dive',
                   period: 'Weeks 9-14',
                   items: ['MM — Materials Management', 'FICO — Finance & Controlling', 'SD — Sales & Distribution', 'Configuration exercises'],
                 },
                 {
-                  icon: <MessageSquare className="w-6 h-6" />,
+                  image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop&q=80',
                   title: 'Consulting Skills',
                   period: 'Throughout',
                   items: ['Documentation standards', 'Client communication', 'Meeting discipline', 'Professional judgement'],
                 },
               ].map((block, i) => (
                 <FadeIn key={block.title} delay={i * 0.08}>
-                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 h-full">
-                    <div className="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center mb-4 text-brand-600">
-                      {block.icon}
+                  <div className="group bg-white border border-slate-200 rounded-2xl overflow-hidden h-full hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div className="relative h-40 overflow-hidden">
+                      <img 
+                        src={block.image} 
+                        alt={block.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                      <div className="absolute bottom-3 left-4 right-4">
+                        <h4 className="text-lg font-bold text-white mb-1">{block.title}</h4>
+                        <p className="text-xs text-brand-300 font-semibold">{block.period}</p>
+                      </div>
                     </div>
-                    <h4 className="text-lg font-bold text-slate-900 mb-1">{block.title}</h4>
-                    <p className="text-xs text-brand-600 font-semibold mb-4">{block.period}</p>
-                    <ul className="space-y-2">
-                      {block.items.map((item, j) => (
-                        <li key={j} className="text-sm text-slate-600 flex items-start gap-2">
-                          <span className="w-1 h-1 rounded-full bg-brand-400 mt-2 shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="p-5">
+                      <ul className="space-y-2.5">
+                        {block.items.map((item, j) => (
+                          <li key={j} className="text-sm text-slate-600 flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </FadeIn>
               ))}
@@ -280,59 +293,63 @@ function DCAPSection() {
       </section>
 
       {/* DCAP Journey */}
-      <section className="py-16 md:py-24 bg-slate-50 border-b border-slate-100">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 to-white border-b border-slate-100">
         <div className="container mx-auto px-6 md:px-12 xl:px-20">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <FadeIn>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">DCAP Journey</p>
             </FadeIn>
             <FadeIn delay={0.05}>
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-12">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-8">
                 From trainee to consultant.
               </h3>
             </FadeIn>
 
-            <div className="space-y-0">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 items-stretch">
               {[
                 {
                   step: '1',
                   title: 'Foundation Training',
-                  meta: 'Months 1-4 \u00B7 Full-time \u00B7 Classroom',
+                  meta: 'Months 1-4 · Full-time · Classroom',
                   desc: 'Business processes, SAP modules, configuration practice, consulting fundamentals. Daily learning with hands-on exercises.',
-                  color: 'border-brand-500',
-                  bg: 'bg-brand-50',
+                  gradient: 'from-brand-500 to-brand-600',
+                  icon: '📚',
                 },
                 {
                   step: '2',
                   title: 'Paid Apprenticeship',
-                  meta: 'Months 5-12 \u00B7 Paid \u00B7 Real Projects',
+                  meta: 'Months 5-12 · Paid · Real Projects',
                   desc: 'Join actual project teams. Configuration, testing, documentation on live work. Practitioner review and feedback. Paid monthly stipend.',
-                  color: 'border-indigo-500',
-                  bg: 'bg-indigo-50',
+                  gradient: 'from-indigo-500 to-indigo-600',
+                  icon: '💼',
                 },
                 {
                   step: '3',
                   title: 'Deployment',
                   meta: 'Post-completion',
                   desc: 'Ready consultants join delivery teams at Orane and partner firms. Continue growing through real engagements.',
-                  color: 'border-accent-500',
-                  bg: 'bg-accent-50',
+                  gradient: 'from-accent-500 to-accent-600',
+                  icon: '🚀',
                 },
               ].map((phase, i) => (
-                <FadeIn key={phase.step} delay={i * 0.1}>
-                  <div className="flex gap-6 md:gap-8">
-                    {/* Timeline line + dot */}
-                    <div className="flex flex-col items-center">
-                      <div className={`w-10 h-10 rounded-full ${phase.bg} border-2 ${phase.color} flex items-center justify-center text-sm font-bold text-slate-700 shrink-0`}>
+                <FadeIn key={phase.step} delay={i * 0.1} className="h-full">
+                  <div className="relative group h-full flex">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${phase.gradient} rounded-2xl opacity-5 group-hover:opacity-10 transition-opacity`} />
+                    <div className="relative bg-white border-2 border-slate-200 rounded-2xl p-6 flex-1 group-hover:border-slate-300 transition-all group-hover:shadow-lg flex flex-col">
+                      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${phase.gradient} text-white text-2xl font-bold mb-4 shadow-md`}>
                         {phase.step}
                       </div>
-                      {i < 2 && <div className="w-px h-full bg-slate-200 min-h-[40px]" />}
+                      <h4 className="text-xl font-bold text-slate-900 mb-2">{phase.title}</h4>
+                      <p className="text-sm text-brand-600 font-semibold mb-3">{phase.meta}</p>
+                      <p className="text-sm text-slate-600 leading-relaxed flex-1">{phase.desc}</p>
                     </div>
-                    <div className={`pb-10 ${i === 2 ? 'pb-0' : ''}`}>
-                      <h4 className="text-xl font-bold text-slate-900 mb-1">{phase.title}</h4>
-                      <p className="text-sm text-brand-600 font-medium mb-3">{phase.meta}</p>
-                      <p className="text-slate-600 leading-relaxed max-w-xl">{phase.desc}</p>
-                    </div>
+                    {i < 2 && (
+                      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 -right-3 z-10">
+                        <div className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center">
+                          <ArrowRight className="w-4 h-4 text-slate-400" />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </FadeIn>
               ))}
@@ -399,28 +416,30 @@ function EAPSection() {
       </section>
 
       {/* What EAP Covers */}
-      <section className="py-16 md:py-20 bg-slate-50 border-b border-slate-100">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-indigo-50 to-slate-50 border-b border-slate-100">
         <div className="container mx-auto px-6 md:px-12 xl:px-20">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <FadeIn>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600 mb-4">What EAP Covers</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-600 mb-6">What EAP Covers</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+                  {[
+                    'Cross-module integration across SAP processes',
+                    'Presales support and effort estimation',
+                    'AI use cases within enterprise environments',
+                    'Managing larger responsibilities within project teams',
+                    'Leadership & ownership development',
+                  ].map((item, i) => (
+                    <FadeIn key={i} delay={i * 0.03}>
+                      <div className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
+                        <span className="text-sm text-slate-700 font-medium leading-relaxed">{item}</span>
+                      </div>
+                    </FadeIn>
+                  ))}
+                </div>
+              </div>
             </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                '🔗 Cross-module integration across SAP processes',
-                '📊 Presales support and effort estimation',
-                '🤖 AI use cases within enterprise environments',
-                '🎯 Managing larger responsibilities within project teams',
-                '🚀 Leadership & ownership development',
-              ].map((item, i) => (
-                <FadeIn key={i} delay={i * 0.05}>
-                  <div className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl p-5">
-                    <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
-                    <span className="text-sm text-slate-700 font-medium">{item}</span>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -543,27 +562,29 @@ function OnlineSection() {
       </section>
 
       {/* What's Included */}
-      <section className="py-16 md:py-20 bg-slate-50 border-b border-slate-100">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-teal-50 to-slate-50 border-b border-slate-100">
         <div className="container mx-auto px-6 md:px-12 xl:px-20">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <FadeIn>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-600 mb-4">What&apos;s Included</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal-600 mb-6">What&apos;s Included</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                  {[
+                    'SAP fundamentals and core concepts',
+                    'How enterprise business processes work',
+                    'Structured introductory learning modules',
+                    'The basics needed to understand SAP consulting environments',
+                  ].map((item, i) => (
+                    <FadeIn key={i} delay={i * 0.03}>
+                      <div className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-teal-500 shrink-0 mt-0.5" />
+                        <span className="text-sm text-slate-700 font-medium leading-relaxed">{item}</span>
+                      </div>
+                    </FadeIn>
+                  ))}
+                </div>
+              </div>
             </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                '📚 SAP fundamentals and core concepts',
-                '🏭 How enterprise business processes work',
-                '📋 Structured introductory learning modules',
-                '🔑 The basics needed to understand SAP consulting environments',
-              ].map((item, i) => (
-                <FadeIn key={i} delay={i * 0.05}>
-                  <div className="flex items-start gap-3 bg-white border border-slate-200 rounded-xl p-5">
-                    <CheckCircle2 className="w-5 h-5 text-teal-500 shrink-0 mt-0.5" />
-                    <span className="text-sm text-slate-700 font-medium">{item}</span>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -768,33 +789,40 @@ function ApplicationSection() {
   ];
 
   return (
-    <section id="apply" className="py-16 md:py-24 bg-slate-50 border-b border-slate-100">
+    <section id="apply" className="py-12 md:py-16 bg-gradient-to-br from-slate-50 via-white to-slate-50 border-b border-slate-100">
       <div className="container mx-auto px-6 md:px-12 xl:px-20">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <FadeIn>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600 mb-3">Application Process</p>
           </FadeIn>
           <FadeIn delay={0.05}>
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-3">
               How to apply for DCAP.
             </h3>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <p className="text-lg text-slate-600 mb-14 max-w-2xl">
+            <p className="text-lg text-slate-600 mb-10 max-w-2xl">
               We&apos;re looking for fit and commitment, not just qualifications.
             </p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {steps.map((step, i) => (
-              <FadeIn key={step.num} delay={i * 0.08}>
-                <div className="relative bg-white border border-slate-200 rounded-2xl p-7 h-full">
-                  <p className="text-4xl font-bold text-brand-100 mb-4">{step.num}</p>
-                  <h4 className="text-lg font-bold text-slate-900 mb-2">{step.title}</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">{step.desc}</p>
+              <FadeIn key={step.num} delay={i * 0.08} className="h-full">
+                <div className="group relative h-full flex">
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-500 to-brand-600 rounded-2xl opacity-5 group-hover:opacity-10 transition-opacity" />
+                  <div className="relative bg-white border-2 border-slate-200 rounded-2xl p-6 flex-1 group-hover:border-brand-300 transition-all group-hover:-translate-y-1 group-hover:shadow-xl flex flex-col">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 text-white text-xl font-bold mb-4 shadow-md">
+                      {step.num}
+                    </div>
+                    <h4 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h4>
+                    <p className="text-sm text-slate-600 leading-relaxed flex-1">{step.desc}</p>
+                  </div>
                   {i < 3 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-3 z-10">
-                      <ArrowRight className="w-5 h-5 text-brand-300" />
+                    <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -right-3 z-10">
+                      <div className="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center shadow-md">
+                        <ArrowRight className="w-3.5 h-3.5 text-white" />
+                      </div>
                     </div>
                   )}
                 </div>
@@ -1015,17 +1043,58 @@ function FacultySection() {
    ═══════════════════════════════════════════════════════════════ */
 
 const ceremonyImages = [
-  { src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop&q=80', alt: 'Graduation ceremony' },
-  { src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80', alt: 'Classroom learning' },
-  { src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&q=80', alt: 'Team collaboration' },
-  { src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80', alt: 'Mentorship session' },
-  { src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop&q=80', alt: 'Project presentation' },
-  { src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&q=80', alt: 'Workshop in progress' },
-  { src: 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=400&fit=crop&q=80', alt: 'Certificate distribution' },
-  { src: 'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&h=400&fit=crop&q=80', alt: 'Campus life' },
+  { src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop&q=80', alt: 'Graduation ceremony', label: 'Graduation Ceremony' },
+  { src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80', alt: 'Classroom learning', label: 'Classroom Learning' },
+  { src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&q=80', alt: 'Team collaboration', label: 'Team Collaboration' },
+  { src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80', alt: 'Mentorship session', label: 'Mentorship Session' },
+  { src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop&q=80', alt: 'Project presentation', label: 'Project Presentation' },
+  { src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&q=80', alt: 'Workshop in progress', label: 'Workshop in Progress' },
+  { src: 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=400&fit=crop&q=80', alt: 'Certificate distribution', label: 'Certificate Distribution' },
+  { src: 'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&h=400&fit=crop&q=80', alt: 'Campus life', label: 'Campus Life' },
 ];
 
 function CeremonySection() {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const checkScroll = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 10);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+
+    // Calculate active index based on scroll position
+    const slideWidth = el.scrollWidth / ceremonyImages.length;
+    const newIndex = Math.round(el.scrollLeft / slideWidth);
+    setActiveIndex(Math.min(newIndex, ceremonyImages.length - 1));
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const slideWidth = el.querySelector('[data-slide]')?.clientWidth ?? 400;
+    el.scrollBy({ left: direction === 'left' ? -slideWidth - 16 : slideWidth + 16, behavior: 'smooth' });
+  };
+
+  const scrollToIndex = (index: number) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const slide = el.querySelectorAll('[data-slide]')[index] as HTMLElement;
+    if (slide) {
+      el.scrollTo({ left: slide.offsetLeft - 16, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll();
+    return () => el.removeEventListener('scroll', checkScroll);
+  }, []);
+
   return (
     <section className="py-16 md:py-24 bg-slate-50 border-b border-slate-100 overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 xl:px-20">
@@ -1054,110 +1123,68 @@ function CeremonySection() {
             </div>
           </FadeIn>
 
-          {/* Photo grid — symmetrical layout
-              Desktop (lg): 4-column grid with explicit placement
-              Row 1: [wide 2-col] [square] [square]
-              Row 2: [square] [square] [wide 2-col]
-              Tablet (sm): 2-column simple grid
-              Mobile: single column
-          */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 auto-rows-[200px] sm:auto-rows-[220px] md:auto-rows-[240px]">
-            {/* Image 1 — wide, spans 2 cols on desktop */}
-            <FadeIn delay={0.04} className="lg:col-span-2">
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ceremonyImages[0].src} alt={ceremonyImages[0].alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 right-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-xs font-medium">{ceremonyImages[0].alt}</p>
-                </div>
-              </div>
-            </FadeIn>
+          {/* Image Carousel */}
+          <FadeIn delay={0.15}>
+            <div className="relative">
+              {/* Navigation Arrows */}
+              <button
+                onClick={() => scroll('left')}
+                className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border-2 border-slate-200 shadow-lg flex items-center justify-center transition-all hover:bg-brand-50 hover:border-brand-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                aria-label="Previous"
+              >
+                <ChevronLeft className="w-5 h-5 text-slate-700" />
+              </button>
+              <button
+                onClick={() => scroll('right')}
+                className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border-2 border-slate-200 shadow-lg flex items-center justify-center transition-all hover:bg-brand-50 hover:border-brand-300 ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                aria-label="Next"
+              >
+                <ChevronRight className="w-5 h-5 text-slate-700" />
+              </button>
 
-            {/* Image 2 — single cell */}
-            <FadeIn delay={0.08}>
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ceremonyImages[1].src} alt={ceremonyImages[1].alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 right-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-xs font-medium">{ceremonyImages[1].alt}</p>
-                </div>
+              {/* Carousel Track */}
+              <div
+                ref={carouselRef}
+                className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 -mx-2 px-2 no-scrollbar"
+              >
+                {ceremonyImages.map((img, i) => (
+                  <div
+                    key={i}
+                    data-slide
+                    className="shrink-0 w-[280px] sm:w-[340px] md:w-[400px] snap-start"
+                  >
+                    <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-[220px] sm:h-[260px] md:h-[300px]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <span className="inline-block px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-lg border border-white/20">
+                          <p className="text-white text-sm font-semibold">{img.label}</p>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </FadeIn>
 
-            {/* Image 3 — single cell */}
-            <FadeIn delay={0.12}>
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ceremonyImages[2].src} alt={ceremonyImages[2].alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 right-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-xs font-medium">{ceremonyImages[2].alt}</p>
-                </div>
+              {/* Dot Indicators */}
+              <div className="flex items-center justify-center gap-2 mt-6">
+                {ceremonyImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => scrollToIndex(i)}
+                    className={`rounded-full transition-all duration-300 ${activeIndex === i ? 'w-8 h-2.5 bg-brand-500' : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'}`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
               </div>
-            </FadeIn>
-
-            {/* Image 4 — single cell */}
-            <FadeIn delay={0.16}>
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ceremonyImages[3].src} alt={ceremonyImages[3].alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 right-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-xs font-medium">{ceremonyImages[3].alt}</p>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Image 5 — single cell */}
-            <FadeIn delay={0.20}>
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ceremonyImages[4].src} alt={ceremonyImages[4].alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 right-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-xs font-medium">{ceremonyImages[4].alt}</p>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Image 6 — wide, spans 2 cols on desktop (mirrors row 1) */}
-            <FadeIn delay={0.24} className="lg:col-span-2">
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ceremonyImages[5].src} alt={ceremonyImages[5].alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 right-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-xs font-medium">{ceremonyImages[5].alt}</p>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Image 7 — single cell */}
-            <FadeIn delay={0.28}>
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ceremonyImages[6].src} alt={ceremonyImages[6].alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 right-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-xs font-medium">{ceremonyImages[6].alt}</p>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Image 8 — single cell */}
-            <FadeIn delay={0.32}>
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 group h-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ceremonyImages[7].src} alt={ceremonyImages[7].alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 right-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-xs font-medium">{ceremonyImages[7].alt}</p>
-                </div>
-              </div>
-            </FadeIn>
-          </div>
+            </div>
+          </FadeIn>
 
           {/* Axentia Logo watermark */}
           <FadeIn delay={0.3} className="flex justify-center mt-10">

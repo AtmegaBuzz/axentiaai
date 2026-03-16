@@ -33,32 +33,36 @@ const leadershipTeam = [
         role: 'Founder & Director',
         bio: 'With decades of experience leading enterprise SAP implementations across global markets, our founder brings the vision and depth that shapes every program at Axentia.AI.',
         initial: 'A',
+        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face&q=80',
     },
     {
         name: 'To Be Announced',
         role: 'Head of Academics',
         bio: 'Responsible for curriculum design and pedagogical excellence, ensuring our programs stay aligned with the evolving demands of the enterprise consulting industry.',
         initial: 'B',
+        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face&q=80',
     },
     {
         name: 'To Be Announced',
         role: 'Director of Enterprise Relations',
         bio: 'Builds and maintains our network of hiring partners, apprenticeship hosts, and enterprise collaborators across India and globally.',
         initial: 'C',
+        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face&q=80',
     },
     {
         name: 'To Be Announced',
         role: 'Head of Placement',
         bio: 'Leads our placement-first approach — from resume building and mock interviews to direct introductions with enterprise hiring teams.',
         initial: 'D',
+        image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face&q=80',
     },
 ];
 
 export default function FacultyPage() {
     return (
-        <main className="pt-24">
+        <main>
             {/* Hero */}
-            <section className="relative py-16 md:py-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e0735 0%, #2a0845 50%, #1a0630 100%)' }}>
+            <section className="relative pt-40 pb-16 md:pt-48 md:pb-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e0735 0%, #2a0845 50%, #1a0630 100%)' }}>
                 <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(192,16,218,0.12) 0%, transparent 60%)' }} />
                 <div className="container mx-auto px-4 md:px-6 relative z-10">
                     <motion.div
@@ -176,12 +180,18 @@ export default function FacultyPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.1, type: 'spring', stiffness: 120, damping: 20 }}
-                                className="bg-white rounded-2xl p-8 border border-slate-200 hover:shadow-md transition-all"
+                                className="group bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                             >
-                                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white font-bold text-2xl mb-6 mx-auto">
-                                    {member.initial}
+                                <div className="relative h-56 overflow-hidden">
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
+                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                                 </div>
-                                <div className="text-center">
+                                <div className="p-6 text-center">
                                     <h3 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h3>
                                     <p className="text-brand-600 text-sm font-semibold mb-4">{member.role}</p>
                                     <p className="text-slate-600 text-sm leading-relaxed text-justify">{member.bio}</p>

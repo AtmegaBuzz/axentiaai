@@ -34,8 +34,8 @@ const projects = [
 export default function OutcomesPage() {
     return (
         <>
-            <main className="pt-24">
-                <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-brand-950">
+            <main>
+                <section className="pt-40 pb-16 md:pt-48 md:pb-24 bg-gradient-to-br from-slate-900 to-brand-950">
                     <div className="container mx-auto px-4 md:px-6">
                         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">Outcomes</motion.h1>
                         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-base md:text-xl text-slate-300 max-w-2xl">Real results from real consultants. Here&apos;s what our alumni achieve.</motion.p>
