@@ -195,63 +195,35 @@ export function SAPAISection() {
                 </div>
             </div>
 
-            {/* Certified Capability panel */}
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-0 pb-16 md:pb-20 -mt-40">
-                <div className="max-w-5xl mx-auto bg-slate-50 border border-slate-200 rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 md:gap-16 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-[0.06]"
-                        style={{ background: 'radial-gradient(circle, #8A29AC, transparent)' }} />
-
-                    <div className="relative z-10 flex-1 text-center md:text-left">
-                        <motion.p
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3"
-                        >
-                            Certified Capability
-                        </motion.p>
-                        <motion.h3
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.08 }}
-                            className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4"
-                        >
-                            Trained for{' '}
-                            <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                real outcomes
-                            </span>
-                        </motion.h3>
-                        <motion.p
-                            initial={{ opacity: 0, y: 14 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.14 }}
-                            className="text-base md:text-lg text-slate-500 leading-relaxed"
-                        >
-                            Every academy is built around how decisions actually get made, how workflows actually run, and how delivery actually happens inside organisations.
-                        </motion.p>
-                    </div>
-
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="relative z-10 flex flex-col gap-3 shrink-0"
-                    >
+            {/* Certified Capability — clean inline */}
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pb-20 md:pb-28 -mt-32">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="max-w-3xl mx-auto text-center"
+                >
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#8A29AC] mb-3">Certified Capability</p>
+                    <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4">
+                        Trained for{' '}
+                        <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">real outcomes</span>
+                    </h3>
+                    <p className="text-base text-slate-500 leading-relaxed mb-8">
+                        Every academy is built around how decisions actually get made, how workflows actually run, and how delivery actually happens inside organisations.
+                    </p>
+                    <div className="flex flex-wrap items-center justify-center gap-3">
                         {[
                             'You learn by doing the real thing',
                             'Inside live SAP environments',
                             'Guided by certified practitioners',
                         ].map(item => (
-                            <div key={item} className="flex items-center gap-3 bg-white border border-slate-200 rounded-2xl px-5 py-3.5 shadow-sm">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                                <span className="text-slate-800 font-medium text-sm">{item}</span>
-                            </div>
+                            <span key={item} className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-medium text-slate-700 shadow-sm">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                                {item}
+                            </span>
                         ))}
-                    </motion.div>
-                </div>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );
