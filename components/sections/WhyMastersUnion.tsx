@@ -133,68 +133,30 @@ export function WhyAxentiaAI() {
                         </div>
                     </motion.div>
 
-                    {/* ── Right: Logo Grid ── */}
+                    {/* ── Right: Logo Grid (bordered cells) ── */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
-                        className="flex-1 w-full max-w-lg"
+                        className="flex-1 w-full"
                     >
-                        {/* Row 1: 3 logos */}
-                        <div className="grid grid-cols-3 gap-4 mb-4">
-                            {partnerLogos.slice(0, 3).map((logo, i) => (
-                                <motion.div
+                        <h3 className="text-lg font-medium text-slate-600 text-center mb-6">Trusted by world&apos;s leading companies</h3>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-max mx-auto -mt-px -ml-px">
+                            {partnerLogos.map((logo) => (
+                                <div
                                     key={logo.alt}
-                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ type: 'spring', stiffness: 140, damping: 18, delay: 0.15 + i * 0.07 }}
-                                    className="aspect-square rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex items-center justify-center p-5"
+                                    className="hover:bg-slate-50 flex items-center justify-center h-16 w-44 sm:w-48 sm:h-20 border border-slate-200 -mt-px -ml-px transition-colors duration-200"
                                 >
                                     <Image
                                         src={logo.src}
                                         alt={logo.alt}
                                         width={logo.width}
                                         height={logo.height}
-                                        className="max-h-10 w-auto object-contain"
+                                        className="max-h-8 w-auto object-contain"
                                     />
-                                </motion.div>
+                                </div>
                             ))}
-                        </div>
-                        {/* Row 2: 2 logos (centered) */}
-                        <div className="grid grid-cols-3 gap-4">
-                            {partnerLogos.slice(3).map((logo, i) => (
-                                <motion.div
-                                    key={logo.alt}
-                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ type: 'spring', stiffness: 140, damping: 18, delay: 0.35 + i * 0.07 }}
-                                    className="aspect-square rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex items-center justify-center p-5"
-                                    style={{ gridColumn: i === 0 ? '1 / 2' : '2 / 3' }}
-                                >
-                                    <Image
-                                        src={logo.src}
-                                        alt={logo.alt}
-                                        width={logo.width}
-                                        height={logo.height}
-                                        className="max-h-10 w-auto object-contain"
-                                    />
-                                </motion.div>
-                            ))}
-                            {/* Decorative card */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.5 }}
-                                className="aspect-square rounded-2xl flex flex-col items-center justify-center gap-2 p-5"
-                                style={{ background: 'linear-gradient(135deg, #8A29AC 0%, #C010DA 100%)' }}
-                            >
-                                <span className="text-2xl font-black text-white leading-none">50+</span>
-                                <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest text-center">Enterprise Partners</span>
-                            </motion.div>
                         </div>
                     </motion.div>
 
