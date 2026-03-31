@@ -38,14 +38,12 @@ function buildScreenTexture(): THREE.CanvasTexture {
     return tex;
 }
 
-/* ── Scene: scroll-driven rotation → then zoom ── */
+/* ── Scene ── */
 function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
-    const groupRef      = useRef<THREE.Group>(null);
-    const sceneRef      = useRef<THREE.Group | null>(null);
-    const lidRef        = useRef<THREE.Mesh | null>(null);
-    const origMatRef    = useRef<THREE.Material | null>(null);
-    const screenMatRef  = useRef<THREE.Material | null>(null);
-    const screenActive  = useRef(false);
+    const groupRef     = useRef<THREE.Group>(null);
+    const sceneRef     = useRef<THREE.Group | null>(null);
+    const screenRef    = useRef<THREE.Mesh | null>(null);
+    const screenActive = useRef(false);
     const [ready, setReady] = useState(false);
     const { camera } = useThree();
 
@@ -59,25 +57,52 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
                         if (cancelled) return;
                         const scene = gltf.scene;
 
+                        /* Auto-center */
                         const box = new THREE.Box3().setFromObject(scene);
                         const center = new THREE.Vector3();
                         box.getCenter(center);
                         scene.position.sub(center);
 
+                        /* Auto-scale */
                         const size = new THREE.Vector3();
                         box.getSize(size);
-                        scene.scale.setScalar(2.8 / Math.max(size.x, size.y, size.z));
+                        const scaleFactor = 2.8 / Math.max(size.x, size.y, size.z);
+                        scene.scale.setScalar(scaleFactor);
 
+                        /* Find lid mesh (index 0 = tall Y) and compute its screen area */
                         const meshes: THREE.Mesh[] = [];
                         scene.traverse(o => { if ((o as THREE.Mesh).isMesh) meshes.push(o as THREE.Mesh); });
+
                         if (meshes[0]) {
-                            lidRef.current = meshes[0];
-                            origMatRef.current = meshes[0].material as THREE.Material;
+                            /* Recompute after scale */
+                            scene.updateMatrixWorld(true);
+                            const lidBox = new THREE.Box3().setFromObject(meshes[0]);
+                            const lidCenter = new THREE.Vector3();
+                            const lidSize = new THREE.Vector3();
+                            lidBox.getCenter(lidCenter);
+                            lidBox.getSize(lidSize);
+
+                            /* Screen plane: 70% of lid, on its front face (+Z) */
                             const tex = buildScreenTexture();
-                            screenMatRef.current = new THREE.MeshStandardMaterial({
-                                map: tex, roughness: 0.15, metalness: 0,
-                                emissive: new THREE.Color('#0a0818'), emissiveIntensity: 0.8,
+                            const screenMat = new THREE.MeshBasicMaterial({
+                                map: tex,
+                                transparent: true,
+                                opacity: 1,
+                                depthWrite: false,
                             });
+                            const screenGeo = new THREE.PlaneGeometry(
+                                lidSize.x * 0.7,
+                                lidSize.y * 0.7
+                            );
+                            const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+                            screenMesh.position.set(
+                                lidCenter.x,
+                                lidCenter.y,
+                                lidBox.max.z + 0.02
+                            );
+                            screenMesh.visible = false;
+                            scene.add(screenMesh);
+                            screenRef.current = screenMesh;
                         }
 
                         sceneRef.current = scene;
@@ -95,31 +120,27 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
         if (!groupRef.current) return;
         const raw = scrollRef.current ?? 0;
 
-        /*
-         * Spin finishes fast (raw 0→0.3), then zoom fills the rest (0.3→1).
-         * Both complete by the time raw hits 1 (viewport center).
-         */
-        const spinProgress = Math.min(raw / 0.3, 1);                    // done by 30%
-        const zoomProgress = Math.max(0, (raw - 0.25) / 0.75);          // starts at 25%, done at 100%
+        const spinProgress = Math.min(raw / 0.3, 1);
+        const zoomProgress = Math.max(0, (raw - 0.25) / 0.75);
 
-        /* Rotation: 90° → 0° — fast */
+        /* Rotation: 90° → 0° */
         const targetY = (Math.PI / 2) * (1 - spinProgress);
         groupRef.current.rotation.y = THREE.MathUtils.lerp(
             groupRef.current.rotation.y, targetY, 0.15
         );
 
-        /* Zoom: z=9 → z=7 */
+        /* Zoom */
         const targetZ = THREE.MathUtils.lerp(9, 7, zoomProgress);
         camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.1);
 
-        /* Screen text: show only when spin is done and zooming in */
-        const lid = lidRef.current;
-        if (!lid || !screenMatRef.current || !origMatRef.current) return;
+        /* Show screen plane only when facing user */
+        const screen = screenRef.current;
+        if (!screen) return;
         if (spinProgress > 0.95 && !screenActive.current) {
-            lid.material = screenMatRef.current;
+            screen.visible = true;
             screenActive.current = true;
         } else if (spinProgress <= 0.85 && screenActive.current) {
-            lid.material = origMatRef.current;
+            screen.visible = false;
             screenActive.current = false;
         }
     });
@@ -152,7 +173,6 @@ export function MacBookViewer() {
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight;
             const mid = rect.top + rect.height / 2;
-            // Start when 50% visible, complete well before center
             const raw = (vh - mid) / (vh * 0.3);
             scrollRef.current = Math.max(0, Math.min(1, raw));
         };
