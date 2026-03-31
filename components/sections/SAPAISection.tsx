@@ -129,8 +129,8 @@ export function SAPAISection() {
                 </div>
 
                 {/* Desktop: cards + 3D laptop */}
-                <div className="hidden md:grid grid-cols-[260px_1fr_260px] lg:grid-cols-[280px_1fr_280px] xl:grid-cols-[300px_1fr_300px] gap-6 items-center overflow-visible">
-                    <div className="flex flex-col gap-5">
+                <div className="hidden md:grid grid-cols-[260px_1fr_260px] lg:grid-cols-[280px_1fr_280px] xl:grid-cols-[300px_1fr_300px] gap-6 items-end overflow-visible">
+                    <div className="flex flex-col gap-3 pb-8">
                         {leftCards.map(c => <InfoCard key={c.title} card={c} direction="left" />)}
                     </div>
 
@@ -144,7 +144,7 @@ export function SAPAISection() {
                         <MacBookViewer />
                     </motion.div>
 
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-3 pb-8">
                         {rightCards.map(c => <InfoCard key={c.title} card={c} direction="right" />)}
                     </div>
                 </div>
