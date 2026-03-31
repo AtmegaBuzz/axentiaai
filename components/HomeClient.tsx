@@ -28,10 +28,10 @@ export function HomeClient() {
             <Offerings />
             {/* Section 5: SAP + AI */}
             <SAPAISection />
-            {/* Section 6: Industry Use Cases */}
-            <IndustryUseCases />
-            {/* Section 7: Our Programmes (DCAP / EAP / Online) */}
+            {/* Section 6: Our Programmes (DCAP / EAP / Online) */}
             <Programs />
+            {/* Section 7: Industry Use Cases */}
+            <IndustryUseCases />
             {/* Section 8: Student Path */}
             <Timeline />
             {/* Section 9: Leadership */}
