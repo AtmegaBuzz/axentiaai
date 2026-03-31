@@ -109,8 +109,8 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
             groupRef.current.rotation.y, targetY, 0.1
         );
 
-        /* Camera: start far (small laptop), zoom to current size after spin */
-        const targetZ = THREE.MathUtils.lerp(7, 3.2, zoomProgress);
+        /* Camera: spin at z=6 (20% smaller), zoom to z=5 (original spin size) */
+        const targetZ = THREE.MathUtils.lerp(6, 5, zoomProgress);
         camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.08);
 
         /* Screen text: show only when spin is done and zooming in */
@@ -173,7 +173,7 @@ export function MacBookViewer() {
             <ErrBoundary>
                 <Canvas
                     frameloop="always"
-                    camera={{ position: [0, 0.3, 7], fov: 45 }}
+                    camera={{ position: [0, 0.3, 6], fov: 45 }}
                     dpr={[1, 1.5]}
                     gl={{ alpha: true, antialias: true, powerPreference: 'default', stencil: false }}
                     style={{ background: 'transparent', overflow: 'visible', position: 'absolute', inset: 0 }}
