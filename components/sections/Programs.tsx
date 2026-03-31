@@ -186,7 +186,7 @@ export function Programs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
+                        className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6"
                     >
                         3 programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
                     </motion.h2>

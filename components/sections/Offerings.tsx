@@ -167,7 +167,7 @@ export function Offerings() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.06 }}
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight mb-6 max-w-4xl mx-auto"
+                    className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-6 max-w-4xl mx-auto"
                 >
                     Bringing transformation,{' '}
                     <br className="hidden md:block" />

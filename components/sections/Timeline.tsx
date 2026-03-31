@@ -296,7 +296,7 @@ export function Timeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg sm:text-2xl md:text-5xl font-bold text-slate-900 tracking-tight mb-5 leading-snug text-left"
+            className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5 leading-snug text-left"
           >
             From first conversation to <span className="font-cursive italic text-brand-600 text-[1.1em]">operating at scale</span>
           </motion.h2>

@@ -117,7 +117,7 @@ export function IndustryUseCases() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.06 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight mb-4"
+                        className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4"
                     >
                         Where AI creates{' '}
                         <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
