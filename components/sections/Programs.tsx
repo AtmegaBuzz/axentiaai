@@ -1,70 +1,65 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Play, Clock, CalendarDays, GraduationCap, MonitorPlay, Briefcase, Layers, BookOpen, Brain, Target, Users, Cpu, FileText } from 'lucide-react';
+import { ArrowUpRight, Play, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
-interface InfoItem {
-    label: string;
-    value: string;
-    Icon: React.ComponentType<{ className?: string }>;
-}
-
-interface Program {
+interface Offering {
     id: string;
+    tag: string;
     title: string;
     titleAccent: string;
     description: string;
-    info: InfoItem[];
+    includes: string[];
     image: string;
 }
 
-const programs: Program[] = [
+const offerings: Offering[] = [
     {
-        id: 'dcap',
-        title: 'Daksha Career',
-        titleAccent: 'Accelerator',
+        id: 'transformation',
+        tag: 'Enterprise · Project-based',
+        title: 'Enterprise AI',
+        titleAccent: 'Transformation',
         description:
-            'Turn graduates into enterprise-ready SAP consultants through classroom learning and paid apprenticeship.',
-        info: [
-            { label: 'Format', value: 'Classroom + Apprenticeship', Icon: MonitorPlay },
-            { label: 'Eligibility', value: 'Fresh Graduates', Icon: GraduationCap },
-            { label: 'Duration', value: '10 Months', Icon: Clock },
-            { label: 'Apprenticeship', value: '6 Months Paid', Icon: Briefcase },
-            { label: 'Modules', value: 'MM, FICO, SD', Icon: Layers },
-            { label: 'Processes', value: 'P2P, O2C, R2R, H2R', Icon: Target },
+            'We design, build, and deploy AI within your SAP and enterprise workflows — taking ideas into active use across the business.',
+        includes: [
+            'AI pilots aligned to real business use cases',
+            'Demand forecasting, invoice automation, HR copilots',
+            'Predictive maintenance using SAP PM data',
+            'Integration with S/4HANA, BTP, and Joule',
+            'Seamless progression from pilot to wider adoption',
         ],
         image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
     },
     {
-        id: 'eap',
-        title: 'Enterprise',
-        titleAccent: 'Accelerator',
+        id: 'capability',
+        tag: 'Enterprise · Company-specific',
+        title: 'Enterprise AI',
+        titleAccent: 'Capability',
         description:
-            'Deepen consulting capabilities with complex enterprise scenarios and larger SAP project responsibilities.',
-        info: [
-            { label: 'Format', value: 'Advanced Cohort', Icon: MonitorPlay },
-            { label: 'Eligibility', value: 'DCAP Graduates', Icon: GraduationCap },
-            { label: 'Selection', value: 'Performance-based', Icon: Target },
-            { label: 'Focus', value: 'Cross-module Integration', Icon: Layers },
-            { label: 'Skills', value: 'Presales & Estimation', Icon: FileText },
-            { label: 'AI/ML', value: 'Enterprise AI Use Cases', Icon: Brain },
+            'We develop the capability within your organisation to lead, operate, and expand AI initiatives with clarity and ownership.',
+        includes: [
+            'AI-enabled teams across business and IT',
+            'Identification and development of internal use cases',
+            'Governance and ways of working for AI adoption',
+            'Enablement across SuccessFactors and Analytics Cloud',
+            'Training tailored to your organisation',
         ],
         image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
     },
     {
-        id: 'online',
-        title: 'Online',
-        titleAccent: 'Foundation',
+        id: 'academies',
+        tag: 'Public · Open Enrollment',
+        title: 'Talent',
+        titleAccent: 'Academies',
         description:
-            'Self-paced introduction to SAP fundamentals and enterprise processes for aspiring consultants.',
-        info: [
-            { label: 'Format', value: 'Self-paced Online', Icon: MonitorPlay },
-            { label: 'Eligibility', value: 'Anyone', Icon: Users },
-            { label: 'Duration', value: 'Flexible', Icon: Clock },
-            { label: 'Covers', value: 'SAP Fundamentals', Icon: BookOpen },
-            { label: 'Processes', value: 'Enterprise Workflows', Icon: Layers },
-            { label: 'Access', value: 'Always Open', Icon: CalendarDays },
+            'We prepare individuals and enterprise teams through structured programs across AI, SAP, and industry tracks.',
+        includes: [
+            'AI Foundation Academy',
+            'SAP SuccessFactors Academy',
+            'Retail & FMCG Industry Academy',
+            'Energy & Utilities Industry Academy',
+            'SAP Workforce Accelerator',
         ],
         image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=600&h=400&fit=crop&q=80',
     },
@@ -76,7 +71,7 @@ const snapDirs = [
     { x: 60, y: 50, rotate: 6 },
 ];
 
-function ProgramCard({ prog, index }: { prog: Program; index: number }) {
+function OfferingCard({ offering, index }: { offering: Offering; index: number }) {
     const dir = snapDirs[index % snapDirs.length];
 
     return (
@@ -102,17 +97,22 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
             <div className="relative h-52 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                    src={prog.image}
-                    alt={prog.title}
+                    src={offering.image}
+                    alt={offering.title}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
-                {/* Centered play button */}
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                         <Play className="w-6 h-6 text-slate-900 fill-current ml-0.5" />
                     </div>
+                </div>
+                {/* Tag badge */}
+                <div className="absolute top-3 left-3">
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-slate-600 px-2.5 py-1 rounded-full">
+                        {offering.tag}
+                    </span>
                 </div>
             </div>
 
@@ -120,33 +120,32 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
             <div className="flex flex-col flex-grow p-6">
                 {/* Heading */}
                 <h3 className="text-2xl font-bold text-slate-900 leading-tight mb-2 text-left">
-                    {prog.title} {prog.titleAccent}
+                    {offering.title}{' '}
+                    <span className="text-accent-500">{offering.titleAccent}</span>
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">{prog.description}</p>
+                <p className="text-sm text-slate-500 leading-relaxed mb-5">{offering.description}</p>
 
-                {/* Info grid */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                    {prog.info.map(({ label, value, Icon }) => (
-                        <div key={label} className="flex items-start gap-3">
-                            <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
-                                <Icon className="w-4 h-4 text-slate-600" />
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-slate-900 leading-tight">{label}</p>
-                                <p className="text-xs text-slate-400 leading-tight mt-0.5">{value}</p>
-                            </div>
-                        </div>
-                    ))}
+                {/* Includes */}
+                <div className="mb-6">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Includes</p>
+                    <ul className="space-y-2">
+                        {offering.includes.map((item) => (
+                            <li key={item} className="flex items-start gap-2 text-left">
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                                <span className="text-xs text-slate-600 leading-snug">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
                 {/* CTA */}
                 <Link
-                    href={`/programs?tab=${prog.id}`}
+                    href={`/programs?tab=${offering.id}`}
                     className="mt-auto inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 rounded-full w-fit transition-colors duration-200"
                 >
-                    Explore Program
+                    Learn More
                     <ArrowUpRight className="w-4 h-4" />
                 </Link>
             </div>
@@ -156,7 +155,7 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
 
 export function Programs() {
     return (
-        <section id="programs" className="relative py-16 md:py-24 overflow-hidden">
+        <section id="what-we-deliver" className="relative py-16 md:py-24 overflow-hidden">
             {/* Background image */}
             <div className="absolute inset-0 z-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -169,7 +168,7 @@ export function Programs() {
             </div>
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
-                <div className="text-center mx-auto mb-16">
+                <div className="mb-16 max-w-3xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -177,8 +176,8 @@ export function Programs() {
                         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
                         className="font-semibold tracking-wide uppercase text-sm mb-4"
                     >
-                        <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>
-                            Our Programmes
+                        <span className="inline-block px-3 py-1 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>
+                            HOW WE HELP YOU SUCCEED
                         </span>
                     </motion.div>
                     <motion.h2
@@ -186,24 +185,29 @@ export function Programs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
+                        className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6"
                     >
-                        3 programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
+                        Bringing transformation, capability, and talent into{' '}
+                        <span className="font-cursive italic text-accent-300 text-[1.1em]">alignment</span>
                     </motion.h2>
-                    <motion.p
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
-                        className="text-lg text-white/70 italic"
+                        className="relative max-w-2xl mx-auto mt-2"
                     >
-                        From first steps to senior consulting, a clear path for every stage of your enterprise career.
-                    </motion.p>
+                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-5">
+                            <p className="text-base md:text-lg text-white/70 leading-relaxed">
+                                Be it AI transformation, internal capability, or talent development, Axentia.AI solves them all together. Each part of our model strengthens the others, creating momentum that holds beyond the engagement.
+                            </p>
+                        </div>
+                    </motion.div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {programs.map((prog, i) => (
-                        <ProgramCard key={prog.id} prog={prog} index={i} />
+                    {offerings.map((offering, i) => (
+                        <OfferingCard key={offering.id} offering={offering} index={i} />
                     ))}
                 </div>
             </div>
