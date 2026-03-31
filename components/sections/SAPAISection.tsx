@@ -154,7 +154,7 @@ export function SAPAISection() {
 
     return (
         /* 500 vh scroll budget — desktop scroll trap lives here */
-        <div ref={trapRef} className="relative h-[500vh] bg-slate-50">
+        <div ref={trapRef} className="relative lg:h-[500vh]  bg-slate-50">
 
             {/* ══ DESKTOP sticky pane (hidden on mobile) ══ */}
             <section className="sticky top-0 h-screen w-full hidden lg:flex flex-col border-b border-slate-100 overflow-hidden">
