@@ -159,9 +159,9 @@ export function MacBookViewer() {
         const onScroll = () => {
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight;
-            // progress = 0 when element top enters bottom of viewport
-            // progress = 1 when element top reaches 70% from top (well above center)
-            const raw = 1 - rect.top / (vh * 0.85);
+            // progress = 0 when element bottom enters viewport
+            // progress = 1 almost immediately after — just one scroll tick
+            const raw = (vh - rect.top) / (vh * 0.25);
             scrollRef.current = Math.max(0, Math.min(1, raw));
         };
         window.addEventListener('scroll', onScroll, { passive: true });
@@ -176,7 +176,7 @@ export function MacBookViewer() {
             <ErrBoundary>
                 <Canvas
                     frameloop="always"
-                    camera={{ position: [0, 0.3, 4.5], fov: 45 }}
+                    camera={{ position: [0, 0.3, 3.2], fov: 45 }}
                     dpr={[1, 1.5]}
                     gl={{ alpha: true, antialias: true, powerPreference: 'default', stencil: false }}
                     style={{ background: 'transparent', overflow: 'visible' }}
