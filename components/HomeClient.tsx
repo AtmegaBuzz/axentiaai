@@ -24,12 +24,12 @@ export function HomeClient() {
             <WhyAxentiaAI />
             {/* Section 3: Standards / Certifications */}
             <StandardsSection />
-            {/* Section 4: SAP + AI */}
-            <SAPAISection />
-            {/* Section 5: Industry Use Cases */}
-            <IndustryUseCases />
-            {/* Section 6: HOW WE HELP YOU SUCCEED — Enterprise AI offerings */}
+            {/* Section 4: HOW WE HELP YOU SUCCEED — Enterprise AI offerings */}
             <Offerings />
+            {/* Section 5: SAP + AI */}
+            <SAPAISection />
+            {/* Section 6: Industry Use Cases */}
+            <IndustryUseCases />
             {/* Section 7: Our Programmes (DCAP / EAP / Online) */}
             <Programs />
             {/* Section 8: Student Path */}
