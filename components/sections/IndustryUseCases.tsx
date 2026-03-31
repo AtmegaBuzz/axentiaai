@@ -87,8 +87,7 @@ const useCases = [
 
 export function IndustryUseCases() {
     const [current, setCurrent] = useState(0);
-    const total = useCases.length;
-    const maxIdx = total - 2; // show 2 at a time on desktop
+    const maxIdx = 3; // only 4 cards navigable out of 6
 
     const prev = () => setCurrent(i => Math.max(0, i - 1));
     const next = () => setCurrent(i => Math.min(maxIdx, i + 1));
@@ -158,19 +157,19 @@ export function IndustryUseCases() {
                 </div>
             </div>
 
-            {/* ── Horizontal slider ── */}
-            <div className="overflow-hidden pb-20 md:pb-28 px-[8vw] md:px-[15vw]">
+            {/* ── Horizontal slider — 1 card at a time, left-aligned with heading ── */}
+            <div className="overflow-hidden pb-20 md:pb-28">
                 <motion.div
-                    className="flex"
-                    animate={{ x: `-${current * 50}%` }}
-                    transition={{ type: 'spring', stiffness: 280, damping: 32, mass: 0.8 }}
-                    style={{ width: `${total * 50}%` }}
+                    className="flex gap-5"
+                    animate={{ x: `calc(-${current} * (60vw + 20px) )` }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 30, mass: 0.9 }}
+                    style={{ paddingLeft: '15vw' }}
                 >
                     {useCases.map((uc, i) => (
                         <div
                             key={uc.id}
-                            className="relative overflow-hidden"
-                            style={{ width: `${100 / total}%`, height: 'clamp(460px, 58vh, 660px)' }}
+                            className="relative overflow-hidden rounded-2xl shrink-0"
+                            style={{ width: '60vw', height: 'clamp(420px, 52vh, 600px)' }}
                         >
                             {/* Full-bleed photo */}
                             {/* eslint-disable-next-line @next/next/no-img-element */}
