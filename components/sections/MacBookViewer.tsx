@@ -152,8 +152,8 @@ export function MacBookViewer() {
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight;
             const mid = rect.top + rect.height / 2;
-            // Start when 50% visible, complete when element center is at viewport center
-            const raw = (vh - mid) / (vh * 0.5);
+            // Start when 50% visible, complete well before center
+            const raw = (vh - mid) / (vh * 0.3);
             scrollRef.current = Math.max(0, Math.min(1, raw));
         };
         window.addEventListener('scroll', onScroll, { passive: true });
