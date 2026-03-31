@@ -96,22 +96,21 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
         const raw = scrollRef.current ?? 0;
 
         /*
-         * Two phases driven by one scroll value (0 → 2):
-         *   Phase 1 (raw 0→1): Spin from back (π) to front (0)
-         *   Phase 2 (raw 1→2): Zoom camera in from z=5 to z=2.8
+         * Spin finishes fast (raw 0→0.3), then zoom fills the rest (0.3→1).
+         * Both complete by the time raw hits 1 (viewport center).
          */
-        const spinProgress = Math.min(raw, 1);          // 0→1
-        const zoomProgress = Math.max(0, raw - 1);      // 0→1 after spin done
+        const spinProgress = Math.min(raw / 0.3, 1);                    // done by 30%
+        const zoomProgress = Math.max(0, (raw - 0.25) / 0.75);          // starts at 25%, done at 100%
 
-        /* Rotation: 90° (side-on) → 0° (screen facing camera) */
+        /* Rotation: 90° → 0° — fast */
         const targetY = (Math.PI / 2) * (1 - spinProgress);
         groupRef.current.rotation.y = THREE.MathUtils.lerp(
-            groupRef.current.rotation.y, targetY, 0.1
+            groupRef.current.rotation.y, targetY, 0.15
         );
 
-        /* Camera: spin at z=9 (small), zoom to z=7 (still compact) */
+        /* Zoom: z=9 → z=7 */
         const targetZ = THREE.MathUtils.lerp(9, 7, zoomProgress);
-        camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.08);
+        camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.1);
 
         /* Screen text: show only when spin is done and zooming in */
         const lid = lidRef.current;
@@ -155,7 +154,7 @@ export function MacBookViewer() {
             const mid = rect.top + rect.height / 2;
             // Start when 50% visible, complete when element center is at viewport center
             const raw = (vh - mid) / (vh * 0.5);
-            scrollRef.current = Math.max(0, Math.min(2, raw));
+            scrollRef.current = Math.max(0, Math.min(1, raw));
         };
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
