@@ -224,7 +224,7 @@ export function StandardsSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.06 }}
-                        className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4"
+                        className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4"
                     >
                         Standards We Are Held To
                     </motion.h3>
