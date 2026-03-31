@@ -96,7 +96,7 @@ export function IndustryUseCases() {
     return (
         <section className="bg-white overflow-hidden">
             {/* ── Header ── */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 px-8 md:px-14 lg:px-20 pt-20 md:pt-28 pb-12 md:pb-16 md:pl-[42vw]">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-20 md:pt-28 pb-12 md:pb-16 px-[8vw] md:px-[15vw]">
                 <div className="max-w-2xl">
                     <motion.div
                         initial={{ opacity: 0, y: 12 }}
@@ -159,7 +159,7 @@ export function IndustryUseCases() {
             </div>
 
             {/* ── Horizontal slider ── */}
-            <div className="overflow-hidden pb-20 md:pb-28">
+            <div className="overflow-hidden pb-20 md:pb-28 px-[8vw] md:px-[15vw]">
                 <motion.div
                     className="flex"
                     animate={{ x: `-${current * 50}%` }}
