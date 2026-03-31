@@ -5,14 +5,15 @@ import { Hero } from '@/components/sections/Hero';
 import { WhyAxentiaAI, StandardsSection } from '@/components/sections/WhyMastersUnion';
 
 /* Below-fold sections — lazy loaded so they don't block initial paint */
-const SAPAISection = dynamic(() => import('@/components/sections/SAPAISection').then(m => ({ default: m.SAPAISection })), { ssr: true });
+const SAPAISection    = dynamic(() => import('@/components/sections/SAPAISection').then(m => ({ default: m.SAPAISection })), { ssr: true });
 const IndustryUseCases = dynamic(() => import('@/components/sections/IndustryUseCases').then(m => ({ default: m.IndustryUseCases })), { ssr: true });
-const Programs = dynamic(() => import('@/components/sections/Programs').then(m => ({ default: m.Programs })), { ssr: true });
-const Timeline = dynamic(() => import('@/components/sections/Timeline').then(m => ({ default: m.Timeline })), { ssr: true });
-const Leaders = dynamic(() => import('@/components/sections/Leaders').then(m => ({ default: m.Leaders })), { ssr: true });
-const Testimonials = dynamic(() => import('@/components/sections/Testimonials'), { ssr: true });
-const CommunityVideo = dynamic(() => import('@/components/sections/CommunityVideo').then(m => ({ default: m.CommunityVideo })), { ssr: true });
-const CTA = dynamic(() => import('@/components/sections/CTA').then(m => ({ default: m.CTA })), { ssr: true });
+const Offerings       = dynamic(() => import('@/components/sections/Offerings').then(m => ({ default: m.Offerings })), { ssr: true });
+const Programs        = dynamic(() => import('@/components/sections/Programs').then(m => ({ default: m.Programs })), { ssr: true });
+const Timeline        = dynamic(() => import('@/components/sections/Timeline').then(m => ({ default: m.Timeline })), { ssr: true });
+const Leaders         = dynamic(() => import('@/components/sections/Leaders').then(m => ({ default: m.Leaders })), { ssr: true });
+const Testimonials    = dynamic(() => import('@/components/sections/Testimonials'), { ssr: true });
+const CommunityVideo  = dynamic(() => import('@/components/sections/CommunityVideo').then(m => ({ default: m.CommunityVideo })), { ssr: true });
+const CTA             = dynamic(() => import('@/components/sections/CTA').then(m => ({ default: m.CTA })), { ssr: true });
 
 export function HomeClient() {
     return (
@@ -25,17 +26,19 @@ export function HomeClient() {
             <StandardsSection />
             {/* Section 4: SAP + AI */}
             <SAPAISection />
-            {/* Section 4: Industry Use Cases */}
+            {/* Section 5: Industry Use Cases */}
             <IndustryUseCases />
-            {/* Section 5: Our Programmes */}
+            {/* Section 6: HOW WE HELP YOU SUCCEED — Enterprise AI offerings */}
+            <Offerings />
+            {/* Section 7: Our Programmes (DCAP / EAP / Online) */}
             <Programs />
-            {/* Section 6: Student Path */}
+            {/* Section 8: Student Path */}
             <Timeline />
-            {/* Section 7: Leadership */}
+            {/* Section 9: Leadership */}
             <Leaders />
-            {/* Section 8: Testimonials */}
+            {/* Section 10: Testimonials */}
             <Testimonials />
-            {/* Section 9: Community Video */}
+            {/* Section 11: Community Video */}
             <CommunityVideo />
             {/* CTA */}
             <CTA />

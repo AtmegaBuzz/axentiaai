@@ -1,226 +1,211 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight, Play, Clock, CalendarDays, GraduationCap, MonitorPlay, Briefcase, Layers, BookOpen, Brain, Target, Users, Cpu, FileText } from 'lucide-react';
 import Link from 'next/link';
-import { useRef } from 'react';
 
-interface Offering {
+interface InfoItem {
+    label: string;
+    value: string;
+    Icon: React.ComponentType<{ className?: string }>;
+}
+
+interface Program {
     id: string;
-    number: string;
-    tag: string;
     title: string;
     titleAccent: string;
     description: string;
-    includes: string[];
+    info: InfoItem[];
     image: string;
 }
 
-const offerings: Offering[] = [
+const programs: Program[] = [
     {
-        id: 'transformation',
-        number: '01',
-        tag: 'Enterprise · Project-based',
-        title: 'Enterprise AI',
-        titleAccent: 'Transformation',
+        id: 'dcap',
+        title: 'Daksha Career',
+        titleAccent: 'Accelerator',
         description:
-            'We design, build, and deploy AI within your SAP and enterprise workflows — taking ideas into active use across the business.',
-        includes: [
-            'AI pilots aligned to real business use cases',
-            'Demand forecasting, invoice automation, HR copilots',
-            'Predictive maintenance using SAP PM data',
-            'Integration with S/4HANA, BTP, and Joule',
+            'Turn graduates into enterprise-ready SAP consultants through classroom learning and paid apprenticeship.',
+        info: [
+            { label: 'Format', value: 'Classroom + Apprenticeship', Icon: MonitorPlay },
+            { label: 'Eligibility', value: 'Fresh Graduates', Icon: GraduationCap },
+            { label: 'Duration', value: '10 Months', Icon: Clock },
+            { label: 'Apprenticeship', value: '6 Months Paid', Icon: Briefcase },
+            { label: 'Modules', value: 'MM, FICO, SD', Icon: Layers },
+            { label: 'Processes', value: 'P2P, O2C, R2R, H2R', Icon: Target },
         ],
-        image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=900&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
     },
     {
-        id: 'capability',
-        number: '02',
-        tag: 'Enterprise · Company-specific',
-        title: 'Enterprise AI',
-        titleAccent: 'Capability',
+        id: 'eap',
+        title: 'Enterprise',
+        titleAccent: 'Accelerator',
         description:
-            'We develop the capability within your organisation to lead, operate, and expand AI initiatives with clarity and ownership.',
-        includes: [
-            'AI-enabled teams across business and IT',
-            'Identification and development of internal use cases',
-            'Governance and ways of working for AI adoption',
-            'Training tailored to your organisation',
+            'Deepen consulting capabilities with complex enterprise scenarios and larger SAP project responsibilities.',
+        info: [
+            { label: 'Format', value: 'Advanced Cohort', Icon: MonitorPlay },
+            { label: 'Eligibility', value: 'DCAP Graduates', Icon: GraduationCap },
+            { label: 'Selection', value: 'Performance-based', Icon: Target },
+            { label: 'Focus', value: 'Cross-module Integration', Icon: Layers },
+            { label: 'Skills', value: 'Presales & Estimation', Icon: FileText },
+            { label: 'AI/ML', value: 'Enterprise AI Use Cases', Icon: Brain },
         ],
-        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=900&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
     },
     {
-        id: 'academies',
-        number: '03',
-        tag: 'Public · Open Enrollment',
-        title: 'Talent',
-        titleAccent: 'Academies',
+        id: 'online',
+        title: 'Online',
+        titleAccent: 'Foundation',
         description:
-            'We prepare individuals and enterprise teams through structured programs across AI, SAP, and industry tracks.',
-        includes: [
-            'AI Foundation Academy',
-            'SAP SuccessFactors Academy',
-            'Retail & FMCG Industry Academy',
-            'Energy & Utilities Industry Academy',
+            'Self-paced introduction to SAP fundamentals and enterprise processes for aspiring consultants.',
+        info: [
+            { label: 'Format', value: 'Self-paced Online', Icon: MonitorPlay },
+            { label: 'Eligibility', value: 'Anyone', Icon: Users },
+            { label: 'Duration', value: 'Flexible', Icon: Clock },
+            { label: 'Covers', value: 'SAP Fundamentals', Icon: BookOpen },
+            { label: 'Processes', value: 'Enterprise Workflows', Icon: Layers },
+            { label: 'Access', value: 'Always Open', Icon: CalendarDays },
         ],
-        image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=800&h=900&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=600&h=400&fit=crop&q=80',
     },
 ];
 
-/* ── Parallax image panel ── */
-function ParallaxImage({ src, alt }: { src: string; alt: string }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-    const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
+const snapDirs = [
+    { x: -60, y: 50, rotate: -6 },
+    { x: 0, y: 70, rotate: 4 },
+    { x: 60, y: 50, rotate: 6 },
+];
+
+function ProgramCard({ prog, index }: { prog: Program; index: number }) {
+    const dir = snapDirs[index % snapDirs.length];
 
     return (
-        <div ref={ref} className="relative w-full h-full overflow-hidden min-h-[55vw] md:min-h-0">
-            <motion.img
-                src={src}
-                alt={alt}
-                style={{ y }}
-                // eslint-disable-next-line @next/next/no-img-element
-                className="absolute inset-0 w-full h-[115%] object-cover"
-                loading="lazy"
-            />
-            {/* Subtle brand tint overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#8A29AC]/10 to-transparent" />
-        </div>
-    );
-}
-
-/* ── Single offering row ── */
-function OfferingRow({ offering, index }: { offering: Offering; index: number }) {
-    const imageRight = index % 2 !== 0; // 01 = image left, 02 = image right, 03 = image left
-
-    const ContentPanel = (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className={`flex flex-col justify-between p-10 md:p-14 lg:p-20 min-h-[70vh] md:min-h-0 ${imageRight ? 'border-r border-slate-200' : ''}`}
+            initial={{ opacity: 0, x: dir.x, y: dir.y, rotate: dir.rotate, scale: 0.85 }}
+            whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{
+                type: 'spring',
+                stiffness: 170,
+                damping: 18,
+                mass: 0.8,
+                delay: index * 0.1,
+            }}
+            whileHover={{
+                y: -8,
+                scale: 1.02,
+                transition: { type: 'spring', stiffness: 300, damping: 22 },
+            }}
+            className="group relative bg-white rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden"
         >
-            {/* Top: number + label + title */}
-            <div>
-                <div className="flex items-start gap-6 mb-6">
-                    {/* Giant outline number */}
-                    <span
-                        className="text-[clamp(5rem,12vw,9rem)] font-black leading-none select-none shrink-0"
-                        style={{
-                            WebkitTextStroke: '2px #8A29AC',
-                            color: 'transparent',
-                            lineHeight: 0.85,
-                        }}
-                    >
-                        {offering.number}
-                    </span>
-
-                    <div className="pt-2">
-                        <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] bg-[#8A29AC]/8 border border-[#8A29AC]/20 rounded-full px-3 py-1 mb-4">
-                            {offering.tag}
-                        </span>
-                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
-                            {offering.title}{' '}
-                            <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                {offering.titleAccent}
-                            </span>
-                        </h3>
+            {/* Thumbnail with play button */}
+            <div className="relative h-52 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={prog.image}
+                    alt={prog.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
+                {/* Centered play button */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <Play className="w-6 h-6 text-slate-900 fill-current ml-0.5" />
                     </div>
                 </div>
             </div>
 
-            {/* Bottom: description + features + CTA */}
-            <div>
-                <p className="text-base md:text-lg text-slate-500 leading-relaxed mb-8 max-w-lg">
-                    {offering.description}
-                </p>
+            {/* Content */}
+            <div className="flex flex-col flex-grow p-6">
+                {/* Heading */}
+                <h3 className="text-2xl font-bold text-slate-900 leading-tight mb-2 text-left">
+                    {prog.title} {prog.titleAccent}
+                </h3>
 
-                <ul className="space-y-2.5 mb-10">
-                    {offering.includes.map((item) => (
-                        <li key={item} className="flex items-start gap-3">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                            <span className="text-sm text-slate-600 leading-snug">{item}</span>
-                        </li>
+                {/* Description */}
+                <p className="text-sm text-slate-500 leading-relaxed mb-6">{prog.description}</p>
+
+                {/* Info grid */}
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                    {prog.info.map(({ label, value, Icon }) => (
+                        <div key={label} className="flex items-start gap-3">
+                            <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+                                <Icon className="w-4 h-4 text-slate-600" />
+                            </div>
+                            <div>
+                                <p className="text-xs font-bold text-slate-900 leading-tight">{label}</p>
+                                <p className="text-xs text-slate-400 leading-tight mt-0.5">{value}</p>
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
 
+                {/* CTA */}
                 <Link
-                    href={`/programs?tab=${offering.id}`}
-                    className="inline-flex items-center gap-2 group"
+                    href={`/programs?tab=${prog.id}`}
+                    className="mt-auto inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 rounded-full w-fit transition-colors duration-200"
                 >
-                    <span className="text-sm font-bold text-slate-900 border-b-2 border-[#8A29AC] pb-0.5 group-hover:text-[#8A29AC] transition-colors duration-200">
-                        Learn More
-                    </span>
-                    <ArrowUpRight className="w-4 h-4 text-[#8A29AC] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                    Explore Program
+                    <ArrowUpRight className="w-4 h-4" />
                 </Link>
             </div>
         </motion.div>
-    );
-
-    const ImagePanel = (
-        <div className="relative overflow-hidden min-h-[55vw] md:min-h-0">
-            <ParallaxImage src={offering.image} alt={`${offering.title} ${offering.titleAccent}`} />
-        </div>
-    );
-
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-2 border-b border-slate-200 last:border-b-0">
-            {imageRight ? ContentPanel : ImagePanel}
-            {imageRight ? ImagePanel : ContentPanel}
-        </div>
     );
 }
 
 export function Programs() {
     return (
-        <section id="what-we-deliver" className="relative bg-white overflow-hidden">
-            {/* Section header */}
-            <div className="border-b border-slate-200 px-10 md:px-14 lg:px-20 py-20 md:py-24 max-w-5xl">
-                <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-5"
-                >
-                    <span
-                        className="inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest"
-                        style={{ background: '#F7C87A', color: '#232322' }}
-                    >
-                        HOW WE HELP YOU SUCCEED
-                    </span>
-                </motion.div>
-
-                <motion.h2
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.06 }}
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight mb-6"
-                >
-                    Bringing transformation,{' '}
-                    <br className="hidden md:block" />
-                    capability, and talent into{' '}
-                    <span className="font-cursive italic text-[#8A29AC] text-[1.05em]">alignment</span>
-                </motion.h2>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.12 }}
-                    className="text-base md:text-lg text-slate-500 leading-relaxed max-w-2xl"
-                >
-                    Be it AI transformation, internal capability, or talent development, Axentia.AI solves them all together. Each part of our model strengthens the others.
-                </motion.p>
+        <section id="programs" className="relative py-16 md:py-24 overflow-hidden">
+            {/* Background image */}
+            <div className="absolute inset-0 z-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src="/images/programs-bg.jpg"
+                    alt=""
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/65" />
             </div>
 
-            {/* Offerings — editorial rows */}
-            <div>
-                {offerings.map((offering, i) => (
-                    <OfferingRow key={offering.id} offering={offering} index={i} />
-                ))}
+            <div className="container mx-auto px-4 md:px-6 relative z-10">
+                <div className="text-center mx-auto mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+                        className="font-semibold tracking-wide uppercase text-sm mb-4"
+                    >
+                        <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>
+                            Our Programmes
+                        </span>
+                    </motion.div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
+                        className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6"
+                    >
+                        3 programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
+                        className="text-lg text-white/70 italic"
+                    >
+                        From first steps to senior consulting, a clear path for every stage of your enterprise career.
+                    </motion.p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {programs.map((prog, i) => (
+                        <ProgramCard key={prog.id} prog={prog} index={i} />
+                    ))}
+                </div>
             </div>
         </section>
     );

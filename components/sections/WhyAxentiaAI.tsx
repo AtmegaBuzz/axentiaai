@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import { usePerformance } from '@/lib/usePerformance';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
 const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
 
 const partnerLogos = [
@@ -53,9 +52,6 @@ export function TrustedBy() {
 export function WhyAxentiaAI() {
     const { tier } = usePerformance();
     const isLowEnd = tier === 'low';
-    // Prevent hydration mismatch: only render WebGL after client mount
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => { setMounted(true); }, []);
 
     return (
         <section
@@ -66,8 +62,8 @@ export function WhyAxentiaAI() {
             <div className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-[0.07]" style={{ background: 'radial-gradient(circle, #8A29AC 0%, transparent 70%)' }} />
             <div className="pointer-events-none absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full opacity-[0.05]" style={{ background: 'radial-gradient(circle, #C010DA 0%, transparent 70%)' }} />
 
-            {/* ── FloatingLines WebGL background — client-only to avoid hydration mismatch ── */}
-            {mounted && !isLowEnd && (
+            {/* ── FloatingLines WebGL background — skipped on low-end devices ── */}
+            {!isLowEnd && (
                 <div className="absolute inset-0 z-0 opacity-30 overflow-hidden">
                     <FloatingLines
                         linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}

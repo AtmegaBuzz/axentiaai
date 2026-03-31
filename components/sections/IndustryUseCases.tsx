@@ -1,82 +1,113 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Settings, BarChart3, FileText, ScanLine, Activity, Users } from 'lucide-react';
-
-const industries = ['All', 'Manufacturing', 'Retail & FMCG', 'Energy & Utilities', 'Banking & Services', 'HR'];
+import { motion } from 'framer-motion';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 const useCases = [
     {
+        id: 'predictive-maintenance',
         industry: 'Manufacturing',
         modules: 'SAP PM · BTP · IoT',
         title: 'Predictive Maintenance',
-        description: 'Anticipate equipment failures using sensor data and maintenance history, helping reduce unplanned downtime and improve asset reliability.',
-        icon: Settings,
+        description:
+            'Anticipate equipment failures using sensor data and maintenance history, helping reduce unplanned downtime and improve asset reliability.',
+        image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&h=700&fit=crop&q=80',
+        stat1Label: 'Downtime reduction',
+        stat1Value: '~40%',
+        stat2Label: 'Maintenance saving',
+        stat2Value: '~25%',
     },
     {
+        id: 'demand-forecasting',
         industry: 'Retail & FMCG',
         modules: 'SAP IBP · Analytics Cloud',
         title: 'Demand Forecasting',
-        description: 'Improve planning accuracy across supply chains, reducing stock imbalances and enabling more responsive inventory decisions.',
-        icon: BarChart3,
+        description:
+            'Improve planning accuracy across supply chains, reducing stock imbalances and enabling more responsive inventory decisions.',
+        image: 'https://images.unsplash.com/photo-1601598851547-4302969d0614?w=900&h=700&fit=crop&q=80',
+        stat1Label: 'Forecast accuracy',
+        stat1Value: '~98%',
+        stat2Label: 'Overstock reduction',
+        stat2Value: '~30%',
     },
     {
-        industry: 'Banking & Services',
+        id: 'invoice-processing',
+        industry: 'Banking & Financial Services',
         modules: 'SAP FI · BTP · Document AI',
         title: 'Invoice & Document Processing',
-        description: 'Automate document handling across finance workflows, including extraction, validation, approvals, and exception handling.',
-        icon: FileText,
+        description:
+            'Automate document handling across finance workflows, including extraction, validation, approvals, and exception handling.',
+        image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=900&h=700&fit=crop&q=80',
+        stat1Label: 'Processing time saved',
+        stat1Value: '~60%',
+        stat2Label: 'Error rate reduction',
+        stat2Value: '~80%',
     },
     {
+        id: 'quality-control',
         industry: 'Manufacturing',
         modules: 'SAP QM · Vision AI · BTP',
         title: 'Quality Control (Vision-Based)',
-        description: 'Detect defects in real time on production lines, improving consistency and reducing manual inspection effort.',
-        icon: ScanLine,
+        description:
+            'Detect defects in real time on production lines, improving consistency and reducing manual inspection effort.',
+        image: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=900&h=700&fit=crop&q=80',
+        stat1Label: 'Defect detection rate',
+        stat1Value: '~99%',
+        stat2Label: 'Inspection time saved',
+        stat2Value: '~50%',
     },
     {
+        id: 'asset-performance',
         industry: 'Energy & Utilities',
         modules: 'SAP PM · IS-Utilities · IoT',
         title: 'Asset Performance Optimisation',
-        description: 'Monitor asset health and plan maintenance more effectively using operational and sensor data across distributed systems.',
-        icon: Activity,
+        description:
+            'Monitor asset health and plan maintenance more effectively using operational and sensor data across distributed systems.',
+        image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&h=700&fit=crop&q=80',
+        stat1Label: 'Asset availability',
+        stat1Value: '+15%',
+        stat2Label: 'Maintenance efficiency',
+        stat2Value: '~35%',
     },
     {
-        industry: 'HR',
+        id: 'hr-copilot',
+        industry: 'HR / SuccessFactors',
         modules: 'SuccessFactors · SAP Joule',
         title: 'HR Copilot',
-        description: 'Support HR teams with policy queries, approvals, and talent insights within existing workflows.',
-        icon: Users,
+        description:
+            'Support HR teams with policy queries, approvals, and talent insights within existing workflows.',
+        image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=900&h=700&fit=crop&q=80',
+        stat1Label: 'Query resolution',
+        stat1Value: '70% faster',
+        stat2Label: 'HR capacity freed',
+        stat2Value: '~40%',
     },
 ];
 
 export function IndustryUseCases() {
-    const [active, setActive] = useState('All');
-    const filtered = active === 'All' ? useCases : useCases.filter(u => u.industry === active);
+    const [current, setCurrent] = useState(0);
+    const total = useCases.length;
+    const maxIdx = total - 2; // show 2 at a time on desktop
+
+    const prev = () => setCurrent(i => Math.max(0, i - 1));
+    const next = () => setCurrent(i => Math.min(maxIdx, i + 1));
 
     return (
-        <section
-            className="relative py-20 md:py-32 overflow-hidden border-b border-slate-100"
-            style={{
-                backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 30%, #f1f5f9 60%, #f8fafc 100%)',
-            }}
-        >
-            {/* Ambient blobs matching site language */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-gradient-radial from-[#8A29AC]/10 to-transparent blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gradient-radial from-blue-400/10 to-transparent blur-3xl pointer-events-none" />
-
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
-
-                {/* ── Header ── */}
-                <div className="max-w-3xl mx-auto text-center mb-14">
+        <section className="bg-white overflow-hidden">
+            {/* ── Header ── */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 px-8 md:px-14 lg:px-20 pt-20 md:pt-28 pb-12 md:pb-16">
+                <div className="max-w-2xl">
                     <motion.div
-                        initial={{ opacity: 0, y: 14 }}
+                        initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="mb-5"
+                        className="mb-4"
                     >
-                        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#8A29AC]/20 bg-[#8A29AC]/6 text-[#8A29AC] text-xs font-bold uppercase tracking-widest">
+                        <span
+                            className="inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest"
+                            style={{ background: '#F7C87A', color: '#232322' }}
+                        >
                             Industry Use Cases
                         </span>
                     </motion.div>
@@ -85,98 +116,122 @@ export function IndustryUseCases() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.08 }}
-                        className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-5"
+                        transition={{ delay: 0.06 }}
+                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight mb-4"
                     >
                         Where AI creates{' '}
                         <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                             measurable impact
-                        </span>
+                        </span>{' '}
+                        inside your industry
                     </motion.h2>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 14 }}
+                        initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.14 }}
-                        className="text-base md:text-lg text-slate-500 leading-relaxed"
+                        transition={{ delay: 0.1 }}
+                        className="text-slate-500 text-base md:text-lg leading-relaxed"
                     >
                         Every use case runs inside your existing SAP environment — shaping how work is carried out across operations, finance, supply chains, and workforce management.
                     </motion.p>
                 </div>
 
-                {/* ── Industry filter tabs ── */}
+                {/* Prev / Next */}
+                <div className="flex items-center gap-3 shrink-0">
+                    <button
+                        onClick={prev}
+                        disabled={current === 0}
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 text-sm font-semibold text-slate-700 hover:border-[#8A29AC] hover:text-[#8A29AC] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Prev
+                    </button>
+                    <button
+                        onClick={next}
+                        disabled={current >= maxIdx}
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 text-sm font-semibold text-slate-700 hover:border-[#8A29AC] hover:text-[#8A29AC] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+                    >
+                        Next
+                        <ArrowRight className="w-4 h-4" />
+                    </button>
+                </div>
+            </div>
+
+            {/* ── Horizontal slider ── */}
+            <div className="overflow-hidden pb-20 md:pb-28">
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.18 }}
-                    className="flex flex-wrap justify-center gap-2 mb-14"
+                    className="flex"
+                    animate={{ x: `-${current * 50}%` }}
+                    transition={{ type: 'spring', stiffness: 280, damping: 32, mass: 0.8 }}
+                    style={{ width: `${total * 50}%` }}
                 >
-                    {industries.map((ind) => (
-                        <button
-                            key={ind}
-                            onClick={() => setActive(ind)}
-                            className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
-                                active === ind
-                                    ? 'bg-slate-900 text-white border-slate-900 shadow-md'
-                                    : 'bg-white/70 backdrop-blur-sm text-slate-500 border-slate-200/80 hover:border-slate-400 hover:text-slate-700'
-                            }`}
+                    {useCases.map((uc, i) => (
+                        <div
+                            key={uc.id}
+                            className="relative overflow-hidden"
+                            style={{ width: `${100 / total}%`, height: 'clamp(460px, 58vh, 660px)' }}
                         >
-                            {ind}
-                        </button>
-                    ))}
-                </motion.div>
+                            {/* Full-bleed photo */}
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={uc.image}
+                                alt={uc.title}
+                                className="absolute inset-0 w-full h-full object-cover"
+                                loading="lazy"
+                            />
+                            {/* Dark gradient for legibility */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
 
-                {/* ── Cards grid ── */}
-                <motion.div
-                    layout
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
-                >
-                    <AnimatePresence mode="popLayout">
-                        {filtered.map((uc, i) => {
-                            const Icon = uc.icon;
-                            return (
-                                <motion.div
-                                    key={uc.title}
-                                    layout
-                                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: -16, scale: 0.96 }}
-                                    transition={{ type: 'spring', stiffness: 140, damping: 18, delay: i * 0.07 }}
-                                    whileHover={{ y: -6, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
-                                    className="group relative bg-white/70 backdrop-blur-xl border border-white/80 rounded-[2rem] p-8 flex flex-col shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:bg-white transition-all duration-300 overflow-hidden"
+                            {/* White info panel */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-60px' }}
+                                transition={{ delay: i * 0.05, duration: 0.5 }}
+                                className="absolute bottom-6 left-6 md:max-w-[360px] bg-white rounded-2xl p-6 shadow-xl"
+                            >
+                                {/* Industry + modules */}
+                                <p className="text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] mb-0.5">
+                                    {uc.industry}
+                                </p>
+                                <p className="text-[10px] text-slate-400 font-medium mb-3">
+                                    {uc.modules}
+                                </p>
+
+                                {/* Title */}
+                                <h3 className="text-lg font-bold text-slate-900 leading-snug mb-2">
+                                    {uc.title}
+                                </h3>
+
+                                {/* Description */}
+                                <p className="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-3">
+                                    {uc.description}
+                                </p>
+
+                                {/* Stats */}
+                                <div className="flex gap-6 mb-4 pt-3 border-t border-slate-100">
+                                    <div>
+                                        <p className="text-[10px] text-slate-400 leading-tight">{uc.stat1Label}</p>
+                                        <p className="text-sm font-black text-slate-900">{uc.stat1Value}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-[10px] text-slate-400 leading-tight">{uc.stat2Label}</p>
+                                        <p className="text-sm font-black text-slate-900">{uc.stat2Value}</p>
+                                    </div>
+                                </div>
+
+                                {/* CTA */}
+                                <a
+                                    href="#"
+                                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 underline underline-offset-2 decoration-[#8A29AC] hover:text-[#8A29AC] transition-colors duration-200"
                                 >
-                                    {/* Hover shimmer */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                                    {/* Top accent line */}
-                                    <div className="absolute top-0 left-8 right-8 h-0.5 rounded-full bg-gradient-to-r from-[#8A29AC]/50 via-blue-600/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                    {/* Icon */}
-                                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 bg-gradient-to-br from-[#8A29AC]/10 to-blue-600/10 text-[#8A29AC] border border-[#8A29AC]/15 group-hover:scale-110 transition-transform duration-300 relative z-10">
-                                        <Icon className="w-5 h-5" />
-                                    </div>
-
-                                    {/* Tags */}
-                                    <div className="flex flex-wrap items-center gap-2 mb-4 relative z-10">
-                                        <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-900 text-white">
-                                            {uc.industry}
-                                        </span>
-                                        <span className="text-xs text-slate-400 font-medium">{uc.modules}</span>
-                                    </div>
-
-                                    <h3 className="text-xl font-extrabold text-slate-900 mb-3 leading-tight relative z-10 group-hover:text-[#8A29AC] transition-colors duration-300">
-                                        {uc.title}
-                                    </h3>
-
-                                    <p className="text-slate-500 text-sm leading-relaxed font-medium relative z-10">
-                                        {uc.description}
-                                    </p>
-                                </motion.div>
-                            );
-                        })}
-                    </AnimatePresence>
+                                    Explore use case
+                                    <ArrowRight className="w-3 h-3" />
+                                </a>
+                            </motion.div>
+                        </div>
+                    ))}
                 </motion.div>
             </div>
         </section>
