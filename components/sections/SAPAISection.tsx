@@ -196,7 +196,7 @@ export function SAPAISection() {
             </div>
 
             {/* Certified Capability panel */}
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 py-16 md:py-20">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-0 pb-16 md:pb-20 -mt-40">
                 <div className="max-w-5xl mx-auto bg-slate-50 border border-slate-200 rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 md:gap-16 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-[0.06]"
                         style={{ background: 'radial-gradient(circle, #8A29AC, transparent)' }} />
