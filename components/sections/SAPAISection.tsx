@@ -1,41 +1,111 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
-import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { MacbookScroll } from '@/components/ui/macbook-scroll';
 
-const MacBookViewer = dynamic(
-    () => import('./MacBookViewer').then(m => ({ default: m.MacBookViewer })),
-    { ssr: false, loading: () => <div style={{ height: '480px' }} /> }
-);
+/* ── Dashboard canvas → data URL (client-side only) ── */
+function buildDashboardSrc(): string {
+    const W = 1280, H = 800;
+    const cvs = document.createElement('canvas');
+    cvs.width = W; cvs.height = H;
+    const c = cvs.getContext('2d')!;
 
-const leftCards = [
+    const rr = (x: number, y: number, w: number, h: number, r: number) => {
+        c.beginPath();
+        c.moveTo(x + r, y); c.lineTo(x + w - r, y); c.arcTo(x + w, y, x + w, y + r, r);
+        c.lineTo(x + w, y + h - r); c.arcTo(x + w, y + h, x + w - r, y + h, r);
+        c.lineTo(x + r, y + h); c.arcTo(x, y + h, x, y + h - r, r);
+        c.lineTo(x, y + r); c.arcTo(x, y, x + r, y, r);
+        c.closePath();
+    };
+
+    /* Background */
+    c.fillStyle = '#0a0818'; c.fillRect(0, 0, W, H);
+
+    /* Top bar */
+    c.fillStyle = '#0f0d20'; c.fillRect(0, 0, W, 54);
+    ['#ef4444', '#f59e0b', '#22c55e'].forEach((col, i) => {
+        c.beginPath(); c.arc(22 + i * 22, 27, 6, 0, Math.PI * 2);
+        c.fillStyle = col; c.fill();
+    });
+    c.fillStyle = '#6366f1'; c.font = 'bold 16px monospace';
+    c.fillText('SAP AI  ·  DASHBOARD', 120, 34);
+    c.beginPath(); c.arc(W - 44, 27, 5, 0, Math.PI * 2);
+    c.fillStyle = '#22c55e'; c.fill();
+    c.fillStyle = '#64748b'; c.font = '13px monospace'; c.fillText('Live', W - 32, 32);
+
+    /* Metric cards */
+    [
+        { label: 'Forecasts', value: '98.2%', color: '#818cf8' },
+        { label: 'Invoices', value: '1,240', color: '#a855f7' },
+        { label: 'Uptime', value: '99.9%', color: '#10b981' },
+        { label: 'AI Score', value: '94/100', color: '#F7C87A' },
+    ].forEach((m, i) => {
+        const mx = 30 + i * 308, my = 72;
+        c.fillStyle = 'rgba(255,255,255,0.04)';
+        c.strokeStyle = 'rgba(255,255,255,0.07)'; c.lineWidth = 1;
+        rr(mx, my, 280, 100, 12); c.fill(); c.stroke();
+        c.fillStyle = m.color; c.font = 'bold 32px monospace'; c.fillText(m.value, mx + 18, my + 50);
+        c.fillStyle = '#475569'; c.font = '14px monospace'; c.fillText(m.label, mx + 18, my + 78);
+    });
+
+    /* Bar chart */
+    const bars = [55, 38, 72, 48, 84, 60, 76, 52, 88, 66, 74, 92];
+    c.fillStyle = '#334155'; c.font = '13px monospace';
+    c.fillText('Monthly AI Predictions', 30, 228);
+    bars.forEach((h, i) => {
+        const bh = (h / 100) * 200, bx = 30 + i * 100;
+        const isLast = i === bars.length - 1;
+        const g = c.createLinearGradient(0, 240 + 200 - bh, 0, 440);
+        g.addColorStop(0, isLast ? '#8A29AC' : 'rgba(138,41,172,0.30)');
+        g.addColorStop(1, isLast ? '#C010DA' : 'rgba(138,41,172,0.10)');
+        c.fillStyle = g; rr(bx, 240 + 200 - bh, 76, bh, 6); c.fill();
+    });
+
+    /* SAP module tags */
+    let tx = 30;
+    ['S/4HANA', 'BTP', 'Joule', 'SuccessFactors', 'Analytics Cloud', 'PM / PS'].forEach(tag => {
+        c.font = 'bold 13px monospace';
+        const tw = c.measureText(tag).width + 28;
+        c.fillStyle = 'rgba(99,102,241,0.14)';
+        c.strokeStyle = 'rgba(99,102,241,0.30)'; c.lineWidth = 1;
+        rr(tx, 472, tw, 30, 7); c.fill(); c.stroke();
+        c.fillStyle = '#818cf8'; c.fillText(tag, tx + 14, 492);
+        tx += tw + 12;
+    });
+
+    /* Footer branding */
+    c.fillStyle = 'rgba(138,41,172,0.7)'; c.font = 'bold 20px monospace';
+    c.fillText('Axentia.AI', 30, 560);
+    c.fillStyle = '#334155'; c.font = '14px monospace';
+    c.fillText('Enterprise AI + SAP Intelligence Platform', 170, 560);
+
+    return cvs.toDataURL('image/png');
+}
+
+/* ── Info cards data ── */
+const cards = [
     {
         label: 'SAP Integration',
         status: 'Native',
         statusColor: 'bg-blue-500',
         title: 'Deep inside SAP',
-        desc: 'S/4HANA · Joule · BTP · SuccessFactors · Analytics Cloud · PM / PS',
-        delay: 0.2,
+        desc: 'S/4HANA · Joule · BTP · SuccessFactors',
     },
     {
         label: 'In Practice',
         status: 'Live',
         statusColor: 'bg-emerald-500',
         title: 'Woven into daily work',
-        desc: 'AI shapes decisions as they happen, drawing on existing data and processes inside your systems.',
-        delay: 0.35,
+        desc: 'AI shapes decisions as they happen, drawing on existing data and processes.',
     },
-];
-
-const rightCards = [
     {
         label: 'Capabilities',
         status: 'Enterprise',
-        statusColor: 'bg-[#8A29AC]',
+        statusColor: 'bg-brand-700',
         title: 'Real operational AI',
-        desc: 'Demand forecasting, invoice processing, HR copilot, maintenance planning, workflow execution.',
-        delay: 0.25,
+        desc: 'Demand forecasting, invoice processing, HR copilot, maintenance planning.',
     },
     {
         label: 'Track Record',
@@ -43,196 +113,220 @@ const rightCards = [
         statusColor: 'bg-amber-500',
         title: '50+ Enterprises',
         desc: '16+ years of SAP delivery. 300+ certified professionals across industries.',
-        delay: 0.4,
     },
 ];
 
-function InfoCard({ card, direction }: { card: typeof leftCards[0]; direction: 'left' | 'right' }) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, x: direction === 'left' ? -40 : 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ type: 'spring', stiffness: 100, damping: 20, delay: card.delay }}
-            className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
-        >
-            <div className="flex items-center justify-between mb-3">
-                <span className="text-xs text-slate-500 font-medium">{card.label}</span>
-                <div className="flex items-center gap-1.5">
-                    <span className={`w-1.5 h-1.5 rounded-full ${card.statusColor}`} />
-                    <span className="text-xs text-slate-500 font-medium">{card.status}</span>
-                </div>
-            </div>
-            <p className="text-base font-bold text-slate-900 mb-2 leading-snug">{card.title}</p>
-            <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
-        </motion.div>
-    );
-}
-
 export function SAPAISection() {
+    const [dashboardSrc, setDashboardSrc] = useState('');
+    const trapRef = useRef<HTMLDivElement>(null);
+
+    /* scrollYProgress: 0 → 1 across the 500 vh scroll budget */
+    const { scrollYProgress } = useScroll({
+        target: trapRef,
+        offset: ['start start', 'end end'],
+    });
+
+    // ── ANIMATION ZONES ──
+
+    // 0 → 0.05   section fades in, header slides up
+    const sectionOpacity = useTransform(scrollYProgress, [0, 0.05, 0.92, 1.0], [0, 1, 1, 0]);
+    const headerY        = useTransform(scrollYProgress, [0, 0.1],             [20, 0]);
+    const headerOpacity  = useTransform(scrollYProgress, [0, 0.08, 0.88, 0.96], [0, 1, 1, 0]);
+
+    // 0 → 0.65   MacBook Y-axis rotation: 3 full spins (1080°)
+    const rotateY = useTransform(scrollYProgress, [0, 0.65], [0, 1080]);
+
+    // 0 → 0.85   MacBook gentle drift / scale entrance
+    const laptopY     = useTransform(scrollYProgress, [0, 0.55, 0.85], [40, 0, -20]);
+    const laptopScale = useTransform(scrollYProgress, [0, 0.1, 0.85, 0.95], [0.85, 1, 1, 0.95]);
+
+    // Dashboard: faintly visible during spin (0 → 0.65), then fully reveals (0.65 → 0.82)
+    const dashOpacity = useTransform(scrollYProgress, [0, 0.65, 0.82], [0.18, 0.18, 1]);
+
+    // 0.30 → 0.55  Info cards slide in from left / right (visible during spin)
+    const cardsOpacity = useTransform(scrollYProgress, [0.30, 0.55], [0, 1]);
+    const leftCardsX   = useTransform(scrollYProgress, [0.30, 0.55], [-48, 0]);
+    const rightCardsX  = useTransform(scrollYProgress, [0.30, 0.55], [48, 0]);
+
+    useEffect(() => {
+        setDashboardSrc(buildDashboardSrc());
+    }, []);
+
     return (
-        <section className="relative overflow-hidden bg-white border-b border-slate-100">
+        /* 500 vh scroll budget — desktop scroll trap lives here */
+        <div ref={trapRef} className="relative h-[500vh] bg-slate-50">
 
-            {/* Subtle brand blobs */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full opacity-[0.04] blur-[80px]"
-                    style={{ background: 'radial-gradient(ellipse, #8A29AC 0%, transparent 70%)' }} />
-                <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-[0.03] blur-[60px]"
-                    style={{ background: 'radial-gradient(circle, #C010DA 0%, transparent 70%)' }} />
-                {/* Arc lines */}
-                <svg className="absolute left-1/2 top-0 -translate-x-1/2 w-[120%] opacity-[0.04]"
-                    viewBox="0 0 1200 500" fill="none" preserveAspectRatio="xMidYMid slice">
-                    {[180, 300, 420, 540, 660].map((r, i) => (
-                        <ellipse key={i} cx="600" cy="500" rx={r} ry={r * 0.5} stroke="#8A29AC" strokeWidth="1" />
-                    ))}
-                </svg>
-            </div>
+            {/* ══ DESKTOP sticky pane (hidden on mobile) ══ */}
+            <section className="sticky top-0 h-screen w-full hidden lg:flex flex-col border-b border-slate-100 overflow-hidden">
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-20 md:pt-28 pb-0">
+                {/* Brand blobs */}
+                <motion.div
+                    style={{ opacity: sectionOpacity }}
+                    className="absolute inset-0 pointer-events-none"
+                >
+                    <div
+                        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full opacity-[0.04] blur-[80px]"
+                        style={{ background: 'radial-gradient(ellipse, #8A29AC 0%, transparent 70%)' }}
+                    />
+                    <div
+                        className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-[0.03] blur-[60px]"
+                        style={{ background: 'radial-gradient(circle, #C010DA 0%, transparent 70%)' }}
+                    />
+                </motion.div>
 
-                {/* Header */}
-                <div className="max-w-4xl mx-auto text-center mb-14 md:mb-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: 14 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="mb-5"
+                {/* Section header — fades in then slides up */}
+                <motion.div
+                    style={{ y: headerY, opacity: headerOpacity }}
+                    className="relative z-10 text-center pt-20 pb-4 px-8 shrink-0"
+                >
+                    <span
+                        className="inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest mb-4"
+                        style={{ background: '#F7C87A', color: '#232322' }}
                     >
-                        <span
-                            className="inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest"
-                            style={{ background: '#F7C87A', color: '#232322' }}
-                        >
-                            Integration at the core
+                        Integration at the core
+                    </span>
+                    <h2 className="text-4xl xl:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
+                        <span className="bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent">
+                            SAP + AI
                         </span>
-                    </motion.div>
+                        {', '}
+                        <span className="font-cursive italic text-brand-600">working within your business</span>
+                    </h2>
+                </motion.div>
 
-                    <motion.h2
+                {/* Three-column layout: left cards | MacBook | right cards */}
+                <motion.div
+                    style={{ opacity: sectionOpacity }}
+                    className="relative z-10 flex-1 flex items-center container mx-auto px-8 xl:px-12 pb-8 min-h-0"
+                >
+                    <div className="w-full grid grid-cols-12 gap-6 items-center">
+
+                        {/* Left cards */}
+                        <motion.div
+                            style={{ opacity: cardsOpacity, x: leftCardsX }}
+                            className="col-span-3 flex flex-col gap-5"
+                        >
+                            {cards.slice(0, 2).map((card) => (
+                                <div
+                                    key={card.title}
+                                    className="bg-white/90 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 shadow-sm"
+                                >
+                                    <div className="flex items-center justify-between mb-3">
+                                        <span className="text-xs text-slate-500 font-medium">{card.label}</span>
+                                        <div className="flex items-center gap-1.5">
+                                            <span className={`w-1.5 h-1.5 rounded-full ${card.statusColor}`} />
+                                            <span className="text-xs text-slate-500 font-medium">{card.status}</span>
+                                        </div>
+                                    </div>
+                                    <p className="text-base font-bold text-slate-900 mb-1 leading-snug">{card.title}</p>
+                                    <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
+                                </div>
+                            ))}
+                        </motion.div>
+
+                        {/* Center — MacBook with Y-axis tumble, lid always open */}
+                        <div className="col-span-6 flex justify-center items-center">
+                            <motion.div style={{ y: laptopY, scale: laptopScale }}>
+                                <MacbookScroll
+                                    src={dashboardSrc}
+                                    showGradient={false}
+                                    lidAlwaysOpen
+                                    externalRotateY={rotateY}
+                                    screenOpacity={dashOpacity}
+                                />
+                            </motion.div>
+                        </div>
+
+                        {/* Right cards */}
+                        <motion.div
+                            style={{ opacity: cardsOpacity, x: rightCardsX }}
+                            className="col-span-3 flex flex-col gap-5"
+                        >
+                            {cards.slice(2, 4).map((card) => (
+                                <div
+                                    key={card.title}
+                                    className="bg-white/90 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 shadow-sm"
+                                >
+                                    <div className="flex items-center justify-between mb-3">
+                                        <span className="text-xs text-slate-500 font-medium">{card.label}</span>
+                                        <div className="flex items-center gap-1.5">
+                                            <span className={`w-1.5 h-1.5 rounded-full ${card.statusColor}`} />
+                                            <span className="text-xs text-slate-500 font-medium">{card.status}</span>
+                                        </div>
+                                    </div>
+                                    <p className="text-base font-bold text-slate-900 mb-1 leading-snug">{card.title}</p>
+                                    <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
+                                </div>
+                            ))}
+                        </motion.div>
+
+                    </div>
+                </motion.div>
+            </section>
+
+            {/* ══ MOBILE layout — static, no scroll trap ══ */}
+            <div className="lg:hidden w-full px-4 pt-14 pb-20 bg-slate-50 border-b border-slate-100">
+                <div className="max-w-4xl mx-auto text-center mb-10">
+                    <span
+                        className="inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest mb-4"
+                        style={{ background: '#F7C87A', color: '#232322' }}
+                    >
+                        Integration at the core
+                    </span>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                        <span className="bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent">
+                            SAP + AI
+                        </span>
+                        {', '}
+                        <span className="font-cursive italic text-brand-600">working within your business</span>
+                    </h2>
+                </div>
+
+                <div className="flex flex-col gap-6">
+                    {/* Static dashboard preview */}
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.08 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-tight mb-6"
+                        className="w-full rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-[#0a0818]"
                     >
-                        <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">SAP + AI</span>
-                        {', '}working within your business
-                    </motion.h2>
-
-                    <motion.p
-                        initial={{ opacity: 0, y: 14 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.14 }}
-                        className="text-base md:text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto"
-                    >
-                        We bring AI into SAP environments so it becomes part of how work is done across teams — from planning and operations to people and finance.
-                    </motion.p>
-                </div>
-
-                {/* Desktop: cards + 3D laptop */}
-                <div className="hidden md:grid grid-cols-[260px_1fr_260px] lg:grid-cols-[280px_1fr_280px] xl:grid-cols-[300px_1fr_300px] gap-6 items-center">
-                    <div className="flex flex-col gap-5">
-                        {leftCards.map(c => <InfoCard key={c.title} card={c} direction="left" />)}
-                    </div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="flex items-center justify-center"
-                    >
-                        <MacBookViewer />
+                        <div className="flex items-center gap-1.5 px-3 py-2 bg-[#0f0d20]">
+                            <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                            <span className="ml-3 text-[10px] font-mono text-slate-400">SAP AI · DASHBOARD</span>
+                        </div>
+                        {dashboardSrc && (
+                            <img src={dashboardSrc} alt="SAP AI Dashboard" className="w-full h-auto" />
+                        )}
                     </motion.div>
 
-                    <div className="flex flex-col gap-5">
-                        {rightCards.map(c => <InfoCard key={c.title} card={c} direction="right" />)}
-                    </div>
-                </div>
-
-                {/* Mobile */}
-                <div className="md:hidden flex flex-col gap-4 pb-8">
-                    {[...leftCards, ...rightCards].map(card => (
-                        <motion.div
-                            key={card.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm"
-                        >
-                            <div className="flex items-center justify-between mb-3">
-                                <span className="text-xs text-slate-500 font-medium">{card.label}</span>
-                                <div className="flex items-center gap-1.5">
-                                    <span className={`w-1.5 h-1.5 rounded-full ${card.statusColor}`} />
-                                    <span className="text-xs text-slate-500 font-medium">{card.status}</span>
+                    {/* 2×2 card grid */}
+                    <div className="grid grid-cols-2 gap-4">
+                        {cards.map((card, i) => (
+                            <motion.div
+                                key={card.title}
+                                initial={{ opacity: 0, y: 16 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.08 * i }}
+                                className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+                            >
+                                <div className="flex items-center justify-between mb-2">
+                                    <span className="text-[10px] text-slate-500 font-medium">{card.label}</span>
+                                    <div className="flex items-center gap-1">
+                                        <span className={`w-1.5 h-1.5 rounded-full ${card.statusColor}`} />
+                                        <span className="text-[10px] text-slate-500 font-medium">{card.status}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <p className="text-base font-bold text-slate-900 mb-2">{card.title}</p>
-                            <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
-                        </motion.div>
-                    ))}
-                    <MacBookViewer />
-                </div>
-            </div>
-
-            {/* Certified Capability panel */}
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 py-16 md:py-20">
-                <div className="max-w-5xl mx-auto bg-slate-50 border border-slate-200 rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 md:gap-16 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-[0.06]"
-                        style={{ background: 'radial-gradient(circle, #8A29AC, transparent)' }} />
-
-                    <div className="relative z-10 flex-1 text-center md:text-left">
-                        <motion.p
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3"
-                        >
-                            Certified Capability
-                        </motion.p>
-                        <motion.h3
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.08 }}
-                            className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4"
-                        >
-                            Trained for{' '}
-                            <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                real outcomes
-                            </span>
-                        </motion.h3>
-                        <motion.p
-                            initial={{ opacity: 0, y: 14 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.14 }}
-                            className="text-base md:text-lg text-slate-500 leading-relaxed"
-                        >
-                            Every academy is built around how decisions actually get made, how workflows actually run, and how delivery actually happens inside organisations.
-                        </motion.p>
-                    </div>
-
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="relative z-10 flex flex-col gap-3 shrink-0"
-                    >
-                        {[
-                            'You learn by doing the real thing',
-                            'Inside live SAP environments',
-                            'Guided by certified practitioners',
-                        ].map(item => (
-                            <div key={item} className="flex items-center gap-3 bg-white border border-slate-200 rounded-2xl px-5 py-3.5 shadow-sm">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                                <span className="text-slate-800 font-medium text-sm">{item}</span>
-                            </div>
+                                <p className="text-sm font-bold text-slate-900 mb-1 leading-snug">{card.title}</p>
+                                <p className="text-[11px] text-slate-500 leading-relaxed">{card.desc}</p>
+                            </motion.div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
             </div>
-        </section>
+
+        </div>
     );
 }

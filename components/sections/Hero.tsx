@@ -35,7 +35,7 @@ export function Hero() {
                         >
                             <div className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[80px] font-black leading-[0.9] tracking-tight">
                                 <span className="text-white">Ecosystem for</span>
-                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-accent-400 bg-clip-text text-transparent">AI Era</span>
+                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-accent-400 bg-clip-text text-transparent pl-[10px]">AI Era</span>
                             </div>
                         </motion.h1>
 

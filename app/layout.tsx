@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display, Geist } from "next/font/google";
 import { NavbarWrapper } from "@/components/NavbarWrapper";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -36,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={cn("scroll-smooth", "font-sans", geist.variable)}>
       <body className={`${inter.variable} ${playfairDisplay.variable} font-sans`}>
         <NavbarWrapper>
           {children}
