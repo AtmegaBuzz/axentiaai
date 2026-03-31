@@ -153,9 +153,8 @@ export function MacBookViewer() {
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight;
             const mid = rect.top + rect.height / 2;
-            // Start when 50% of laptop is visible (mid enters viewport)
-            // Same completion speed from that point (vh*0.35 travel)
-            const raw = (vh - mid) / (vh * 0.35);
+            // Start when 50% visible, complete when element center is at viewport center
+            const raw = (vh - mid) / (vh * 0.5);
             scrollRef.current = Math.max(0, Math.min(2, raw));
         };
         window.addEventListener('scroll', onScroll, { passive: true });
