@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useMemo, useState, Component, ReactNode } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -100,7 +100,6 @@ function MacBookScene({ isInViewRef }: { isInViewRef: React.MutableRefObject<boo
     const { scene } = useGLTF('/3dmodels/macbook.glb');
     const groupRef = useRef<THREE.Group>(null);
     const velRef = useRef(0.014);
-    const { invalidate } = useThree();
 
     const screenTex = useMemo(() => buildScreenTexture(), []);
 
@@ -130,9 +129,6 @@ function MacBookScene({ isInViewRef }: { isInViewRef: React.MutableRefObject<boo
         const targetVel = inView ? 0.0008 : 0.014;
         velRef.current = THREE.MathUtils.lerp(velRef.current, targetVel, inView ? 0.04 : 0.06);
         groupRef.current.rotation.y += velRef.current;
-
-        // Only ask for next frame while actually moving
-        if (velRef.current > 0.0005) invalidate();
     });
 
     return (
@@ -177,7 +173,7 @@ export function MacBookViewer() {
             {!contextLost && (
                 <CanvasErrorBoundary>
                     <Canvas
-                        frameloop="demand"
+                        frameloop="always"
                         camera={{ position: [0, 0.4, 4.2], fov: 42 }}
                         dpr={[1, 1.5]}
                         gl={{
