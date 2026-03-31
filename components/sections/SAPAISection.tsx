@@ -71,7 +71,7 @@ function InfoCard({ card, direction }: { card: typeof leftCards[0]; direction: '
 
 export function SAPAISection() {
     return (
-        <section className="relative bg-white border-b border-slate-100">
+        <section className="relative bg-[#f8f6fb] border-b border-slate-100">
 
             {/* Subtle brand blobs */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
