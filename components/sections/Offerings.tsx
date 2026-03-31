@@ -98,7 +98,7 @@ function OfferingRow({ offering, index }: { offering: typeof offerings[0]; index
                         <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] bg-[#8A29AC]/8 border border-[#8A29AC]/20 rounded-full px-3 py-1 mb-4">
                             {offering.tag}
                         </span>
-                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
+                        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight leading-tight whitespace-nowrap">
                             {offering.title}{' '}
                             <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                                 {offering.titleAccent}

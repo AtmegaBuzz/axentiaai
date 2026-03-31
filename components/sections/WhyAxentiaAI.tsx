@@ -1,10 +1,8 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { usePerformance } from '@/lib/usePerformance';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
+import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
 const partnerLogos = [
     { src: '/partners/orane-logo.png',     alt: 'Orane',        width: 120, height: 40 },
@@ -50,78 +48,75 @@ export function TrustedBy() {
 
 /* ── main component ────────────────────────────────────────────────── */
 export function WhyAxentiaAI() {
-    const { tier } = usePerformance();
-    const isLowEnd = tier === 'low';
+    const stats = [
+        { end: 50,  suffix: '+', label: 'Enterprises served globally' },
+        { end: 300, suffix: '+', label: 'Certified professionals' },
+        { end: 16,  suffix: '+', label: 'Years of delivery excellence' },
+    ];
 
     return (
-        <section
-            id="why-axentiaai"
-            className="relative overflow-hidden bg-white py-20 md:py-28"
-        >
-            {/* Subtle gradient blob */}
-            <div className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-[0.07]" style={{ background: 'radial-gradient(circle, #8A29AC 0%, transparent 70%)' }} />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full opacity-[0.05]" style={{ background: 'radial-gradient(circle, #C010DA 0%, transparent 70%)' }} />
+        <section id="why-axentiaai" className="relative bg-white border-b border-slate-100 overflow-hidden">
 
-            {/* ── FloatingLines WebGL background — skipped on low-end devices ── */}
-            {!isLowEnd && (
-                <div className="absolute inset-0 z-0 opacity-30 overflow-hidden">
-                    <FloatingLines
-                        linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}
-                        enabledWaves={['top', 'middle', 'bottom']}
-                        lineCount={[3, 4, 2]}
-                        lineDistance={[5, 6, 5]}
-                        bendRadius={5}
-                        bendStrength={-0.4}
-                        interactive={false}
-                        parallax={true}
-                        parallaxStrength={0.1}
-                        animationSpeed={0.6}
-                    />
-                </div>
-            )}
+            {/* Ghosted decorative number */}
+            <div
+                className="pointer-events-none select-none absolute -top-4 -left-4 font-black leading-none text-slate-900 opacity-[0.03]"
+                style={{ fontSize: 'clamp(120px, 18vw, 260px)' }}
+                aria-hidden="true"
+            >
+                16+
+            </div>
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
+            {/* ── Top zone: editorial 2-col ── */}
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-20 md:pt-28 pb-16 md:pb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-24 items-start">
 
-                    {/* ── Left: Text ── */}
+                    {/* Left: badge + heading */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-                        className="flex-1 max-w-xl"
+                        transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                     >
-                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#8A29AC]/25 bg-[#8A29AC]/8 text-[#8A29AC] text-xs font-bold uppercase tracking-widest mb-6">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#8A29AC]/25 bg-[#8A29AC]/8 text-[#8A29AC] text-xs font-bold uppercase tracking-widest mb-8">
                             Trusted By
                         </span>
-
-                        <h2 className="text-4xl md:text-5xl xl:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-5">
+                        <h2
+                            className="font-black text-slate-900 tracking-tight leading-[1.05]"
+                            style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)' }}
+                        >
                             The AI-enforced{' '}
                             <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                                 legacy
-                            </span>{' '}
+                            </span>
+                            <br />
                             of Orane.
                         </h2>
+                    </motion.div>
 
-                        <p className="text-base md:text-lg text-slate-500 leading-relaxed mb-8">
+                    {/* Right: description + stacked stats */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.12 }}
+                        className="lg:pt-14"
+                    >
+                        <p className="text-base md:text-lg text-slate-500 leading-relaxed mb-10 pl-5 border-l-2 border-[#8A29AC]/30">
                             Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
                         </p>
-
-                        {/* Stats pills */}
-                        <div className="flex flex-wrap gap-3">
-                            {[
-                                { value: '50+', label: 'Enterprises' },
-                                { value: '300+', label: 'Certified Professionals' },
-                                { value: '16+', label: 'Years of Delivery' },
-                            ].map((stat) => (
+                        <div className="flex flex-col">
+                            {stats.map((stat, i) => (
                                 <div
                                     key={stat.label}
-                                    className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-full px-5 py-2.5 shadow-sm"
+                                    className={`flex items-baseline gap-5 py-5 ${i < stats.length - 1 ? 'border-b border-slate-100' : ''}`}
                                 >
-                                    <span className="text-xl font-black text-slate-900 tracking-tight leading-none">
-                                        {stat.value}
-                                    </span>
-                                    <span className="text-xs font-semibold text-slate-500 leading-snug">
+                                    <AnimatedCounter
+                                        end={stat.end}
+                                        suffix={stat.suffix}
+                                        duration={1600}
+                                        className="text-3xl font-black text-slate-900 tracking-tight tabular-nums w-20 shrink-0"
+                                    />
+                                    <span className="text-sm text-slate-500 leading-snug">
                                         {stat.label}
                                     </span>
                                 </div>
@@ -129,73 +124,45 @@ export function WhyAxentiaAI() {
                         </div>
                     </motion.div>
 
-                    {/* ── Right: Logo Grid ── */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
-                        className="flex-1 w-full max-w-lg"
-                    >
-                        {/* Row 1: 3 logos */}
-                        <div className="grid grid-cols-3 gap-4 mb-4">
-                            {partnerLogos.slice(0, 3).map((logo, i) => (
-                                <motion.div
-                                    key={logo.alt}
-                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ type: 'spring', stiffness: 140, damping: 18, delay: 0.15 + i * 0.07 }}
-                                    className="aspect-square rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex items-center justify-center p-5"
-                                >
-                                    <Image
-                                        src={logo.src}
-                                        alt={logo.alt}
-                                        width={logo.width}
-                                        height={logo.height}
-                                        className="max-h-10 w-auto object-contain"
-                                    />
-                                </motion.div>
-                            ))}
-                        </div>
-                        {/* Row 2: 2 logos (centered) */}
-                        <div className="grid grid-cols-3 gap-4">
-                            {partnerLogos.slice(3).map((logo, i) => (
-                                <motion.div
-                                    key={logo.alt}
-                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ type: 'spring', stiffness: 140, damping: 18, delay: 0.35 + i * 0.07 }}
-                                    className="aspect-square rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex items-center justify-center p-5"
-                                    style={{ gridColumn: i === 0 ? '1 / 2' : '2 / 3' }}
-                                >
-                                    <Image
-                                        src={logo.src}
-                                        alt={logo.alt}
-                                        width={logo.width}
-                                        height={logo.height}
-                                        className="max-h-10 w-auto object-contain"
-                                    />
-                                </motion.div>
-                            ))}
-                            {/* Decorative card */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.5 }}
-                                className="aspect-square rounded-2xl flex flex-col items-center justify-center gap-2 p-5"
-                                style={{ background: 'linear-gradient(135deg, #8A29AC 0%, #C010DA 100%)' }}
-                            >
-                                <span className="text-2xl font-black text-white leading-none">50+</span>
-                                <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest text-center">Enterprise Partners</span>
-                            </motion.div>
-                        </div>
-                    </motion.div>
-
                 </div>
             </div>
+
+            {/* ── Bottom zone: full-bleed logo strip ── */}
+            <div className="border-t border-slate-200">
+                {/* Label row */}
+                <div className="container mx-auto px-4 md:px-8 xl:px-12">
+                    <div className="flex items-center gap-4 py-4">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 shrink-0">
+                            Partners &amp; Integrations
+                        </span>
+                        <div className="flex-1 h-px bg-slate-200" />
+                    </div>
+                </div>
+                {/* Logo row — full width */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.15 }}
+                    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 border-t border-slate-200"
+                >
+                    {partnerLogos.map((logo, i) => (
+                        <div
+                            key={logo.alt}
+                            className={`group flex items-center justify-center h-24 hover:bg-slate-50 transition-colors duration-200 ${i < partnerLogos.length - 1 ? 'border-r border-slate-200' : ''}`}
+                        >
+                            <Image
+                                src={logo.src}
+                                alt={logo.alt}
+                                width={logo.width}
+                                height={logo.height}
+                                className="max-h-8 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
+                            />
+                        </div>
+                    ))}
+                </motion.div>
+            </div>
+
         </section>
     );
 }
@@ -220,7 +187,7 @@ export function StandardsSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.06 }}
-                        className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight mb-4"
+                        className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4"
                     >
                         Standards We Are Held To
                     </motion.h3>
