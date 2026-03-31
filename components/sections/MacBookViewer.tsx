@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useEffect, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, Environment } from '@react-three/drei';
+import { useRef, useEffect, useMemo, useState, Component, ReactNode } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 /* ── Draw SAP/AI dashboard onto a canvas → Three.js texture ── */
@@ -59,7 +59,7 @@ function buildScreenTexture(): THREE.CanvasTexture {
     // Bar chart
     const bars = [55, 38, 72, 48, 84, 60, 76, 52, 88, 66, 74, 92];
     const bw = 58, bg = 22, cx0 = 30, cy0 = 220, ch = 160;
-    c.fillStyle = '#1e1b35'; c.font = '12px monospace';
+    c.fillStyle = '#334155'; c.font = '12px monospace';
     c.fillText('Monthly AI Predictions', cx0, cy0 - 10);
     bars.forEach((h, i) => {
         const bh = (h / 100) * ch;
@@ -95,43 +95,44 @@ function buildScreenTexture(): THREE.CanvasTexture {
     return new THREE.CanvasTexture(cvs);
 }
 
-/* ── 3D MacBook scene ── */
-function MacBook({ isInViewRef }: { isInViewRef: React.MutableRefObject<boolean> }) {
+/* ── Inner scene: loads model + drives spin ── */
+function MacBookScene({ isInViewRef }: { isInViewRef: React.MutableRefObject<boolean> }) {
     const { scene } = useGLTF('/3dmodels/macbook.glb');
     const groupRef = useRef<THREE.Group>(null);
-    const velRef = useRef(0.014);   // current spin velocity
+    const velRef = useRef(0.014);
+    const { invalidate } = useThree();
 
     const screenTex = useMemo(() => buildScreenTexture(), []);
 
-    /* Apply canvas texture to the screen mesh (Object_6 = lid, index 0) */
+    /* Apply canvas texture to lid mesh (index 0 = taller Y-extent mesh) */
     useEffect(() => {
         const meshes: THREE.Mesh[] = [];
-        scene.traverse(obj => { if ((obj as THREE.Mesh).isMesh) meshes.push(obj as THREE.Mesh); });
-
-        // lid mesh (taller one) = meshes[0]
+        scene.traverse(obj => {
+            if ((obj as THREE.Mesh).isMesh) meshes.push(obj as THREE.Mesh);
+        });
         const lid = meshes[0];
         if (lid) {
-            // clone material so base keeps its original texture
-            const mat = new THREE.MeshStandardMaterial({
+            lid.material = new THREE.MeshStandardMaterial({
                 map: screenTex,
                 roughness: 0.15,
                 metalness: 0.1,
                 emissive: new THREE.Color('#1a0f3c'),
-                emissiveIntensity: 0.3,
+                emissiveIntensity: 0.4,
             });
-            lid.material = mat;
         }
         return () => { screenTex.dispose(); };
     }, [scene, screenTex]);
 
-    /* Scroll-based rotation */
+    /* Spin: fast while scrolling in, near-stop when section is visible */
     useFrame(() => {
         if (!groupRef.current) return;
         const inView = isInViewRef.current;
-        // When in view slow down to near-zero; when out spin at target speed
         const targetVel = inView ? 0.0008 : 0.014;
         velRef.current = THREE.MathUtils.lerp(velRef.current, targetVel, inView ? 0.04 : 0.06);
         groupRef.current.rotation.y += velRef.current;
+
+        // Only ask for next frame while actually moving
+        if (velRef.current > 0.0005) invalidate();
     });
 
     return (
@@ -141,16 +142,30 @@ function MacBook({ isInViewRef }: { isInViewRef: React.MutableRefObject<boolean>
     );
 }
 
+/* ── Simple error boundary so a context crash doesn't kill the page ── */
+class CanvasErrorBoundary extends Component<{ children: ReactNode }, { crashed: boolean }> {
+    state = { crashed: false };
+    static getDerivedStateFromError() { return { crashed: true }; }
+    render() {
+        if (this.state.crashed) return null;
+        return this.props.children;
+    }
+}
+
 /* ── Exported viewer wrapper ── */
 export function MacBookViewer() {
     const wrapRef = useRef<HTMLDivElement>(null);
     const isInViewRef = useRef(false);
+    const [contextLost, setContextLost] = useState(false);
 
+    /* Intersection observer: section in/out of view */
     useEffect(() => {
         const el = wrapRef.current;
         if (!el) return;
         const obs = new IntersectionObserver(
-            ([entry]) => { isInViewRef.current = entry.intersectionRatio >= 0.5; },
+            ([entry]) => {
+                isInViewRef.current = entry.intersectionRatio >= 0.5;
+            },
             { threshold: [0, 0.3, 0.5, 0.8] }
         );
         obs.observe(el);
@@ -159,18 +174,44 @@ export function MacBookViewer() {
 
     return (
         <div ref={wrapRef} style={{ width: '100%', height: '460px' }}>
-            <Canvas
-                camera={{ position: [0, 0.4, 4.2], fov: 42 }}
-                gl={{ alpha: true, antialias: true }}
-                style={{ background: 'transparent' }}
-            >
-                <ambientLight intensity={0.6} />
-                <directionalLight position={[4, 6, 4]} intensity={1.2} />
-                <pointLight position={[-4, 3, 2]} intensity={1.0} color="#8A29AC" />
-                <pointLight position={[2, -2, 3]} intensity={0.4} color="#C010DA" />
-                <MacBook isInViewRef={isInViewRef} />
-                <Environment preset="city" />
-            </Canvas>
+            {!contextLost && (
+                <CanvasErrorBoundary>
+                    <Canvas
+                        frameloop="demand"
+                        camera={{ position: [0, 0.4, 4.2], fov: 42 }}
+                        dpr={[1, 1.5]}
+                        gl={{
+                            alpha: true,
+                            antialias: true,
+                            powerPreference: 'default',
+                            depth: true,
+                            stencil: false,
+                            preserveDrawingBuffer: false,
+                        }}
+                        style={{ background: 'transparent' }}
+                        onCreated={({ gl }) => {
+                            const canvas = gl.domElement;
+
+                            const onLost = (e: Event) => {
+                                e.preventDefault();
+                                setContextLost(true);
+                                // Try to restore after short delay
+                                setTimeout(() => setContextLost(false), 1500);
+                            };
+                            const onRestored = () => setContextLost(false);
+
+                            canvas.addEventListener('webglcontextlost', onLost);
+                            canvas.addEventListener('webglcontextrestored', onRestored);
+                        }}
+                    >
+                        <ambientLight intensity={0.7} />
+                        <directionalLight position={[4, 6, 4]} intensity={1.4} castShadow={false} />
+                        <directionalLight position={[-3, 2, -2]} intensity={0.5} />
+                        <pointLight position={[-4, 3, 2]} intensity={1.2} color="#8A29AC" />
+                        <MacBookScene isInViewRef={isInViewRef} />
+                    </Canvas>
+                </CanvasErrorBoundary>
+            )}
         </div>
     );
 }
