@@ -2,6 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const MacBookViewer = dynamic(
+    () => import('./MacBookViewer').then(m => ({ default: m.MacBookViewer })),
+    { ssr: false, loading: () => <div style={{ height: '460px' }} /> }
+);
 
 const leftCards = [
     {
@@ -41,141 +47,6 @@ const rightCards = [
     },
 ];
 
-/* ── CSS 3D Laptop ── */
-function LaptopMockup() {
-    return (
-        <div
-            className="relative flex flex-col items-center"
-            style={{ perspective: '1100px', perspectiveOrigin: '50% 30%' }}
-        >
-            {/* Screen */}
-            <div
-                style={{
-                    width: '340px',
-                    transformOrigin: 'bottom center',
-                    transform: 'rotateX(-22deg)',
-                    marginBottom: '-2px',
-                    borderRadius: '14px 14px 0 0',
-                    background: 'linear-gradient(160deg, #1e1b2e 0%, #12101f 100%)',
-                    border: '2px solid rgba(255,255,255,0.10)',
-                    borderBottom: 'none',
-                    boxShadow: '0 -8px 60px rgba(138,41,172,0.25), 0 0 0 1px rgba(138,41,172,0.15)',
-                    padding: '10px 10px 0',
-                }}
-            >
-                {/* Camera dot */}
-                <div style={{ textAlign: 'center', marginBottom: '6px' }}>
-                    <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: '#334155' }} />
-                </div>
-
-                {/* Screen bezel inner */}
-                <div
-                    style={{
-                        borderRadius: '8px 8px 0 0',
-                        overflow: 'hidden',
-                        background: '#0a0818',
-                        height: '200px',
-                    }}
-                >
-                    {/* Dashboard header */}
-                    <div style={{ background: '#110f1e', borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <div style={{ display: 'flex', gap: '4px' }}>
-                            {['#ef4444', '#f59e0b', '#22c55e'].map(c => (
-                                <span key={c} style={{ width: '7px', height: '7px', borderRadius: '50%', background: c, display: 'inline-block' }} />
-                            ))}
-                        </div>
-                        <span style={{ color: '#6366f1', fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', marginLeft: '6px' }}>SAP AI · DASHBOARD</span>
-                        <span style={{ marginLeft: 'auto', fontSize: '8px', color: '#334155' }}>Live ●</span>
-                    </div>
-
-                    {/* Metrics row */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', padding: '10px 10px 6px' }}>
-                        {[
-                            { label: 'Forecasts', val: '98.2%', color: '#818cf8' },
-                            { label: 'Invoices', val: '1,240', color: '#a855f7' },
-                            { label: 'Uptime', val: '99.9%', color: '#10b981' },
-                        ].map(m => (
-                            <div key={m.label} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '6px', padding: '6px 8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                                <div style={{ fontSize: '13px', fontWeight: 800, color: m.color, lineHeight: 1 }}>{m.val}</div>
-                                <div style={{ fontSize: '8px', color: '#475569', marginTop: '3px', letterSpacing: '0.04em' }}>{m.label}</div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Bar chart */}
-                    <div style={{ padding: '4px 10px 0', display: 'flex', alignItems: 'flex-end', gap: '5px', height: '60px' }}>
-                        {[55, 38, 70, 48, 82, 60, 74, 52, 88, 65].map((h, i) => (
-                            <div key={i} style={{ flex: 1, height: `${h}%`, borderRadius: '3px 3px 0 0', background: i === 8 ? 'linear-gradient(to top, #8A29AC, #C010DA)' : 'rgba(138,41,172,0.25)', transition: 'height 0.3s' }} />
-                        ))}
-                    </div>
-
-                    {/* Module tags */}
-                    <div style={{ padding: '8px 10px', display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-                        {['S/4HANA', 'BTP', 'Joule', 'SF'].map(tag => (
-                            <span key={tag} style={{ fontSize: '8px', fontWeight: 700, color: '#818cf8', background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.2)', borderRadius: '4px', padding: '2px 6px' }}>{tag}</span>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            {/* Hinge strip */}
-            <div style={{
-                width: '340px',
-                height: '5px',
-                background: 'linear-gradient(to bottom, #1e293b, #0f172a)',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderTop: '2px solid rgba(255,255,255,0.12)',
-                borderBottom: 'none',
-            }} />
-
-            {/* Base/keyboard */}
-            <div
-                style={{
-                    width: '340px',
-                    height: '130px',
-                    transformOrigin: 'top center',
-                    transform: 'rotateX(15deg)',
-                    background: 'linear-gradient(175deg, #1a2233 0%, #0d1525 100%)',
-                    borderRadius: '0 0 12px 12px',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    borderTop: 'none',
-                    padding: '12px 16px 10px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '5px',
-                    boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
-                }}
-            >
-                {/* Keyboard rows */}
-                {[13, 12, 11, 10].map((cols, row) => (
-                    <div key={row} style={{ display: 'flex', gap: '3px' }}>
-                        {Array.from({ length: cols }).map((_, i) => (
-                            <div key={i} style={{ flex: 1, height: '10px', borderRadius: '2px', background: 'rgba(148,163,184,0.10)', border: '1px solid rgba(255,255,255,0.05)' }} />
-                        ))}
-                    </div>
-                ))}
-                {/* Space bar row */}
-                <div style={{ display: 'flex', gap: '3px', marginTop: '2px' }}>
-                    <div style={{ flex: 1, height: '10px', borderRadius: '2px', background: 'rgba(148,163,184,0.07)', border: '1px solid rgba(255,255,255,0.04)' }} />
-                    <div style={{ flex: 5, height: '10px', borderRadius: '2px', background: 'rgba(148,163,184,0.12)', border: '1px solid rgba(255,255,255,0.06)' }} />
-                    <div style={{ flex: 1, height: '10px', borderRadius: '2px', background: 'rgba(148,163,184,0.07)', border: '1px solid rgba(255,255,255,0.04)' }} />
-                </div>
-                {/* Trackpad */}
-                <div style={{ width: '80px', height: '20px', borderRadius: '4px', background: 'rgba(148,163,184,0.08)', border: '1px solid rgba(255,255,255,0.05)', margin: '4px auto 0' }} />
-            </div>
-
-            {/* Surface reflection */}
-            <div style={{
-                width: '320px',
-                height: '12px',
-                marginTop: '-2px',
-                background: 'linear-gradient(to bottom, rgba(138,41,172,0.15), transparent)',
-                borderRadius: '0 0 8px 8px',
-                filter: 'blur(4px)',
-            }} />
-        </div>
-    );
-}
 
 export function SAPAISection() {
     return (
@@ -266,7 +137,7 @@ export function SAPAISection() {
                         transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="flex items-end justify-center pb-4"
                     >
-                        <LaptopMockup />
+                        <MacBookViewer />
                     </motion.div>
 
                     {/* Right cards */}
@@ -319,7 +190,7 @@ export function SAPAISection() {
                         ))}
                     </div>
                     <div className="flex justify-center pt-4 pb-8">
-                        <LaptopMockup />
+                        <MacBookViewer />
                     </div>
                 </div>
             </div>
