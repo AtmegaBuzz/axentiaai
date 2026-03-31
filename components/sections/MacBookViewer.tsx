@@ -1,50 +1,44 @@
 'use client';
 
 import { useRef, useEffect, useState, Component, ReactNode } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
-/* ── Screen texture: "AI is the future with Axentia.AI" ── */
+/* ── Screen texture ── */
 function buildScreenTexture(): THREE.CanvasTexture {
     const W = 1024, H = 640;
     const cvs = document.createElement('canvas');
     cvs.width = W; cvs.height = H;
     const c = cvs.getContext('2d')!;
 
-    /* Dark background — no grid, no patterns */
     c.fillStyle = '#0a0818';
     c.fillRect(0, 0, W, H);
 
-    /* Purple glow behind text */
     const grad = c.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, 320);
     grad.addColorStop(0, 'rgba(138,41,172,0.15)');
     grad.addColorStop(1, 'transparent');
     c.fillStyle = grad;
     c.fillRect(0, 0, W, H);
 
-    /* Centered headline */
     c.textAlign = 'center';
     c.textBaseline = 'middle';
-
     c.fillStyle = '#ffffff';
     c.font = 'bold 64px system-ui, -apple-system, sans-serif';
     c.fillText('AI is the future', W / 2, H / 2 - 50);
-
     c.fillStyle = '#C010DA';
     c.font = 'bold 56px system-ui, -apple-system, sans-serif';
     c.fillText('with Axentia.AI', W / 2, H / 2 + 30);
-
     c.fillStyle = 'rgba(255,255,255,0.25)';
     c.font = '20px system-ui, -apple-system, sans-serif';
     c.fillText('Enterprise AI + SAP Intelligence Platform', W / 2, H / 2 + 100);
 
     const tex = new THREE.CanvasTexture(cvs);
-    tex.flipY = false;           // match glTF UV convention
+    tex.flipY = false;
     tex.colorSpace = THREE.SRGBColorSpace;
     return tex;
 }
 
-/* ── All-in-one scene: loads model, drives rotation + screen swap ── */
+/* ── Scene: scroll-driven rotation → then zoom ── */
 function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
     const groupRef      = useRef<THREE.Group>(null);
     const sceneRef      = useRef<THREE.Group | null>(null);
@@ -53,11 +47,10 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
     const screenMatRef  = useRef<THREE.Material | null>(null);
     const screenActive  = useRef(false);
     const [ready, setReady] = useState(false);
+    const { camera } = useThree();
 
-    /* Load GLB once */
     useEffect(() => {
         let cancelled = false;
-
         import('three/examples/jsm/loaders/GLTFLoader.js')
             .then(({ GLTFLoader }) => {
                 new GLTFLoader().load(
@@ -66,32 +59,24 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
                         if (cancelled) return;
                         const scene = gltf.scene;
 
-                        /* Auto-center */
                         const box = new THREE.Box3().setFromObject(scene);
                         const center = new THREE.Vector3();
                         box.getCenter(center);
                         scene.position.sub(center);
 
-                        /* Auto-scale */
                         const size = new THREE.Vector3();
                         box.getSize(size);
                         scene.scale.setScalar(2.8 / Math.max(size.x, size.y, size.z));
 
-                        /* Find lid mesh (index 0 = tall Y-extent), stash materials */
                         const meshes: THREE.Mesh[] = [];
                         scene.traverse(o => { if ((o as THREE.Mesh).isMesh) meshes.push(o as THREE.Mesh); });
-
                         if (meshes[0]) {
                             lidRef.current = meshes[0];
                             origMatRef.current = meshes[0].material as THREE.Material;
-
                             const tex = buildScreenTexture();
                             screenMatRef.current = new THREE.MeshStandardMaterial({
-                                map: tex,
-                                roughness: 0.15,
-                                metalness: 0,
-                                emissive: new THREE.Color('#0a0818'),
-                                emissiveIntensity: 0.8,
+                                map: tex, roughness: 0.15, metalness: 0,
+                                emissive: new THREE.Color('#0a0818'), emissiveIntensity: 0.8,
                             });
                         }
 
@@ -103,29 +88,38 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
                 );
             })
             .catch(err => console.error('[MacBookViewer] GLTFLoader import failed:', err));
-
         return () => { cancelled = true; };
     }, []);
 
-    /* Scroll-driven rotation + screen text swap */
     useFrame(() => {
         if (!groupRef.current) return;
-        const progress = scrollRef.current ?? 0;
+        const raw = scrollRef.current ?? 0;
 
-        /* Rotate from π (back) → 0 (front) */
-        const targetY = Math.PI * (1 - progress);
+        /*
+         * Two phases driven by one scroll value (0 → 2):
+         *   Phase 1 (raw 0→1): Spin from back (π) to front (0)
+         *   Phase 2 (raw 1→2): Zoom camera in from z=5 to z=2.8
+         */
+        const spinProgress = Math.min(raw, 1);          // 0→1
+        const zoomProgress = Math.max(0, raw - 1);      // 0→1 after spin done
+
+        /* Rotation */
+        const targetY = Math.PI * (1 - spinProgress);
         groupRef.current.rotation.y = THREE.MathUtils.lerp(
-            groupRef.current.rotation.y, targetY, 0.08
+            groupRef.current.rotation.y, targetY, 0.1
         );
 
-        /* Swap lid material: show screen text only when nearly face-on */
+        /* Zoom: camera z moves from 5 → 2.8 */
+        const targetZ = THREE.MathUtils.lerp(5, 2.8, zoomProgress);
+        camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.08);
+
+        /* Screen text: show only when spin is done and zooming in */
         const lid = lidRef.current;
         if (!lid || !screenMatRef.current || !origMatRef.current) return;
-
-        if (progress > 0.92 && !screenActive.current) {
+        if (spinProgress > 0.95 && !screenActive.current) {
             lid.material = screenMatRef.current;
             screenActive.current = true;
-        } else if (progress <= 0.85 && screenActive.current) {
+        } else if (spinProgress <= 0.85 && screenActive.current) {
             lid.material = origMatRef.current;
             screenActive.current = false;
         }
@@ -152,34 +146,39 @@ export function MacBookViewer() {
     const scrollRef = useRef(0);
     const [hidden, setHidden] = useState(false);
 
-    /* Scroll progress: 0 → 1 as section enters → centres in viewport */
     useEffect(() => {
         const el = wrapRef.current;
         if (!el) return;
         const onScroll = () => {
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight;
-            // progress = 0 when element bottom enters viewport
-            // progress = 1 almost immediately after — just one scroll tick
-            const raw = (vh - rect.top) / (vh * 0.25);
-            scrollRef.current = Math.max(0, Math.min(1, raw));
+            /*
+             * raw goes from 0 → 2:
+             *   0→1 = spin phase (element top goes from viewport bottom → 60% up)
+             *   1→2 = zoom phase (continues scrolling)
+             */
+            const raw = (vh - rect.top) / (vh * 0.35);
+            scrollRef.current = Math.max(0, Math.min(2, raw));
         };
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    if (hidden) return <div style={{ height: 520 }} />;
+    if (hidden) return <div style={{ height: 600 }} />;
 
     return (
-        <div ref={wrapRef} style={{ width: '100%', height: 520, overflow: 'visible' }}>
+        <div
+            ref={wrapRef}
+            style={{ width: '100%', height: 600, overflow: 'visible', position: 'relative', zIndex: 10 }}
+        >
             <ErrBoundary>
                 <Canvas
                     frameloop="always"
-                    camera={{ position: [0, 0.3, 3.2], fov: 45 }}
+                    camera={{ position: [0, 0.3, 5], fov: 45 }}
                     dpr={[1, 1.5]}
                     gl={{ alpha: true, antialias: true, powerPreference: 'default', stencil: false }}
-                    style={{ background: 'transparent', overflow: 'visible' }}
+                    style={{ background: 'transparent', overflow: 'visible', position: 'absolute', inset: 0 }}
                     onCreated={({ gl }) => {
                         gl.domElement.addEventListener('webglcontextlost', (e) => {
                             e.preventDefault();
