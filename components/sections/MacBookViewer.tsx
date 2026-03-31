@@ -152,12 +152,10 @@ export function MacBookViewer() {
         const onScroll = () => {
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight;
-            /*
-             * raw goes from 0 → 2:
-             *   0→1 = spin phase (element top goes from viewport bottom → 60% up)
-             *   1→2 = zoom phase (continues scrolling)
-             */
-            const raw = (vh - rect.top) / (vh * 0.35);
+            const mid = rect.top + rect.height / 2;
+            // Start when 50% of laptop is visible (mid enters viewport)
+            // Same completion speed from that point (vh*0.35 travel)
+            const raw = (vh - mid) / (vh * 0.35);
             scrollRef.current = Math.max(0, Math.min(2, raw));
         };
         window.addEventListener('scroll', onScroll, { passive: true });
