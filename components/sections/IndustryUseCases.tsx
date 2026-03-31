@@ -191,42 +191,42 @@ export function IndustryUseCases() {
                                 className="absolute bottom-6 left-6 md:max-w-[360px] bg-white rounded-2xl p-6 shadow-xl"
                             >
                                 {/* Industry + modules */}
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] mb-0.5">
+                                <p className="text-xs font-bold uppercase tracking-widest text-[#8A29AC] mb-1">
                                     {uc.industry}
                                 </p>
-                                <p className="text-[10px] text-slate-400 font-medium mb-3">
+                                <p className="text-xs text-slate-400 font-medium mb-3">
                                     {uc.modules}
                                 </p>
 
                                 {/* Title */}
-                                <h3 className="text-lg font-bold text-slate-900 leading-snug mb-2">
+                                <h3 className="text-xl font-bold text-slate-900 leading-snug mb-2">
                                     {uc.title}
                                 </h3>
 
                                 {/* Description */}
-                                <p className="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-3">
+                                <p className="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-3">
                                     {uc.description}
                                 </p>
 
                                 {/* Stats */}
-                                <div className="flex gap-6 mb-4 pt-3 border-t border-slate-100">
+                                <div className="flex gap-8 mb-4 pt-3 border-t border-slate-100">
                                     <div>
-                                        <p className="text-[10px] text-slate-400 leading-tight">{uc.stat1Label}</p>
-                                        <p className="text-sm font-black text-slate-900">{uc.stat1Value}</p>
+                                        <p className="text-xs text-slate-400 leading-tight">{uc.stat1Label}</p>
+                                        <p className="text-base font-black text-slate-900">{uc.stat1Value}</p>
                                     </div>
                                     <div>
-                                        <p className="text-[10px] text-slate-400 leading-tight">{uc.stat2Label}</p>
-                                        <p className="text-sm font-black text-slate-900">{uc.stat2Value}</p>
+                                        <p className="text-xs text-slate-400 leading-tight">{uc.stat2Label}</p>
+                                        <p className="text-base font-black text-slate-900">{uc.stat2Value}</p>
                                     </div>
                                 </div>
 
                                 {/* CTA */}
                                 <a
                                     href="#"
-                                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 underline underline-offset-2 decoration-[#8A29AC] hover:text-[#8A29AC] transition-colors duration-200"
+                                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 underline underline-offset-2 decoration-[#8A29AC] hover:text-[#8A29AC] transition-colors duration-200"
                                 >
                                     Explore use case
-                                    <ArrowRight className="w-3 h-3" />
+                                    <ArrowRight className="w-4 h-4" />
                                 </a>
                             </motion.div>
                         </div>
