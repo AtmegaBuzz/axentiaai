@@ -56,108 +56,146 @@ export function WhyAxentiaAI() {
     return (
         <section
             id="why-axentiaai"
-            style={{
-                backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 25%, #f1f5f9 50%, #fef8ec 75%, #f8fafc 100%)',
-            }}
-            className="relative animate-gradient-loop flex flex-col justify-center py-16 md:py-24"
+            className="relative overflow-hidden bg-white py-20 md:py-28"
         >
+            {/* Subtle gradient blob */}
+            <div className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-[0.07]" style={{ background: 'radial-gradient(circle, #8A29AC 0%, transparent 70%)' }} />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full opacity-[0.05]" style={{ background: 'radial-gradient(circle, #C010DA 0%, transparent 70%)' }} />
+
             {/* ── FloatingLines WebGL background — skipped on low-end devices ── */}
             {!isLowEnd && (
-                <div className="absolute inset-0 z-0 opacity-60 overflow-hidden">
+                <div className="absolute inset-0 z-0 opacity-30 overflow-hidden">
                     <FloatingLines
                         linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}
                         enabledWaves={['top', 'middle', 'bottom']}
-                        lineCount={[4, 5, 3]}
-                        lineDistance={[4, 5, 4]}
+                        lineCount={[3, 4, 2]}
+                        lineDistance={[5, 6, 5]}
                         bendRadius={5}
-                        bendStrength={-0.5}
-                        interactive={true}
+                        bendStrength={-0.4}
+                        interactive={false}
                         parallax={true}
-                        parallaxStrength={0.15}
-                        animationSpeed={0.8}
+                        parallaxStrength={0.1}
+                        animationSpeed={0.6}
                     />
                 </div>
             )}
 
-            {/* ── Section 1: Orane Heritage + Stats ── */}
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 mb-12 lg:mb-16">
-                <div className="flex flex-col items-center text-center gap-8">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
+                <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
 
-                    {/* Label + headline + description */}
+                    {/* ── Left: Text ── */}
                     <motion.div
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="max-w-2xl"
+                        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+                        className="flex-1 max-w-xl"
                     >
-                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#8A29AC]/20 bg-[#8A29AC]/6 text-[#8A29AC] text-xs font-bold uppercase tracking-widest mb-5">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#8A29AC]/25 bg-[#8A29AC]/8 text-[#8A29AC] text-xs font-bold uppercase tracking-widest mb-6">
                             Trusted By
                         </span>
-                        <h2 className="text-3xl md:text-4xl xl:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
-                            The AI-enforced legacy of{' '}
+
+                        <h2 className="text-4xl md:text-5xl xl:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-5">
+                            The AI-enforced{' '}
                             <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                Orane
-                            </span>
+                                legacy
+                            </span>{' '}
+                            of Orane.
                         </h2>
-                        <p className="text-base md:text-lg text-slate-500 leading-relaxed">
-                            Building on over a decade and a half of global enterprise delivery excellence, we prepare our
-                            talent for the highest standards of the industry.
+
+                        <p className="text-base md:text-lg text-slate-500 leading-relaxed mb-8">
+                            Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
                         </p>
+
+                        {/* Stats pills */}
+                        <div className="flex flex-wrap gap-3">
+                            {[
+                                { value: '50+', label: 'Enterprises' },
+                                { value: '300+', label: 'Certified Professionals' },
+                                { value: '16+', label: 'Years of Delivery' },
+                            ].map((stat) => (
+                                <div
+                                    key={stat.label}
+                                    className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-full px-5 py-2.5 shadow-sm"
+                                >
+                                    <span className="text-xl font-black text-slate-900 tracking-tight leading-none">
+                                        {stat.value}
+                                    </span>
+                                    <span className="text-xs font-semibold text-slate-500 leading-snug">
+                                        {stat.label}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
                     </motion.div>
 
-                    {/* Stats — number + label inline on same row */}
+                    {/* ── Right: Logo Grid ── */}
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.18 }}
-                        className="flex flex-wrap items-center justify-center gap-3"
+                        transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
+                        className="flex-1 w-full max-w-lg"
                     >
-                        {[
-                            { value: '50+', label: 'Enterprises' },
-                            { value: '300+', label: 'Certified Professionals' },
-                            { value: '16+', label: 'Years of Enterprise Delivery' },
-                        ].map((stat, i) => (
-                            <div
-                                key={stat.label}
-                                className="flex items-center gap-2.5 bg-white/70 backdrop-blur-md border border-white/80 rounded-full px-5 py-2.5 shadow-sm"
+                        {/* Row 1: 3 logos */}
+                        <div className="grid grid-cols-3 gap-4 mb-4">
+                            {partnerLogos.slice(0, 3).map((logo, i) => (
+                                <motion.div
+                                    key={logo.alt}
+                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ type: 'spring', stiffness: 140, damping: 18, delay: 0.15 + i * 0.07 }}
+                                    className="aspect-square rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex items-center justify-center p-5"
+                                >
+                                    <Image
+                                        src={logo.src}
+                                        alt={logo.alt}
+                                        width={logo.width}
+                                        height={logo.height}
+                                        className="max-h-10 w-auto object-contain"
+                                    />
+                                </motion.div>
+                            ))}
+                        </div>
+                        {/* Row 2: 2 logos (centered) */}
+                        <div className="grid grid-cols-3 gap-4">
+                            {partnerLogos.slice(3).map((logo, i) => (
+                                <motion.div
+                                    key={logo.alt}
+                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ type: 'spring', stiffness: 140, damping: 18, delay: 0.35 + i * 0.07 }}
+                                    className="aspect-square rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex items-center justify-center p-5"
+                                    style={{ gridColumn: i === 0 ? '1 / 2' : '2 / 3' }}
+                                >
+                                    <Image
+                                        src={logo.src}
+                                        alt={logo.alt}
+                                        width={logo.width}
+                                        height={logo.height}
+                                        className="max-h-10 w-auto object-contain"
+                                    />
+                                </motion.div>
+                            ))}
+                            {/* Decorative card */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.5 }}
+                                className="aspect-square rounded-2xl flex flex-col items-center justify-center gap-2 p-5"
+                                style={{ background: 'linear-gradient(135deg, #8A29AC 0%, #C010DA 100%)' }}
                             >
-                                <span className="text-xl font-black text-slate-900 tracking-tight leading-none">
-                                    {stat.value}
-                                </span>
-                                <span className="text-xs font-semibold text-slate-500 leading-snug">
-                                    {stat.label}
-                                </span>
-                            </div>
-                        ))}
+                                <span className="text-2xl font-black text-white leading-none">50+</span>
+                                <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest text-center">Enterprise Partners</span>
+                            </motion.div>
+                        </div>
                     </motion.div>
 
                 </div>
             </div>
-
-            {/* ── Partner Logos Marquee — full width ── */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative overflow-hidden z-20 md:mt-4 mb-20 md:mb-28"
-            >
-                <div className="flex w-max animate-marquee items-center py-6 md:py-8">
-                    {[...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos].map((logo, idx) => (
-                        <div key={idx} className="mx-8 md:mx-14 flex items-center">
-                            <Image
-                                src={logo.src}
-                                alt={logo.alt}
-                                width={logo.width}
-                                height={logo.height}
-                                className="h-6 md:h-8 w-auto object-contain"
-                            />
-                        </div>
-                    ))}
-                </div>
-            </motion.div>
-
         </section>
     );
 }
@@ -208,22 +246,21 @@ export function StandardsSection() {
                             viewport={{ once: true, margin: '-40px' }}
                             transition={{ type: 'spring', stiffness: 140, damping: 18, delay: i * 0.1 }}
                             whileHover={{ y: -6, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
-                            className="group relative bg-white/70 backdrop-blur-xl border border-white/80 rounded-[2rem] p-8 flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:bg-white transition-all duration-300 overflow-hidden"
+                            className="group relative bg-white border border-slate-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 overflow-hidden"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="relative w-full h-24 mb-6 flex items-center justify-center">
+                            <div className="relative w-full h-20 mb-5 flex items-center justify-center">
                                 <Image
                                     src={cert.file}
                                     alt={cert.name}
                                     width={120}
                                     height={80}
-                                    className="max-h-20 w-auto object-contain transform group-hover:scale-105 transition-transform duration-500"
+                                    className="max-h-16 w-auto object-contain transform group-hover:scale-105 transition-transform duration-500"
                                     unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
                                 />
                             </div>
-                            <h4 className="text-xl font-bold text-slate-900 mb-2 tracking-tight relative z-10">{cert.name}</h4>
-                            <p className="text-xs text-slate-500 leading-relaxed mb-6 font-medium relative z-10">{cert.tagline}</p>
-                            <span className="mt-auto inline-flex items-center gap-1.5 bg-slate-900 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full relative z-10">
+                            <h4 className="text-xl font-bold text-slate-900 mb-2 tracking-tight">{cert.name}</h4>
+                            <p className="text-[11px] text-slate-500 leading-relaxed mb-5 font-medium">{cert.tagline}</p>
+                            <span className="mt-auto inline-flex items-center gap-1.5 bg-slate-900 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
                                 {cert.badgeText}
                             </span>
                         </motion.div>
