@@ -109,8 +109,8 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
             groupRef.current.rotation.y, targetY, 0.1
         );
 
-        /* Zoom: camera z moves from 5 → 2.8 */
-        const targetZ = THREE.MathUtils.lerp(5, 2.8, zoomProgress);
+        /* Zoom: camera z moves from 5 → 3.2 */
+        const targetZ = THREE.MathUtils.lerp(5, 3.2, zoomProgress);
         camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.08);
 
         /* Screen text: show only when spin is done and zooming in */
@@ -165,12 +165,12 @@ export function MacBookViewer() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    if (hidden) return <div style={{ height: 600 }} />;
+    if (hidden) return <div style={{ height: 800 }} />;
 
     return (
         <div
             ref={wrapRef}
-            style={{ width: '100%', height: 600, overflow: 'visible', position: 'relative', zIndex: 10 }}
+            style={{ width: '100%', height: 800, overflow: 'visible', position: 'relative', zIndex: 10 }}
         >
             <ErrBoundary>
                 <Canvas
