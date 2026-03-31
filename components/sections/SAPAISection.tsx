@@ -100,10 +100,10 @@ export function SAPAISection() {
                 </svg>
             </div>
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-20 md:pt-28 pb-0 overflow-visible">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-14 md:pt-20 pb-0 overflow-visible">
 
                 {/* Header */}
-                <div className="max-w-4xl mx-auto text-center mb-14 md:mb-20">
+                <div className="max-w-4xl mx-auto text-center mb-6 md:mb-8">
                     <motion.div
                         initial={{ opacity: 0, y: 14 }}
                         whileInView={{ opacity: 1, y: 0 }}
