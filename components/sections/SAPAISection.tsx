@@ -1,8 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { useRef } from 'react';
 
 const MacBookViewer = dynamic(
     () => import('./MacBookViewer').then(m => ({ default: m.MacBookViewer })),
@@ -52,15 +53,20 @@ function InfoCard({ card, direction, tilted }: { card: typeof leftCards[0]; dire
         ? direction === 'left' ? '2deg' : '-2deg'
         : direction === 'left' ? '-1.5deg' : '1.5deg';
 
+    const ref = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+    const y = useTransform(scrollYProgress, [0.5, 1], [0, -30]);
+
     return (
         <motion.div
+            ref={ref}
             initial={{ opacity: 0, x: direction === 'left' ? -40 : 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ type: 'spring', stiffness: 100, damping: 20, delay: card.delay }}
             whileHover={{ rotate: 0, scale: 1.03, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
-            style={{ rotate: tiltDeg }}
-            className="bg-white border border-slate-200 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(138,41,172,0.1)] hover:border-[#8A29AC]/20 transition-all duration-300 cursor-default"
+            style={{ rotate: tiltDeg, y }}
+            className="bg-white border border-slate-200 rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(138,41,172,0.1)] hover:border-[#8A29AC]/20 transition-shadow transition-border duration-300 cursor-default"
         >
             <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{card.label}</span>
