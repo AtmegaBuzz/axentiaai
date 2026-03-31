@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
 
@@ -195,35 +194,71 @@ export function SAPAISection() {
                 </div>
             </div>
 
-            {/* Certified Capability — clean inline */}
+            {/* Certified Capability — editorial 2-col */}
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pb-20 md:pb-28 -mt-32">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="max-w-3xl mx-auto text-center"
-                >
-                    <p className="text-xs font-bold uppercase tracking-widest text-[#8A29AC] mb-3">Certified Capability</p>
-                    <h3 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4">
-                        Trained for{' '}
-                        <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">real outcomes</span>
-                    </h3>
-                    <p className="text-base text-slate-500 leading-relaxed mb-8">
-                        Every academy is built around how decisions actually get made, how workflows actually run, and how delivery actually happens inside organisations.
-                    </p>
-                    <div className="flex flex-wrap items-center justify-center gap-3">
-                        {[
-                            'You learn by doing the real thing',
-                            'Inside live SAP environments',
-                            'Guided by certified practitioners',
-                        ].map(item => (
-                            <span key={item} className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm font-medium text-slate-700 shadow-sm">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                                {item}
+
+                {/* Divider label */}
+                <div className="flex items-center gap-4 mb-12 md:mb-16">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#8A29AC] shrink-0">
+                        Certified Capability
+                    </span>
+                    <div className="flex-1 h-px bg-[#8A29AC]/25" />
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+
+                    {/* Left: heading + description */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 90, damping: 20 }}
+                    >
+                        <h3
+                            className="font-black text-slate-900 tracking-tight leading-[1.05] mb-6"
+                            style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}
+                        >
+                            Trained for{' '}
+                            <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                                real outcomes
                             </span>
+                        </h3>
+                        <p className="text-base md:text-lg text-slate-500 leading-relaxed pl-5 border-l-2 border-[#8A29AC]/30">
+                            Every academy is built around how decisions actually get made, how workflows actually run, and how delivery actually happens inside organisations.
+                        </p>
+                    </motion.div>
+
+                    {/* Right: numbered features */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.12 }}
+                        className="flex flex-col"
+                    >
+                        {[
+                            { n: '01', text: 'You learn by doing the real thing' },
+                            { n: '02', text: 'Inside live SAP environments' },
+                            { n: '03', text: 'Guided by certified practitioners' },
+                        ].map((item, i) => (
+                            <div
+                                key={item.n}
+                                className={`flex items-start gap-6 py-6 ${i < 2 ? 'border-b border-slate-200' : ''}`}
+                            >
+                                <span
+                                    className="text-4xl font-black leading-none shrink-0 select-none"
+                                    style={{ WebkitTextStroke: '1.5px #8A29AC', color: 'transparent' }}
+                                >
+                                    {item.n}
+                                </span>
+                                <p className="text-base font-semibold text-slate-700 leading-snug pt-2">
+                                    {item.text}
+                                </p>
+                            </div>
                         ))}
-                    </div>
-                </motion.div>
+                    </motion.div>
+
+                </div>
             </div>
         </section>
     );
