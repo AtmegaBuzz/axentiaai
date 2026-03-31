@@ -159,9 +159,9 @@ export function MacBookViewer() {
         const onScroll = () => {
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight;
-            // Start earlier: 0 when element top hits viewport bottom
-            // End earlier: 1 when element top reaches ~40% from top of viewport
-            const raw = 1 - rect.top / (vh * 0.6);
+            // progress = 0 when element top enters bottom of viewport
+            // progress = 1 when element top reaches 70% from top (well above center)
+            const raw = 1 - rect.top / (vh * 0.85);
             scrollRef.current = Math.max(0, Math.min(1, raw));
         };
         window.addEventListener('scroll', onScroll, { passive: true });

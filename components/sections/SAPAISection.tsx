@@ -88,7 +88,7 @@ export function SAPAISection() {
                 </svg>
             </div>
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-20 md:pt-28 pb-0">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-20 md:pt-28 pb-0 overflow-visible">
 
                 {/* Header */}
                 <div className="max-w-4xl mx-auto text-center mb-14 md:mb-20">
@@ -129,7 +129,7 @@ export function SAPAISection() {
                 </div>
 
                 {/* Desktop: cards + 3D laptop */}
-                <div className="hidden md:grid grid-cols-[260px_1fr_260px] lg:grid-cols-[280px_1fr_280px] xl:grid-cols-[300px_1fr_300px] gap-6 items-center">
+                <div className="hidden md:grid grid-cols-[260px_1fr_260px] lg:grid-cols-[280px_1fr_280px] xl:grid-cols-[300px_1fr_300px] gap-6 items-center overflow-visible">
                     <div className="flex flex-col gap-5">
                         {leftCards.map(c => <InfoCard key={c.title} card={c} direction="left" />)}
                     </div>
@@ -139,7 +139,7 @@ export function SAPAISection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="flex items-center justify-center"
+                        className="flex items-center justify-center overflow-visible"
                     >
                         <MacBookViewer />
                     </motion.div>
