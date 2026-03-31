@@ -87,7 +87,7 @@ const useCases = [
 
 export function IndustryUseCases() {
     const [current, setCurrent] = useState(0);
-    const maxIdx = 3; // only 4 cards navigable out of 6
+    const maxIdx = useCases.length - 1; // all cards navigable, last one centers
 
     const prev = () => setCurrent(i => Math.max(0, i - 1));
     const next = () => setCurrent(i => Math.min(maxIdx, i + 1));
@@ -163,7 +163,7 @@ export function IndustryUseCases() {
                     className="flex gap-5"
                     animate={{ x: `calc(-${current} * (60vw + 20px) )` }}
                     transition={{ type: 'spring', stiffness: 260, damping: 30, mass: 0.9 }}
-                    style={{ paddingLeft: '15vw' }}
+                    style={{ paddingLeft: '15vw', paddingRight: '25vw' }}
                 >
                     {useCases.map((uc, i) => (
                         <div
