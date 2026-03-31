@@ -103,8 +103,8 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
         const spinProgress = Math.min(raw, 1);          // 0→1
         const zoomProgress = Math.max(0, raw - 1);      // 0→1 after spin done
 
-        /* Rotation */
-        const targetY = Math.PI * (1 - spinProgress);
+        /* Rotation: 90° (side-on) → 0° (screen facing camera) */
+        const targetY = (Math.PI / 2) * (1 - spinProgress);
         groupRef.current.rotation.y = THREE.MathUtils.lerp(
             groupRef.current.rotation.y, targetY, 0.1
         );
