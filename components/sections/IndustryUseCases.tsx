@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 
@@ -87,10 +87,23 @@ const useCases = [
 
 export function IndustryUseCases() {
     const [current, setCurrent] = useState(0);
-    const maxIdx = useCases.length - 1; // all cards navigable, last one centers
+    const maxIdx = useCases.length - 1;
+    const sliderRef = useRef<HTMLDivElement>(null);
+    const wheelAccum = useRef(0);
 
     const prev = () => setCurrent(i => Math.max(0, i - 1));
     const next = () => setCurrent(i => Math.min(maxIdx, i + 1));
+
+    /* Horizontal scroll / shift+scroll / trackpad swipe */
+    const onWheel = useCallback((e: React.WheelEvent) => {
+        const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+        if (dx === 0) return;
+        e.preventDefault();
+        wheelAccum.current += dx;
+        const threshold = 80;
+        if (wheelAccum.current > threshold) { next(); wheelAccum.current = 0; }
+        else if (wheelAccum.current < -threshold) { prev(); wheelAccum.current = 0; }
+    }, []);
 
     return (
         <section className="bg-white overflow-hidden">
@@ -158,7 +171,8 @@ export function IndustryUseCases() {
             </div>
 
             {/* ── Horizontal slider — 1 card at a time, left-aligned with heading ── */}
-            <div className="overflow-hidden pb-20 md:pb-28">
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+            <div ref={sliderRef} className="overflow-hidden pb-20 md:pb-28" onWheel={onWheel}>
                 <motion.div
                     className="flex gap-5"
                     animate={{ x: `calc(-${current} * (60vw + 20px) )` }}
