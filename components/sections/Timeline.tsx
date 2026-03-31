@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
-import { BookOpen, Wrench, BarChart3, Settings, Crown } from 'lucide-react'
+import { Search, Rocket, GraduationCap, TrendingUp } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 interface TimelineEntry {
@@ -17,53 +17,43 @@ interface TimelineEntry {
 const timelineItems: TimelineEntry[] = [
   {
     step: 1,
-    period: 'Month 0–4',
-    title: 'Trainee',
+    period: '2–3 days',
+    title: 'Discovery Workshop',
     description:
-      'Learn enterprise process flows, SAP basics, and structured documentation practices.',
+      'We sit with your team to map how work actually moves today, identify where time, effort, and decisions get stuck, and arrive at a clear, practical starting point. You leave with a defined starting point, not a generic roadmap.',
     image:
       'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&q=80',
-    icon: BookOpen,
+    icon: Search,
   },
   {
     step: 2,
-    period: 'Month 4–10',
-    title: 'Apprentice',
+    period: '4–8 weeks',
+    title: 'Pilot & Implementation',
     description:
-      'Work on supervised project tasks. Paid. Deliverables reviewed by senior consultants.',
+      'We take the highest-value use cases and put them into motion inside your existing systems using your data, processes, and teams to achieve real results in day-to-day operations.',
     image:
       'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
-    icon: Wrench,
+    icon: Rocket,
   },
   {
     step: 3,
-    period: 'Year 1–2',
-    title: 'Associate Consultant',
+    period: '3–6 months',
+    title: 'Capability Build',
     description:
-      'Support UAT cycles, prepare dashboards, handle structured client communication, manage defined tasks independently.',
+      'Your teams learn by doing. They engage directly with what has been built, take ownership of it, and start to adapt it to align with how the organization operates.',
     image:
       'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80',
-    icon: BarChart3,
+    icon: GraduationCap,
   },
   {
     step: 4,
-    period: 'Year 2–4',
-    title: 'Consultant',
+    period: 'Ongoing',
+    title: 'Scale with Execution Capacity',
     description:
-      'Own specific process areas, manage configuration and testing cycles, coordinate across teams.',
-    image:
-      'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
-    icon: Settings,
-  },
-  {
-    step: 5,
-    period: 'Year 4+',
-    title: 'Senior / Lead',
-    description:
-      'Drive module-level decisions, guide junior consultants, manage client-facing responsibilities.',
+      'AI-led ways of working extend across teams and geographies, carried by people already trained in how to use and sustain them. The organisation runs on its own capability, while Axentia.AI supports the expansion.',
     image:
       'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&q=80',
-    icon: Crown,
+    icon: TrendingUp,
   },
 ]
 
@@ -298,7 +288,7 @@ export function Timeline() {
             className="text-sm font-semibold uppercase tracking-widest mb-3"
           >
             <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>
-              Student Path
+              How It Works
             </span>
           </motion.p>
           <motion.h2
@@ -306,19 +296,10 @@ export function Timeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg sm:text-2xl md:text-5xl font-bold text-slate-900 tracking-tight mb-5 whitespace-nowrap leading-snug"
+            className="text-lg sm:text-2xl md:text-5xl font-bold text-slate-900 tracking-tight mb-5 leading-snug text-left"
           >
-            How Your Consulting <span className="font-cursive italic text-brand-600 text-[1.1em]">Career Grows</span>
+            From first conversation to <span className="font-cursive italic text-brand-600 text-[1.1em]">operating at scale</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="text-lg text-slate-600"
-          >
-            Every consulting career starts with learning. But growth comes from doing real work, taking responsibility, and solving real problems. At Axentia.AI, your journey follows the same path most successful consultants take inside enterprise teams.
-          </motion.p>
         </div>
 
         {/* Timeline */}
