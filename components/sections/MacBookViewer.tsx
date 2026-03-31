@@ -95,11 +95,13 @@ function MacBookInner({ scrollRef }: { scrollRef: React.RefObject<number> }) {
                                 lidSize.y * 0.7
                             );
                             const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+                            /* Try front face first; if wrong face, flip to min.z */
                             screenMesh.position.set(
                                 lidCenter.x,
                                 lidCenter.y,
-                                lidBox.max.z + 0.02
+                                lidBox.min.z - 0.02
                             );
+                            screenMesh.rotation.y = Math.PI; /* face toward camera */
                             screenMesh.visible = false;
                             scene.add(screenMesh);
                             screenRef.current = screenMesh;
