@@ -99,7 +99,7 @@ export function WhyAxentiaAI() {
                             Trusted By
                         </span>
 
-                        <h2 className="text-4xl md:text-5xl xl:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-5">
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-5">
                             The AI-enforced{' '}
                             <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                                 legacy
