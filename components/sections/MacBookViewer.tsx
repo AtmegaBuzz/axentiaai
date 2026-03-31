@@ -1,8 +1,8 @@
 'use client';
 
 import { Suspense, useRef, useEffect, useMemo, useState, Component, ReactNode } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, Center, OrbitControls } from '@react-three/drei';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 
 /* ── SAP/AI dashboard canvas texture ── */
@@ -24,33 +24,42 @@ function buildScreenTexture(): THREE.CanvasTexture {
     c.fillStyle = '#0a0818'; c.fillRect(0, 0, W, H);
     c.fillStyle = '#0f0d20'; c.fillRect(0, 0, W, 54);
     ['#ef4444', '#f59e0b', '#22c55e'].forEach((col, i) => {
-        c.beginPath(); c.arc(22 + i * 22, 27, 6, 0, Math.PI * 2); c.fillStyle = col; c.fill();
+        c.beginPath(); c.arc(22 + i * 22, 27, 6, 0, Math.PI * 2);
+        c.fillStyle = col; c.fill();
     });
     c.fillStyle = '#6366f1'; c.font = 'bold 15px monospace';
     c.fillText('SAP AI  ·  DASHBOARD', 110, 33);
-    c.beginPath(); c.arc(W - 36, 27, 5, 0, Math.PI * 2); c.fillStyle = '#22c55e'; c.fill();
-    c.fillStyle = '#64748b'; c.font = '13px monospace'; c.fillText('Live', W - 26, 32);
+    c.beginPath(); c.arc(W - 36, 27, 5, 0, Math.PI * 2);
+    c.fillStyle = '#22c55e'; c.fill();
+    c.fillStyle = '#64748b'; c.font = '13px monospace';
+    c.fillText('Live', W - 26, 32);
 
     [
-        { label: 'Forecasts', value: '98.2%', color: '#818cf8' },
-        { label: 'Invoices', value: '1,240', color: '#a855f7' },
-        { label: 'Uptime', value: '99.9%', color: '#10b981' },
-        { label: 'AI Score', value: '94/100', color: '#F7C87A' },
+        { label: 'Forecasts', value: '98.2%',  color: '#818cf8' },
+        { label: 'Invoices',  value: '1,240',  color: '#a855f7' },
+        { label: 'Uptime',    value: '99.9%',  color: '#10b981' },
+        { label: 'AI Score',  value: '94/100', color: '#F7C87A' },
     ].forEach((m, i) => {
         const mx = 30 + i * 247, my = 72;
-        c.fillStyle = 'rgba(255,255,255,0.04)'; c.strokeStyle = 'rgba(255,255,255,0.07)'; c.lineWidth = 1;
+        c.fillStyle = 'rgba(255,255,255,0.04)';
+        c.strokeStyle = 'rgba(255,255,255,0.07)';
+        c.lineWidth = 1;
         rr(mx, my, 222, 90, 10); c.fill(); c.stroke();
-        c.fillStyle = m.color; c.font = 'bold 28px monospace'; c.fillText(m.value, mx + 14, my + 42);
-        c.fillStyle = '#475569'; c.font = '13px monospace'; c.fillText(m.label, mx + 14, my + 68);
+        c.fillStyle = m.color; c.font = 'bold 28px monospace';
+        c.fillText(m.value, mx + 14, my + 42);
+        c.fillStyle = '#475569'; c.font = '13px monospace';
+        c.fillText(m.label, mx + 14, my + 68);
     });
 
     const bars = [55, 38, 72, 48, 84, 60, 76, 52, 88, 66, 74, 92];
-    c.fillStyle = '#334155'; c.font = '12px monospace'; c.fillText('Monthly AI Predictions', 30, 208);
+    c.fillStyle = '#334155'; c.font = '12px monospace';
+    c.fillText('Monthly AI Predictions', 30, 208);
     bars.forEach((h, i) => {
         const bh = (h / 100) * 160, bx = 30 + i * 80;
+        const isLast = i === bars.length - 1;
         const g = c.createLinearGradient(0, 220 + 160 - bh, 0, 380);
-        g.addColorStop(0, i === bars.length - 1 ? '#8A29AC' : 'rgba(138,41,172,0.28)');
-        g.addColorStop(1, i === bars.length - 1 ? '#C010DA' : 'rgba(138,41,172,0.15)');
+        g.addColorStop(0, isLast ? '#8A29AC' : 'rgba(138,41,172,0.28)');
+        g.addColorStop(1, isLast ? '#C010DA' : 'rgba(138,41,172,0.10)');
         c.fillStyle = g; rr(bx, 220 + 160 - bh, 60, bh, 5); c.fill();
     });
 
@@ -58,77 +67,94 @@ function buildScreenTexture(): THREE.CanvasTexture {
     ['S/4HANA', 'BTP', 'Joule', 'SuccessFactors', 'Analytics Cloud'].forEach(tag => {
         c.font = 'bold 12px monospace';
         const tw = c.measureText(tag).width + 24;
-        c.fillStyle = 'rgba(99,102,241,0.14)'; c.strokeStyle = 'rgba(99,102,241,0.28)'; c.lineWidth = 1;
+        c.fillStyle = 'rgba(99,102,241,0.14)';
+        c.strokeStyle = 'rgba(99,102,241,0.28)';
+        c.lineWidth = 1;
         rr(tx, 418, tw, 28, 6); c.fill(); c.stroke();
-        c.fillStyle = '#818cf8'; c.fillText(tag, tx + 12, 437); tx += tw + 10;
+        c.fillStyle = '#818cf8'; c.fillText(tag, tx + 12, 437);
+        tx += tw + 10;
     });
 
-    c.fillStyle = 'rgba(138,41,172,0.6)'; c.font = 'bold 18px monospace'; c.fillText('Axentia.AI', 30, 530);
-    c.fillStyle = '#334155'; c.font = '13px monospace'; c.fillText('Enterprise AI + SAP Intelligence Platform', 150, 530);
+    c.fillStyle = 'rgba(138,41,172,0.6)'; c.font = 'bold 18px monospace';
+    c.fillText('Axentia.AI', 30, 530);
+    c.fillStyle = '#334155'; c.font = '13px monospace';
+    c.fillText('Enterprise AI + SAP Intelligence Platform', 150, 530);
 
     return new THREE.CanvasTexture(cvs);
 }
 
-/* ── 3D scene ── */
+/* ── 3D MacBook model ── */
 function MacBookModel({ isInViewRef }: { isInViewRef: React.MutableRefObject<boolean> }) {
-    const { scene } = useGLTF('/3dmodels/macbook.glb');
+    // Use raw useLoader instead of drei's useGLTF — more Turbopack-compatible
+    const gltf = useLoader(GLTFLoader, '/3dmodels/macbook.glb');
     const groupRef = useRef<THREE.Group>(null);
     const velRef = useRef(0.014);
 
     const screenTex = useMemo(() => buildScreenTexture(), []);
 
-    /* Apply screen dashboard to lid mesh (index 0, larger Y-extent) */
+    /* Auto-center: compute bounding box and offset group */
+    const [offset, setOffset] = useState<[number, number, number]>([0, 0, 0]);
+    useEffect(() => {
+        const box = new THREE.Box3().setFromObject(gltf.scene);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+        setOffset([-center.x, -center.y, -center.z]);
+    }, [gltf.scene]);
+
+    /* Apply screen dashboard texture to lid mesh (larger Y-extent = index 0) */
     useEffect(() => {
         const meshes: THREE.Mesh[] = [];
-        scene.traverse(obj => { if ((obj as THREE.Mesh).isMesh) meshes.push(obj as THREE.Mesh); });
+        gltf.scene.traverse(obj => {
+            if ((obj as THREE.Mesh).isMesh) meshes.push(obj as THREE.Mesh);
+        });
         if (meshes[0]) {
             meshes[0].material = new THREE.MeshStandardMaterial({
                 map: screenTex,
                 roughness: 0.2,
                 metalness: 0.0,
                 emissive: new THREE.Color('#0a0818'),
-                emissiveIntensity: 0.6,
+                emissiveIntensity: 0.5,
             });
         }
         return () => { screenTex.dispose(); };
-    }, [scene, screenTex]);
+    }, [gltf.scene, screenTex]);
 
+    /* Spin fast while scrolling in; slow to near-stop when section fully visible */
     useFrame(() => {
         if (!groupRef.current) return;
         const inView = isInViewRef.current;
-        velRef.current = THREE.MathUtils.lerp(velRef.current, inView ? 0.0008 : 0.014, inView ? 0.04 : 0.06);
+        velRef.current = THREE.MathUtils.lerp(
+            velRef.current,
+            inView ? 0.0008 : 0.014,
+            inView ? 0.04 : 0.06
+        );
         groupRef.current.rotation.y += velRef.current;
     });
 
     return (
         <group ref={groupRef}>
-            {/* Center auto-fits the model to origin regardless of its internal pivot */}
-            <Center>
-                <primitive object={scene} scale={0.065} />
-            </Center>
+            <group position={offset}>
+                <primitive object={gltf.scene} scale={0.065} />
+            </group>
         </group>
     );
 }
 
-/* ── Error boundary ── */
-class CanvasErrorBoundary extends Component<{ children: ReactNode }, { crashed: boolean }> {
-    state = { crashed: false };
-    static getDerivedStateFromError() { return { crashed: true }; }
+/* ── Simple error boundary ── */
+class ErrBoundary extends Component<{ children: ReactNode }, { err: boolean }> {
+    state = { err: false };
+    static getDerivedStateFromError() { return { err: true }; }
     render() {
-        if (this.state.crashed) return (
-            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12 }}>3D model unavailable</span>
-            </div>
-        );
+        if (this.state.err) return null;
         return this.props.children;
     }
 }
 
-/* ── Exported viewer ── */
+/* ── Exported canvas wrapper ── */
 export function MacBookViewer() {
-    const wrapRef = useRef<HTMLDivElement>(null);
+    const wrapRef  = useRef<HTMLDivElement>(null);
     const isInViewRef = useRef(false);
-    const [contextLost, setContextLost] = useState(false);
+    const [hidden, setHidden] = useState(false);
 
     useEffect(() => {
         const el = wrapRef.current;
@@ -141,37 +167,35 @@ export function MacBookViewer() {
         return () => obs.disconnect();
     }, []);
 
-    return (
-        <div ref={wrapRef} style={{ width: '100%', height: '480px' }}>
-            {!contextLost && (
-                <CanvasErrorBoundary>
-                    <Canvas
-                        frameloop="always"
-                        camera={{ position: [0, 0, 5], fov: 45 }}
-                        dpr={[1, 1.5]}
-                        gl={{ alpha: true, antialias: true, powerPreference: 'default', stencil: false }}
-                        style={{ background: 'transparent' }}
-                        onCreated={({ gl }) => {
-                            gl.domElement.addEventListener('webglcontextlost', (e) => {
-                                e.preventDefault();
-                                setContextLost(true);
-                                setTimeout(() => setContextLost(false), 2000);
-                            });
-                        }}
-                    >
-                        <ambientLight intensity={1.2} />
-                        <directionalLight position={[5, 8, 5]} intensity={2} />
-                        <directionalLight position={[-4, 2, -3]} intensity={0.8} />
-                        <pointLight position={[0, 4, 3]} intensity={1.5} color="#8A29AC" />
+    if (hidden) return <div style={{ height: 480 }} />;
 
-                        <Suspense fallback={null}>
-                            <MacBookModel isInViewRef={isInViewRef} />
-                        </Suspense>
-                    </Canvas>
-                </CanvasErrorBoundary>
-            )}
+    return (
+        <div ref={wrapRef} style={{ width: '100%', height: 480 }}>
+            <ErrBoundary>
+                <Canvas
+                    frameloop="always"
+                    camera={{ position: [0, 0, 5], fov: 45 }}
+                    dpr={[1, 1.5]}
+                    gl={{ alpha: true, antialias: true, powerPreference: 'default', stencil: false }}
+                    style={{ background: 'transparent' }}
+                    onCreated={({ gl }) => {
+                        gl.domElement.addEventListener('webglcontextlost', (e) => {
+                            e.preventDefault();
+                            setHidden(true);
+                            setTimeout(() => setHidden(false), 2500);
+                        });
+                    }}
+                >
+                    <ambientLight intensity={1.5} />
+                    <directionalLight position={[5, 8, 5]}  intensity={2.5} />
+                    <directionalLight position={[-4, 2, -3]} intensity={1.0} />
+                    <pointLight position={[0, 4, 3]} intensity={2.0} color="#8A29AC" />
+
+                    <Suspense fallback={null}>
+                        <MacBookModel isInViewRef={isInViewRef} />
+                    </Suspense>
+                </Canvas>
+            </ErrBoundary>
         </div>
     );
 }
-
-useGLTF.preload('/3dmodels/macbook.glb');
