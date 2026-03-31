@@ -68,7 +68,7 @@ export function Leaders() {
 
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-16 md:mb-20">
+                <div className="mb-16 md:mb-20">
                     <motion.p
                         initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +93,7 @@ export function Leaders() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.14 }}
-                        className="text-lg text-slate-500 max-w-xl mx-auto"
+                        className="text-lg text-slate-500 max-w-xl"
                     >
                         Industry veterans building the next generation for AI Era
                     </motion.p>

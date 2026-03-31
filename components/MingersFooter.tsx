@@ -1,96 +1,124 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { Facebook, Instagram, Linkedin, Youtube, MapPin, Phone, Mail } from 'lucide-react';
-import { SubscribeForm } from '@/components/SubscribeForm';
+import { Linkedin, Twitter, Phone, Mail, MapPin } from 'lucide-react';
 
-const footerLinks = {
-    Company: [
-        { name: 'About Us', href: '/about' },
-        { name: 'Our Mission', href: '/about#mission' },
-        { name: 'Mentors', href: '/faculty' },
-        { name: 'Enterprises', href: '/enterprises' },
-        { name: 'Community Forum', href: '/forum', target: '_blank' },
+const footerNav = {
+    ENTERPRISE: [
+        { name: 'AI Transformation', href: '/programs?tab=transformation' },
+        { name: 'AI Capability Development', href: '/programs?tab=capability' },
+        { name: 'SAP + AI Integration', href: '/#sap-ai' },
+        { name: 'Industry Use Cases', href: '/#industry-use-cases' },
+        { name: 'How It Works', href: '/#how-it-works' },
     ],
-    Programs: [
-        { name: 'DCAP, Career Accelerator', href: '/programs?tab=dcap' },
-        { name: 'EAP, Enterprise Accelerator', href: '/programs?tab=eap' },
-        { name: 'Online Foundation', href: '/programs?tab=online' },
-        { name: 'Compare Programs', href: '/programs?tab=compare' },
-        { name: 'Apply Now', href: '/programs#apply' },
+    ACADEMIES: [
+        { name: 'AI Foundation', href: '/programs?tab=academies' },
+        { name: 'SAP SuccessFactors', href: '/programs?tab=academies' },
+        { name: 'Retail & FMCG', href: '/programs?tab=academies' },
+        { name: 'Energy & Utilities', href: '/programs?tab=academies' },
+        { name: 'SAP Workforce', href: '/programs?tab=academies' },
     ],
-    'Student Life': [
-        { name: 'Student Life', href: '/student-life' },
-        { name: 'Learning Journey', href: '/student-life/learning-journey' },
-        { name: 'Culture & Activities', href: '/student-life/culture' },
-        { name: 'Alumni Network', href: '/student-life#alumni' },
+    COMPANY: [
+        { name: 'About Axentia', href: '/about' },
+        { name: 'Strategic Partners', href: '/about#partners' },
+        { name: 'Leadership', href: '/faculty' },
+        { name: 'Insights', href: '/forum' },
+        { name: 'Contact Us', href: 'mailto:info@axentiaai.com' },
     ],
 };
 
 const socials = [
-    { icon: Linkedin, href: 'https://www.linkedin.com/company/daksha-career-accelerator-edu/' },
-    { icon: Youtube, href: 'https://www.youtube.com/@DakshaCareerAccelerator' },
-    { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61583290772359' },
-    { icon: Instagram, href: 'https://www.instagram.com/daksha_edu/' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/daksha-career-accelerator-edu/', label: 'LinkedIn' },
+    { icon: Twitter, href: 'https://x.com/axentiaai', label: 'X' },
 ];
 
 export function MingersFooter() {
     return (
         <footer className="font-sans">
 
-            {/* ── TOP SECTION — light bg ── */}
-            <div className="relative overflow-hidden bg-slate-50">
-                {/* Subtle purple tint overlay */}
-                <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 60% 0%, rgba(106,27,154,0.06) 0%, transparent 70%)' }} />
-
-                {/* ── JOIN COMMUNITY BANNER ── */}
-                <div className="relative z-10 border-b border-slate-200">
-                    <div className="container mx-auto px-4 md:px-8 xl:px-12 py-6 md:py-20">
-                        <div className="max-w-4xl mx-auto text-center">
-                            <p className="text-xs font-bold uppercase tracking-[0.25em] text-brand-600 mb-1 md:mb-4">Community</p>
-                            <h2 className="text-lg md:text-5xl font-bold text-slate-900 mb-3 md:mb-5 leading-tight">
-                                Join the Axentia.AI{' '}
-                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-brand-600 to-accent-500 bg-clip-text text-transparent">
-                                    Community
-                                </span>
-                            </h2>
-                            <p className="hidden md:block text-base md:text-xl text-slate-500 mb-6 md:mb-10 leading-relaxed text-justify">
-                                Connect with SAP consultants, enterprise professionals, and students building careers for the AI era.
-                            </p>
-                            <div className="flex flex-wrap gap-2 md:gap-4 justify-center">
-                                <Link
-                                    href="/student-life"
-                                    className="inline-flex items-center gap-2 bg-brand-700 text-white font-bold px-4 md:px-8 py-2 md:py-4 rounded-full shadow-xl hover:-translate-y-1 transition-all duration-200 text-xs md:text-base"
-                                >
-                                    Join the Community
-                                    <span>&rarr;</span>
-                                </Link>
-                            </div>
-                            <p className="text-slate-400 text-[10px] md:text-sm mt-2 md:mt-8">
-                                200+ students &bull; 4+ countries &bull; Capability enhancement platform
-                            </p>
-                        </div>
+            {/* ── TOP: Community Banner — light bg ── */}
+            <div className="relative overflow-hidden bg-slate-50 border-b border-slate-200">
+                <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: 'radial-gradient(ellipse at 60% 0%, rgba(106,27,154,0.06) 0%, transparent 70%)' }}
+                />
+                <div className="container mx-auto px-4 md:px-8 xl:px-12 py-14 md:py-24 relative z-10">
+                    <div className="max-w-3xl">
+                        <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#8A29AC] mb-4">Community</p>
+                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-5 leading-tight tracking-tight">
+                            Join the Axentia.AI{' '}
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                                Community
+                            </span>
+                        </h2>
+                        <p className="text-base md:text-lg text-slate-500 mb-8 leading-relaxed max-w-xl mx-auto">
+                            Connect with SAP consultants, enterprise professionals, and students building careers for the AI era.
+                        </p>
+                        <Link
+                            href="/student-life"
+                            className="inline-flex items-center gap-2 bg-slate-900 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-sm"
+                        >
+                            Join the Community
+                            <span>&rarr;</span>
+                        </Link>
+                        <p className="text-slate-400 text-xs mt-6">
+                            200+ students &bull; 4+ countries &bull; Capability enhancement platform
+                        </p>
                     </div>
                 </div>
-
             </div>
 
-            {/* ── BOTTOM SECTION — dark purple bg ── */}
-            <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #2a0845 0%, #3b1068 40%, #4a1580 70%, #2a0845 100%)' }}>
-                {/* Ambient glow */}
-                <div className="absolute bottom-0 left-1/3 w-96 h-96 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(192,16,218,0.12) 0%, transparent 70%)' }} />
+            {/* ── BOTTOM: Dark footer ── */}
+            <div className="bg-[#111118] relative overflow-hidden">
+                {/* Subtle ambient glow */}
+                <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full pointer-events-none opacity-30" style={{ background: 'radial-gradient(circle, rgba(138,41,172,0.15) 0%, transparent 70%)' }} />
 
-                {/* ── LINKS + SUBSCRIBE ── */}
-                <div className="container mx-auto px-4 md:px-8 xl:px-12 py-4 md:py-16 relative z-10">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-8">
+                {/* ── Main columns ── */}
+                <div className="container mx-auto px-4 md:px-8 xl:px-12 pt-14 pb-10 md:pt-16 md:pb-12 relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
 
-                        {/* Link columns — hidden on mobile */}
-                        {Object.entries(footerLinks).map(([title, links]) => (
-                            <div key={title} className="hidden md:block">
-                                <h4 className="font-bold text-base md:text-lg mb-4 md:mb-6 text-white">{title}</h4>
-                                <ul className="space-y-3 md:space-y-4">
+                        {/* Col 1: Logo + description + socials */}
+                        <div className="md:col-span-1">
+                            {/* Logo lockup */}
+                            <Link href="/" className="inline-flex items-center gap-3 mb-5">
+                                <div className="w-9 h-9 rounded-xl bg-[#8A29AC] flex items-center justify-center shrink-0">
+                                    <span className="text-white font-extrabold text-base leading-none">A</span>
+                                </div>
+                                <span className="text-white font-bold text-lg tracking-tight">
+                                    Axentia<span className="text-[#8A29AC]">.AI</span>
+                                </span>
+                            </Link>
+
+                            <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-[220px]">
+                                Enterprise AI Transformation, Capability Development, and Talent Academies. In strategic partnership with Orane Consulting.
+                            </p>
+
+                            {/* Socials */}
+                            <div className="flex items-center gap-3">
+                                {socials.map(({ icon: Icon, href, label }) => (
+                                    <a
+                                        key={label}
+                                        href={href}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        aria-label={label}
+                                        className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-[#8A29AC]/20 hover:text-[#C078E8] hover:border-[#8A29AC]/30 transition-all duration-200"
+                                    >
+                                        <Icon className="w-4 h-4" />
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Cols 2-4: Nav columns */}
+                        {Object.entries(footerNav).map(([title, links]) => (
+                            <div key={title}>
+                                <h4 className="text-white font-bold text-xs uppercase tracking-[0.18em] mb-5">{title}</h4>
+                                <ul className="space-y-3.5">
                                     {links.map((link) => (
                                         <li key={link.name}>
-                                            <Link href={link.href} {...('target' in link ? { target: link.target } : {})} className="text-slate-400 hover:text-brand-400 font-medium transition-colors">
+                                            <Link
+                                                href={link.href}
+                                                className="text-slate-400 hover:text-white text-sm transition-colors duration-200 font-normal"
+                                            >
                                                 {link.name}
                                             </Link>
                                         </li>
@@ -98,78 +126,50 @@ export function MingersFooter() {
                                 </ul>
                             </div>
                         ))}
-
-                        {/* Subscribe column */}
-                        <div className="lg:col-span-2 p-4 md:p-8 rounded-2xl md:rounded-3xl border border-white/10 backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.04)' }}>
-                            <h4 className="font-bold text-base md:text-2xl mb-2 md:mb-3 text-white">Stay Updated</h4>
-                            <p className="hidden md:block text-slate-400 font-medium mb-4 md:mb-6 text-sm md:text-base">
-                                Get the latest on programs, events, and enterprise consulting insights.
-                            </p>
-                            <SubscribeForm />
-                        </div>
-
                     </div>
                 </div>
 
-                {/* ── CONTACT ROW ── */}
-                <div className="container mx-auto px-4 md:px-8 xl:px-12 pb-4 md:pb-8 relative z-10">
-                    <div className="border-t border-white/10 pt-4 md:pt-8">
-                        <div className="flex flex-wrap gap-3 md:gap-8 text-xs md:text-sm text-slate-400">
-                            <a href="tel:+9217665361" className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
-                                <Phone className="w-4 h-4 text-brand-500" /> +91-9217665361
-                            </a>
-                            <a href="mailto:info@axentiaai.com " className="flex items-center gap-2 hover:text-brand-400 transition-colors font-medium">
-                                <Mail className="w-4 h-4 text-brand-500" /> info@axentiaai.com
-                            </a>
-                            <div className="flex items-center gap-2 font-medium">
-                                <MapPin className="w-4 h-4 text-brand-500 shrink-0" />
-                                1st Floor, IDEMIA Building, Plot No - 1 - A, Sector 73, Noida, Uttar Pradesh 201316
-                            </div>
+                {/* ── Divider ── */}
+                <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
+                    <div className="h-px bg-white/8" />
+                </div>
+
+                {/* ── Contact row ── */}
+                <div className="container mx-auto px-4 md:px-8 xl:px-12 py-5 relative z-10">
+                    <div className="flex flex-wrap gap-x-8 gap-y-2 text-xs text-slate-500">
+                        <a href="tel:+9217665361" className="flex items-center gap-1.5 hover:text-slate-300 transition-colors font-medium">
+                            <Phone className="w-3.5 h-3.5 text-[#8A29AC]" /> +91-9217665361
+                        </a>
+                        <a href="mailto:info@axentiaai.com" className="flex items-center gap-1.5 hover:text-slate-300 transition-colors font-medium">
+                            <Mail className="w-3.5 h-3.5 text-[#8A29AC]" /> info@axentiaai.com
+                        </a>
+                        <div className="flex items-center gap-1.5 font-medium">
+                            <MapPin className="w-3.5 h-3.5 text-[#8A29AC] shrink-0" />
+                            1st Floor, IDEMIA Building, Plot No 1-A, Sector 73, Noida, UP 201316
                         </div>
                     </div>
                 </div>
 
-                {/* ── BOTTOM BAR ── */}
-                <div className="container mx-auto px-4 md:px-8 xl:px-12 pb-6 md:pb-10 relative z-10">
+                {/* ── Divider ── */}
+                <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
+                    <div className="h-px bg-white/8" />
+                </div>
 
-                    {/* Logo & Socials */}
-                    <div className="flex flex-col sm:flex-row justify-between items-center mb-4 md:mb-6 gap-4 md:gap-6">
-                        <Link href="/" className="flex items-center">
-                            <Image src="/brand/axentia-logo-white.png" alt="Axentia.AI" width={320} height={96} className="h-6 md:h-8 w-auto" />
-                        </Link>
-                        <div className="flex items-center gap-3 md:gap-4">
-                            {socials.map(({ icon: Icon, href }, i) => (
-                                <a
-                                    key={i}
-                                    href={href}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-brand-700/30 hover:text-brand-400 hover:border-brand-700/40 transition-colors"
-                                >
-                                    <Icon className="w-4 h-4 md:w-5 md:h-5" />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="h-px w-full bg-white/10 mb-3 md:mb-5" />
-
-                    {/* Legal & Copyright */}
-                    <div className="flex flex-col sm:flex-row justify-between items-center gap-2 md:gap-4 text-xs md:text-sm font-medium text-slate-500">
-                        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
-                            <Link href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
+                {/* ── Bottom bar ── */}
+                <div className="container mx-auto px-4 md:px-8 xl:px-12 py-5 relative z-10">
+                    <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-600">
+                        <div className="flex flex-wrap items-center gap-3">
+                            <Link href="/privacy" className="hover:text-slate-400 transition-colors">Privacy Policy</Link>
                             <span className="text-white/10">|</span>
-                            <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms & Conditions</Link>
+                            <Link href="/terms" className="hover:text-slate-400 transition-colors">Terms & Conditions</Link>
                             <span className="text-white/10">|</span>
-                            <Link href="/refund" className="hover:text-slate-300 transition-colors">Refund Policy</Link>
+                            <Link href="/refund" className="hover:text-slate-400 transition-colors">Refund Policy</Link>
                         </div>
-                        <p>
-                            &copy; 2026 Axentia.AI | All rights reserved.
-                        </p>
+                        <p>&copy; 2026 Axentia.AI &mdash; All rights reserved.</p>
                     </div>
-
                 </div>
             </div>
+
         </footer>
     );
 }

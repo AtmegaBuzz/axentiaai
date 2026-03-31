@@ -2,9 +2,11 @@
 
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/sections/Hero';
-import { WhyAxentiaAI, TrustedBy } from '@/components/sections/WhyMastersUnion';
+import { WhyAxentiaAI, StandardsSection } from '@/components/sections/WhyMastersUnion';
 
 /* Below-fold sections — lazy loaded so they don't block initial paint */
+const SAPAISection = dynamic(() => import('@/components/sections/SAPAISection').then(m => ({ default: m.SAPAISection })), { ssr: true });
+const IndustryUseCases = dynamic(() => import('@/components/sections/IndustryUseCases').then(m => ({ default: m.IndustryUseCases })), { ssr: true });
 const Programs = dynamic(() => import('@/components/sections/Programs').then(m => ({ default: m.Programs })), { ssr: true });
 const Timeline = dynamic(() => import('@/components/sections/Timeline').then(m => ({ default: m.Timeline })), { ssr: true });
 const Leaders = dynamic(() => import('@/components/sections/Leaders').then(m => ({ default: m.Leaders })), { ssr: true });
@@ -19,17 +21,21 @@ export function HomeClient() {
             <Hero />
             {/* Section 2: The Axentia Approach */}
             <WhyAxentiaAI />
-            {/* Section 3: Certificates */}
-            <TrustedBy />
-            {/* Section 4: Our Programmes */}
+            {/* Section 3: Standards / Certifications */}
+            <StandardsSection />
+            {/* Section 4: SAP + AI */}
+            <SAPAISection />
+            {/* Section 4: Industry Use Cases */}
+            <IndustryUseCases />
+            {/* Section 5: Our Programmes */}
             <Programs />
-            {/* Section 5: Student Path */}
+            {/* Section 6: Student Path */}
             <Timeline />
-            {/* Section 6: Backbone of Axentia.AI — Leaders */}
+            {/* Section 7: Leadership */}
             <Leaders />
-            {/* Section 7: Testimonials */}
+            {/* Section 8: Testimonials */}
             <Testimonials />
-            {/* Section 8: Community Video */}
+            {/* Section 9: Community Video */}
             <CommunityVideo />
             {/* CTA */}
             <CTA />
