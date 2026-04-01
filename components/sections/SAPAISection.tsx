@@ -211,7 +211,7 @@ export function SAPAISection() {
                 {/* Section header — fades in then slides up */}
                 <motion.div
                     style={{ y: headerY, opacity: headerOpacity }}
-                    className="relative z-10 text-center pt-20 pb-4 px-8 shrink-0"
+                    className="relative z-10 text-center pt-20 pb-4 px-8 shrink-0 "
                 >
                     <span
                         className="inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest mb-4"
@@ -226,12 +226,16 @@ export function SAPAISection() {
                         {', '}
                         <span className="font-cursive italic text-brand-600">working within your business</span>
                     </h2>
+                          <h4 className="text-base md:text-lg sm:text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto">
+                      We bring AI into SAP environments so it becomes part of how work is done across teams — from planning and operations to people and finance.
+                    </h4>
                 </motion.div>
+               
 
                 {/* MacBook + floating cards around it */}
-                <div className="relative z-10 flex-1 flex items-center justify-center pb-8 min-h-0">
+                <div className="relative z-10 flex-1 flex items-center justify-center pb-8 min-h-0 mt-[7rem]">
                     {/* Positioning context — cards are absolute inside here */}
-                    <div className="relative" style={{ perspective: "1400px" }}>
+                    <div className="relative " style={{ perspective: "1400px" }}>
 
                         {/* ── MacBook ── */}
                         <motion.div style={{
@@ -294,13 +298,16 @@ export function SAPAISection() {
                     >
                         Integration at the core
                     </span>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-3">
                         <span className="bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent">
                             SAP + AI
                         </span>
                         {', '}
                         <span className="font-cursive italic text-brand-600">working within your business</span>
                     </h2>
+                    <p className="text-base text-slate-500 leading-relaxed max-w-xl mx-auto">
+                        We bring AI into SAP environments so it becomes part of how work is done across teams — from planning and operations to people and finance.
+                    </p>
                 </div>
 
                 <div className="flex flex-col gap-6">
