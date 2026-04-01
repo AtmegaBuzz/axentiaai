@@ -14,8 +14,6 @@ const WhyEnterprisesChoose  = dynamic(() => import('@/components/sections/WhyEnt
 const Leaders         = dynamic(() => import('@/components/sections/Leaders').then(m => ({ default: m.Leaders })), { ssr: true });
 const Testimonials    = dynamic(() => import('@/components/sections/Testimonials'), { ssr: true });
 const WhereWeFit      = dynamic(() => import('@/components/sections/WhereWeFit').then(m => ({ default: m.WhereWeFit })), { ssr: true });
-const AudienceSection = dynamic(() => import('@/components/sections/IndividualPaths').then(m => ({ default: m.AudienceSection })), { ssr: true });
-const StartNowSection = dynamic(() => import('@/components/sections/IndividualPaths').then(m => ({ default: m.StartNowSection })), { ssr: true });
 const CTA             = dynamic(() => import('@/components/sections/CTA').then(m => ({ default: m.CTA })), { ssr: true });
 
 export function HomeClient() {
@@ -43,10 +41,6 @@ export function HomeClient() {
             <Testimonials />
             {/* Section 11: Where Axentia.AI fits */}
             <WhereWeFit />
-            {/* Section 12: Individual Paths — Students & Professionals */}
-            <AudienceSection />
-            {/* Section 13: Start Now — 3-step CTA cards */}
-            <StartNowSection />
             {/* CTA */}
             <CTA />
         </main>

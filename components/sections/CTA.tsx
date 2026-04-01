@@ -43,19 +43,24 @@ export function CTA() {
                             Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia.AI is the right fit, and if it&apos;s not, we&apos;ll say that too.
                         </p>
 
-                        <div className="flex flex-wrap items-center gap-3 md:gap-5">
+                        <div className="flex flex-wrap items-center gap-3">
                             <Link
-                                href="#"
-                                className="bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-6 rounded-full hover:bg-brand-50 transition-colors text-sm"
+                                href="/programs#apply"
+                                className="bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 rounded-full hover:bg-brand-50 transition-colors text-sm"
                             >
-                                Schedule a consultation
+                                Book AI Discovery Workshop
                             </Link>
                             <Link
-                                href="/programs"
-                                className="text-white font-semibold flex items-center gap-2 hover:text-brand-100 transition-colors group text-sm"
+                                href="/programs?tab=transformation"
+                                className="bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 rounded-full hover:bg-white/25 transition-colors text-sm"
                             >
-                                Explore Programs
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                Launch Your First AI Pilot
+                            </Link>
+                            <Link
+                                href="/programs?tab=academies"
+                                className="bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 rounded-full hover:bg-white/25 transition-colors text-sm"
+                            >
+                                Join a Talent Academy
                             </Link>
                         </div>
                     </div>

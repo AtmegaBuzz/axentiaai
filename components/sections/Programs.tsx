@@ -153,15 +153,10 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
 
             {/* Content */}
             <div className="flex flex-col flex-grow p-6">
-                {/* Heading */}
-                <h3 className="text-2xl font-bold text-slate-900 leading-tight mb-2 text-left">
+                <h3 className="text-xl font-bold text-slate-900 leading-tight mb-2 text-left">
                     {prog.title} {prog.titleAccent}
                 </h3>
-
-                {/* Description */}
                 <p className="text-sm text-slate-500 leading-relaxed mb-6">{prog.description}</p>
-
-                {/* Info grid */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
                     {prog.info.map(({ label, value, Icon }) => (
                         <div key={label} className="flex items-start gap-3">
@@ -175,8 +170,6 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
                         </div>
                     ))}
                 </div>
-
-                {/* CTA */}
                 <Link
                     href={`/programs?tab=${prog.id}`}
                     className="mt-auto inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 rounded-full w-fit transition-colors duration-200"
@@ -208,7 +201,7 @@ export function Programs() {
     }, []);
 
     return (
-        <section id="programs" className="relative py-16 md:py-24 overflow-hidden">
+        <section id="programs" className="relative py-10 md:py-14 overflow-hidden">
             {/* Background image */}
             <div className="absolute inset-0 z-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -222,7 +215,7 @@ export function Programs() {
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                     <div>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -302,7 +295,7 @@ export function Programs() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
-                    className="text-center mt-12"
+                    className="text-center mt-8"
                 >
                     <Link
                         href="/programs"

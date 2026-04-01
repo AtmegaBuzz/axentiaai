@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 
@@ -91,19 +91,31 @@ export function IndustryUseCases() {
     const sliderRef = useRef<HTMLDivElement>(null);
     const wheelAccum = useRef(0);
 
-    const prev = () => setCurrent(i => Math.max(0, i - 1));
-    const next = () => setCurrent(i => Math.min(maxIdx, i + 1));
+    const userInteracted = useRef(false);
+
+    const prev = () => { userInteracted.current = true; setCurrent(i => Math.max(0, i - 1)); };
+    const next = () => { userInteracted.current = true; setCurrent(i => Math.min(maxIdx, i + 1)); };
+
+    /* Auto-scroll every 3s, loops back to start, pauses on user interaction */
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (userInteracted.current) return;
+            setCurrent(i => (i >= maxIdx ? 0 : i + 1));
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [maxIdx]);
 
     /* Horizontal scroll / shift+scroll / trackpad swipe */
     const onWheel = useCallback((e: React.WheelEvent) => {
         const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
         if (dx === 0) return;
         e.preventDefault();
+        userInteracted.current = true;
         wheelAccum.current += dx;
         const threshold = 80;
-        if (wheelAccum.current > threshold) { next(); wheelAccum.current = 0; }
-        else if (wheelAccum.current < -threshold) { prev(); wheelAccum.current = 0; }
-    }, []);
+        if (wheelAccum.current > threshold) { setCurrent(i => Math.min(maxIdx, i + 1)); wheelAccum.current = 0; }
+        else if (wheelAccum.current < -threshold) { setCurrent(i => Math.max(0, i - 1)); wheelAccum.current = 0; }
+    }, [maxIdx]);
 
     return (
         <section className="bg-white overflow-hidden">

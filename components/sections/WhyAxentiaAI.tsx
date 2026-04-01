@@ -87,61 +87,47 @@ export function WhyAxentiaAI() {
             )}
 
             {/* ── Content ── */}
-            <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10 pt-14 md:pt-20 pb-32 md:pb-44">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 py-16 md:py-24">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
 
-                    {/* Left: badge + heading + glass cards */}
-                    <div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 24 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ type: 'spring', stiffness: 90, damping: 20 }}
+                    {/* Left: text content */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 90, damping: 20 }}
+                    >
+                        <span className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-[#8A29AC]/25 bg-[#8A29AC]/8 text-[#8A29AC] text-[10px] font-bold uppercase tracking-widest mb-5">
+                            Trusted By
+                        </span>
+                        <h2
+                            className="font-black text-slate-900 tracking-tight leading-[1.1] mb-4"
+                            style={{ fontSize: 'clamp(1.4rem, 3vw, 2.8rem)' }}
                         >
-                            <span className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-[#8A29AC]/25 bg-[#8A29AC]/8 text-[#8A29AC] text-[10px] font-bold uppercase tracking-widest mb-5">
-                                Trusted By
-                            </span>
-                            <h2
-                                className="font-black text-slate-900 tracking-tight leading-[1.08] mb-4"
-                                style={{ fontSize: 'clamp(1.6rem, 3vw, 2.5rem)' }}
-                            >
-                                The AI-enforced{' '}
-                                <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                    legacy
-                                </span>{' '}
-                                of Orane.
-                            </h2>
-                            <p className="text-sm text-slate-500 leading-relaxed mb-5 pl-4 border-l-2 border-[#8A29AC]/30 max-w-md">
-                                Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
-                            </p>
-                        </motion.div>
+                            The AI-enforced legacy of<br />
+                            <span className="text-[#00A3E5]">Orane Consulting</span>
+                        </h2>
+                        <p className="text-sm text-slate-600 leading-relaxed mb-8 max-w-lg">
+                            Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
+                        </p>
 
-                        {/* Transparent glass cards */}
-                        <div className="grid grid-cols-2 gap-3">
+                        {/* Stats row */}
+                        <div className="flex items-baseline gap-10 mb-8">
                             {stats.map((stat, i) => (
-                                <motion.div
-                                    key={stat.label}
-                                    initial={{ opacity: 0, y: 16, scale: 0.95 }}
-                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.15 + i * 0.1 }}
-                                    whileHover={{ y: -3, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
-                                    className="bg-white/25 backdrop-blur-xl border border-white/40 rounded-none p-4 shadow-[0_4px_20px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.5)] hover:bg-white/35 transition-all duration-300"
-                                >
+                                <div key={stat.label}>
                                     <AnimatedCounter
                                         end={stat.end}
                                         suffix={stat.suffix}
                                         duration={1600}
-                                        className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight tabular-nums"
+                                        className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight tabular-nums"
                                     />
                                     <p className="text-xs font-semibold text-slate-700 mt-1">{stat.label}</p>
-                                    <p className="text-[10px] text-slate-400 mt-0.5">{stat.sub}</p>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
 
-                        {/* Certification badges */}
-                        <div className="flex flex-wrap items-start gap-4 md:gap-5 mt-6">
+                        {/* Certification badge cards */}
+                        <div className="flex flex-wrap items-start gap-3 pt-6 border-t border-slate-200/60">
                             {certifications.map((cert, i) => (
                                 <motion.div
                                     key={cert.name}
@@ -149,7 +135,7 @@ export function WhyAxentiaAI() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.08 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
-                                    className="relative flex flex-col items-center w-[80px] md:w-[95px]"
+                                    className="relative flex flex-col items-center w-[80px] md:w-[90px]"
                                 >
                                     <div
                                         className="w-full bg-white border border-slate-200 shadow-sm flex flex-col items-center px-2 pt-2.5 pb-5"
@@ -170,22 +156,20 @@ export function WhyAxentiaAI() {
                                 </motion.div>
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {/* Right: spinning Globe + region tags */}
+                    {/* Right: Globe + region tags */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
+                        initial={{ opacity: 0, scale: 0.92 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.2 }}
+                        transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.15 }}
                         className="flex flex-col items-center"
                     >
-                        <div className="relative h-[220px] md:h-[270px] lg:h-[290px] w-full">
+                        <div className="relative w-full aspect-square max-w-[520px]">
                             <Globe className="opacity-90" />
                         </div>
-
-                        {/* Region tags */}
-                        <div className="flex flex-wrap justify-center gap-3 mt-20">
+                        <div className="flex flex-wrap justify-center gap-2 mt-4">
                             {regionTags.map((name, i) => (
                                 <motion.span
                                     key={name}
@@ -193,7 +177,7 @@ export function WhyAxentiaAI() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.4 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
-                                    className="bg-white/25 backdrop-blur-sm text-xs font-bold text-slate-600 px-4 py-2 rounded-md border border-white/40 shadow-sm"
+                                    className="bg-white/25 backdrop-blur-sm text-[11px] font-bold text-slate-600 px-3 py-1.5 rounded-md border border-white/40 shadow-sm"
                                 >
                                     {name}
                                 </motion.span>
