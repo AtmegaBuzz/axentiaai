@@ -34,39 +34,7 @@ export function Footer() {
     return (
         <footer className="font-sans">
 
-            {/* ── TOP: Community Banner — light bg ── */}
-            <div className="relative overflow-hidden bg-slate-50 border-b border-slate-200">
-                <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{ background: 'radial-gradient(ellipse at 60% 0%, rgba(106,27,154,0.06) 0%, transparent 70%)' }}
-                />
-                <div className="container mx-auto px-4 md:px-8 xl:px-12 py-14 md:py-24 relative z-10">
-                    <div className="max-w-3xl">
-                        <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#8A29AC] mb-4">Community</p>
-                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-5 leading-tight tracking-tight">
-                            Join the Axentia.AI{' '}
-                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                Community
-                            </span>
-                        </h2>
-                        <p className="text-base md:text-lg text-slate-500 mb-8 leading-relaxed max-w-xl mx-auto">
-                            Connect with SAP consultants, enterprise professionals, and students building careers for the AI era.
-                        </p>
-                        <Link
-                            href="/student-life"
-                            className="inline-flex items-center gap-2 bg-slate-900 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-sm"
-                        >
-                            Join the Community
-                            <span>&rarr;</span>
-                        </Link>
-                        <p className="text-slate-400 text-xs mt-6">
-                            200+ students &bull; 4+ countries &bull; Capability enhancement platform
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {/* ── BOTTOM: Dark footer ── */}
+            {/* ── Dark footer ── */}
             <div className="bg-[#111118] relative overflow-hidden">
                 {/* Subtle ambient glow */}
                 <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full pointer-events-none opacity-30" style={{ background: 'radial-gradient(circle, rgba(138,41,172,0.15) 0%, transparent 70%)' }} />
