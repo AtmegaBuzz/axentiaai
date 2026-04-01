@@ -116,6 +116,22 @@ const cards = [
     },
 ];
 
+function InfoCard({ card }: { card: typeof cards[number] }) {
+    return (
+        <div className="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 shadow-md">
+            <div className="flex items-center justify-between mb-3">
+                <span className="text-xs text-slate-500 font-semibold uppercase tracking-wide">{card.label}</span>
+                <div className="flex items-center gap-1.5">
+                    <span className={`w-2 h-2 rounded-full ${card.statusColor}`} />
+                    <span className="text-xs text-slate-500 font-medium">{card.status}</span>
+                </div>
+            </div>
+            <p className="text-base font-bold text-slate-900 mb-1.5 leading-snug">{card.title}</p>
+            <p className="text-sm text-slate-500 leading-relaxed">{card.desc}</p>
+        </div>
+    );
+}
+
 export function SAPAISection() {
     const [dashboardSrc, setDashboardSrc] = useState('');
     const trapRef = useRef<HTMLDivElement>(null);
@@ -127,34 +143,52 @@ export function SAPAISection() {
     });
 
     // ── ANIMATION ZONES ──
+    // Scroll budget is 400 vh — each phase gets generous room.
 
-// 0 → 0.1: Header fades in and settles
-const sectionOpacity = useTransform(scrollYProgress, [0, 0.05, 0.9, 1.0], [0, 1, 1, 0]);
-const headerY        = useTransform(scrollYProgress, [0, 0.1],             [20, 0]);
-const headerOpacity  = useTransform(scrollYProgress, [0, 0.05, 0.8, 0.9],  [0, 1, 1, 0]);
+    // Blobs only — never wraps the 3D content (opacity breaks preserve-3d)
+    const sectionOpacity = useTransform(scrollYProgress, [0, 0.04, 0.88, 0.97], [0, 1, 1, 0]);
 
-// 0 → 0.6: MacBook completes its 3 spins much faster now
-const rotateY = useTransform(scrollYProgress, [0, 0.6], [0, 360]);
+    // Header: fades in fast, holds, fades out near end
+    const headerOpacity = useTransform(scrollYProgress, [0, 0.05, 0.85, 0.95], [0, 1, 1, 0]);
+    const headerY       = useTransform(scrollYProgress, [0, 0.10], [28, 0]);
 
-// 0 → 0.8: Handle the drift and scale
-const laptopY     = useTransform(scrollYProgress, [0, 0.5, 0.8], [40, 0, -20]);
-const laptopScale = useTransform(scrollYProgress, [0, 0.1, 0.8, 0.95], [0.85, 1, 1, 0.95]);
+    // Y tilt: sweeps in from the left (-35°), slight overshoot to the right (+14°),
+    //         then settles at a shallow angle (+4°) so depth remains visible.
+    const tiltY = useTransform(
+        scrollYProgress,
+        [0,    0.12,  0.32,  0.55,  0.85],
+        [-35,  -20,   14,    4,     4],
+    );
 
-// 0.4 → 0.7: Dashboard reveals quickly after the spin starts slowing down
-const dashOpacity = useTransform(scrollYProgress, [0, 0.4, 0.7], [0.18, 0.18, 1]);
+    // X tilt: starts slightly tilted away (top-back), eases to a gentle forward lean.
+    const tiltX = useTransform(
+        scrollYProgress,
+        [0,   0.20,  0.50,  0.85],
+        [8,   4,     -5,    -3],
+    );
 
-// 0.2 → 0.5: Info cards slide in earlier
-const cardsOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
-const leftCardsX   = useTransform(scrollYProgress, [0.2, 0.5], [-48, 0]);
-const rightCardsX  = useTransform(scrollYProgress, [0.2, 0.5], [48, 0]);
+    // Laptop drifts up from below on entry, subtly recedes at exit
+    const laptopY     = useTransform(scrollYProgress, [0, 0.14, 0.86, 0.96], [64, 0, 0, -28]);
+    const laptopScale = useTransform(scrollYProgress, [0, 0.10, 0.86, 0.96], [0.86, 1, 1, 0.93]);
+
+    // Screen fades in as the laptop swings toward the viewer (screen always at least
+    // partly visible, so no need to wait for a full spin to complete)
+    const dashOpacity = useTransform(scrollYProgress, [0.08, 0.32], [0, 1]);
+
+    // Cards slide in after screen is fully revealed — staggered per card
+    const leftCardsX   = useTransform(scrollYProgress, [0.38, 0.62], [-52, 0]);
+    const rightCardsX  = useTransform(scrollYProgress, [0.38, 0.62], [52, 0]);
+    // Upper cards drift in from above, lower cards from below
+    const upperCardsY  = useTransform(scrollYProgress, [0.38, 0.60], [-18, 0]);
+    const lowerCardsY  = useTransform(scrollYProgress, [0.42, 0.64], [18, 0]);
 
     useEffect(() => {
         setDashboardSrc(buildDashboardSrc());
     }, []);
 
     return (
-        /* 500 vh scroll budget — desktop scroll trap lives here */
-        <div ref={trapRef} className="relative lg:h-[200vh]  bg-slate-50">
+        // 400 vh scroll budget — desktop scroll trap lives here
+        <div ref={trapRef} className="relative lg:h-[400vh] bg-slate-50">
 
             {/* ══ DESKTOP sticky pane (hidden on mobile) ══ */}
             <section className="sticky top-0 h-screen w-full hidden lg:flex flex-col border-b border-slate-100 overflow-hidden">
@@ -194,67 +228,57 @@ const rightCardsX  = useTransform(scrollYProgress, [0.2, 0.5], [48, 0]);
                     </h2>
                 </motion.div>
 
-                {/* Three-column layout: left cards | MacBook | right cards */}
-                <div className="relative z-10 flex-1 flex items-center container mx-auto px-8 xl:px-12 pb-8 min-h-0">
-                    <div className="w-full grid grid-cols-12 gap-6 items-center">
+                {/* MacBook + floating cards around it */}
+                <div className="relative z-10 flex-1 flex items-center justify-center pb-8 min-h-0">
+                    {/* Positioning context — cards are absolute inside here */}
+                    <div className="relative" style={{ perspective: "1400px" }}>
 
-                        {/* Left cards */}
-                        <motion.div
-                            style={{ opacity: cardsOpacity, x: leftCardsX }}
-                            className="col-span-3 flex flex-col gap-5"
-                        >
-                            {cards.slice(0, 2).map((card) => (
-                                <div
-                                    key={card.title}
-                                    className="bg-white/90 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 shadow-sm"
-                                >
-                                    <div className="flex items-center justify-between mb-3">
-                                        <span className="text-xs text-slate-500 font-medium">{card.label}</span>
-                                        <div className="flex items-center gap-1.5">
-                                            <span className={`w-1.5 h-1.5 rounded-full ${card.statusColor}`} />
-                                            <span className="text-xs text-slate-500 font-medium">{card.status}</span>
-                                        </div>
-                                    </div>
-                                    <p className="text-base font-bold text-slate-900 mb-1 leading-snug">{card.title}</p>
-                                    <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
-                                </div>
-                            ))}
+                        {/* ── MacBook ── */}
+                        <motion.div style={{
+                            y: laptopY,
+                            scale: laptopScale,
+                            rotateY: tiltY,
+                            rotateX: tiltX,
+                            transformStyle: "preserve-3d",
+                        }}>
+                            <MacbookScroll
+                                src={dashboardSrc}
+                                showGradient={false}
+                                lidAlwaysOpen
+                                screenOpacity={dashOpacity}
+                            />
                         </motion.div>
 
-                        {/* Center — MacBook with Y-axis tumble, lid always open */}
-                        <div className="col-span-6 flex justify-center items-center">
-                            <motion.div style={{ y: laptopY, scale: laptopScale, transformStyle: "preserve-3d" }}>
-                                <MacbookScroll
-                                    src={dashboardSrc}
-                                    showGradient={false}
-                                    lidAlwaysOpen
-                                    externalRotateY={rotateY}
-                                    screenOpacity={dashOpacity}
-                                />
-                            </motion.div>
-                        </div>
-
-                        {/* Right cards */}
+                        {/* ── Upper-left card ── */}
                         <motion.div
-                            style={{ opacity: cardsOpacity, x: rightCardsX }}
-                            className="col-span-3 flex flex-col gap-5"
+                            style={{ x: leftCardsX, y: upperCardsY, top: '2rem', right: 'calc(100% + 1.25rem)' }}
+                            className="absolute z-20 w-64"
                         >
-                            {cards.slice(2, 4).map((card) => (
-                                <div
-                                    key={card.title}
-                                    className="bg-white/90 backdrop-blur-sm border border-slate-200 rounded-2xl p-5 shadow-sm"
-                                >
-                                    <div className="flex items-center justify-between mb-3">
-                                        <span className="text-xs text-slate-500 font-medium">{card.label}</span>
-                                        <div className="flex items-center gap-1.5">
-                                            <span className={`w-1.5 h-1.5 rounded-full ${card.statusColor}`} />
-                                            <span className="text-xs text-slate-500 font-medium">{card.status}</span>
-                                        </div>
-                                    </div>
-                                    <p className="text-base font-bold text-slate-900 mb-1 leading-snug">{card.title}</p>
-                                    <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
-                                </div>
-                            ))}
+                            <InfoCard card={cards[0]} />
+                        </motion.div>
+
+                        {/* ── Lower-left card ── */}
+                        <motion.div
+                            style={{ x: leftCardsX, y: lowerCardsY, bottom: '5rem', right: 'calc(100% + 1.25rem)' }}
+                            className="absolute z-20 w-64"
+                        >
+                            <InfoCard card={cards[1]} />
+                        </motion.div>
+
+                        {/* ── Upper-right card ── */}
+                        <motion.div
+                            style={{ x: rightCardsX, y: upperCardsY, top: '2rem', left: 'calc(100% + 1.25rem)' }}
+                            className="absolute z-20 w-64"
+                        >
+                            <InfoCard card={cards[2]} />
+                        </motion.div>
+
+                        {/* ── Lower-right card ── */}
+                        <motion.div
+                            style={{ x: rightCardsX, y: lowerCardsY, bottom: '5rem', left: 'calc(100% + 1.25rem)' }}
+                            className="absolute z-20 w-64"
+                        >
+                            <InfoCard card={cards[3]} />
                         </motion.div>
 
                     </div>
