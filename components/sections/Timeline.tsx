@@ -222,7 +222,7 @@ function TimelineItem({
   )
 }
 
-export function Timeline() {
+export function HowItWorks() {
   const containerRef = useRef<HTMLDivElement>(null)
   const dotEls = useRef<(HTMLDivElement | null)[]>([])
   const [dotOffsets, setDotOffsets] = useState<number[]>([])
