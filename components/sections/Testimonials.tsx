@@ -66,7 +66,7 @@ function TestimonialCard({
     const rangeStart = index / (total - 1);
     const rangeEnd = (index + 1) / (total - 1);
 
-    /* Card shrinks and dims as the next one slides in */
+    /* Card shrinks and dims as the next one slides in, then hides completely */
     const scale = useTransform(
         scrollYProgress,
         [rangeStart, rangeEnd],
@@ -75,8 +75,12 @@ function TestimonialCard({
 
     const opacity = useTransform(
         scrollYProgress,
-        [rangeStart, rangeEnd],
-        [1, isLast ? 1 : 0.45],
+        isLast
+            ? [rangeStart, rangeEnd]
+            : [rangeStart, rangeEnd - 0.01, rangeEnd],
+        isLast
+            ? [1, 1]
+            : [1, 0.45, 0],
     );
 
     return (
@@ -87,7 +91,7 @@ function TestimonialCard({
          */
         <div
             className="sticky top-0 h-screen flex justify-center overflow-hidden"
-            style={{ zIndex: index + 1, background: '#f0edf8', paddingTop: '3rem' }}
+            style={{ zIndex: index + 1, background: 'transparent', paddingTop: '3rem' }}
         >
             {/*
              * Inner card — 80% wide, white bg, sharp edges.
@@ -191,7 +195,7 @@ export default function Testimonials() {
     });
 
     return (
-        <section>
+        <section style={{ background: '#f0edf8' }}>
             <div ref={containerRef} style={{ height: `${total * 100}vh` }}>
                 {testimonials.map((t, i) => (
                     <TestimonialCard

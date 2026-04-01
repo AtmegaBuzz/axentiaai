@@ -87,7 +87,7 @@ export function WhyAxentiaAI() {
             )}
 
             {/* ── Content ── */}
-            <div className="mx-auto px-4 md:px-6 lg:px-10 xl:px-14 relative z-10 pt-14 md:pt-20 pb-32 md:pb-44">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10 pt-14 md:pt-20 pb-32 md:pb-44">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
                     {/* Left: badge + heading + glass cards */}
