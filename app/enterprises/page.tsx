@@ -7,6 +7,7 @@ import { Users, Briefcase, Building2, ArrowRight, CheckCircle2, Cpu, Layers } fr
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { WhyEnterprisesChoose } from '@/components/sections/WhyEnterprisesChoose';
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
@@ -129,6 +130,9 @@ export default function EnterprisesPage() {
                         </motion.div>
                     </div>
                 </section>
+
+                {/* Why Enterprises Choose Axentia.AI */}
+                <WhyEnterprisesChoose />
 
                 {/* Why Enterprises Work With Axentia.AI */}
                 <section className="py-24 bg-white border-b border-slate-200">

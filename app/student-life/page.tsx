@@ -5,7 +5,8 @@ import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { ArrowRight, Users, Award } from 'lucide-react';
 import Link from 'next/link';
 import Testimonials from '@/components/sections/Testimonials';
-import { Globe } from '@/components/ui/Globe';
+import dynamic from 'next/dynamic';
+const Globe = dynamic(() => import('@/components/ui/Globe').then(m => ({ default: m.Globe })), { ssr: false });
 
 function FadeIn({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   return (

@@ -47,7 +47,7 @@ export function CommunityVideo() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="flex flex-col items-center gap-4"
+                    className="flex flex-col items-start gap-4"
                 >
                     <p className="text-white/60 text-sm font-medium tracking-wide">
                         200+ students &bull; 4+ countries &bull; Capability enhancement platform

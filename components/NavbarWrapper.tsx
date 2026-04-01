@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { Navbar } from './Navbar';
-import { MingersFooter } from './MingersFooter';
+import { Footer } from './Footer';
 
 export function NavbarWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -12,7 +12,7 @@ export function NavbarWrapper({ children }: { children: React.ReactNode }) {
         <>
             {!isAdmin && <Navbar />}
             {children}
-            {!isAdmin && <MingersFooter />}
+            {!isAdmin && <Footer />}
         </>
     );
 }
