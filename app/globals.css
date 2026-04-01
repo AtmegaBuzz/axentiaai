@@ -35,7 +35,7 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 antialiased overflow-x-hidden text-justify;
+    @apply bg-slate-50 text-slate-900 antialiased overflow-x-hidden text-left;
   }
 }
 
@@ -66,6 +66,49 @@
 
 .animate-marquee-reverse {
   animation: marquee-reverse 30s linear infinite;
+}
+
+@keyframes spin-border {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: '<angle>';
+}
+
+@keyframes border-spin {
+  to { --border-angle: 360deg; }
+}
+
+.gradient-border-btn {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#6B1D8E, #6B1D8E) padding-box,
+    conic-gradient(
+      from var(--border-angle),
+      rgba(138, 41, 172, 0.48) 80%,
+      #C010DA 86%,
+      #E473BA 90%,
+      #C010DA 94%,
+      rgba(138, 41, 172, 0.48)
+    ) border-box;
+  animation: border-spin 4s linear infinite;
+}
+
+.gradient-border-btn:hover {
+  background:
+    linear-gradient(#3d0d5c, #3d0d5c) padding-box,
+    conic-gradient(
+      from var(--border-angle),
+      rgba(138, 41, 172, 0.48) 80%,
+      #C010DA 86%,
+      #E473BA 90%,
+      #C010DA 94%,
+      rgba(138, 41, 172, 0.48)
+    ) border-box;
 }
 
 @keyframes gradientPan {
