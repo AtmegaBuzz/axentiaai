@@ -283,11 +283,19 @@ export default function FloatingLines({
     }) => {
     if (cancelled || !containerRef.current) return;
 
+    // Test WebGL availability before proceeding
+    const testCanvas = document.createElement('canvas');
+    const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
+    if (!gl) return;
+
     const scene = new Scene();
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
 
-    const renderer = new WebGLRenderer({ antialias: true, alpha: true, premultipliedAlpha: false });
+    let renderer: InstanceType<typeof WebGLRenderer>;
+    try {
+      renderer = new WebGLRenderer({ antialias: true, alpha: true, premultipliedAlpha: false });
+    } catch { return; }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
@@ -338,10 +346,17 @@ export default function FloatingLines({
       });
     }
 
-    const material = new ShaderMaterial({ uniforms, vertexShader, fragmentShader });
-    const geometry = new PlaneGeometry(2, 2);
+    let material: InstanceType<typeof ShaderMaterial>;
+    let geometry: InstanceType<typeof PlaneGeometry>;
+    try {
+      material = new ShaderMaterial({ uniforms, vertexShader, fragmentShader });
+      geometry = new PlaneGeometry(2, 2);
+    } catch { renderer.dispose(); return; }
     const mesh = new Mesh(geometry, material);
     scene.add(mesh);
+
+    // Test render to catch shader compilation errors early
+    try { renderer.render(scene, camera); } catch { renderer.dispose(); geometry.dispose(); material.dispose(); return; }
 
     const startTime = performance.now();
 
@@ -452,7 +467,7 @@ export default function FloatingLines({
       }
     };
 
-    }); // end import('three')
+    }).catch(() => {}); // silently handle import/WebGL failures
 
     return () => {
       cancelled = true;

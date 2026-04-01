@@ -92,18 +92,36 @@ export function IndustryUseCases() {
     const wheelAccum = useRef(0);
 
     const userInteracted = useRef(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
 
     const prev = () => { userInteracted.current = true; setCurrent(i => Math.max(0, i - 1)); };
     const next = () => { userInteracted.current = true; setCurrent(i => Math.min(maxIdx, i + 1)); };
 
-    /* Auto-scroll every 3s, loops back to start, pauses on user interaction */
+    /* Detect when section enters viewport */
     useEffect(() => {
-        const interval = setInterval(() => {
-            if (userInteracted.current) return;
-            setCurrent(i => (i >= maxIdx ? 0 : i + 1));
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [maxIdx]);
+        const el = sectionRef.current;
+        if (!el) return;
+        const io = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+            { threshold: 0.3 }
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
+
+    /* Auto-scroll every 3s, only after section is visible + 2s delay */
+    useEffect(() => {
+        if (!isVisible) return;
+        const timeout = setTimeout(() => {
+            const interval = setInterval(() => {
+                if (userInteracted.current) return;
+                setCurrent(i => (i >= maxIdx ? 0 : i + 1));
+            }, 3000);
+            return () => clearInterval(interval);
+        }, 2000);
+        return () => clearTimeout(timeout);
+    }, [isVisible, maxIdx]);
 
     /* Horizontal scroll / shift+scroll / trackpad swipe */
     const onWheel = useCallback((e: React.WheelEvent) => {
@@ -118,7 +136,7 @@ export function IndustryUseCases() {
     }, [maxIdx]);
 
     return (
-        <section className="bg-white overflow-hidden">
+        <section ref={sectionRef} className="bg-white overflow-hidden">
             {/* ── Header ── */}
             <div className="container mx-auto px-4 md:px-8 xl:px-12 pt-20 md:pt-28 pb-12 md:pb-16">
                 <motion.div
