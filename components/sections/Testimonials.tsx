@@ -87,7 +87,7 @@ function TestimonialCard({
          */
         <div
             className="sticky top-0 h-screen flex justify-center overflow-hidden"
-            style={{ zIndex: index + 1, background: '#f0edf8', paddingTop: '2rem' }}
+            style={{ zIndex: index + 1, background: '#f0edf8', paddingTop: '3rem' }}
         >
             {/*
              * Inner card — 80% wide, white bg, sharp edges.
@@ -100,7 +100,7 @@ function TestimonialCard({
                     scale,
                     opacity,
                     transformOrigin: 'top center',
-                    height: 'calc(100vh - 2rem)',
+                    height: 'calc(100vh - 3rem)',
                 }}
             >
                 {/* ── top: counter + eyebrow ── */}
@@ -118,16 +118,16 @@ function TestimonialCard({
                     In session with
                 </p>
 
-                {/* ── Big name ── */}
+                {/* ── Big role ── */}
                 <h2
-                    className="font-black text-slate-900 tracking-tight leading-none text-center px-8"
-                    style={{ fontSize: 'clamp(2.5rem, 7vw, 7rem)' }}
+                    className="font-black text-slate-900 tracking-tight leading-none text-center px-8 uppercase"
+                    style={{ fontSize: 'clamp(1.8rem, 4.5vw, 4.5rem)' }}
                 >
-                    {t.name}
+                    {t.role}
                 </h2>
 
                 {/* ── content: text 30% | video 70% ── */}
-                <div className="flex-1 grid min-h-0" style={{ gridTemplateColumns: '30% 70%' }}>
+                <div className="grid min-h-0 mt-8" style={{ gridTemplateColumns: '30% 70%', flex: '1 1 0', maxHeight: 'calc(100% - 2rem)' }}>
 
                     {/* Left: tag + role + quote + button */}
                     <div className="flex flex-col px-10 pb-8 pt-4">
@@ -138,7 +138,7 @@ function TestimonialCard({
                             {t.company}
                         </span>
                         <p className="font-black text-slate-900 text-sm md:text-base uppercase leading-snug mb-4">
-                            {t.role}
+                            {t.name}
                         </p>
                         <p className="text-slate-500 text-sm leading-relaxed mb-6">
                             &ldquo;{t.quote}&rdquo;
@@ -155,15 +155,14 @@ function TestimonialCard({
                     </div>
 
                     {/* Right: large video — natural 16:9 aspect ratio */}
-                    <div className="relative h-full overflow-hidden bg-slate-900 flex items-center">
+                    <div className="relative h-full overflow-hidden flex items-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={`https://img.youtube.com/vi/${t.videoId}/maxresdefault.jpg`}
                             alt={`${t.name} video`}
-                            className="w-full h-auto object-contain"
+                            className="w-full h-full object-cover"
                             loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-black/20" />
                         {/* Square play button */}
                         <div className="absolute inset-0 flex items-center justify-center">
                             <div

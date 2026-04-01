@@ -228,35 +228,28 @@ export function SAPAISection() {
                         </p>
                     </motion.div>
 
-                    {/* Right: numbered features */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.12 }}
-                        className="flex flex-col"
-                    >
+                    {/* Right: big feature cards */}
+                    <div className="flex flex-col gap-5">
                         {[
-                            { n: '01', text: 'You learn by doing the real thing' },
-                            { n: '02', text: 'Inside live SAP environments' },
-                            { n: '03', text: 'Guided by certified practitioners' },
-                        ].map((item, i) => (
-                            <div
-                                key={item.n}
-                                className={`flex items-start gap-6 py-6 ${i < 2 ? 'border-b border-slate-200' : ''}`}
+                            'You learn by doing the real thing',
+                            'Inside live SAP environments',
+                            'Guided by certified practitioners',
+                        ].map((text, i) => (
+                            <motion.div
+                                key={text}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.1 + i * 0.08 }}
+                                whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
+                                className="bg-white border border-slate-200 rounded-2xl px-7 py-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(138,41,172,0.08)] hover:border-[#8A29AC]/20 transition-all duration-300"
                             >
-                                <span
-                                    className="text-4xl font-black leading-none shrink-0 select-none"
-                                    style={{ WebkitTextStroke: '1.5px #8A29AC', color: 'transparent' }}
-                                >
-                                    {item.n}
-                                </span>
-                                <p className="text-base font-semibold text-slate-700 leading-snug pt-2">
-                                    {item.text}
+                                <p className="text-lg font-bold text-slate-800 leading-snug">
+                                    {text}
                                 </p>
-                            </div>
+                            </motion.div>
                         ))}
-                    </motion.div>
+                    </div>
 
                 </div>
             </div>

@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/sections/Hero';
-import { WhyAxentiaAI, StandardsSection } from '@/components/sections/WhyAxentiaAI';
+import { WhyAxentiaAI } from '@/components/sections/WhyAxentiaAI';
 
 /* Below-fold sections — lazy loaded so they don't block initial paint */
 const SAPAISection    = dynamic(() => import('@/components/sections/SAPAISection').then(m => ({ default: m.SAPAISection })), { ssr: true });
@@ -25,8 +25,6 @@ export function HomeClient() {
             <Hero />
             {/* Section 2: The Axentia Approach */}
             <WhyAxentiaAI />
-            {/* Section 3: Standards / Certifications */}
-            <StandardsSection />
             {/* Section 4: HOW WE HELP YOU SUCCEED — Enterprise AI offerings */}
             <Offerings />
             {/* Section 5: SAP + AI */}
