@@ -24,47 +24,33 @@ export function Hero() {
 
             {/* Hero Content */}
             <div className="relative z-10 flex-1 flex items-end">
-                <div className="container mx-auto px-4 md:px-6 pt-32 pb-20 md:pb-28">
+                <div className="container mx-auto px-4 md:px-6 pt-32 pb-32 md:pb-40">
                     <div className="max-w-5xl">
                         <motion.h1
                             id="hero-heading"
                             initial={{ opacity: 0, y: 24 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-left"
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight"
                         >
-                            <div className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[80px] font-black leading-[0.9] tracking-tight">
-                                <span className="text-white">Ecosystem for</span>
-                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-accent-400 bg-clip-text text-transparent">AI Era</span>
-                            </div>
+                            <span className="text-white">Ecosystem for </span>
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-accent-400 bg-clip-text text-transparent">AI Era</span>
                         </motion.h1>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            className="mt-6 max-w-3xl"
-                        >
-                            <h2 className="text-xl sm:text-2xl md:text-3xl font-medium text-slate-100 leading-snug tracking-wide">
-                                AI that scales, because your enterprise is built for it.
-                            </h2>
-                        </motion.div>
 
                         <motion.p
                             initial={{ opacity: 0, y: 12 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="mt-4 text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed font-light"
+                            transition={{ duration: 0.6, delay: 0.12 }}
+                            className="mt-5 text-sm sm:text-base md:text-lg text-slate-300 max-w-xl leading-relaxed font-normal"
                         >
-                            An enterprise transformation platform that builds the talent to sustain growth, as per your enterprise needs.
+                            AI that scales, because your enterprise is built for it.
                         </motion.p>
 
-
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 16 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.25 }}
-                            className="flex flex-col sm:flex-row flex-wrap gap-4 mt-10"
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="flex flex-col sm:flex-row flex-wrap gap-3 mt-8"
                         >
                             <Link
                                 href="/programs#apply"

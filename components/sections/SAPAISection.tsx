@@ -194,65 +194,6 @@ export function SAPAISection() {
                 </div>
             </div>
 
-            {/* Certified Capability — editorial 2-col */}
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pb-20 md:pb-28 -mt-32">
-
-                {/* Divider label */}
-                <div className="flex items-center gap-4 mb-12 md:mb-16">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#8A29AC] shrink-0">
-                        Certified Capability
-                    </span>
-                    <div className="flex-1 h-px bg-[#8A29AC]/25" />
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-
-                    {/* Left: heading + description */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ type: 'spring', stiffness: 90, damping: 20 }}
-                    >
-                        <h3
-                            className="font-black text-slate-900 tracking-tight leading-[1.05] mb-6"
-                            style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}
-                        >
-                            Trained for{' '}
-                            <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                real outcomes
-                            </span>
-                        </h3>
-                        <p className="text-base md:text-lg text-slate-500 leading-relaxed pl-5 border-l-2 border-[#8A29AC]/30">
-                            Every academy is built around how decisions actually get made, how workflows actually run, and how delivery actually happens inside organisations.
-                        </p>
-                    </motion.div>
-
-                    {/* Right: big feature cards */}
-                    <div className="flex flex-col gap-5">
-                        {[
-                            'You learn by doing the real thing',
-                            'Inside live SAP environments',
-                            'Guided by certified practitioners',
-                        ].map((text, i) => (
-                            <motion.div
-                                key={text}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.1 + i * 0.08 }}
-                                whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
-                                className="bg-white border border-slate-200 rounded-2xl px-7 py-6 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(138,41,172,0.08)] hover:border-[#8A29AC]/20 transition-all duration-300"
-                            >
-                                <p className="text-lg font-bold text-slate-800 leading-snug">
-                                    {text}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                </div>
-            </div>
         </section>
     );
 }
