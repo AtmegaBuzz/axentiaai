@@ -9,10 +9,13 @@ const SAPAISection    = dynamic(() => import('@/components/sections/SAPAISection
 const IndustryUseCases = dynamic(() => import('@/components/sections/IndustryUseCases').then(m => ({ default: m.IndustryUseCases })), { ssr: true });
 const Offerings       = dynamic(() => import('@/components/sections/Offerings').then(m => ({ default: m.Offerings })), { ssr: true });
 const Programs        = dynamic(() => import('@/components/sections/Programs').then(m => ({ default: m.Programs })), { ssr: true });
-const Timeline        = dynamic(() => import('@/components/sections/Timeline').then(m => ({ default: m.Timeline })), { ssr: true });
+const HowItWorks            = dynamic(() => import('@/components/sections/Timeline').then(m => ({ default: m.HowItWorks })), { ssr: true });
+const WhyEnterprisesChoose  = dynamic(() => import('@/components/sections/WhyEnterprisesChoose').then(m => ({ default: m.WhyEnterprisesChoose })), { ssr: true });
 const Leaders         = dynamic(() => import('@/components/sections/Leaders').then(m => ({ default: m.Leaders })), { ssr: true });
 const Testimonials    = dynamic(() => import('@/components/sections/Testimonials'), { ssr: true });
-const CommunityVideo  = dynamic(() => import('@/components/sections/CommunityVideo').then(m => ({ default: m.CommunityVideo })), { ssr: true });
+const WhereWeFit      = dynamic(() => import('@/components/sections/WhereWeFit').then(m => ({ default: m.WhereWeFit })), { ssr: true });
+const AudienceSection = dynamic(() => import('@/components/sections/IndividualPaths').then(m => ({ default: m.AudienceSection })), { ssr: true });
+const StartNowSection = dynamic(() => import('@/components/sections/IndividualPaths').then(m => ({ default: m.StartNowSection })), { ssr: true });
 const CTA             = dynamic(() => import('@/components/sections/CTA').then(m => ({ default: m.CTA })), { ssr: true });
 
 export function HomeClient() {
@@ -30,16 +33,22 @@ export function HomeClient() {
             <SAPAISection />
             {/* Section 6: Our Programmes (DCAP / EAP / Online) */}
             <Programs />
-            {/* Section 7: Industry Use Cases */}
+            {/* Section 7: How It Works */}
+            <HowItWorks />
+            {/* Section 8: Industry Use Cases */}
             <IndustryUseCases />
-            {/* Section 8: Student Path */}
-            <Timeline />
+            {/* Section 9: Why Enterprises Choose Axentia.AI */}
+            <WhyEnterprisesChoose />
             {/* Section 9: Leadership */}
             <Leaders />
             {/* Section 10: Testimonials */}
             <Testimonials />
-            {/* Section 11: Community Video */}
-            <CommunityVideo />
+            {/* Section 11: Where Axentia.AI fits */}
+            <WhereWeFit />
+            {/* Section 12: Individual Paths — Students & Professionals */}
+            <AudienceSection />
+            {/* Section 13: Start Now — 3-step CTA cards */}
+            <StartNowSection />
             {/* CTA */}
             <CTA />
         </main>
