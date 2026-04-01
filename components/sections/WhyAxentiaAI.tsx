@@ -138,28 +138,32 @@ export function WhyAxentiaAI() {
                         <div className="flex-1 h-px bg-slate-200" />
                     </div>
                 </div>
-                {/* Logo row — full width */}
+                {/* Logo marquee — left to right */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.15 }}
-                    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 border-t border-slate-200"
+                    className="border-t border-slate-200 overflow-hidden relative"
                 >
-                    {partnerLogos.map((logo, i) => (
-                        <div
-                            key={logo.alt}
-                            className={`group flex items-center justify-center h-24 hover:bg-slate-50 transition-colors duration-200 ${i < partnerLogos.length - 1 ? 'border-r border-slate-200' : ''}`}
-                        >
-                            <Image
-                                src={logo.src}
-                                alt={logo.alt}
-                                width={logo.width}
-                                height={logo.height}
-                                className="max-h-8 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
-                            />
-                        </div>
-                    ))}
+                    <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+                    <div className="flex w-max animate-marquee-reverse will-change-transform">
+                        {[...partnerLogos, ...partnerLogos].map((logo, i) => (
+                            <div
+                                key={i}
+                                className="group flex items-center justify-center h-24 px-12 border-r border-slate-200 hover:bg-slate-50 transition-colors duration-200 shrink-0"
+                            >
+                                <Image
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    width={logo.width}
+                                    height={logo.height}
+                                    className="max-h-8 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </motion.div>
             </div>
 
