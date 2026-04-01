@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Hero } from '@/components/sections/Hero';
-import { WhyAxentiaAI } from '@/components/sections/WhyMastersUnion';
+import { WhyAxentiaAI } from '@/components/sections/WhyAxentiaAI';
 
 export function HeroSnapSection() {
     const [showOverlay, setShowOverlay] = useState(false);
