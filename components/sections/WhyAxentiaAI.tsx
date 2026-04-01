@@ -178,14 +178,14 @@ export function WhyAxentiaAI() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.2 }}
-                        className="flex flex-col"
+                        className="flex flex-col items-center"
                     >
-                        <div className="relative h-[220px] md:h-[270px] lg:h-[290px]">
+                        <div className="relative h-[220px] md:h-[270px] lg:h-[290px] w-full">
                             <Globe className="opacity-90" />
                         </div>
 
                         {/* Region tags */}
-                        <div className="flex flex-wrap justify-center gap-2 mt-16">
+                        <div className="flex flex-wrap justify-center gap-3 mt-20">
                             {regionTags.map((name, i) => (
                                 <motion.span
                                     key={name}
@@ -193,7 +193,7 @@ export function WhyAxentiaAI() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.4 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
-                                    className="bg-white/25 backdrop-blur-sm text-[10px] font-bold text-slate-600 px-2.5 py-1 rounded-md border border-white/40 shadow-sm"
+                                    className="bg-white/25 backdrop-blur-sm text-xs font-bold text-slate-600 px-4 py-2 rounded-md border border-white/40 shadow-sm"
                                 >
                                     {name}
                                 </motion.span>

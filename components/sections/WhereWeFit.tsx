@@ -14,8 +14,8 @@ const personas = [
             'Cuts manual load across functions',
             'Speeds up decision-making',
         ],
-        image: '/images/about-us-hero.jpg',
-        imageAlt: 'Technical team at work',
+        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop&q=80',
+        imageAlt: 'CTO reviewing enterprise systems',
     },
     {
         number: '02',
@@ -27,8 +27,8 @@ const personas = [
             'Upskilling tied to actual roles',
             'Capability built internally',
         ],
-        image: '/images/cta-woman.jpg',
-        imageAlt: 'HR leadership',
+        image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop&q=80',
+        imageAlt: 'HR leader in a meeting',
     },
     {
         number: '03',
@@ -40,8 +40,8 @@ const personas = [
             'Less friction in execution',
             'Clear movement in outcomes',
         ],
-        image: '/images/teamwork.png',
-        imageAlt: 'Business collaboration',
+        image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
+        imageAlt: 'Business leaders collaborating',
     },
     {
         number: '04',
@@ -53,8 +53,8 @@ const personas = [
             'Scales across teams',
             'Linked to business outcomes',
         ],
-        image: '/images/programs-bg.jpg',
-        imageAlt: 'Enterprise learning',
+        image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
+        imageAlt: 'Enterprise training session',
     },
 ];
 
@@ -75,7 +75,7 @@ export function WhereWeFit() {
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
 
                 {/* ── Header ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-end mb-16 md:mb-20">
+                <div className="mb-16 md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -93,10 +93,10 @@ export function WhereWeFit() {
                         </motion.span>
 
                         <h2
-                            className="font-black text-slate-900 tracking-tight leading-[0.95]"
-                            style={{ fontSize: 'clamp(2.8rem, 6vw, 5.5rem)' }}
+                            className="font-black text-slate-900 tracking-tight leading-[0.95] mb-4"
+                            style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
                         >
-                            Where Axentia.AI<br />
+                            Where Axentia.AI{' '}
                             <motion.span
                                 initial={{ opacity: 0, y: 16 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -111,17 +111,11 @@ export function WhereWeFit() {
                                 fits?
                             </motion.span>
                         </h2>
-                    </motion.div>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.18, ease: 'easeOut' }}
-                        className="text-slate-500 text-sm leading-relaxed max-w-xs lg:pb-3 lg:text-right"
-                    >
-                        For enterprises and individuals<br className="hidden lg:block" /> ready to scale with AI
-                    </motion.p>
+                        <p className="text-slate-400 text-sm leading-relaxed">
+                            For enterprises and individuals ready to scale with AI
+                        </p>
+                    </motion.div>
                 </div>
 
                 {/* ── 4-column card grid ── */}

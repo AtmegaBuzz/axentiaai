@@ -187,7 +187,7 @@ export function StartNowSection() {
             <div className="container mx-auto px-4 md:px-8 xl:px-12">
 
                 {/* Header */}
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-end mb-16 md:mb-20">
+                <div className="mb-16 md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -198,8 +198,8 @@ export function StartNowSection() {
                             Get Started
                         </span>
                         <h2
-                            className="font-black text-slate-900 tracking-tight leading-[0.95]"
-                            style={{ fontSize: 'clamp(2.8rem, 6vw, 5.5rem)' }}
+                            className="font-black text-slate-900 tracking-tight leading-[0.95] mb-4"
+                            style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
                         >
                             Start{' '}
                             <motion.span
@@ -216,18 +216,10 @@ export function StartNowSection() {
                                 Now
                             </motion.span>
                         </h2>
+                        <p className="text-slate-400 text-sm leading-relaxed">
+                            A simple way to begin — understand where this fits, see it in action, and take it forward at your pace.
+                        </p>
                     </motion.div>
-
-                    <motion.p
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.18, ease: 'easeOut' }}
-                        className="text-slate-500 text-sm leading-relaxed max-w-xs lg:pb-3 lg:text-right"
-                    >
-                        A simple way to begin — understand where this fits,
-                        see it in action, and take it forward at your pace.
-                    </motion.p>
                 </div>
 
                 {/* 3-step cards */}

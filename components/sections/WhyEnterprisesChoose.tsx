@@ -57,7 +57,7 @@ export function WhyEnterprisesChoose() {
                     transition={{ duration: 0.5, delay: 0.1 }}
                     className="border border-slate-800 rounded-2xl overflow-hidden"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-800">
+                    <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-800">
 
                         {/* Col 1: What sets this apart */}
                         <div className="px-8 lg:px-10 py-10">
@@ -98,20 +98,6 @@ export function WhyEnterprisesChoose() {
                             </ul>
                         </div>
 
-                        {/* Col 3: Backed by Orane */}
-                        <div className="px-8 lg:px-10 py-10 flex flex-col justify-between gap-8">
-                            <div>
-                                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#8A29AC] mb-6">
-                                    Backed by
-                                </p>
-                                <p className="text-2xl font-black text-slate-900 tracking-tight mb-1">Orane</p>
-                                <p className="text-slate-500 text-sm">SAP Gold Partner</p>
-                            </div>
-                            <div className="inline-flex items-center gap-2.5 border border-slate-800 rounded-lg px-4 py-2.5 w-fit">
-                                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
-                                <span className="text-slate-800 text-xs font-semibold">SAP Gold Partner · 16+ Years</span>
-                            </div>
-                        </div>
 
                     </div>
                 </motion.div>
