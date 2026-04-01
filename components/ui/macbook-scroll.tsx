@@ -61,10 +61,10 @@ export const MacbookScroll = ({
   const fixedZero = useMotionValue(0);
 
   // Internal scroll-driven transforms (only used when lidAlwaysOpen is false)
-  const _scaleX        = useTransform(scrollYProgress, [0, 0.3], [1.2, isMobile ? 1 : 1.5]);
-  const _scaleY        = useTransform(scrollYProgress, [0, 0.3], [0.6, isMobile ? 1 : 1.5]);
+const _scaleX    = useTransform(scrollYProgress, [0, 0.2], [1.2, isMobile ? 1 : 1.5]);
+const _scaleY    = useTransform(scrollYProgress, [0, 0.2], [0.6, isMobile ? 1 : 1.5]);
   const _translate     = useTransform(scrollYProgress, [0, 1],   [0, 1500]);
-  const _rotate        = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
+const _rotate    = useTransform(scrollYProgress, [0.05, 0.1, 0.2], [-28, -28, 0]);
   const _textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const _textOpacity   = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
@@ -79,9 +79,10 @@ export const MacbookScroll = ({
     <div
       ref={ref}
       className={cn(
-        "flex shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100",
+        "flex shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 perspective-distant sm:scale-50 md:scale-100",
         !lidAlwaysOpen && "min-h-[200vh] md:py-80",
       )}
+      style={{ transformStyle: "preserve-3d" }}
     >
       {/* Title — hidden when lid is always open (header lives in the parent section) */}
       {!lidAlwaysOpen && (
@@ -108,7 +109,12 @@ export const MacbookScroll = ({
       />
 
       {/* Base area */}
-      <div className="relative -z-10 h-[22rem] w-[32rem] overflow-hidden rounded-2xl bg-gray-200 dark:bg-[#272729]">
+      <div 
+      style={{
+    transformOrigin: "top",
+    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" // Heavy bottom shadow for depth
+  }}
+      className="relative -z-10 h-[22rem] w-[32rem] overflow-hidden rounded-2xl bg-gray-200 dark:bg-[#272729]">
         <div className="relative h-10 w-full">
           <div className="absolute inset-x-0 mx-auto h-4 w-[80%] bg-[#050505]" />
         </div>
@@ -167,7 +173,8 @@ export const Lid = ({
   screenOpacity?: MotionValue<number>;
 }) => {
   return (
-    <div className="relative [perspective:800px]">
+    <div className="relative [perspective:800px]"
+    style={{ transformStyle: "preserve-3d" }}>
       {/* Back of lid (visible when lid is angled closed) */}
       <div
         style={{
@@ -175,7 +182,7 @@ export const Lid = ({
           // transformOrigin: "bottom",
           // transformStyle: "preserve-3d",
         }}
-        className="relative h-[12rem] w-[32rem] rounded-2xl bg-[#010101] p-2"
+className="relative h-[12rem] w-[32rem] rounded-2xl bg-[#010101] p-2 shadow-2xl"
       >
 
       </div>
@@ -187,6 +194,7 @@ scaleX: scaleX,
     scaleY: scaleY,
     rotateX: rotate,
     translateY: translate,
+    translateZ: "2px", // Pull the screen forward toward the user
     transformStyle: "preserve-3d",
     transformOrigin: "bottom",
   }}
@@ -370,7 +378,7 @@ export const KBtn = ({
   return (
     <div
       className={cn(
-        "[transform:translateZ(0)] rounded-[4px] p-[0.5px] [will-change:transform]",
+        "[transform:translateZ(4px)] rounded-[4px] p-[0.5px]",
         backlit && "bg-white/[0.2] shadow-xl shadow-white",
       )}
     >

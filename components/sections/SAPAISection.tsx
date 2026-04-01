@@ -128,25 +128,25 @@ export function SAPAISection() {
 
     // ── ANIMATION ZONES ──
 
-    // 0 → 0.05   section fades in, header slides up
-    const sectionOpacity = useTransform(scrollYProgress, [0, 0.05, 0.92, 1.0], [0, 1, 1, 0]);
-    const headerY        = useTransform(scrollYProgress, [0, 0.1],             [20, 0]);
-    const headerOpacity  = useTransform(scrollYProgress, [0, 0.08, 0.88, 0.96], [0, 1, 1, 0]);
+// 0 → 0.1: Header fades in and settles
+const sectionOpacity = useTransform(scrollYProgress, [0, 0.05, 0.9, 1.0], [0, 1, 1, 0]);
+const headerY        = useTransform(scrollYProgress, [0, 0.1],             [20, 0]);
+const headerOpacity  = useTransform(scrollYProgress, [0, 0.05, 0.8, 0.9],  [0, 1, 1, 0]);
 
-    // 0 → 0.65   MacBook Y-axis rotation: 3 full spins (1080°)
-    const rotateY = useTransform(scrollYProgress, [0, 0.65], [0, 1080]);
+// 0 → 0.6: MacBook completes its 3 spins much faster now
+const rotateY = useTransform(scrollYProgress, [0, 0.6], [0, 360]);
 
-    // 0 → 0.85   MacBook gentle drift / scale entrance
-    const laptopY     = useTransform(scrollYProgress, [0, 0.55, 0.85], [40, 0, -20]);
-    const laptopScale = useTransform(scrollYProgress, [0, 0.1, 0.85, 0.95], [0.85, 1, 1, 0.95]);
+// 0 → 0.8: Handle the drift and scale
+const laptopY     = useTransform(scrollYProgress, [0, 0.5, 0.8], [40, 0, -20]);
+const laptopScale = useTransform(scrollYProgress, [0, 0.1, 0.8, 0.95], [0.85, 1, 1, 0.95]);
 
-    // Dashboard: faintly visible during spin (0 → 0.65), then fully reveals (0.65 → 0.82)
-    const dashOpacity = useTransform(scrollYProgress, [0, 0.65, 0.82], [0.18, 0.18, 1]);
+// 0.4 → 0.7: Dashboard reveals quickly after the spin starts slowing down
+const dashOpacity = useTransform(scrollYProgress, [0, 0.4, 0.7], [0.18, 0.18, 1]);
 
-    // 0.30 → 0.55  Info cards slide in from left / right (visible during spin)
-    const cardsOpacity = useTransform(scrollYProgress, [0.30, 0.55], [0, 1]);
-    const leftCardsX   = useTransform(scrollYProgress, [0.30, 0.55], [-48, 0]);
-    const rightCardsX  = useTransform(scrollYProgress, [0.30, 0.55], [48, 0]);
+// 0.2 → 0.5: Info cards slide in earlier
+const cardsOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
+const leftCardsX   = useTransform(scrollYProgress, [0.2, 0.5], [-48, 0]);
+const rightCardsX  = useTransform(scrollYProgress, [0.2, 0.5], [48, 0]);
 
     useEffect(() => {
         setDashboardSrc(buildDashboardSrc());
@@ -154,7 +154,7 @@ export function SAPAISection() {
 
     return (
         /* 500 vh scroll budget — desktop scroll trap lives here */
-        <div ref={trapRef} className="relative lg:h-[500vh]  bg-slate-50">
+        <div ref={trapRef} className="relative lg:h-[200vh]  bg-slate-50">
 
             {/* ══ DESKTOP sticky pane (hidden on mobile) ══ */}
             <section className="sticky top-0 h-screen w-full hidden lg:flex flex-col border-b border-slate-100 overflow-hidden">
@@ -195,10 +195,7 @@ export function SAPAISection() {
                 </motion.div>
 
                 {/* Three-column layout: left cards | MacBook | right cards */}
-                <motion.div
-                    style={{ opacity: sectionOpacity }}
-                    className="relative z-10 flex-1 flex items-center container mx-auto px-8 xl:px-12 pb-8 min-h-0"
-                >
+                <div className="relative z-10 flex-1 flex items-center container mx-auto px-8 xl:px-12 pb-8 min-h-0">
                     <div className="w-full grid grid-cols-12 gap-6 items-center">
 
                         {/* Left cards */}
@@ -226,7 +223,7 @@ export function SAPAISection() {
 
                         {/* Center — MacBook with Y-axis tumble, lid always open */}
                         <div className="col-span-6 flex justify-center items-center">
-                            <motion.div style={{ y: laptopY, scale: laptopScale }}>
+                            <motion.div style={{ y: laptopY, scale: laptopScale, transformStyle: "preserve-3d" }}>
                                 <MacbookScroll
                                     src={dashboardSrc}
                                     showGradient={false}
@@ -261,7 +258,7 @@ export function SAPAISection() {
                         </motion.div>
 
                     </div>
-                </motion.div>
+                </div>
             </section>
 
             {/* ══ MOBILE layout — static, no scroll trap ══ */}
