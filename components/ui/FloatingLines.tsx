@@ -280,7 +280,6 @@ export default function FloatingLines({
       ShaderMaterial,
       Vector3,
       Vector2,
-      Clock,
     }) => {
     if (cancelled || !containerRef.current) return;
 
@@ -344,7 +343,7 @@ export default function FloatingLines({
     const mesh = new Mesh(geometry, material);
     scene.add(mesh);
 
-    const clock = new Clock();
+    const startTime = performance.now();
 
     const setSize = () => {
       const el = container;
@@ -412,7 +411,7 @@ export default function FloatingLines({
 
     const renderLoop = () => {
       if (isVisible) {
-        (uniforms.iTime.value as number) = clock.getElapsedTime();
+        (uniforms.iTime.value as number) = (performance.now() - startTime) / 1000;
 
         if (interactive) {
           currentMouseRef.current.x += (targetMouseRef.current.x - currentMouseRef.current.x) * mouseDamping;

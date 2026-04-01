@@ -63,9 +63,11 @@ export function WhyAxentiaAI() {
     return (
         <section
             id="why-axentiaai"
-            className="relative overflow-hidden animate-gradient-loop"
+            className="relative overflow-hidden animate-gradient-loop -mt-[100vh] rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.15)]"
             style={{
                 backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 25%, #f1f5f9 50%, #fef8ec 75%, #f8fafc 100%)',
+                position: 'relative',
+                zIndex: 10,
             }}
         >
             {/* FloatingLines WebGL background — skipped on low-end devices */}

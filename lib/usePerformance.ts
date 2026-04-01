@@ -66,9 +66,13 @@ export function getPerformanceTier(): PerformanceInfo {
 }
 
 export function usePerformance(): PerformanceInfo {
-  const [info, setInfo] = useState<PerformanceInfo>(() => getPerformanceTier());
+  // Always start with 'high' to match server render and avoid hydration mismatch
+  const [info, setInfo] = useState<PerformanceInfo>({ tier: 'high', reducedMotion: false });
 
   useEffect(() => {
+    // Detect actual tier after hydration
+    setInfo(getPerformanceTier());
+
     // Listen for reduced-motion changes
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     const handler = () => {
