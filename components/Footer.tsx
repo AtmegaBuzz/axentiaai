@@ -118,24 +118,6 @@ export function Footer() {
                     </div>
                 </div>
 
-                {/* ── Divider ── */}
-                <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
-                    <div className="h-px bg-white/8" />
-                </div>
-
-                {/* ── Bottom bar ── */}
-                <div className="container mx-auto px-4 md:px-8 xl:px-12 py-5 relative z-10">
-                    <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-600">
-                        <div className="flex flex-wrap items-center gap-3">
-                            <Link href="/privacy" className="hover:text-slate-400 transition-colors">Privacy Policy</Link>
-                            <span className="text-white/10">|</span>
-                            <Link href="/terms" className="hover:text-slate-400 transition-colors">Terms & Conditions</Link>
-                            <span className="text-white/10">|</span>
-                            <Link href="/refund" className="hover:text-slate-400 transition-colors">Refund Policy</Link>
-                        </div>
-                        <p>&copy; 2026 Axentia.AI &mdash; All rights reserved.</p>
-                    </div>
-                </div>
             </div>
 
         </footer>

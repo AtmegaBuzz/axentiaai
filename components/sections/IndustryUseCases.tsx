@@ -108,65 +108,65 @@ export function IndustryUseCases() {
     return (
         <section className="bg-white overflow-hidden">
             {/* ── Header ── */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-20 md:pt-28 pb-12 md:pb-16 px-[8vw] md:px-[15vw]">
-                <div className="max-w-2xl">
-                    <motion.div
-                        initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="mb-4"
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 pt-20 md:pt-28 pb-12 md:pb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-4"
+                >
+                    <span
+                        className="inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest"
+                        style={{ background: '#F7C87A', color: '#232322' }}
                     >
-                        <span
-                            className="inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest"
-                            style={{ background: '#F7C87A', color: '#232322' }}
-                        >
-                            Industry Use Cases
-                        </span>
-                    </motion.div>
+                        Industry Use Cases
+                    </span>
+                </motion.div>
 
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.06 }}
-                        className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4"
-                    >
-                        Where AI creates{' '}
-                        <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                            measurable impact
-                        </span>{' '}
-                        inside your industry
-                    </motion.h2>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.06 }}
+                    className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-5"
+                >
+                    Where AI creates{' '}
+                    <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                        measurable impact
+                    </span>{' '}
+                    inside your industry
+                </motion.h2>
 
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                     <motion.p
                         initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-slate-500 text-base md:text-lg leading-relaxed"
+                        className="text-slate-500 text-base md:text-lg leading-relaxed max-w-2xl"
                     >
                         Every use case runs inside your existing SAP environment — shaping how work is carried out across operations, finance, supply chains, and workforce management.
                     </motion.p>
-                </div>
 
-                {/* Prev / Next */}
-                <div className="flex items-center gap-3 shrink-0">
-                    <button
-                        onClick={prev}
-                        disabled={current === 0}
-                        className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 text-sm font-semibold text-slate-700 hover:border-[#8A29AC] hover:text-[#8A29AC] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        Prev
-                    </button>
-                    <button
-                        onClick={next}
-                        disabled={current >= maxIdx}
-                        className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 text-sm font-semibold text-slate-700 hover:border-[#8A29AC] hover:text-[#8A29AC] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
-                    >
-                        Next
-                        <ArrowRight className="w-4 h-4" />
-                    </button>
+                    {/* Prev / Next */}
+                    <div className="flex items-center gap-3 shrink-0">
+                        <button
+                            onClick={prev}
+                            disabled={current === 0}
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 text-sm font-semibold text-slate-700 hover:border-[#8A29AC] hover:text-[#8A29AC] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+                        >
+                            <ArrowLeft className="w-4 h-4" />
+                            Prev
+                        </button>
+                        <button
+                            onClick={next}
+                            disabled={current >= maxIdx}
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 text-sm font-semibold text-slate-700 hover:border-[#8A29AC] hover:text-[#8A29AC] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+                        >
+                            Next
+                            <ArrowRight className="w-4 h-4" />
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -177,7 +177,7 @@ export function IndustryUseCases() {
                     className="flex gap-5"
                     animate={{ x: `calc(-${current} * (60vw + 20px) )` }}
                     transition={{ type: 'spring', stiffness: 260, damping: 30, mass: 0.9 }}
-                    style={{ paddingLeft: '15vw', paddingRight: '25vw' }}
+                    style={{ paddingLeft: 'max(1rem, calc((100vw - 80rem) / 2 + 3rem))', paddingRight: '10vw' }}
                 >
                     {useCases.map((uc, i) => (
                         <div

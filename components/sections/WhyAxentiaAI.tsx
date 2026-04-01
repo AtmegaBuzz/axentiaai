@@ -1,8 +1,13 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+import { usePerformance } from '@/lib/usePerformance';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+
+const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
+const Globe = dynamic(() => import('@/components/ui/Globe').then(m => ({ default: m.Globe })), { ssr: false });
 
 const partnerLogos = [
     { src: '/partners/orane-logo.png',     alt: 'Orane',        width: 120, height: 40 },
@@ -39,87 +44,159 @@ const certifications = [
     },
 ];
 
+const regionTags = ['India', 'Middle East', 'Africa', 'South East Asia'];
+
 export function TrustedBy() {
     return null;
 }
 
-
-
-
 /* ── main component ────────────────────────────────────────────────── */
 export function WhyAxentiaAI() {
+    const { tier } = usePerformance();
+    const isLowEnd = tier === 'low';
+
     const stats = [
-        { end: 50,  suffix: '+', label: 'Enterprises served globally' },
-        { end: 300, suffix: '+', label: 'Certified professionals' },
-        { end: 16,  suffix: '+', label: 'Years of delivery excellence' },
+        { end: 50,  suffix: '+', label: 'Enterprises served globally', sub: 'Across SAP, AI/ML & ERP verticals' },
+        { end: 300, suffix: '+', label: 'Certified professionals', sub: 'Trained & deployed worldwide' },
     ];
 
     return (
-        <section id="why-axentiaai" className="relative bg-white border-b border-slate-100 overflow-hidden">
+        <section
+            id="why-axentiaai"
+            className="relative overflow-hidden animate-gradient-loop"
+            style={{
+                backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 25%, #f1f5f9 50%, #fef8ec 75%, #f8fafc 100%)',
+            }}
+        >
+            {/* FloatingLines WebGL background — skipped on low-end devices */}
+            {!isLowEnd && (
+                <div className="absolute inset-0 z-0 opacity-60 overflow-hidden">
+                    <FloatingLines
+                        linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}
+                        enabledWaves={['top', 'middle', 'bottom']}
+                        lineCount={[4, 5, 3]}
+                        lineDistance={[4, 5, 4]}
+                        bendRadius={5}
+                        bendStrength={-0.5}
+                        interactive={true}
+                        parallax={true}
+                        parallaxStrength={0.15}
+                        animationSpeed={0.8}
+                    />
+                </div>
+            )}
 
-            {/* Ghosted decorative number */}
-            <div
-                className="pointer-events-none select-none absolute -top-4 -left-4 font-black leading-none text-slate-900 opacity-[0.03]"
-                style={{ fontSize: 'clamp(120px, 18vw, 260px)' }}
-                aria-hidden="true"
-            >
-                16+
-            </div>
+            {/* ── Content ── */}
+            <div className="mx-auto px-4 md:px-6 lg:px-10 xl:px-14 relative z-10 pt-14 md:pt-20 pb-32 md:pb-44">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-            {/* ── Top zone: editorial 2-col ── */}
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 pt-20 md:pt-28 pb-16 md:pb-20">
-                <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-24 items-start">
-
-                    {/* Left: badge + heading */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ type: 'spring', stiffness: 90, damping: 20 }}
-                    >
-                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#8A29AC]/25 bg-[#8A29AC]/8 text-[#8A29AC] text-xs font-bold uppercase tracking-widest mb-8">
-                            Trusted By
-                        </span>
-                        <h2
-                            className="font-black text-slate-900 tracking-tight leading-[1.05]"
-                            style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)' }}
+                    {/* Left: badge + heading + glass cards */}
+                    <div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                         >
-                            The AI-enforced{' '}
-                            <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                legacy
+                            <span className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-[#8A29AC]/25 bg-[#8A29AC]/8 text-[#8A29AC] text-[10px] font-bold uppercase tracking-widest mb-5">
+                                Trusted By
                             </span>
-                            <br />
-                            of Orane.
-                        </h2>
-                    </motion.div>
+                            <h2
+                                className="font-black text-slate-900 tracking-tight leading-[1.08] mb-4"
+                                style={{ fontSize: 'clamp(1.6rem, 3vw, 2.5rem)' }}
+                            >
+                                The AI-enforced{' '}
+                                <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                                    legacy
+                                </span>{' '}
+                                of Orane.
+                            </h2>
+                            <p className="text-sm text-slate-500 leading-relaxed mb-5 pl-4 border-l-2 border-[#8A29AC]/30 max-w-md">
+                                Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
+                            </p>
+                        </motion.div>
 
-                    {/* Right: description + stacked stats */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 24 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ type: 'spring', stiffness: 90, damping: 20, delay: 0.12 }}
-                        className="lg:pt-14"
-                    >
-                        <p className="text-base md:text-lg text-slate-500 leading-relaxed mb-10 pl-5 border-l-2 border-[#8A29AC]/30">
-                            Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
-                        </p>
-                        <div className="flex flex-col">
+                        {/* Transparent glass cards */}
+                        <div className="grid grid-cols-2 gap-3">
                             {stats.map((stat, i) => (
-                                <div
+                                <motion.div
                                     key={stat.label}
-                                    className={`flex items-baseline gap-5 py-5 ${i < stats.length - 1 ? 'border-b border-slate-100' : ''}`}
+                                    initial={{ opacity: 0, y: 16, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.15 + i * 0.1 }}
+                                    whileHover={{ y: -3, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
+                                    className="bg-white/25 backdrop-blur-xl border border-white/40 rounded-none p-4 shadow-[0_4px_20px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.5)] hover:bg-white/35 transition-all duration-300"
                                 >
                                     <AnimatedCounter
                                         end={stat.end}
                                         suffix={stat.suffix}
                                         duration={1600}
-                                        className="text-3xl font-black text-slate-900 tracking-tight tabular-nums w-20 shrink-0"
+                                        className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight tabular-nums"
                                     />
-                                    <span className="text-sm text-slate-500 leading-snug">
-                                        {stat.label}
-                                    </span>
-                                </div>
+                                    <p className="text-xs font-semibold text-slate-700 mt-1">{stat.label}</p>
+                                    <p className="text-[10px] text-slate-400 mt-0.5">{stat.sub}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Certification badges */}
+                        <div className="flex flex-wrap items-start gap-4 md:gap-5 mt-6">
+                            {certifications.map((cert, i) => (
+                                <motion.div
+                                    key={cert.name}
+                                    initial={{ opacity: 0, y: 12 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.08 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
+                                    className="relative flex flex-col items-center w-[80px] md:w-[95px]"
+                                >
+                                    <div
+                                        className="w-full bg-white border border-slate-200 shadow-sm flex flex-col items-center px-2 pt-2.5 pb-5"
+                                        style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)' }}
+                                    >
+                                        <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 text-center leading-tight">
+                                            {cert.name}
+                                        </span>
+                                        <Image
+                                            src={cert.file}
+                                            alt={cert.name}
+                                            width={44}
+                                            height={36}
+                                            className="h-7 md:h-8 w-auto object-contain"
+                                            unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
+                                        />
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right: spinning Globe + region tags */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.2 }}
+                        className="flex flex-col"
+                    >
+                        <div className="relative h-[220px] md:h-[270px] lg:h-[290px]">
+                            <Globe className="opacity-90" />
+                        </div>
+
+                        {/* Region tags */}
+                        <div className="flex flex-wrap justify-center gap-2 mt-16">
+                            {regionTags.map((name, i) => (
+                                <motion.span
+                                    key={name}
+                                    initial={{ opacity: 0, y: 8 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.4 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
+                                    className="bg-white/25 backdrop-blur-sm text-[10px] font-bold text-slate-600 px-2.5 py-1 rounded-md border border-white/40 shadow-sm"
+                                >
+                                    {name}
+                                </motion.span>
                             ))}
                         </div>
                     </motion.div>
@@ -127,45 +204,6 @@ export function WhyAxentiaAI() {
                 </div>
             </div>
 
-            {/* ── Bottom zone: full-bleed logo strip ── */}
-            <div className="border-t border-slate-200">
-                {/* Label row */}
-                <div className="container mx-auto px-4 md:px-8 xl:px-12">
-                    <div className="flex items-center gap-4 py-4">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 shrink-0">
-                            Partners &amp; Integrations
-                        </span>
-                        <div className="flex-1 h-px bg-slate-200" />
-                    </div>
-                </div>
-                {/* Logo marquee — left to right */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.15 }}
-                    className="border-t border-slate-200 overflow-hidden relative"
-                >
-                    <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-                    <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-                    <div className="flex w-max animate-marquee-reverse will-change-transform">
-                        {[...partnerLogos, ...partnerLogos].map((logo, i) => (
-                            <div
-                                key={i}
-                                className="group flex items-center justify-center h-24 px-12 border-r border-slate-200 hover:bg-slate-50 transition-colors duration-200 shrink-0"
-                            >
-                                <Image
-                                    src={logo.src}
-                                    alt={logo.alt}
-                                    width={logo.width}
-                                    height={logo.height}
-                                    className="max-h-8 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
-            </div>
 
         </section>
     );
@@ -173,69 +211,81 @@ export function WhyAxentiaAI() {
 
 export function StandardsSection() {
     return (
-        <section className="py-20 md:py-28 bg-white border-b border-slate-100">
+        <section className="py-12 md:py-16 bg-white border-b border-slate-100">
             <div className="container mx-auto px-4 md:px-8 xl:px-12">
-                {/* Header */}
-                <div className="mb-14 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2.5 bg-slate-900 text-white text-xs font-bold uppercase tracking-[0.2em] px-5 py-3 rounded-full shadow-lg mb-6"
-                    >
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ring-2 ring-emerald-400/30" />
-                        Certified &amp; Recognised
-                    </motion.div>
-                    <motion.h3
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.06 }}
-                        className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4"
-                    >
-                        Standards We Are Held To
-                    </motion.h3>
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-slate-400 text-sm md:text-base max-w-lg mx-auto italic leading-relaxed"
-                    >
-                        Every certification reflects a commitment to quality, security, and professional standards
-                        across our organisation and programs.
-                    </motion.p>
-                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-8 lg:gap-14 items-stretch">
 
-                {/* 4-card certifications grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {certifications.map((cert, i) => (
-                        <motion.div
-                            key={cert.name}
-                            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                            viewport={{ once: true, margin: '-40px' }}
-                            transition={{ type: 'spring', stiffness: 140, damping: 18, delay: i * 0.1 }}
-                            whileHover={{ y: -6, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
-                            className="group relative bg-white border border-slate-200 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 overflow-hidden"
+                    {/* Left: 2x2 certification cards */}
+                    <div className="grid grid-cols-2 gap-4">
+                        {certifications.map((cert, i) => (
+                            <motion.div
+                                key={cert.name}
+                                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: true, margin: '-40px' }}
+                                transition={{ type: 'spring', stiffness: 140, damping: 18, delay: i * 0.08 }}
+                                whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
+                                className="group relative bg-white border border-slate-200 rounded-none p-5 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
+                            >
+                                <div className="relative w-full h-14 mb-3 flex items-center justify-center">
+                                    <Image
+                                        src={cert.file}
+                                        alt={cert.name}
+                                        width={100}
+                                        height={60}
+                                        className="max-h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                                        unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
+                                    />
+                                </div>
+                                <h4 className="text-base font-bold text-slate-900 mb-1 tracking-tight">{cert.name}</h4>
+                                <p className="text-[10px] text-slate-500 leading-snug mb-3 font-medium">{cert.tagline}</p>
+                                <span className="mt-auto inline-flex items-center gap-1.5 bg-slate-900 text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">
+                                    {cert.badgeText}
+                                </span>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Right: text + stats filler */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 90, damping: 20 }}
+                        className="flex flex-col h-full"
+                    >
+                        <div className="inline-flex items-center gap-2.5 bg-slate-900 text-white text-xs font-bold uppercase tracking-[0.2em] px-5 py-2.5 rounded-full shadow-lg mb-5 w-fit">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ring-2 ring-emerald-400/30" />
+                            Certified &amp; Recognised
+                        </div>
+                        <h3
+                            className="font-black text-slate-900 tracking-tight leading-[1.05] mb-4 whitespace-nowrap"
+                            style={{ fontSize: 'clamp(1.6rem, 2.8vw, 2.75rem)' }}
                         >
-                            <div className="relative w-full h-20 mb-5 flex items-center justify-center">
-                                <Image
-                                    src={cert.file}
-                                    alt={cert.name}
-                                    width={120}
-                                    height={80}
-                                    className="max-h-16 w-auto object-contain transform group-hover:scale-105 transition-transform duration-500"
-                                    unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
-                                />
+                            Standards We Are Held To
+                        </h3>
+                        <p className="text-slate-500 text-sm md:text-base leading-relaxed pl-5 border-l-2 border-[#8A29AC]/30 mb-8">
+                            Every certification reflects a commitment to quality, security, and professional standards
+                            across our organisation and programs.
+                        </p>
+
+                        {/* Stat highlights to fill remaining height */}
+                        <div className="mt-auto grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
+                            <div>
+                                <p className="text-2xl font-black text-slate-900 tracking-tight">4</p>
+                                <p className="text-[11px] text-slate-400 font-medium mt-1">Active Certifications</p>
                             </div>
-                            <h4 className="text-xl font-bold text-slate-900 mb-2 tracking-tight">{cert.name}</h4>
-                            <p className="text-[11px] text-slate-500 leading-relaxed mb-5 font-medium">{cert.tagline}</p>
-                            <span className="mt-auto inline-flex items-center gap-1.5 bg-slate-900 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
-                                {cert.badgeText}
-                            </span>
-                        </motion.div>
-                    ))}
+                            <div>
+                                <p className="text-2xl font-black text-slate-900 tracking-tight">100%</p>
+                                <p className="text-[11px] text-slate-400 font-medium mt-1">Compliance Score</p>
+                            </div>
+                            <div>
+                                <p className="text-2xl font-black text-slate-900 tracking-tight">Global</p>
+                                <p className="text-[11px] text-slate-400 font-medium mt-1">Standards Recognised</p>
+                            </div>
+                        </div>
+                    </motion.div>
+
                 </div>
             </div>
         </section>

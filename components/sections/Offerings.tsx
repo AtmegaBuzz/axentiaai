@@ -87,24 +87,16 @@ function OfferingRow({ offering, index }: { offering: typeof offerings[0]; index
             className={`flex flex-col justify-between p-10 md:p-14 lg:p-20 min-h-[70vh] md:min-h-0 ${imageRight ? 'border-r border-slate-200' : ''}`}
         >
             <div>
-                <div className="flex items-start gap-6 mb-6">
-                    <span
-                        className="text-[clamp(5rem,12vw,9rem)] font-black leading-none select-none shrink-0"
-                        style={{ WebkitTextStroke: '2px #8A29AC', color: 'transparent', lineHeight: 0.85 }}
-                    >
-                        {offering.number}
+                <div className="mb-6">
+                    <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] bg-[#8A29AC]/8 border border-[#8A29AC]/20 rounded-full px-3 py-1 mb-4">
+                        {offering.tag}
                     </span>
-                    <div className="pt-2">
-                        <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] bg-[#8A29AC]/8 border border-[#8A29AC]/20 rounded-full px-3 py-1 mb-4">
-                            {offering.tag}
-                        </span>
-                        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight leading-tight whitespace-nowrap">
-                            {offering.title}{' '}
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight leading-tight whitespace-nowrap">
+                        {offering.title}{' '}
                             <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                                 {offering.titleAccent}
                             </span>
                         </h3>
-                    </div>
                 </div>
             </div>
             <div>
@@ -167,11 +159,9 @@ export function Offerings() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.06 }}
-                    className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-6 max-w-4xl mx-auto"
+                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-6 max-w-none mx-auto whitespace-nowrap"
                 >
-                    Bringing transformation,{' '}
-                    <br className="hidden md:block" />
-                    capability, and talent into{' '}
+                    Bringing transformation, capability, and talent into{' '}
                     <span className="font-cursive italic text-[#8A29AC] text-[1.05em]">alignment</span>
                 </motion.h2>
                 <motion.p
