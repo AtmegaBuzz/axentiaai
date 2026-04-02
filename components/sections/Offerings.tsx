@@ -38,7 +38,7 @@ const offerings = [
             'Enablement across SuccessFactors and Analytics Cloud',
             'Training tailored to your organisation',
         ],
-        image: '/images/new_images/offerings/enterprise-ai-capability.jpg',
+        image: '/images/ai-technology-human-interaction.jpg',
     },
     {
         id: 'academies',
