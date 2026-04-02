@@ -172,9 +172,9 @@ export function Offerings() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.12 }}
-                    className="text-sm md:text-base text-slate-500 leading-relaxed max-w-2xl mx-auto"
+                    className="text-sm md:text-base text-slate-500 leading-relaxed max-w-4xl mx-auto"
                 >
-                    Be it enterprise AI transformation, internal capability building, or structured talent development, Axentia.AI brings them all together under one unified approach. Each part of our model strengthens the others, creating lasting momentum that holds well beyond the engagement itself.
+                    Be it enterprise AI transformation, internal capability building, or structured talent development — Axentia.AI brings them together under one unified approach. Each part of our model strengthens the others, creating momentum that holds beyond the engagement.
                 </motion.p>
             </div>
 
