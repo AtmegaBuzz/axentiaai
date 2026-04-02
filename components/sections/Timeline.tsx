@@ -20,7 +20,7 @@ const timelineItems: TimelineEntry[] = [
     title: 'Discovery Workshop',
     description:
       'We sit with your team to map how work actually moves today, identify where time, effort, and decisions get stuck, and arrive at a clear, practical starting point.',
-    image: '/images/new_images/hero/team-working-together-1.jpg',
+    image: '/images/discovery-workshop.jpg',
     icon: Search,
     highlights: ['Process mapping', 'Pain-point analysis', 'Prioritised roadmap'],
   },
@@ -29,7 +29,7 @@ const timelineItems: TimelineEntry[] = [
     title: 'Pilot & Implementation',
     description:
       'We take the highest-value use cases and put them into motion inside your existing systems using your data, processes, and teams.',
-    image: '/images/new_images/personas/business-leaders/professionals-meeting.jpg',
+    image: '/images/pilot-implementation.jpg',
     icon: Rocket,
     highlights: ['Live integration', 'Real data validation', 'Measurable outcomes'],
   },
@@ -38,7 +38,7 @@ const timelineItems: TimelineEntry[] = [
     title: 'Capability Build',
     description:
       'Your teams learn by doing. They engage directly with what has been built, take ownership of it, and start to adapt it.',
-    image: '/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg',
+    image: '/images/capability-building.jpg',
     icon: GraduationCap,
     highlights: ['Hands-on training', 'Knowledge transfer', 'Team enablement'],
   },
@@ -47,7 +47,7 @@ const timelineItems: TimelineEntry[] = [
     title: 'Scale with Execution Capacity',
     description:
       'AI-led ways of working extend across teams and geographies, carried by people already trained in how to use and sustain them.',
-    image: '/images/new_images/hero/modern-office-collaboration.jpg',
+    image: '/images/Scale-with-Execution-Capacity .webp',
     icon: TrendingUp,
     highlights: ['Cross-team rollout', 'Continuous optimisation', 'Sustainable growth'],
   },
@@ -151,12 +151,12 @@ export function HowItWorks() {
                     <h3 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight leading-tight mb-3">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-slate-500 leading-relaxed mb-5 flex-1">
+                    <p className="text-sm text-slate-500 leading-relaxed flex-1">
                       {item.description}
                     </p>
 
                     {/* Highlights */}
-                    <div className="flex flex-wrap gap-2 mt-auto">
+                    <div className="flex flex-nowrap gap-2 mt-3">
                       {item.highlights.map((h) => (
                         <span
                           key={h}

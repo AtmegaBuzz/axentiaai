@@ -12,7 +12,7 @@ const useCases = [
         title: 'Predictive Maintenance',
         description:
             'Anticipate equipment failures using sensor data and maintenance history, helping reduce unplanned downtime and improve asset reliability.',
-        image: '/images/new_images/industry-use-cases/predictive-maintenance/factory-workers-hardhats.jpg',
+        image: '/images/predictive-maintainance.jpg',
         stat1Label: 'Downtime reduction',
         stat1Value: '~40%',
         stat2Label: 'Maintenance saving',
@@ -38,7 +38,7 @@ const useCases = [
         title: 'Invoice & Document Processing',
         description:
             'Automate document handling across finance workflows, including extraction, validation, approvals, and exception handling.',
-        image: '/images/new_images/industry-use-cases/invoice-processing/business-financial-analysis.jpg',
+        image: '/images/Invoice-Document-Processing.jpg',
         stat1Label: 'Processing time saved',
         stat1Value: '~60%',
         stat2Label: 'Error rate reduction',
@@ -51,7 +51,7 @@ const useCases = [
         title: 'Quality Control (Vision-Based)',
         description:
             'Detect defects in real time on production lines, improving consistency and reducing manual inspection effort.',
-        image: '/images/new_images/industry-use-cases/quality-control/auto-assembly-line.jpg',
+        image: '/images/quality-control.webp',
         stat1Label: 'Defect detection rate',
         stat1Value: '~99%',
         stat2Label: 'Inspection time saved',
@@ -64,7 +64,7 @@ const useCases = [
         title: 'Asset Performance Optimisation',
         description:
             'Monitor asset health and plan maintenance more effectively using operational and sensor data across distributed systems.',
-        image: '/images/new_images/industry-use-cases/asset-performance/wind-turbines-sunset.jpg',
+        image: '/images/asset-management.webp',
         stat1Label: 'Asset availability',
         stat1Value: '+15%',
         stat2Label: 'Maintenance efficiency',
@@ -77,7 +77,7 @@ const useCases = [
         title: 'HR Copilot',
         description:
             'Support HR teams with policy queries, approvals, and talent insights within existing workflows.',
-        image: '/images/new_images/industry-use-cases/hr-copilot/woman-white-blazer-desk.jpg',
+        image: '/images/hr-copilot.jpg',
         stat1Label: 'Query resolution',
         stat1Value: '70% faster',
         stat2Label: 'HR capacity freed',
