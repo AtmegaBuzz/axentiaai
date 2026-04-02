@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ArrowLeft, ArrowRight, Play, Brain, Users, BookOpen, Target, Layers, Briefcase, MonitorPlay, Cpu, FileText, GraduationCap } from 'lucide-react';
+import { ArrowUpRight, ArrowLeft, ArrowRight, Brain, Users, BookOpen, Target, Layers, Briefcase, MonitorPlay, Cpu, FileText, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 
 interface InfoItem {
@@ -103,52 +103,25 @@ const programs: Program[] = [
     },
 ];
 
-const snapDirs = [
-    { x: -60, y: 50, rotate: -6 },
-    { x: 0, y: 70, rotate: 4 },
-    { x: 60, y: 50, rotate: 6 },
-    { x: -40, y: 60, rotate: -4 },
-    { x: 40, y: 60, rotate: 5 },
-];
-
 function ProgramCard({ prog, index }: { prog: Program; index: number }) {
-    const dir = snapDirs[index % snapDirs.length];
-
     return (
         <motion.div
-            initial={{ opacity: 0, x: dir.x, y: dir.y, rotate: dir.rotate, scale: 0.85 }}
-            whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{
-                type: 'spring',
-                stiffness: 170,
-                damping: 18,
-                mass: 0.8,
-                delay: index * 0.1,
-            }}
-            whileHover={{
-                y: -8,
-                scale: 1.02,
-                transition: { type: 'spring', stiffness: 300, damping: 22 },
-            }}
-            className="group relative bg-white rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden h-full"
+            transition={{ duration: 0.5, delay: index * 0.08 }}
+            className="group relative bg-white shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden h-full"
         >
-            {/* Thumbnail with play button */}
-            <div className="relative h-52 overflow-hidden">
+            {/* Thumbnail — no play button */}
+            <div className="relative h-48 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={prog.image}
                     alt={prog.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                     loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
-                {/* Centered play button */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        <Play className="w-6 h-6 text-slate-900 fill-current ml-0.5" />
-                    </div>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
 
             {/* Content */}
@@ -160,7 +133,7 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                     {prog.info.map(({ label, value, Icon }) => (
                         <div key={label} className="flex items-start gap-3">
-                            <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
+                            <div className="w-9 h-9 bg-slate-100 flex items-center justify-center flex-shrink-0">
                                 <Icon className="w-4 h-4 text-slate-600" />
                             </div>
                             <div>
@@ -172,7 +145,7 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
                 </div>
                 <Link
                     href={`/programs?tab=${prog.id}`}
-                    className="mt-auto inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 rounded-full w-fit transition-colors duration-200"
+                    className="mt-auto inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 w-fit transition-colors duration-200"
                 >
                     Explore Program
                     <ArrowUpRight className="w-4 h-4" />
@@ -218,33 +191,33 @@ export function Programs() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                     <div>
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-                            className="font-semibold tracking-wide uppercase text-sm mb-4"
+                            transition={{ duration: 0.5 }}
+                            className="mb-4"
                         >
-                            <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>
+                            <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8">
                                 Our Programmes
                             </span>
                         </motion.div>
                         <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.05 }}
-                            className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3"
-                        >
-                            5 programs designed for every <span className="font-cursive italic text-accent-300 text-[1.1em]">stage</span>
-                        </motion.h2>
-                        <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
-                            className="text-base text-white/50 max-w-xl"
+                            transition={{ duration: 0.5, delay: 0.05 }}
+                            className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3"
                         >
-                            From first steps to enterprise deployment, a clear path for every stage of your career.
+                            Certified capability trained for real outcomes
+                        </motion.h2>
+                        <motion.p
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                            className="text-sm text-white/50 max-w-xl"
+                        >
+                            Every academy is built around how decisions actually get made, how workflows actually run, and how delivery actually happens inside organisations. You learn by doing the real thing.
                         </motion.p>
                     </div>
 
@@ -256,14 +229,14 @@ export function Programs() {
                         <button
                             onClick={prev}
                             disabled={current === 0}
-                            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 text-white hover:border-white/50 disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
+                            className="flex items-center justify-center w-10 h-10 border border-white/20 text-white hover:border-white/50 disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
                         >
                             <ArrowLeft className="w-4 h-4" />
                         </button>
                         <button
                             onClick={next}
                             disabled={current >= maxIdx}
-                            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 text-white hover:border-white/50 disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
+                            className="flex items-center justify-center w-10 h-10 border border-white/20 text-white hover:border-white/50 disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
                         >
                             <ArrowRight className="w-4 h-4" />
                         </button>
@@ -299,7 +272,7 @@ export function Programs() {
                 >
                     <Link
                         href="/programs"
-                        className="inline-flex items-center gap-2 bg-white text-slate-900 text-sm font-bold py-3 px-7 rounded-full hover:bg-slate-100 transition-colors duration-200"
+                        className="inline-flex items-center gap-2 bg-white text-slate-900 text-sm font-bold py-3 px-7 hover:bg-slate-100 transition-colors duration-200"
                     >
                         Browse All Programs
                         <ArrowUpRight className="w-4 h-4" />

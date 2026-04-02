@@ -3,7 +3,13 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
+
+const metrics = [
+    { value: '50+', label: 'Enterprises' },
+    { value: '300+', label: 'Certified Professionals' },
+    { value: '16+', label: 'Years of Delivery' },
+];
 
 export function Hero() {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -12,16 +18,11 @@ export function Hero() {
         offset: ['start start', 'end end'],
     });
 
-    /* Hero text flies up and fades during first half of scroll */
     const contentY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-80%']);
     const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-
     return (
-        /* 200vh wrapper: first 100vh is hero pinned, scrolling through the
-           extra 100vh drives the text-up + next-section-up transition */
         <div ref={wrapperRef} style={{ height: '200vh' }} className="relative">
-            {/* Pinned hero viewport */}
             <div className="sticky top-0 h-screen overflow-hidden">
 
                 {/* Video background */}
@@ -37,10 +38,10 @@ export function Hero() {
                     >
                         <source src="/videos/hero-section-2.mp4" type="video/mp4" />
                     </video>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
                 </div>
 
-                {/* Hero content — flies up on scroll */}
+                {/* Hero content */}
                 <motion.div
                     className="absolute inset-0 z-10 flex items-end"
                     style={{ y: contentY, opacity: contentOpacity }}
@@ -55,13 +56,13 @@ export function Hero() {
                                 transition={{ duration: 0.5, delay: 0.1 }}
                                 className="mb-6"
                             >
-                                <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 text-white/70 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2">
+                                <span className="inline-flex items-center gap-2.5 bg-white/8 backdrop-blur-sm border border-white/12 text-white/70 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                                     Enterprise AI Platform
                                 </span>
                             </motion.div>
 
-                            {/* Heading */}
+                            {/* Heading — exact original text */}
                             <motion.h1
                                 id="hero-heading"
                                 initial={{ opacity: 0, y: 30 }}
@@ -76,30 +77,30 @@ export function Hero() {
                                 </span>
                             </motion.h1>
 
-                            {/* Subtext */}
+                            {/* Subtext — exact original text */}
                             <motion.p
                                 initial={{ opacity: 0, y: 16 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.35 }}
-                                className="mt-6 text-sm md:text-base text-white/60 max-w-lg leading-relaxed"
+                                className="mt-6 text-sm md:text-base text-white/65 max-w-xl leading-relaxed"
                             >
-                                AI that scales, because your enterprise is built for it.
+                                An enterprise transformation platform that builds the talent to sustain growth, as per your enterprise needs.
                             </motion.p>
 
-                            {/* Divider line */}
+                            {/* Divider */}
                             <motion.div
                                 initial={{ scaleX: 0 }}
                                 animate={{ scaleX: 1 }}
                                 transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
-                                className="h-px bg-gradient-to-r from-white/30 to-transparent max-w-sm mt-8 mb-8 origin-left"
+                                className="h-px bg-gradient-to-r from-white/25 to-transparent max-w-md mt-8 mb-8 origin-left"
                             />
 
-                            {/* CTAs */}
+                            {/* CTAs — exact original text */}
                             <motion.div
                                 initial={{ opacity: 0, y: 16 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.5 }}
-                                className="flex flex-col sm:flex-row flex-wrap gap-3"
+                                className="flex flex-col sm:flex-row flex-wrap gap-3 mb-12"
                             >
                                 <Link
                                     href="/programs#apply"
@@ -110,26 +111,46 @@ export function Hero() {
                                 </Link>
                                 <Link
                                     href="#what-we-deliver"
-                                    className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/25 text-white font-semibold py-3 px-7 text-sm hover:bg-white/10 transition-colors duration-200"
+                                    className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/20 text-white font-semibold py-3 px-7 text-sm hover:bg-white/8 transition-colors duration-200"
                                 >
                                     See What We Deliver
                                 </Link>
                             </motion.div>
+
+                            {/* Trust metrics strip — above-fold social proof */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.65 }}
+                                className="flex items-center gap-8 md:gap-12"
+                            >
+                                {metrics.map((m, i) => (
+                                    <div key={m.label} className="flex items-center gap-3">
+                                        {i > 0 && <div className="w-px h-8 bg-white/15 -ml-4 md:-ml-6 mr-1" />}
+                                        <div>
+                                            <p className="text-lg md:text-xl font-black text-white tracking-tight">{m.value}</p>
+                                            <p className="text-[10px] md:text-[11px] font-medium text-white/45 uppercase tracking-wider">{m.label}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </motion.div>
+
                         </div>
                     </div>
                 </motion.div>
 
-                {/* Bottom scroll indicator — fades as you scroll */}
+                {/* Scroll indicator */}
                 <motion.div
                     style={{ opacity: contentOpacity }}
-                    className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+                    className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1"
                 >
-                    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30">Scroll</span>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/25">Scroll</span>
                     <motion.div
-                        animate={{ y: [0, 6, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                        className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent"
-                    />
+                        animate={{ y: [0, 5, 0] }}
+                        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                        <ChevronDown className="w-4 h-4 text-white/30" />
+                    </motion.div>
                 </motion.div>
 
             </div>

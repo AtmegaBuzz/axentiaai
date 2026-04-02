@@ -131,15 +131,15 @@ export function WhereWeFit() {
                         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                     >
                         {/* Tab buttons */}
-                        <div className="flex items-center gap-1 mb-6 bg-slate-200/60 p-1 rounded-full w-fit">
+                        <div className="flex items-center gap-0 mb-6 border border-slate-200 w-fit">
                             {tabs.map((tab) => (
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
-                                    className={`relative px-5 py-2 text-sm font-bold rounded-full transition-all duration-200 ${
+                                    className={`relative px-6 py-2.5 text-sm font-bold transition-all duration-200 ${
                                         activeTab === tab.id
-                                            ? 'bg-[#8A29AC] text-white shadow-md'
-                                            : 'text-slate-500 hover:text-slate-700'
+                                            ? 'bg-slate-900 text-white'
+                                            : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'
                                     }`}
                                 >
                                     {tab.label}
@@ -152,7 +152,7 @@ export function WhereWeFit() {
                             style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
                         >
                             Where Axentia.AI{' '}
-                            <span className="font-cursive italic text-accent-300 text-[1.05em]">fits?</span>
+                            <span className="font-[family-name:var(--font-playfair)] italic text-accent-300 text-[1.05em]">fits?</span>
                         </h2>
                         <p className="text-slate-600 text-sm leading-relaxed max-w-md">
                             For enterprises and individuals ready to scale with AI

@@ -94,7 +94,7 @@ export function HowItWorks() {
               viewport={{ once: true }}
               className="text-sm font-semibold uppercase tracking-widest mb-3"
             >
-              <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>
+              <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-600 border border-slate-200 bg-slate-100">
                 How It Works
               </span>
             </motion.p>
@@ -106,7 +106,7 @@ export function HowItWorks() {
               className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-snug"
             >
               From first conversation to{' '}
-              <span className="font-cursive italic text-brand-600 text-[1.05em]">operating at scale</span>
+              <span className="bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">operating at scale</span>
             </motion.h2>
           </div>
 

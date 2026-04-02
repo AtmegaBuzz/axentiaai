@@ -19,6 +19,7 @@ const offerings = [
             'Demand forecasting, invoice automation, HR copilots',
             'Predictive maintenance using SAP PM data',
             'Integration with S/4HANA, BTP, and Joule',
+            'Seamless progression from pilot to wider adoption',
         ],
         image: '/images/new_images/offerings/enterprise-ai-transformation.jpg',
     },
@@ -34,6 +35,7 @@ const offerings = [
             'AI-enabled teams across business and IT',
             'Identification and development of internal use cases',
             'Governance and ways of working for AI adoption',
+            'Enablement across SuccessFactors and Analytics Cloud',
             'Training tailored to your organisation',
         ],
         image: '/images/new_images/offerings/enterprise-ai-capability.jpg',
@@ -51,6 +53,7 @@ const offerings = [
             'SAP SuccessFactors Academy',
             'Retail & FMCG Industry Academy',
             'Energy & Utilities Industry Academy',
+            'SAP Workforce Accelerator',
         ],
         image: '/images/new_images/offerings/talent-academies.jpg',
     },
@@ -111,11 +114,12 @@ function OfferingRow({ offering, index }: { offering: typeof offerings[0]; index
                         </li>
                     ))}
                 </ul>
-                <Link href={`/programs?tab=${offering.id}`} className="inline-flex items-center gap-2 group">
-                    <span className="text-sm font-bold text-slate-900 border-b-2 border-[#8A29AC] pb-0.5 group-hover:text-[#8A29AC] transition-colors duration-200">
-                        Learn More
-                    </span>
-                    <ArrowUpRight className="w-4 h-4 text-[#8A29AC] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                <Link
+                    href={`/programs?tab=${offering.id}`}
+                    className="inline-flex items-center gap-2 bg-slate-900 text-white text-sm font-bold px-5 py-2.5 hover:bg-slate-800 transition-colors duration-200 group"
+                >
+                    Learn More
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                 </Link>
             </div>
         </motion.div>
@@ -148,8 +152,7 @@ export function Offerings() {
                     className="mb-5"
                 >
                     <span
-                        className="inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest"
-                        style={{ background: '#F7C87A', color: '#232322' }}
+                        className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest border border-[#8A29AC]/20 bg-[#8A29AC]/8 text-[#8A29AC]"
                     >
                         HOW WE HELP YOU SUCCEED
                     </span>
@@ -159,19 +162,19 @@ export function Offerings() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.06 }}
-                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-6 max-w-none mx-auto whitespace-nowrap"
+                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-6 max-w-none mx-auto"
                 >
                     Bringing transformation, capability, and talent into{' '}
-                    <span className="font-cursive italic text-[#8A29AC] text-[1.05em]">alignment</span>
+                    <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">alignment</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.12 }}
-                    className="text-base md:text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto"
+                    className="text-sm md:text-base text-slate-500 leading-relaxed max-w-2xl mx-auto"
                 >
-                    Be it AI transformation, internal capability, or talent development, Axentia.AI solves them all together. Each part of our model strengthens the others.
+                    Be it AI transformation, internal capability, or talent development, Axentia.AI solves them all together. Each part of our model strengthens the others, creating momentum that holds beyond the engagement.
                 </motion.p>
             </div>
 

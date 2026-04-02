@@ -99,8 +99,8 @@ export function WhyAxentiaAI() {
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                     >
-                        <span className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-[#8A29AC]/25 bg-[#8A29AC]/8 text-[#8A29AC] text-[10px] font-bold uppercase tracking-widest mb-5">
-                            Trusted By
+                        <span className="inline-flex items-center gap-2 px-3 py-1 border border-[#8A29AC]/20 bg-[#8A29AC]/8 text-[#8A29AC] text-[10px] font-bold uppercase tracking-widest mb-5">
+                            Enterprise Heritage
                         </span>
                         <h2
                             className="font-black text-slate-900 tracking-tight leading-[1.1] mb-4"

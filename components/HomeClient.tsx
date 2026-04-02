@@ -19,29 +19,29 @@ const CTA             = dynamic(() => import('@/components/sections/CTA').then(m
 export function HomeClient() {
     return (
         <main className="flex min-h-screen flex-col">
-            {/* Section 1: Hero */}
+            {/* 1. Hero — Establish authority & primary CTA */}
             <Hero />
-            {/* Section 2: The Axentia Approach */}
+            {/* 2. Trust & Credentials — Build confidence immediately */}
             <WhyAxentiaAI />
-            {/* Section 4: HOW WE HELP YOU SUCCEED — Enterprise AI offerings */}
+            {/* 3. Core Offerings — What we do (problem → solution) */}
             <Offerings />
-            {/* Section 5: SAP + AI */}
+            {/* 4. SAP + AI — Technical differentiation */}
             <SAPAISection />
-            {/* Section 6: Our Programmes (DCAP / EAP / Online) */}
-            <Programs />
-            {/* Section 7: How It Works */}
+            {/* 5. How It Works — Clear transformation journey */}
             <HowItWorks />
-            {/* Section 8: Industry Use Cases */}
+            {/* 6. Industry Use Cases — Prove results with real scenarios */}
             <IndustryUseCases />
-            {/* Section 9: Why Enterprises Choose Axentia.AI */}
+            {/* 7. Why Enterprises Choose Us — Quantified differentiators */}
             <WhyEnterprisesChoose />
-            {/* Section 9: Leadership */}
-            <Leaders />
-            {/* Section 10: Testimonials */}
-            <Testimonials />
-            {/* Section 11: Where Axentia.AI fits */}
+            {/* 8. Who We Serve — Persona segmentation */}
             <WhereWeFit />
-            {/* CTA */}
+            {/* 9. Programs — Training & development detail */}
+            <Programs />
+            {/* 10. Leadership — Team credibility */}
+            <Leaders />
+            {/* 11. Testimonials — Social proof */}
+            <Testimonials />
+            {/* 12. CTA — Final conversion push */}
             <CTA />
         </main>
     );
