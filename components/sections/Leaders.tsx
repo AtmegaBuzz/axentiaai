@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Linkedin, ArrowUpRight } from 'lucide-react';
 
 const leaders = [
@@ -25,6 +26,9 @@ const leaders = [
         photo: '/images/team/gauri-gupta.jpeg',
         linkedin: 'https://in.linkedin.com/in/gauri-gupta-6768b21b5',
     },
+];
+
+const team = [
     {
         name: 'Nadeem Farooq',
         role: 'Senior Manager - Business Growth & Alliance',
@@ -48,7 +52,12 @@ const leaders = [
     },
 ];
 
+type Tab = 'leaders' | 'team';
+
 export function Leaders() {
+    const [activeTab, setActiveTab] = useState<Tab>('leaders');
+    const people = activeTab === 'leaders' ? leaders : team;
+
     return (
         <section className="relative overflow-hidden bg-slate-900">
             {/* Subtle grid pattern */}
@@ -75,11 +84,28 @@ export function Leaders() {
                             initial={{ opacity: 0, y: 12 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="mb-4"
+                            className="mb-4 flex gap-2"
                         >
-                            <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8">
-                                Leadership
-                            </span>
+                            <button
+                                onClick={() => setActiveTab('leaders')}
+                                className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-colors duration-200 cursor-pointer ${
+                                    activeTab === 'leaders'
+                                        ? 'text-accent-300 border border-accent-300/20 bg-accent-300/8'
+                                        : 'text-white/40 border border-white/10 bg-white/[0.03] hover:text-white/60'
+                                }`}
+                            >
+                                Leaders
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('team')}
+                                className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-colors duration-200 cursor-pointer ${
+                                    activeTab === 'team'
+                                        ? 'text-accent-300 border border-accent-300/20 bg-accent-300/8'
+                                        : 'text-white/40 border border-white/10 bg-white/[0.03] hover:text-white/60'
+                                }`}
+                            >
+                                Team
+                            </button>
                         </motion.div>
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
@@ -104,34 +130,23 @@ export function Leaders() {
                         </motion.p>
                     </div>
 
-                    {/* Team count badge */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.15 }}
-                        className="flex items-center gap-4 shrink-0"
-                    >
-                        <div className="text-right">
-                            <p className="text-2xl font-black text-white tracking-tight">3</p>
-                            <p className="text-[10px] font-medium text-white/35 uppercase tracking-wider">Leaders</p>
-                        </div>
-                        <div className="w-px h-10 bg-white/10" />
-                        <div className="text-right">
-                            <p className="text-2xl font-black text-white tracking-tight">16+</p>
-                            <p className="text-[10px] font-medium text-white/35 uppercase tracking-wider">Years Experience</p>
-                        </div>
-                    </motion.div>
                 </div>
 
                 {/* Cards grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]">
-                    {leaders.map((leader, index) => (
+                <AnimatePresence mode="wait">
+                <motion.div
+                    key={activeTab}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]"
+                >
+                    {people.map((leader, index) => (
                         <motion.div
                             key={leader.name}
                             initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-40px' }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.08 }}
                             className="group relative bg-slate-900 hover:bg-slate-800/80 transition-colors duration-300"
                         >
@@ -177,7 +192,8 @@ export function Leaders() {
 
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
+                </AnimatePresence>
             </div>
         </section>
     );

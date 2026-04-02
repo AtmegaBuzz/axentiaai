@@ -91,13 +91,9 @@ export default function Testimonials() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="text-sm font-semibold text-[#8A29AC] mb-4 block">Testimonials</span>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-3">
-                            What our students say about us
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#8A29AC] tracking-tight leading-tight mb-10 uppercase">
+                            Testimonials
                         </h2>
-                        <p className="text-sm text-slate-700 leading-relaxed mb-10">
-                            Real stories from real people who transformed their careers with Axentia.AI
-                        </p>
 
                         <Link
                             href="/outcomes"

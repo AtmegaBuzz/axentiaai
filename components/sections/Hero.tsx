@@ -38,7 +38,7 @@ export function Hero() {
                     >
                         <source src="/videos/hero-latest.mp4" type="video/mp4" />
                     </video>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/65 to-black/50" />
                 </div>
 
                 {/* Hero content */}
