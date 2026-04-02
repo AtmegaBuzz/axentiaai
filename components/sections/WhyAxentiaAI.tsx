@@ -115,9 +115,9 @@ export function WhyAxentiaAI() {
                         </p>
 
                         {/* Stats row */}
-                        <div className="flex items-baseline gap-10 mb-8">
+                        <div className="flex gap-4 mb-8">
                             {stats.map((stat) => (
-                                <div key={stat.label}>
+                                <div key={stat.label} className="bg-white/50 backdrop-blur-sm border border-slate-200/60 px-5 py-4">
                                     <AnimatedCounter
                                         end={stat.end}
                                         suffix={stat.suffix}
