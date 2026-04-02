@@ -8,24 +8,24 @@ import Image from 'next/image';
 const leaders = [
     {
         name: 'Manuj Gupta',
-        role: 'Senior Advisor & Mentor',
-        company: 'Axentia AI | Orane Consulting',
+        role: 'Senior Advisor, Industry Expert',
+        company: 'Founder & CEO, Orane Consulting',
         photo: '/images/team/manoj-gupta.jpeg',
         linkedin: 'https://www.linkedin.com/in/manuj123/',
     },
     {
-        name: 'Arun Rajput',
-        role: 'VP - Business Growth & Alliance',
+        name: 'Aditya Shankar',
+        role: 'AI Lead, Industry Expert',
         company: 'Axentia AI',
-        photo: '/images/team/arun-rajput.jpeg',
-        linkedin: 'https://in.linkedin.com/in/arun-rajput-65a3925',
+        photo: '/images/team/aditya-shankar.jpeg',
+        linkedin: '',
     },
     {
-        name: 'Gauri Gupta',
-        role: 'Director',
+        name: 'Naresh Pathak',
+        role: 'Mentor & Wellness Coach, Industry Expert',
         company: 'Axentia AI',
-        photo: '/images/team/gauri-gupta.jpeg',
-        linkedin: 'https://in.linkedin.com/in/gauri-gupta-6768b21b5',
+        photo: '/images/team/naresh-pathak.jpeg',
+        linkedin: '',
     },
 ];
 

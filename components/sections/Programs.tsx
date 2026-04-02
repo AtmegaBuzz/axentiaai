@@ -217,7 +217,7 @@ export function Programs() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="text-sm text-white/50 max-w-xl"
+                            className="text-sm text-white/50 max-w-2xl"
                         >
                             Every academy is built around how decisions actually get made, how workflows actually run, and how delivery actually happens inside organisations. You learn by doing the real thing.
                         </motion.p>
