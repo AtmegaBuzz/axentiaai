@@ -26,7 +26,7 @@ const programs: Program[] = [
         title: 'AI Foundation',
         titleAccent: 'Academy',
         description:
-            'Understand how AI works, where it creates value, and how to apply it within business workflows. Built for AI enthusiasts at every level \u2014 no technical background required to begin.',
+            'Understand how AI works, where it creates value, and how to apply it within business workflows. Built for AI enthusiasts at every level, no technical background required to begin.',
         info: [
             { label: 'Focus', value: 'AI Concepts & Prompt Engineering', Icon: Brain },
             { label: 'For', value: 'All Levels', Icon: Users },

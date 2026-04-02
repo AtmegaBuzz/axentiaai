@@ -34,13 +34,13 @@ const testimonials: Testimonial[] = [
     {
         name: 'Sakshi Patodi',
         program: 'SAP FICO & ABAP Consultant',
-        quote: 'I am not only trained in FICO now, but I also have exposure to every sector in SAP. DCAP is closing the real gap in the market — it is a truly recommended program.',
+        quote: 'I am not only trained in FICO now, but I also have exposure to every sector in SAP. DCAP is closing the real gap in the market, it is a truly recommended program.',
         image: '/images/testimonials/sakshi-patodi.jpeg',
     },
     {
         name: 'Deeksha',
         program: 'SAP Trainee',
-        quote: "Six weeks in, I'm thinking differently about enterprise problems — especially after understanding how AI fits into SAP workflows. I know I'm making real progress.",
+        quote: "Six weeks in, I'm thinking differently about enterprise problems, especially after understanding how AI fits into SAP workflows. I know I'm making real progress.",
         image: '/images/testimonials/deeksha.jpeg',
     },
 ];

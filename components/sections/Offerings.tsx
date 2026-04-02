@@ -13,7 +13,7 @@ const offerings = [
         title: 'Enterprise AI',
         titleAccent: 'Transformation',
         description:
-            'We design, build, and deploy AI within your SAP and enterprise workflows — taking ideas into active use across the business.',
+            'We design, build, and deploy AI within your SAP and enterprise workflows taking ideas into active use across the business.',
         includes: [
             'AI pilots aligned to real business use cases',
             'Demand forecasting, invoice automation, HR copilots',
@@ -172,9 +172,9 @@ export function Offerings() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.12 }}
-                    className="text-sm md:text-base text-slate-500 leading-relaxed max-w-4xl mx-auto"
+                    className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-4xl mx-auto"
                 >
-                    Be it enterprise AI transformation, internal capability building, or structured talent development — Axentia.AI brings them together under one unified approach. Each part of our model strengthens the others, creating momentum that holds beyond the engagement.
+                    Be it enterprise AI transformation, internal capability building, or structured talent development Axentia.AI brings them together under one unified approach. Each part of our model strengthens the others, creating momentum that holds beyond the engagement.
                 </motion.p>
             </div>
 
