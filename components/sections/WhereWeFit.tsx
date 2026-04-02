@@ -152,7 +152,7 @@ export function WhereWeFit() {
                             style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
                         >
                             Where Axentia.AI{' '}
-                            <span className="font-[family-name:var(--font-playfair)] italic text-accent-300 text-[1.05em]">fits?</span>
+                            <span className="text-accent-300">fits?</span>
                         </h2>
                         <p className="text-slate-600 text-sm leading-relaxed max-w-md">
                             For enterprises and individuals ready to scale with AI
