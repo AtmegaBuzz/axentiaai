@@ -20,7 +20,7 @@ const offerings = [
             'Predictive maintenance using SAP PM data',
             'Integration with S/4HANA, BTP, and Joule',
         ],
-        image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=900&fit=crop&q=80',
+        image: '/images/new_images/offerings/enterprise-ai-transformation.jpg',
     },
     {
         id: 'capability',
@@ -36,7 +36,7 @@ const offerings = [
             'Governance and ways of working for AI adoption',
             'Training tailored to your organisation',
         ],
-        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=900&fit=crop&q=80',
+        image: '/images/new_images/offerings/enterprise-ai-capability.jpg',
     },
     {
         id: 'academies',
@@ -52,7 +52,7 @@ const offerings = [
             'Retail & FMCG Industry Academy',
             'Energy & Utilities Industry Academy',
         ],
-        image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=800&h=900&fit=crop&q=80',
+        image: '/images/new_images/offerings/talent-academies.jpg',
     },
 ];
 

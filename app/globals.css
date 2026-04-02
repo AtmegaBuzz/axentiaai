@@ -122,6 +122,29 @@
   animation: gradientPan 12s ease infinite;
 }
 
+/* Vertical scroll animations for testimonials */
+@keyframes scroll-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes scroll-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 25s linear infinite;
+}
+
+.animate-scroll-down {
+  animation: scroll-down 25s linear infinite;
+}
+
+.animate-scroll-up-slow {
+  animation: scroll-up 35s linear infinite;
+}
+
 /* Hide scrollbar for carousel */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

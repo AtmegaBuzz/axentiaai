@@ -18,7 +18,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Brings AI into the flow of systems already in place, so improvements show up in how the business runs day to day.',
         points: ['Works with existing SAP landscape', 'Cuts manual load across functions', 'Speeds up decision-making'],
-        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/personas/cio-cto/man-presenting-office.jpg',
         imageAlt: 'CTO reviewing enterprise systems',
     },
     {
@@ -26,7 +26,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Shapes how teams adapt, learn, and take ownership as new ways of working begin to settle in.',
         points: ['AI within HR workflows', 'Upskilling tied to actual roles', 'Capability built internally'],
-        image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/personas/chro/standing-presenting-team.jpg',
         imageAlt: 'HR leader in a meeting',
     },
     {
@@ -34,7 +34,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Focuses on where work slows down or gets messy and introduces changes that make it smoother and easier to run.',
         points: ['Use cases tied to real problems', 'Less friction in execution', 'Clear movement in outcomes'],
-        image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/personas/business-leaders/entrepreneurs-business-office.jpg',
         imageAlt: 'Business leaders collaborating',
     },
     {
@@ -42,7 +42,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Extends this across teams in a structured way, aligned to how the organisation actually works.',
         points: ['Programs built for your setup', 'Scales across teams', 'Linked to business outcomes'],
-        image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg',
         imageAlt: 'Enterprise training session',
     },
 ];
@@ -53,7 +53,7 @@ const talentPersonas: Persona[] = [
         description:
             'The gap between certification and employability is where most programmes fail. Axentia.AI closes it. You learn inside real enterprise contexts, develop the SAP and AI skills enterprises actually hire for, and enter the job market through a network that is already placing people.',
         points: ['Exposure to real use cases', 'Tracks across SAP and AI', 'Entry into live environments'],
-        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/personas/students/community-technology-concept.jpg',
         imageAlt: 'Students learning together',
     },
     {
@@ -61,7 +61,7 @@ const talentPersonas: Persona[] = [
         description:
             'Build on what they already know and move into roles that sit closer to enterprise systems and workflows.',
         points: ['Flexible progression paths', 'Industry-aligned tracks', 'Hands-on project exposure'],
-        image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg',
         imageAlt: 'Professional at work',
     },
 ];
@@ -118,7 +118,7 @@ export function WhereWeFit() {
     const personas = activeTab === 'enterprise' ? enterprisePersonas : talentPersonas;
 
     return (
-        <section className="bg-slate-50 py-20 md:py-28 overflow-hidden relative">
+        <section className="bg-white py-20 md:py-28 overflow-hidden relative border-b border-slate-100">
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
 
                 {/* Header row: tabs left, heading right */}
@@ -152,16 +152,9 @@ export function WhereWeFit() {
                             style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
                         >
                             Where Axentia.AI{' '}
-                            <span
-                                style={{
-                                    WebkitTextStroke: '1.5px #8A29AC',
-                                    color: 'transparent',
-                                }}
-                            >
-                                fits?
-                            </span>
+                            <span className="font-cursive italic text-accent-300 text-[1.05em]">fits?</span>
                         </h2>
-                        <p className="text-slate-400 text-sm leading-relaxed max-w-md">
+                        <p className="text-slate-600 text-sm leading-relaxed max-w-md">
                             For enterprises and individuals ready to scale with AI
                         </p>
                     </motion.div>

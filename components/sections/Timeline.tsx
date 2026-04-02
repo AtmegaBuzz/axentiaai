@@ -21,7 +21,7 @@ const timelineItems: TimelineEntry[] = [
     title: 'Discovery Workshop',
     description:
       'We sit with your team to map how work actually moves today, identify where time, effort, and decisions get stuck, and arrive at a clear, practical starting point.',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/hero/team-working-together-1.jpg',
     icon: Search,
   },
   {
@@ -30,7 +30,7 @@ const timelineItems: TimelineEntry[] = [
     title: 'Pilot & Implementation',
     description:
       'We take the highest-value use cases and put them into motion inside your existing systems using your data, processes, and teams.',
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/personas/business-leaders/professionals-meeting.jpg',
     icon: Rocket,
   },
   {
@@ -39,7 +39,7 @@ const timelineItems: TimelineEntry[] = [
     title: 'Capability Build',
     description:
       'Your teams learn by doing. They engage directly with what has been built, take ownership of it, and start to adapt it.',
-    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg',
     icon: GraduationCap,
   },
   {
@@ -48,7 +48,7 @@ const timelineItems: TimelineEntry[] = [
     title: 'Scale with Execution Capacity',
     description:
       'AI-led ways of working extend across teams and geographies, carried by people already trained in how to use and sustain them.',
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/hero/modern-office-collaboration.jpg',
     icon: TrendingUp,
   },
 ]

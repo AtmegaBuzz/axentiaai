@@ -272,15 +272,15 @@ function LegacySection() {
               <div className="flex gap-3">
                 <div className="w-28 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=240&h=160&fit=crop&q=80" alt="SAP consulting" className="w-full h-full object-cover" />
+                  <img src="/images/new_images/about/people-modern-office-talk.jpg" alt="SAP consulting" className="w-full h-full object-cover" />
                 </div>
                 <div className="w-28 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=240&h=160&fit=crop&q=80" alt="Team meeting" className="w-full h-full object-cover" />
+                  <img src="/images/new_images/about/teamwork-collaboration.jpg" alt="Team meeting" className="w-full h-full object-cover" />
                 </div>
                 <div className="w-28 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-sm hidden sm:block">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=240&h=160&fit=crop&q=80" alt="Enterprise tech" className="w-full h-full object-cover" />
+                  <img src="/images/new_images/about/business-professionals-office.jpg" alt="Enterprise tech" className="w-full h-full object-cover" />
                 </div>
               </div>
             </FadeIn>
@@ -290,7 +290,7 @@ function LegacySection() {
               {/* Large filler image behind stats */}
               <div className="absolute -top-8 -right-6 w-[calc(100%+24px)] h-[calc(100%+40px)] rounded-3xl overflow-hidden opacity-[0.08]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=500&fit=crop&q=60" alt="Enterprise building" className="w-full h-full object-cover" />
+                <img src="/images/new_images/about/professional-woman-workspace.jpg" alt="Enterprise building" className="w-full h-full object-cover" />
               </div>
               <div className="grid grid-cols-2 gap-3 relative p-6 bg-slate-50 rounded-3xl border border-slate-100">
                 {[
@@ -323,13 +323,13 @@ function LegacySection() {
    ═══════════════════════════════════════════════════════════════ */
 
 const milestones = [
-  { year: '2000', title: 'Orane\'s SAP Legacy Begins', desc: 'Orane Consulting starts delivering enterprise SAP projects across India, building 25+ years of real-world consulting expertise.', icon: <BuildingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&h=160&fit=crop&q=80' },
-  { year: '2012', title: 'Global Expansion', desc: 'Operations extend to Canada, Portugal, and Kenya, becoming a truly international SAP delivery organisation.', icon: <GlobeIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?w=300&h=160&fit=crop&q=80' },
-  { year: '2022', title: 'The Talent Gap Emerges', desc: '500+ consultants deployed, but the market demand for AI-ready SAP talent far outpaces what traditional hiring can deliver.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=300&h=160&fit=crop&q=80' },
-  { year: '2024', title: 'Axentia.AI Begins', desc: 'A new idea takes shape: what if we could build consultants, not just hire them? Axentia.AI is founded to solve the capability gap at its source.', icon: <BrainIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&h=160&fit=crop&q=80' },
-  { year: '2025', title: 'Axentia.AI Launches', desc: 'The Daksha Career Accelerator launches: 10 months of classroom training plus paid apprenticeship. First cohort placed in enterprise roles.', icon: <TargetIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300&h=160&fit=crop&q=80' },
-  { year: '2026', title: 'AI-Ready Consultants', desc: '100+ careers launched. Graduates working across SAP S/4HANA, FICO, MM, SD, building the next generation of enterprise consulting talent.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=300&h=160&fit=crop&q=80' },
-  { year: 'Next', title: 'The Road Ahead', desc: 'Expanding programs, deepening enterprise partnerships, and building the capability infrastructure needed for the AI era of consulting.', icon: <LightbulbIcon className="w-5 h-5" />, hl: true, img: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=300&h=160&fit=crop&q=80' },
+  { year: '2000', title: 'Orane\'s SAP Legacy Begins', desc: 'Orane Consulting starts delivering enterprise SAP projects across India, building 25+ years of real-world consulting expertise.', icon: <BuildingIcon className="w-5 h-5" />, hl: false, img: '/images/new_images/about/journey/sap-legacy-2000.jpg' },
+  { year: '2012', title: 'Global Expansion', desc: 'Operations extend to Canada, Portugal, and Kenya, becoming a truly international SAP delivery organisation.', icon: <GlobeIcon className="w-5 h-5" />, hl: false, img: '/images/new_images/about/journey/global-expansion-2012.jpg' },
+  { year: '2022', title: 'The Talent Gap Emerges', desc: '500+ consultants deployed, but the market demand for AI-ready SAP talent far outpaces what traditional hiring can deliver.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: '/images/new_images/about/journey/talent-gap-2022.jpg' },
+  { year: '2024', title: 'Axentia.AI Begins', desc: 'A new idea takes shape: what if we could build consultants, not just hire them? Axentia.AI is founded to solve the capability gap at its source.', icon: <BrainIcon className="w-5 h-5" />, hl: true, img: '/images/new_images/about/journey/axentia-begins-2024.jpg' },
+  { year: '2025', title: 'Axentia.AI Launches', desc: 'The Daksha Career Accelerator launches: 10 months of classroom training plus paid apprenticeship. First cohort placed in enterprise roles.', icon: <TargetIcon className="w-5 h-5" />, hl: true, img: '/images/new_images/about/journey/axentia-launches-2025.jpg' },
+  { year: '2026', title: 'AI-Ready Consultants', desc: '100+ careers launched. Graduates working across SAP S/4HANA, FICO, MM, SD, building the next generation of enterprise consulting talent.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: '/images/new_images/about/journey/ai-ready-2026.jpg' },
+  { year: 'Next', title: 'The Road Ahead', desc: 'Expanding programs, deepening enterprise partnerships, and building the capability infrastructure needed for the AI era of consulting.', icon: <LightbulbIcon className="w-5 h-5" />, hl: true, img: '/images/new_images/about/journey/road-ahead.jpg' },
 ];
 
 function JourneySection() {
@@ -558,13 +558,13 @@ function ValuesSection() {
       <motion.div className="absolute top-16 left-[60%] hidden xl:block" animate={{ y: [-5, 5, -5] }} transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}>
         <div className="w-24 h-16 rounded-lg overflow-hidden border border-white/40 shadow-lg rotate-3 opacity-40">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=200&h=140&fit=crop&q=60" alt="" className="w-full h-full object-cover" />
+          <img src="/images/new_images/about/teamwork-collaboration.jpg" alt="" className="w-full h-full object-cover" />
         </div>
       </motion.div>
       <motion.div className="absolute bottom-20 right-[55%] hidden xl:block" animate={{ y: [5, -5, 5] }} transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}>
         <div className="w-20 h-14 rounded-lg overflow-hidden border border-white/40 shadow-lg -rotate-2 opacity-30">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=200&h=140&fit=crop&q=60" alt="" className="w-full h-full object-cover" />
+          <img src="/images/new_images/about/people-modern-office-talk.jpg" alt="" className="w-full h-full object-cover" />
         </div>
       </motion.div>
 
@@ -601,8 +601,8 @@ function ValuesSection() {
    ═══════════════════════════════════════════════════════════════ */
 
 const ecosystem = [
-  { name: 'Axentia AI', tag: 'Enterprise AI & Automation', info: 'Data, AI, Automation', desc: 'AI-powered solutions for enterprise consulting and digital transformation.', icon: <BrainIcon className="w-7 h-7" />, grad: 'from-indigo-500 to-indigo-700', img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80' },
-  { name: 'Orane Consulting', tag: 'SAP Enterprise Delivery', info: '500+ consultants, 4 countries', desc: '15+ year SAP practice — India, Canada, Portugal, Kenya.', icon: <BuildingIcon className="w-7 h-7" />, grad: 'from-accent-500 to-accent-700', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop&q=80' },
+  { name: 'Axentia AI', tag: 'Enterprise AI & Automation', info: 'Data, AI, Automation', desc: 'AI-powered solutions for enterprise consulting and digital transformation.', icon: <BrainIcon className="w-7 h-7" />, grad: 'from-indigo-500 to-indigo-700', img: '/images/new_images/hero/modern-office-collaboration.jpg' },
+  { name: 'Orane Consulting', tag: 'SAP Enterprise Delivery', info: '500+ consultants, 4 countries', desc: '15+ year SAP practice — India, Canada, Portugal, Kenya.', icon: <BuildingIcon className="w-7 h-7" />, grad: 'from-accent-500 to-accent-700', img: '/images/new_images/about/business-professionals-office.jpg' },
 ];
 
 function EcosystemSection() {
@@ -666,7 +666,7 @@ const teamMembers = [
     role: 'Head of Academics',
     company: 'Axentia.AI',
     desc: 'Former SAP Practice Lead with 15+ years of delivery experience.',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/priya-sharma.jpg',
     linkedin: '#',
     color: 'from-rose-500 to-pink-600',
   },
@@ -675,7 +675,7 @@ const teamMembers = [
     role: 'Director of Operations',
     company: 'Axentia AI',
     desc: 'Scaled consulting operations across 10+ countries.',
-    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/rajesh-kumar.jpg',
     linkedin: '#',
     color: 'from-blue-500 to-indigo-600',
   },
@@ -684,7 +684,7 @@ const teamMembers = [
     role: 'Head of Placements',
     company: 'Axentia.AI',
     desc: 'Built talent pipelines for Fortune 500 companies.',
-    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/anita-verma.jpg',
     linkedin: '#',
     color: 'from-amber-500 to-orange-600',
   },
@@ -693,7 +693,7 @@ const teamMembers = [
     role: 'CTO',
     company: 'Axentia AI',
     desc: 'AI/ML architect building next-gen enterprise solutions.',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/vikram-singh.jpg',
     linkedin: '#',
     color: 'from-emerald-500 to-teal-600',
   },
@@ -702,7 +702,7 @@ const teamMembers = [
     role: 'Head of Curriculum',
     company: 'Axentia.AI',
     desc: 'Designed enterprise-grade training for 1000+ professionals.',
-    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/meera-patel.jpg',
     linkedin: '#',
     color: 'from-violet-500 to-purple-600',
   },
@@ -711,7 +711,7 @@ const teamMembers = [
     role: 'VP of Partnerships',
     company: 'Orane Consulting',
     desc: 'Forged strategic alliances with top-tier SAP partners globally.',
-    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/arjun-nair.jpg',
     linkedin: '#',
     color: 'from-cyan-500 to-blue-600',
   },
@@ -852,7 +852,7 @@ function TeamSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-600 to-brand-900" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=600&fit=crop&q=80"
+                  src="/images/new_images/about/cta-founder.jpg"
                   alt="Manuj Gupta"
                   className="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-60 group-hover:opacity-80 group-hover:mix-blend-normal transition-all duration-700"
                 />
@@ -933,7 +933,7 @@ function TeamSection() {
                       <Linkedin className="w-4 h-4" /> Connect
                     </a>
                     <div className="flex gap-2">
-                      {['https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=70&fit=crop&q=60', 'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=100&h=70&fit=crop&q=60'].map((src, i) => (
+                      {['/images/new_images/about/footer/gallery-1.jpg', '/images/new_images/about/footer/gallery-2.jpg'].map((src, i) => (
                         <motion.div
                           key={i}
                           className="w-16 h-11 rounded-lg overflow-hidden border border-slate-100 shadow-sm"

@@ -23,11 +23,11 @@ function FadeIn({ children, className = '', delay = 0 }: { children: React.React
 }
 
 const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&q=80', alt: 'Students collaborating' },
-  { src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80', alt: 'Classroom learning' },
-  { src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&q=80', alt: 'Team discussion' },
-  { src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&q=80', alt: 'Project work' },
-  { src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80', alt: 'Enterprise consulting' },
+  { src: '/images/new_images/personas/students/community-technology-concept.jpg', alt: 'Students collaborating' },
+  { src: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg', alt: 'Classroom learning' },
+  { src: '/images/new_images/programs/sap-successfactors/team-meeting-indian.jpg', alt: 'Team discussion' },
+  { src: '/images/new_images/personas/working-professionals/man-laptop-modern.jpg', alt: 'Project work' },
+  { src: '/images/new_images/hero/modern-office-collaboration.jpg', alt: 'Enterprise consulting' },
 ];
 
 const placementCompanies = [

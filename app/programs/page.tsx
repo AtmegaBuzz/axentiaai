@@ -236,25 +236,25 @@ function DCAPSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
-                  image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&h=400&fit=crop&q=80',
+                  image: '/images/new_images/hero/team-working-laptops-2.jpg',
                   title: 'Business Processes',
                   period: 'Weeks 1-3',
                   items: ['Procure-to-Pay (P2P)', 'Order-to-Cash (O2C)', 'Record-to-Report (R2R)', 'Hire-to-Retire (H2R)'],
                 },
                 {
-                  image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop&q=80',
+                  image: '/images/new_images/programs/ai-foundation/professional-working-laptop.jpg',
                   title: 'SAP Foundations',
                   period: 'Weeks 4-8',
                   items: ['S/4HANA architecture', 'Navigation & UI', 'Master data concepts', 'Integration basics'],
                 },
                 {
-                  image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&q=80',
+                  image: '/images/new_images/programs/sap-successfactors/team-meeting-indian.jpg',
                   title: 'Module Deep-Dive',
                   period: 'Weeks 9-14',
                   items: ['MM — Materials Management', 'FICO — Finance & Controlling', 'SD — Sales & Distribution', 'Configuration exercises'],
                 },
                 {
-                  image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop&q=80',
+                  image: '/images/new_images/personas/business-leaders/professionals-meeting.jpg',
                   title: 'Consulting Skills',
                   period: 'Throughout',
                   items: ['Documentation standards', 'Client communication', 'Meeting discipline', 'Professional judgement'],
@@ -658,21 +658,21 @@ function CompareSection() {
       id: 'dcap',
       name: 'DCAP',
       fullName: 'Daksha Career Accelerator',
-      image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=500&fit=crop&q=80',
+      image: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg',
       accentColor: 'brand',
     },
     {
       id: 'eap',
       name: 'EAP',
       fullName: 'Elite Acceleration Program',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop&q=80',
+      image: '/images/new_images/about/business-professionals-office.jpg',
       accentColor: 'indigo',
     },
     {
       id: 'online',
       name: 'Online',
       fullName: 'Self-Paced Learning',
-      image: 'https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=800&h=500&fit=crop&q=80',
+      image: '/images/new_images/personas/working-professionals/man-laptop-modern.jpg',
       accentColor: 'teal',
     },
   ];
@@ -994,7 +994,7 @@ const faculty = [
     role: 'Founder & Lead Mentor',
     specialization: 'SAP Strategy & Enterprise Delivery',
     bio: '30+ years of enterprise consulting experience. Built Orane Consulting into a 500+ consultant SAP practice across 4 countries.',
-    photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/rajesh-kumar.jpg',
     linkedin: 'https://www.linkedin.com/in/manuj-gupta',
   },
   {
@@ -1002,7 +1002,7 @@ const faculty = [
     role: 'Head of Academics',
     specialization: 'SAP MM & FICO',
     bio: 'Former SAP Practice Lead with 15+ years of delivery experience across Fortune 500 implementations.',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/priya-sharma.jpg',
     linkedin: '#',
   },
   {
@@ -1010,7 +1010,7 @@ const faculty = [
     role: 'Senior Faculty',
     specialization: 'SAP SD & Enterprise Integration',
     bio: 'Scaled consulting operations across 10+ countries with deep expertise in Sales & Distribution.',
-    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/vikram-singh.jpg',
     linkedin: '#',
   },
   {
@@ -1018,7 +1018,7 @@ const faculty = [
     role: 'Head of Placements',
     specialization: 'Career Strategy & Industry Connect',
     bio: 'Built talent pipelines for Fortune 500 companies. Expert in enterprise consulting career pathways.',
-    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/anita-verma.jpg',
     linkedin: '#',
   },
   {
@@ -1026,7 +1026,7 @@ const faculty = [
     role: 'AI & Technology Faculty',
     specialization: 'AI/ML & SAP BTP',
     bio: 'AI/ML architect building next-gen enterprise solutions. Leads the Data & AI curriculum.',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/cta/confident-businesswoman-smile.jpg',
     linkedin: '#',
   },
   {
@@ -1034,7 +1034,7 @@ const faculty = [
     role: 'Head of Curriculum',
     specialization: 'Process Design & Documentation',
     bio: 'Designed enterprise-grade training for 1000+ professionals across SAP modules.',
-    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&q=80',
+    photo: '/images/new_images/about/team/meera-patel.jpg',
     linkedin: '#',
   },
 ];
@@ -1151,14 +1151,14 @@ function FacultySection() {
    ═══════════════════════════════════════════════════════════════ */
 
 const ceremonyImages = [
-  { src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=400&fit=crop&q=80', alt: 'Graduation ceremony', label: 'Graduation Ceremony' },
-  { src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80', alt: 'Classroom learning', label: 'Classroom Learning' },
-  { src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&q=80', alt: 'Team collaboration', label: 'Team Collaboration' },
-  { src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80', alt: 'Mentorship session', label: 'Mentorship Session' },
-  { src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop&q=80', alt: 'Project presentation', label: 'Project Presentation' },
-  { src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&q=80', alt: 'Workshop in progress', label: 'Workshop in Progress' },
-  { src: 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=400&fit=crop&q=80', alt: 'Certificate distribution', label: 'Certificate Distribution' },
-  { src: 'https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&h=400&fit=crop&q=80', alt: 'Campus life', label: 'Campus Life' },
+  { src: '/images/new_images/about/business-professionals-office.jpg', alt: 'Graduation ceremony', label: 'Graduation Ceremony' },
+  { src: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg', alt: 'Classroom learning', label: 'Classroom Learning' },
+  { src: '/images/new_images/hero/team-working-together-1.jpg', alt: 'Team collaboration', label: 'Team Collaboration' },
+  { src: '/images/new_images/personas/business-leaders/entrepreneurs-business-office.jpg', alt: 'Mentorship session', label: 'Mentorship Session' },
+  { src: '/images/new_images/about/teamwork-collaboration.jpg', alt: 'Project presentation', label: 'Project Presentation' },
+  { src: '/images/new_images/programs/sap-successfactors/hr-corporate-meeting.jpg', alt: 'Workshop in progress', label: 'Workshop in Progress' },
+  { src: '/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg', alt: 'Certificate distribution', label: 'Certificate Distribution' },
+  { src: '/images/new_images/cta/confident-businesswoman-smile.jpg', alt: 'Campus life', label: 'Campus Life' },
 ];
 
 function CeremonySection() {

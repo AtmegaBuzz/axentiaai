@@ -94,7 +94,7 @@ export function WhyChooseUs() {
                                 <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/5]">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
-                                        src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=500&fit=crop&q=80"
+                                        src="/images/new_images/offerings/enterprise-ai-transformation.jpg"
                                         alt="SAP consulting classroom"
                                         className="w-full h-full object-cover"
                                         loading="lazy"
@@ -105,7 +105,7 @@ export function WhyChooseUs() {
                                 <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
-                                        src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=300&fit=crop&q=80"
+                                        src="/images/new_images/personas/business-leaders/entrepreneurs-business-office.jpg"
                                         alt="Enterprise consulting team"
                                         className="w-full h-full object-cover"
                                         loading="lazy"
@@ -114,7 +114,7 @@ export function WhyChooseUs() {
                                 <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
-                                        src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop&q=80"
+                                        src="/images/new_images/personas/working-professionals/young-woman-striped-laptop.jpg"
                                         alt="AI era consulting"
                                         className="w-full h-full object-cover"
                                         loading="lazy"

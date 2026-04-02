@@ -12,7 +12,7 @@ const useCases = [
         title: 'Predictive Maintenance',
         description:
             'Anticipate equipment failures using sensor data and maintenance history, helping reduce unplanned downtime and improve asset reliability.',
-        image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&h=700&fit=crop&q=80',
+        image: '/images/new_images/industry-use-cases/predictive-maintenance/factory-workers-hardhats.jpg',
         stat1Label: 'Downtime reduction',
         stat1Value: '~40%',
         stat2Label: 'Maintenance saving',
@@ -25,7 +25,7 @@ const useCases = [
         title: 'Demand Forecasting',
         description:
             'Improve planning accuracy across supply chains, reducing stock imbalances and enabling more responsive inventory decisions.',
-        image: 'https://images.unsplash.com/photo-1601598851547-4302969d0614?w=900&h=700&fit=crop&q=80',
+        image: '/images/new_images/industry-use-cases/demand-forecasting/modern-store-interior.jpg',
         stat1Label: 'Forecast accuracy',
         stat1Value: '~98%',
         stat2Label: 'Overstock reduction',
@@ -38,7 +38,7 @@ const useCases = [
         title: 'Invoice & Document Processing',
         description:
             'Automate document handling across finance workflows, including extraction, validation, approvals, and exception handling.',
-        image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=900&h=700&fit=crop&q=80',
+        image: '/images/new_images/industry-use-cases/invoice-processing/business-financial-analysis.jpg',
         stat1Label: 'Processing time saved',
         stat1Value: '~60%',
         stat2Label: 'Error rate reduction',
@@ -51,7 +51,7 @@ const useCases = [
         title: 'Quality Control (Vision-Based)',
         description:
             'Detect defects in real time on production lines, improving consistency and reducing manual inspection effort.',
-        image: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=900&h=700&fit=crop&q=80',
+        image: '/images/new_images/industry-use-cases/quality-control/auto-assembly-line.jpg',
         stat1Label: 'Defect detection rate',
         stat1Value: '~99%',
         stat2Label: 'Inspection time saved',
@@ -64,7 +64,7 @@ const useCases = [
         title: 'Asset Performance Optimisation',
         description:
             'Monitor asset health and plan maintenance more effectively using operational and sensor data across distributed systems.',
-        image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&h=700&fit=crop&q=80',
+        image: '/images/new_images/industry-use-cases/asset-performance/wind-turbines-sunset.jpg',
         stat1Label: 'Asset availability',
         stat1Value: '+15%',
         stat2Label: 'Maintenance efficiency',
@@ -77,7 +77,7 @@ const useCases = [
         title: 'HR Copilot',
         description:
             'Support HR teams with policy queries, approvals, and talent insights within existing workflows.',
-        image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=900&h=700&fit=crop&q=80',
+        image: '/images/new_images/industry-use-cases/hr-copilot/woman-white-blazer-desk.jpg',
         stat1Label: 'Query resolution',
         stat1Value: '70% faster',
         stat2Label: 'HR capacity freed',

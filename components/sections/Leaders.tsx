@@ -6,39 +6,51 @@ import { Linkedin } from 'lucide-react';
 const leaders = [
     {
         name: 'Manuj Gupta',
-        role: 'Founder & CEO',
+        role: 'Senior Advisor & Mentor',
         company: 'Axentia AI | Orane Consulting',
-        bio: '25+ years of SAP enterprise delivery. Built one of India\'s leading SAP practices from the ground up.',
-        photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&q=80',
-        linkedin: 'https://www.linkedin.com/in/manuj-gupta',
-        color: 'from-brand-500 to-brand-700',
+        bio: 'Seasoned enterprise leader guiding strategic direction and mentoring the next generation of AI and SAP professionals.',
+        photo: '/images/team/manoj-gupta.jpeg',
+        linkedin: 'https://www.linkedin.com/in/manuj123/',
     },
     {
-        name: 'Priya Sharma',
-        role: 'Head of Academics',
+        name: 'Arun Rajput',
+        role: 'VP - Business Growth & Alliance',
         company: 'Axentia AI',
-        bio: 'Former SAP Practice Lead. Designs the curriculum that bridges classroom theory with real project delivery.',
-        photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&q=80',
-        linkedin: '#',
-        color: 'from-rose-500 to-pink-600',
+        bio: 'Drives enterprise partnerships and business expansion, building alliances that accelerate AI adoption across industries.',
+        photo: '/images/team/arun-rajput.png',
+        linkedin: 'https://in.linkedin.com/in/arun-rajput-65a3925',
     },
     {
-        name: 'Rajesh Kumar',
-        role: 'Director of Operations',
+        name: 'Dr. Naresh Pathak',
+        role: 'Advisor',
         company: 'Axentia AI',
-        bio: 'Scaled consulting operations across 10+ countries. Oversees apprenticeship placements and partner relations.',
-        photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&q=80',
-        linkedin: '#',
-        color: 'from-blue-500 to-indigo-600',
+        bio: 'Brings deep academic and industry expertise to shape the strategic vision and quality standards of the organisation.',
+        photo: '/images/team/Naresh-Kumar.jpg',
+        linkedin: 'https://in.linkedin.com/in/nkp74',
     },
     {
-        name: 'Anita Verma',
-        role: 'Head of Placements',
+        name: 'Gauri Gupta',
+        role: 'Director - Operations',
         company: 'Axentia AI',
-        bio: 'Built talent pipelines for Fortune 500 companies. Drives the 95% placement record across cohorts.',
-        photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&q=80',
-        linkedin: '#',
-        color: 'from-amber-500 to-orange-600',
+        bio: 'Oversees day-to-day operations ensuring delivery excellence, process efficiency, and seamless programme execution.',
+        photo: '/images/team/gauri-gupta.jpeg',
+        linkedin: 'https://in.linkedin.com/in/gauri-gupta-6768b21b5',
+    },
+    {
+        name: 'Devlina Sarkar',
+        role: 'Brand & Communication Manager',
+        company: 'Axentia AI',
+        bio: 'Shapes the brand narrative and communication strategy, connecting the Axentia.AI story with enterprises and talent alike.',
+        photo: '/images/team/devlina-sarkar.jpeg',
+        linkedin: 'https://www.linkedin.com/in/devlina-sarkar-081401229/',
+    },
+    {
+        name: 'Nadeem Farooq',
+        role: 'Senior Manager - Business Growth & Alliance',
+        company: 'Axentia AI',
+        bio: 'Leads enterprise outreach and alliance development, strengthening the bridge between Axentia.AI and global partners.',
+        photo: '/images/team/nadeem.jpeg',
+        linkedin: 'https://in.linkedin.com/in/nadeem-farooq-62598270',
     },
 ];
 
@@ -46,7 +58,9 @@ const snapDirs = [
     { x: -80, y: 40, rotate: -8 },
     { x: 0, y: -60, rotate: 6 },
     { x: 80, y: 40, rotate: -6 },
-    { x: 0, y: 60, rotate: 8 },
+    { x: -40, y: 60, rotate: 8 },
+    { x: 40, y: -40, rotate: -5 },
+    { x: 0, y: 50, rotate: 7 },
 ];
 
 export function Leaders() {
@@ -100,7 +114,7 @@ export function Leaders() {
                 </div>
 
                 {/* Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {leaders.map((leader, index) => {
                         const dir = snapDirs[index % snapDirs.length];
                         return (
@@ -114,10 +128,10 @@ export function Leaders() {
                                     stiffness: 200,
                                     damping: 18,
                                     mass: 0.8,
-                                    delay: index * 0.1,
+                                    delay: index * 0.08,
                                 }}
                                 whileHover={{
-                                    y: -10,
+                                    y: -8,
                                     scale: 1.03,
                                     transition: { type: 'spring', stiffness: 400, damping: 25 },
                                 }}

@@ -18,16 +18,16 @@ function FadeIn({ children, className = '', delay = 0 }: { children: React.React
 }
 
 const cultureImages = [
-  { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop&q=80', alt: 'Festival celebration', label: 'Diwali Celebration' },
-  { src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=400&fit=crop&q=80', alt: 'Team celebration', label: 'Cohort Graduation' },
-  { src: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&h=400&fit=crop&q=80', alt: 'Office party', label: 'Team Milestones' },
+  { src: '/images/new_images/about/teamwork-collaboration.jpg', alt: 'Festival celebration', label: 'Diwali Celebration' },
+  { src: '/images/new_images/about/business-professionals-office.jpg', alt: 'Team celebration', label: 'Cohort Graduation' },
+  { src: '/images/new_images/about/people-modern-office-talk.jpg', alt: 'Office party', label: 'Team Milestones' },
 ];
 
 const classroomImages = [
-  { src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&h=340&fit=crop&q=80', alt: 'Peer discussion', label: 'Peer Discussions' },
-  { src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&h=340&fit=crop&q=80', alt: 'Problem solving', label: 'Problem-Solving Sessions' },
-  { src: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&h=340&fit=crop&q=80', alt: 'Idea sharing', label: 'Idea Sharing & Mentoring' },
-  { src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&h=340&fit=crop&q=80', alt: 'Teamwork', label: 'Teamwork in Project Sims' },
+  { src: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg', alt: 'Peer discussion', label: 'Peer Discussions' },
+  { src: '/images/new_images/programs/sap-successfactors/team-meeting-indian.jpg', alt: 'Problem solving', label: 'Problem-Solving Sessions' },
+  { src: '/images/new_images/personas/enterprise-ld/conference-business-meeting.jpg', alt: 'Idea sharing', label: 'Idea Sharing & Mentoring' },
+  { src: '/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg', alt: 'Teamwork', label: 'Teamwork in Project Sims' },
 ];
 
 export default function CulturePage() {
@@ -39,7 +39,7 @@ export default function CulturePage() {
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&h=800&fit=crop&q=80"
+            src="/images/new_images/hero/team-working-together-1.jpg"
             alt="Culture at Axentia.AI"
             className="w-full h-full object-cover"
           />

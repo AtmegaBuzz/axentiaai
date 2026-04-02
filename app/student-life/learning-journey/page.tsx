@@ -28,7 +28,7 @@ const phases = [
     accent: 'text-brand-600',
     description:
       'Students start by understanding how real businesses work. They learn the basics of AI, enterprise systems, and how companies actually use technology to run operations. This stage builds the foundation for thinking and solving problems like a consultant.',
-    image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/programs/ai-foundation/professional-working-laptop.jpg',
     tags: ['Enterprise Systems', 'AI Basics', 'Business Context'],
   },
   {
@@ -40,7 +40,7 @@ const phases = [
     accent: 'text-purple-600',
     description:
       'Learning quickly turns into action. Students begin applying what they learn through exercises, documentation, and AI-assisted research. This is where concepts start turning into real skills.',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg',
     tags: ['Hands-on Exercises', 'Documentation', 'AI Research'],
   },
   {
@@ -52,7 +52,7 @@ const phases = [
     accent: 'text-indigo-600',
     description:
       'Students explore how industries like retail and supply chains actually operate. They see how enterprise systems, data, and AI support real business decisions. This helps them connect technology with real-world problems.',
-    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/programs/retail-fmcg/modern-retail-store.jpg',
     tags: ['Retail', 'Supply Chain', 'Industry AI'],
   },
   {
@@ -64,7 +64,7 @@ const phases = [
     accent: 'text-teal-600',
     description:
       'Students work on simulated consulting projects in small teams. They analyze problems, prepare structured deliverables, and present solutions. This phase builds confidence in working on real business challenges.',
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/personas/business-leaders/entrepreneurs-business-office.jpg',
     tags: ['Simulated Projects', 'Teamwork', 'Deliverables'],
   },
   {
@@ -76,7 +76,7 @@ const phases = [
     accent: 'text-accent-600',
     description:
       'The final stage focuses on preparing students for professional environments. They refine communication, structured thinking, and AI-powered productivity. By the end, students are ready to step into enterprise roles with confidence.',
-    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
+    image: '/images/new_images/cta/confident-businesswoman-smile.jpg',
     tags: ['Communication', 'AI Productivity', 'Enterprise Ready'],
   },
 ];
@@ -91,7 +91,7 @@ export default function LearningJourneyPage() {
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&h=900&fit=crop&q=80"
+            src="/images/new_images/personas/enterprise-ld/group-projector-training.jpg"
             alt="Learning Journey"
             className="w-full h-full object-cover"
           />

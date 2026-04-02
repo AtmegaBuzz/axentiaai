@@ -1,211 +1,156 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
-import { Play, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Star, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface Testimonial {
     name: string;
-    role: string;
-    company: string;
+    program: string;
     quote: string;
-    videoId: string;
+    image: string;
 }
 
 const testimonials: Testimonial[] = [
     {
         name: 'Charu Tyagi',
-        role: 'SAP SF Consultant',
-        company: 'Orane Consulting',
+        program: 'SAP SF Consultant',
         quote: 'DCAP offers the best classroom experience with experienced teachers from the SAP industry. This is exactly what I needed to enhance my skills and transition into a consulting career.',
-        videoId: 'tTpmml4ndWM',
+        image: '/images/testimonials/charu-tyagi.jpeg',
     },
     {
         name: 'Anjali Kaushik',
-        role: 'SAP ABAP Consultant',
-        company: 'Orane Consulting',
+        program: 'SAP ABAP Consultant',
         quote: 'As a CS graduate, I wanted to stand out from the crowd. Without a doubt, joining Axentia.AI was the right choice. I went from a fresher to a billable consultant in under a year.',
-        videoId: 'XX-Qx3yx3ZE',
+        image: '/images/testimonials/anjali-kaushik.jpeg',
     },
     {
         name: 'Madhav Jhawar',
-        role: 'SAP MM Consultant',
-        company: 'Orane Consulting',
+        program: 'SAP MM Consultant',
         quote: 'After AI emerged, every company wants employees trained in AI. Axentia.AI has been my supportive hand. The best thing is you get paid for the projects you complete.',
-        videoId: 'vM23wbWFL4E',
+        image: '/images/testimonials/madhav-jhawar.jpeg',
     },
     {
         name: 'Sakshi Patodi',
-        role: 'SAP FICO & ABAP Consultant',
-        company: 'Orane Consulting',
+        program: 'SAP FICO & ABAP Consultant',
         quote: 'I am not only trained in FICO now, but I also have exposure to every sector in SAP. DCAP is closing the real gap in the market — it is a truly recommended program.',
-        videoId: 'JbsyTIxOh6I',
+        image: '/images/testimonials/sakshi-patodi.jpeg',
     },
     {
         name: 'Deeksha',
-        role: 'SAP Trainee',
-        company: 'Axentia.AI',
+        program: 'SAP Trainee',
         quote: "Six weeks in, I'm thinking differently about enterprise problems — especially after understanding how AI fits into SAP workflows. I know I'm making real progress.",
-        videoId: 'bffdXIDsR3U',
+        image: '/images/testimonials/deeksha.jpeg',
     },
 ];
 
-/* ── individual card ─────────────────────────────────────────────── */
-function TestimonialCard({
-    t,
-    index,
-    total,
-    scrollYProgress,
-}: {
-    t: Testimonial;
-    index: number;
-    total: number;
-    scrollYProgress: MotionValue<number>;
-}) {
-    const isLast = index === total - 1;
-    const rangeStart = index / (total - 1);
-    const rangeEnd = (index + 1) / (total - 1);
+const col1 = [...testimonials, ...testimonials];
+const col2 = [...[...testimonials].reverse(), ...[...testimonials].reverse()];
 
-    /* Card shrinks and dims as the next one slides in, then hides completely */
-    const scale = useTransform(
-        scrollYProgress,
-        [rangeStart, rangeEnd],
-        [1, isLast ? 1 : 0.88],
-    );
-
-    const opacity = useTransform(
-        scrollYProgress,
-        isLast
-            ? [rangeStart, rangeEnd]
-            : [rangeStart, rangeEnd - 0.01, rangeEnd],
-        isLast
-            ? [1, 1]
-            : [1, 0.45, 0],
-    );
-
+function Stars() {
     return (
-        /*
-         * Sticky WRAPPER — full width, section bg (#f0edf8).
-         * This is what stacks. The section bg shows on the 10% side gaps,
-         * making the 80% white card visually "float" inside the section.
-         */
-        <div
-            className="sticky top-0 h-screen flex justify-center overflow-hidden"
-            style={{ zIndex: index + 1, background: 'transparent', paddingTop: '3rem' }}
-        >
-            {/*
-             * Inner card — 80% wide, white bg, sharp edges.
-             * Scale animation applies here so only the card shrinks,
-             * not the section bg strips on the sides.
-             */}
-            <motion.div
-                className="w-[80%] flex flex-col overflow-hidden bg-white"
-                style={{
-                    scale,
-                    opacity,
-                    transformOrigin: 'top center',
-                    height: 'calc(100vh - 3rem)',
-                }}
-            >
-                {/* ── top: counter + eyebrow ── */}
-                <div className="flex items-center justify-between px-10 pt-8 mb-1">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                        Testimonials
-                    </span>
-                    <span className="text-xs font-medium text-slate-400 tabular-nums">
-                        {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-                    </span>
-                </div>
+        <div className="flex gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+            ))}
+        </div>
+    );
+}
 
-                {/* ── "In session with" ── */}
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 text-center mb-1">
-                    In session with
-                </p>
+function Card({ t }: { t: Testimonial }) {
+    return (
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 shrink-0">
+            <Stars />
+            <p className="text-sm text-slate-600 leading-relaxed mb-5">{t.quote}</p>
+            <div className="flex items-center gap-3">
+                <Image
+                    src={t.image}
+                    alt={t.name}
+                    width={36}
+                    height={36}
+                    className="w-9 h-9 rounded-full object-cover"
+                />
+                <span className="text-sm font-bold text-slate-900">{t.name}</span>
+                <span className="w-px h-4 bg-slate-200" />
+                <span className="text-sm text-[#8A29AC] font-medium">{t.program}</span>
+            </div>
+        </div>
+    );
+}
 
-                {/* ── Big role ── */}
-                <h2
-                    className="font-black text-slate-900 tracking-tight leading-none text-center px-8 uppercase"
-                    style={{ fontSize: 'clamp(1.8rem, 4.5vw, 4.5rem)' }}
-                >
-                    {t.role}
-                </h2>
+export default function Testimonials() {
+    return (
+        <section className="bg-slate-50 py-20 md:py-28 overflow-hidden">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12">
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-10 lg:gap-16 items-center">
 
-                {/* ── content: text 30% | video 70% ── */}
-                <div className="grid min-h-0 mt-8" style={{ gridTemplateColumns: '30% 70%', flex: '1 1 0', maxHeight: 'calc(100% - 2rem)' }}>
-
-                    {/* Left: tag + role + quote + button */}
-                    <div className="flex flex-col px-10 pb-8 pt-4">
-                        <span
-                            className="inline-block px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest mb-4 w-fit"
-                            style={{ background: '#8A29AC', color: '#fff' }}
-                        >
-                            {t.company}
-                        </span>
-                        <p className="font-black text-slate-900 text-sm md:text-base uppercase leading-snug mb-4">
-                            {t.name}
+                    {/* Left: heading + stats */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <span className="text-sm font-semibold text-[#8A29AC] mb-4 block">Testimonials</span>
+                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight mb-3">
+                            What our students say about us
+                        </h2>
+                        <p className="text-sm text-slate-400 leading-relaxed mb-10">
+                            Real stories from real people who transformed their careers with Axentia.AI
                         </p>
-                        <p className="text-slate-500 text-sm leading-relaxed mb-6">
-                            &ldquo;{t.quote}&rdquo;
-                        </p>
-                        <a
-                            href={`https://www.youtube.com/watch?v=${t.videoId}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-3 px-6 py-3 font-bold text-sm text-slate-900 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-colors duration-200 w-fit"
-                        >
-                            View Video
-                            <ArrowRight className="w-4 h-4" />
-                        </a>
-                    </div>
 
-                    {/* Right: large video — natural 16:9 aspect ratio */}
-                    <div className="relative h-full overflow-hidden flex items-center">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            src={`https://img.youtube.com/vi/${t.videoId}/maxresdefault.jpg`}
-                            alt={`${t.name} video`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                        />
-                        {/* Square play button */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div
-                                className="w-16 h-16 flex items-center justify-center"
-                                style={{ background: '#F7C87A' }}
-                            >
-                                <Play className="w-6 h-6 fill-slate-900 text-slate-900 ml-1" />
+                        {/* Stats filler */}
+                        <div className="grid grid-cols-2 gap-4 mb-10">
+                            <div className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm">
+                                <p className="text-3xl font-black text-slate-900 tracking-tight">95%</p>
+                                <p className="text-xs text-slate-500 mt-1">Placement success rate</p>
+                            </div>
+                            <div className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm">
+                                <p className="text-3xl font-black text-slate-900 tracking-tight">4.9</p>
+                                <div className="flex items-center gap-1.5 mt-1">
+                                    <div className="flex gap-0.5">
+                                        {[...Array(5)].map((_, i) => (
+                                            <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                                        ))}
+                                    </div>
+                                    <span className="text-xs text-slate-500">avg rating</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <Link
+                            href="/outcomes"
+                            className="inline-flex items-center gap-2 bg-[#8A29AC] text-white text-sm font-bold py-3 px-6 rounded-full hover:bg-[#6B1D8E] transition-colors group"
+                        >
+                            View all testimonials
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </motion.div>
+
+                    {/* Right: 2 vertical scrolling columns */}
+                    <div className="relative h-[500px] md:h-[560px]">
+                        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-slate-50 to-transparent z-10 pointer-events-none" />
+                        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none" />
+
+                        <div className="grid grid-cols-2 gap-4 h-full overflow-hidden">
+                            <div className="relative overflow-hidden">
+                                <div className="flex flex-col gap-4 animate-scroll-up">
+                                    {col1.map((t, i) => (
+                                        <Card key={`col1-${i}`} t={t} />
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="relative overflow-hidden">
+                                <div className="flex flex-col gap-4 animate-scroll-down">
+                                    {col2.map((t, i) => (
+                                        <Card key={`col2-${i}`} t={t} />
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
-            </motion.div>
-        </div>
-    );
-}
-
-/* ── main component ───────────────────────────────────────────────── */
-export default function Testimonials() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const total = testimonials.length;
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ['start start', 'end end'],
-    });
-
-    return (
-        <section style={{ background: '#f0edf8' }}>
-            <div ref={containerRef} style={{ height: `${total * 100}vh` }}>
-                {testimonials.map((t, i) => (
-                    <TestimonialCard
-                        key={t.name}
-                        t={t}
-                        index={i}
-                        total={total}
-                        scrollYProgress={scrollYProgress}
-                    />
-                ))}
             </div>
         </section>
     );

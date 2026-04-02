@@ -13,22 +13,22 @@ type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 const valuePropCards = [
     {
-        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop&q=80',
+        image: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg',
         title: 'Pre-trained, Deployment-Ready Talent',
         desc: 'Our graduates arrive with 10 months of hands-on SAP training and apprenticeship experience, not just classroom theory.',
     },
     {
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop&q=80',
+        image: '/images/new_images/offerings/enterprise-ai-transformation.jpg',
         title: 'AI-Era Consulting Capability',
         desc: 'Every program integrates AI tools and thinking into the SAP consulting process, so graduates are prepared for what enterprises actually need.',
     },
     {
-        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&q=80',
+        image: '/images/new_images/about/professional-woman-workspace.jpg',
         title: 'Backed by 25+ Years of Delivery',
         desc: 'Axentia.AI is built on Orane Consulting\'s enterprise SAP legacy, giving us unique credibility and curriculum depth.',
     },
     {
-        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop&q=80',
+        image: '/images/new_images/personas/business-leaders/professionals-meeting.jpg',
         title: 'Placement-First by Design',
         desc: 'Our model is structured around outcomes. Every cohort is prepared specifically for enterprise deployment, not generic employability.',
     },

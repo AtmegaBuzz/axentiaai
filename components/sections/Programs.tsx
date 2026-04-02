@@ -35,7 +35,7 @@ const programs: Program[] = [
             { label: 'Format', value: 'Structured Learning', Icon: MonitorPlay },
             { label: 'Prereq', value: 'None Required', Icon: BookOpen },
         ],
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/programs/ai-foundation/professional-working-laptop.jpg',
     },
     {
         id: 'sap-sf',
@@ -51,7 +51,7 @@ const programs: Program[] = [
             { label: 'Approach', value: 'Hands-on Practice', Icon: Target },
             { label: 'Format', value: 'Instructor-led', Icon: MonitorPlay },
         ],
-        image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/programs/sap-successfactors/team-meeting-indian.jpg',
     },
     {
         id: 'retail-fmcg',
@@ -67,7 +67,7 @@ const programs: Program[] = [
             { label: 'Decisions', value: 'Real-world Scenarios', Icon: Brain },
             { label: 'Format', value: 'Applied Learning', Icon: MonitorPlay },
         ],
-        image: 'https://images.unsplash.com/photo-1601598851547-4302969d0614?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/programs/retail-fmcg/modern-retail-store.jpg',
     },
     {
         id: 'energy-utilities',
@@ -83,7 +83,7 @@ const programs: Program[] = [
             { label: 'Industry', value: 'Energy Sector', Icon: Briefcase },
             { label: 'Format', value: 'Applied Learning', Icon: MonitorPlay },
         ],
-        image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/programs/energy-utilities/wind-turbines.jpg',
     },
     {
         id: 'workforce-accelerator',
@@ -99,7 +99,7 @@ const programs: Program[] = [
             { label: 'Experience', value: 'Client-ready', Icon: Layers },
             { label: 'Outcome', value: 'Enterprise Hiring', Icon: FileText },
         ],
-        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80',
+        image: '/images/new_images/programs/sap-workforce/team-collaboration-laptops.jpg',
     },
 ];
 

@@ -33,28 +33,28 @@ const leadershipTeam = [
         role: 'Founder & Director',
         bio: 'With decades of experience leading enterprise SAP implementations across global markets, our founder brings the vision and depth that shapes every program at Axentia.AI.',
         initial: 'A',
-        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face&q=80',
+        image: '/images/new_images/about/team/rajesh-kumar.jpg',
     },
     {
         name: 'To Be Announced',
         role: 'Head of Academics',
         bio: 'Responsible for curriculum design and pedagogical excellence, ensuring our programs stay aligned with the evolving demands of the enterprise consulting industry.',
         initial: 'B',
-        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face&q=80',
+        image: '/images/new_images/cta/confident-businesswoman-smile.jpg',
     },
     {
         name: 'To Be Announced',
         role: 'Director of Enterprise Relations',
         bio: 'Builds and maintains our network of hiring partners, apprenticeship hosts, and enterprise collaborators across India and globally.',
         initial: 'C',
-        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face&q=80',
+        image: '/images/new_images/about/team/vikram-singh.jpg',
     },
     {
         name: 'To Be Announced',
         role: 'Head of Placement',
         bio: 'Leads our placement-first approach — from resume building and mock interviews to direct introductions with enterprise hiring teams.',
         initial: 'D',
-        image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face&q=80',
+        image: '/images/new_images/cta/woman-blazer-modern-building.jpg',
     },
 ];
 
