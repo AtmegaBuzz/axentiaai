@@ -42,7 +42,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Extends this across teams in a structured way, aligned to how the organisation actually works.',
         points: ['Programs built for your setup', 'Scales across teams', 'Linked to business outcomes'],
-        image: '/images/Business-Leaders.jpg',
+        image: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg',
         imageAlt: 'Enterprise training session',
     },
 ];

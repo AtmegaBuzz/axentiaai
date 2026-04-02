@@ -35,7 +35,7 @@ const programs: Program[] = [
             { label: 'Format', value: 'Structured Learning', Icon: MonitorPlay },
             { label: 'Prereq', value: 'None Required', Icon: BookOpen },
         ],
-        image: '/images/new_images/programs/ai-foundation/professional-working-laptop.jpg',
+        image: '/images/ai-academy.jpg',
     },
     {
         id: 'sap-sf',
@@ -67,7 +67,7 @@ const programs: Program[] = [
             { label: 'Decisions', value: 'Real-world Scenarios', Icon: Brain },
             { label: 'Format', value: 'Applied Learning', Icon: MonitorPlay },
         ],
-        image: '/images/new_images/programs/retail-fmcg/modern-retail-store.jpg',
+        image: '/images/retail-academy.webp',
     },
     {
         id: 'energy-utilities',
@@ -83,7 +83,7 @@ const programs: Program[] = [
             { label: 'Industry', value: 'Energy Sector', Icon: Briefcase },
             { label: 'Format', value: 'Applied Learning', Icon: MonitorPlay },
         ],
-        image: '/images/new_images/programs/energy-utilities/wind-turbines.jpg',
+        image: '/images/industry.jpg',
     },
     {
         id: 'workforce-accelerator',
@@ -99,7 +99,7 @@ const programs: Program[] = [
             { label: 'Experience', value: 'Client-ready', Icon: Layers },
             { label: 'Outcome', value: 'Enterprise Hiring', Icon: FileText },
         ],
-        image: '/images/new_images/programs/sap-workforce/team-collaboration-laptops.jpg',
+        image: '/images/workforce.jpg',
     },
 ];
 
