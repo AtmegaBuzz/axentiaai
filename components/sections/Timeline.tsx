@@ -63,12 +63,10 @@ export function HowItWorks() {
 
   const [activeStep, setActiveStep] = useState(-1)
 
-  /* Map vertical scroll to horizontal card movement */
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-75%'])
-  /* Track line progress */
-  const trackWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+  /* Track vertical line progress */
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
-  /* Light up dots as the line reaches them */
+  /* Light up steps as the line reaches them */
   const dotThresholds = timelineItems.map((_, i) => i / (timelineItems.length - 1))
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     let newActive = -1
@@ -79,25 +77,20 @@ export function HowItWorks() {
   })
 
   return (
-    /* Tall outer wrapper — the extra height is what the user scrolls through.
-       The visible content is pinned with sticky so it feels like the page
-       "pauses" while the cards scroll horizontally. */
     <div ref={sectionRef} style={{ height: '300vh' }}>
-      <section className="sticky top-0 h-screen bg-slate-50 overflow-hidden flex flex-col justify-center">
+      <section className="sticky top-0 h-screen bg-white overflow-hidden flex flex-col justify-center">
         <div className="container mx-auto px-4 md:px-8 xl:px-12">
 
           {/* Header */}
-          <div className="mb-10 md:mb-14">
-            <motion.p
+          <div className="mb-12 md:mb-16 text-center">
+            <motion.span
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-sm font-semibold uppercase tracking-widest mb-3"
+              className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-600 border border-slate-200 bg-slate-50 mb-4"
             >
-              <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-600 border border-slate-200 bg-slate-100">
-                How It Works
-              </span>
-            </motion.p>
+              How It Works
+            </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -110,84 +103,74 @@ export function HowItWorks() {
             </motion.h2>
           </div>
 
-          {/* Horizontal track line */}
-          <div className="relative mb-8">
-            {/* Dots row */}
-            <div className="relative flex justify-between">
-              {timelineItems.map((item, i) => {
-                const Icon = item.icon
-                const isActive = i <= activeStep
-                return (
-                  <div key={item.step} className="flex flex-col items-center gap-2 z-10">
+          {/* Timeline grid: 4 columns with vertical line in center */}
+          <div className="relative grid grid-cols-4 gap-0">
+
+            {/* Vertical center line (spans all rows) */}
+            <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-slate-200 hidden md:block" />
+            <motion.div
+              className="absolute left-1/2 top-0 -translate-x-1/2 w-px bg-gradient-to-b from-brand-500 to-brand-400 hidden md:block"
+              style={{ height: lineHeight }}
+            />
+
+            {/* Step cards — each occupies 1 of 4 columns */}
+            {timelineItems.map((item, i) => {
+              const Icon = item.icon
+              const isActive = i <= activeStep
+
+              return (
+                <motion.div
+                  key={item.step}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08, duration: 0.5 }}
+                  className="relative flex flex-col"
+                >
+                  {/* Step number + icon */}
+                  <div className="flex items-center gap-3 mb-4">
                     <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-500"
+                      className="w-10 h-10 flex items-center justify-center transition-all duration-500"
                       style={{
-                        border: `3px solid ${isActive ? 'var(--color-brand-500, #C010DA)' : '#e2e8f0'}`,
+                        border: `2px solid ${isActive ? 'var(--color-brand-500, #C010DA)' : '#e2e8f0'}`,
                         backgroundColor: isActive ? 'var(--color-brand-500, #C010DA)' : '#fff',
-                        boxShadow: isActive
-                          ? '0 0 0 5px rgba(192, 16, 218, 0.15), 0 0 16px rgba(192, 16, 218, 0.3)'
-                          : '0 1px 3px rgba(0,0,0,0.06)',
                       }}
                     >
-                      <Icon className="w-4 h-4 transition-colors duration-500" style={{ color: isActive ? '#fff' : '#94a3b8' }} strokeWidth={2} />
-                    </div>
-                    <span
-                      className="text-[9px] font-bold uppercase tracking-wider whitespace-nowrap transition-colors duration-500"
-                      style={{ color: isActive ? 'var(--color-brand-500, #C010DA)' : '#94a3b8' }}
-                    >
-                      Step {item.step}
-                    </span>
-                  </div>
-                )
-              })}
-            </div>
-            {/* Lines — positioned to cross through the center of the dots (18px = half of 36px dot) */}
-            <div className="absolute left-0 right-0 top-[18px] -translate-y-1/2 h-[3px] bg-slate-200" />
-            <motion.div
-              className="absolute left-0 top-[18px] -translate-y-1/2 h-[3px]"
-              style={{
-                width: trackWidth,
-                background: 'linear-gradient(to right, var(--color-brand-400, #D44DC8), var(--color-brand-600, #A20EBF))',
-              }}
-            />
-          </div>
-
-          {/* Scroll-driven horizontal cards */}
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-6"
-              style={{ x }}
-            >
-              {timelineItems.map((item) => {
-                const Icon = item.icon
-                return (
-                  <div key={item.step} className="flex-shrink-0 w-[320px] md:w-[380px] flex flex-col">
-                    {/* Image */}
-                    <div className="relative h-48 rounded-xl overflow-hidden mb-4">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
+                      <Icon
+                        className="w-4 h-4 transition-colors duration-500"
+                        style={{ color: isActive ? '#fff' : '#94a3b8' }}
+                        strokeWidth={2}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                      <span className="absolute bottom-3 left-3 text-xs font-mono tracking-wider uppercase text-white/80">
-                        {item.period}
+                    </div>
+                    <div>
+                      <span
+                        className="text-[9px] font-bold uppercase tracking-widest block transition-colors duration-500"
+                        style={{ color: isActive ? 'var(--color-brand-500, #C010DA)' : '#94a3b8' }}
+                      >
+                        Step {item.step}
                       </span>
+                      <span className="text-[10px] font-semibold text-slate-400 tracking-wide">{item.period}</span>
                     </div>
-                    {/* Content */}
-                    <div className="flex items-start gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center shrink-0 mt-0.5">
-                        <Icon className="w-4 h-4 text-brand-600" strokeWidth={2} />
-                      </div>
-                      <h3 className="text-base font-bold text-slate-900 leading-snug">{item.title}</h3>
-                    </div>
-                    <p className="text-sm text-slate-500 leading-relaxed pl-11">{item.description}</p>
                   </div>
-                )
-              })}
-            </motion.div>
+
+                  {/* Image */}
+                  <div className="relative h-32 overflow-hidden mb-4">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-sm font-bold text-slate-900 leading-snug mb-2 tracking-tight">{item.title}</h3>
+                  <p className="text-xs text-slate-500 leading-relaxed pr-3">{item.description}</p>
+                </motion.div>
+              )
+            })}
           </div>
 
         </div>
