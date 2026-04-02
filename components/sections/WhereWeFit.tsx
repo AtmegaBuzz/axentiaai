@@ -18,7 +18,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Brings AI into the flow of systems already in place, so improvements show up in how the business runs day to day.',
         points: ['Works with existing SAP landscape', 'Cuts manual load across functions', 'Speeds up decision-making'],
-        image: '/images/new_images/personas/cio-cto/man-presenting-office.jpg',
+        image: '/images/cio-cto.jpg',
         imageAlt: 'CTO reviewing enterprise systems',
     },
     {
@@ -26,7 +26,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Shapes how teams adapt, learn, and take ownership as new ways of working begin to settle in.',
         points: ['AI within HR workflows', 'Upskilling tied to actual roles', 'Capability built internally'],
-        image: '/images/new_images/personas/chro/standing-presenting-team.jpg',
+        image: '/images/chro.webp',
         imageAlt: 'HR leader in a meeting',
     },
     {
@@ -34,7 +34,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Focuses on where work slows down or gets messy and introduces changes that make it smoother and easier to run.',
         points: ['Use cases tied to real problems', 'Less friction in execution', 'Clear movement in outcomes'],
-        image: '/images/new_images/personas/business-leaders/entrepreneurs-business-office.jpg',
+        image: '/images/Business-Leaders.jpg',
         imageAlt: 'Business leaders collaborating',
     },
     {
@@ -42,7 +42,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Extends this across teams in a structured way, aligned to how the organisation actually works.',
         points: ['Programs built for your setup', 'Scales across teams', 'Linked to business outcomes'],
-        image: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg',
+        image: '/images/Business-Leaders.jpg',
         imageAlt: 'Enterprise training session',
     },
 ];
