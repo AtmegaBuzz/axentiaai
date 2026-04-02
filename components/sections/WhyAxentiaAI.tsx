@@ -212,24 +212,6 @@ export function WhyAxentiaAI() {
                     </div>
                 </div>
 
-                {/* Bottom: Partner logos strip */}
-                <div className="border-t border-slate-200 pt-10">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-6 text-center">
-                        Trusted Partners
-                    </p>
-                    <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-                        {partnerLogos.map((logo) => (
-                            <Image
-                                key={logo.alt}
-                                src={logo.src}
-                                alt={logo.alt}
-                                width={logo.width}
-                                height={logo.height}
-                                className="h-7 md:h-8 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all"
-                            />
-                        ))}
-                    </div>
-                </div>
 
             </div>
         </section>
