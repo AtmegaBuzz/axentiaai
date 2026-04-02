@@ -5,10 +5,16 @@ import { Linkedin, ArrowUpRight } from 'lucide-react';
 
 const leaders = [
     {
+        name: 'Gauri Gupta',
+        role: 'Director',
+        company: 'Axentia AI',
+        photo: '/images/team/gauri-gupta.jpeg',
+        linkedin: 'https://in.linkedin.com/in/gauri-gupta-6768b21b5',
+    },
+    {
         name: 'Manuj Gupta',
         role: 'Senior Advisor & Mentor',
         company: 'Axentia AI | Orane Consulting',
-        bio: 'Seasoned enterprise leader guiding strategic direction and mentoring the next generation of AI and SAP professionals.',
         photo: '/images/team/manoj-gupta.jpeg',
         linkedin: 'https://www.linkedin.com/in/manuj123/',
     },
@@ -16,31 +22,13 @@ const leaders = [
         name: 'Arun Rajput',
         role: 'VP - Business Growth & Alliance',
         company: 'Axentia AI',
-        bio: 'Drives enterprise partnerships and business expansion, building alliances that accelerate AI adoption across industries.',
         photo: '/images/team/arun-rajput.png',
         linkedin: 'https://in.linkedin.com/in/arun-rajput-65a3925',
-    },
-    {
-        name: 'Dr. Naresh Pathak',
-        role: 'Advisor',
-        company: 'Axentia AI',
-        bio: 'Brings deep academic and industry expertise to shape the strategic vision and quality standards of the organisation.',
-        photo: '/images/team/Naresh-Kumar.jpg',
-        linkedin: 'https://in.linkedin.com/in/nkp74',
-    },
-    {
-        name: 'Gauri Gupta',
-        role: 'Director - Operations',
-        company: 'Axentia AI',
-        bio: 'Oversees day-to-day operations ensuring delivery excellence, process efficiency, and seamless programme execution.',
-        photo: '/images/team/gauri-gupta.jpeg',
-        linkedin: 'https://in.linkedin.com/in/gauri-gupta-6768b21b5',
     },
     {
         name: 'Devlina Sarkar',
         role: 'Brand & Communication Manager',
         company: 'Axentia AI',
-        bio: 'Shapes the brand narrative and communication strategy, connecting the Axentia.AI story with enterprises and talent alike.',
         photo: '/images/team/devlina-sarkar.jpeg',
         linkedin: 'https://www.linkedin.com/in/devlina-sarkar-081401229/',
     },
@@ -48,7 +36,6 @@ const leaders = [
         name: 'Nadeem Farooq',
         role: 'Senior Manager - Business Growth & Alliance',
         company: 'Axentia AI',
-        bio: 'Leads enterprise outreach and alliance development, strengthening the bridge between Axentia.AI and global partners.',
         photo: '/images/team/nadeem.jpeg',
         linkedin: 'https://in.linkedin.com/in/nadeem-farooq-62598270',
     },
@@ -153,12 +140,12 @@ export function Leaders() {
                                 {/* Gradient overlay for text legibility */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
 
-                                {/* LinkedIn icon — top right */}
+                                {/* LinkedIn icon — top right, always visible */}
                                 <a
                                     href={leader.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/10 text-white/60 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200 opacity-0 group-hover:opacity-100"
+                                    className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/10 text-white/60 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200"
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <Linkedin className="w-4 h-4" />
@@ -181,12 +168,6 @@ export function Leaders() {
                                 </div>
                             </div>
 
-                            {/* Bio below photo */}
-                            <div className="px-5 py-4 border-t border-white/[0.06]">
-                                <p className="text-xs text-white/45 leading-relaxed">
-                                    {leader.bio}
-                                </p>
-                            </div>
                         </motion.div>
                     ))}
                 </div>
