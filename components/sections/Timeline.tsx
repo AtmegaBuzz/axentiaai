@@ -79,9 +79,9 @@ export function HowItWorks() {
             <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200 bg-slate-50 mb-3">
               How It Works
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-snug">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
               From first conversation to{' '}
-              <span className="bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+              <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                 operating at scale
               </span>
             </h2>

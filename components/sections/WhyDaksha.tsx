@@ -50,11 +50,11 @@ export function WhyAxentiaAI() {
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
                 <div className="max-w-3xl mb-14">
                     <p className="text-sm font-semibold uppercase tracking-widest text-accent-600 mb-3">Why Axentia.AI Works</p>
-                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4">
                         Built by consultants,{' '}
-                        <span className="font-cursive italic text-brand-600 text-[1.1em]">for careers.</span>
+                        <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">for careers.</span>
                     </h2>
-                    <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
+                    <p className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-2xl">
                         We train you the way enterprise teams actually work — not how textbooks describe it.
                     </p>
                 </div>

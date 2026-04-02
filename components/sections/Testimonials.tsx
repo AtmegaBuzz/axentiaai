@@ -91,7 +91,7 @@ export default function Testimonials() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#8A29AC] tracking-tight leading-tight mb-10 uppercase">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#8A29AC] tracking-tight leading-tight mb-10 uppercase">
                             Testimonials
                         </h2>
 

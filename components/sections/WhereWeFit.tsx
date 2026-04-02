@@ -148,13 +148,12 @@ export function WhereWeFit() {
                         </div>
 
                         <h2
-                            className="font-black text-slate-900 tracking-tight leading-[0.95] mb-4"
-                            style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
+                            className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4"
                         >
                             Where Axentia.AI{' '}
-                            <span className="text-accent-300">fits?</span>
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">fits?</span>
                         </h2>
-                        <p className="text-slate-600 text-sm leading-relaxed max-w-md">
+                        <p className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-md">
                             For enterprises and individuals ready to scale with AI
                         </p>
                     </motion.div>

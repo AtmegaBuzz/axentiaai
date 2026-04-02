@@ -158,10 +158,10 @@ export function IndustryUseCases() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.06 }}
-                    className="text-2xl md:text-3xl lg:text-[2.6rem] font-bold text-slate-900 tracking-tighter leading-tight mb-5 whitespace-nowrap"
+                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-5"
                 >
                     Where AI creates{' '}
-                    <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                    <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                         measurable impact
                     </span>{' '}
                     inside your industry
@@ -173,7 +173,7 @@ export function IndustryUseCases() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-slate-500 text-base md:text-lg leading-relaxed max-w-2xl"
+                        className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-2xl"
                     >
                         Every use case runs inside your existing SAP environment shaping how work is carried out across operations, finance, supply chains, and workforce management.
                     </motion.p>

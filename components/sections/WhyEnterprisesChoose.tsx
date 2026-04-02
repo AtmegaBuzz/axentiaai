@@ -48,11 +48,10 @@ export function WhyEnterprisesChoose() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.06 }}
-                        className="font-black text-slate-900 tracking-tight leading-[1.05] mb-5"
-                        style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.4rem)' }}
+                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-5"
                     >
                         Why enterprises choose{' '}
-                        <span className="bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                        <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                             Axentia.AI
                         </span>
                     </motion.h2>
@@ -61,7 +60,7 @@ export function WhyEnterprisesChoose() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-sm text-slate-500 leading-relaxed max-w-2xl"
+                        className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-2xl"
                     >
                         Built to last AI that runs in live environments, owned by your teams, and sustained over time.
                     </motion.p>

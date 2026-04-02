@@ -208,7 +208,7 @@ export function Programs() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.05 }}
-                            className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3"
+                            className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight mb-3"
                         >
                             Certified capability trained for real outcomes
                         </motion.h2>

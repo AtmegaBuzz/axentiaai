@@ -35,10 +35,10 @@ export function WhyChooseUs() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.08 }}
-                            className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-6 leading-tight"
+                            className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-6"
                         >
                             Why{' '}
-                            <span className="font-cursive italic text-brand-600 text-[1.1em]">Choose US</span>
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">Choose US</span>
                             ?
                         </motion.h2>
 

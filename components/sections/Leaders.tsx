@@ -116,7 +116,7 @@ export function Leaders() {
                             className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight mb-4"
                         >
                             Backbone of{' '}
-                            <span className="bg-gradient-to-r from-brand-400 to-brand-300 bg-clip-text text-transparent">
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                                 Axentia.AI
                             </span>
                         </motion.h2>
@@ -125,7 +125,7 @@ export function Leaders() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-base md:text-lg text-white/50 max-w-xl leading-relaxed"
+                            className="text-xs md:text-sm text-white/50 max-w-xl leading-relaxed"
                         >
                             Industry veterans building the next generation for AI Era
                         </motion.p>
