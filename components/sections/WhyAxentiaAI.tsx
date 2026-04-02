@@ -5,6 +5,7 @@ import { usePerformance } from '@/lib/usePerformance';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+import { Globe2, Shield, Award, Users } from 'lucide-react';
 
 const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
 const Globe = dynamic(() => import('@/components/ui/Globe').then(m => ({ default: m.Globe })), { ssr: false });
@@ -46,6 +47,13 @@ const certifications = [
 
 const regionTags = ['India', 'Middle East', 'Africa', 'South East Asia'];
 
+const stats = [
+    { end: 50,  suffix: '+', label: 'Enterprises', icon: Globe2 },
+    { end: 300, suffix: '+', label: 'Consultants', icon: Users },
+    { end: 16,  suffix: '+', label: 'Years', icon: Shield },
+    { end: 4,   suffix: '',  label: 'Regions', icon: Award },
+];
+
 export function TrustedBy() {
     return null;
 }
@@ -55,120 +63,101 @@ export function WhyAxentiaAI() {
     const { tier } = usePerformance();
     const isLowEnd = tier === 'low';
 
-    const stats = [
-        { end: 50,  suffix: '+', label: 'Enterprises served globally', sub: 'Across SAP, AI/ML & ERP verticals' },
-        { end: 300, suffix: '+', label: 'Certified professionals', sub: 'Trained & deployed worldwide' },
-    ];
-
     return (
         <section
             id="why-axentiaai"
-            className="relative overflow-hidden animate-gradient-loop -mt-[100vh] rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.15)]"
+            className="relative overflow-hidden -mt-[100vh] rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.15)]"
             style={{
-                backgroundImage: 'linear-gradient(135deg, #f8fafc 0%, #faf5ff 25%, #f1f5f9 50%, #fef8ec 75%, #f8fafc 100%)',
+                background: '#0f172a',
                 position: 'relative',
                 zIndex: 10,
             }}
         >
-            {/* FloatingLines WebGL background — skipped on low-end devices */}
-            {!isLowEnd && (
-                <div className="absolute inset-0 z-0 opacity-60 overflow-hidden">
-                    <FloatingLines
-                        linesGradient={['#C010DA', '#E473BA', '#F3B15F', '#F7C87A', '#8929AC', '#58179B']}
-                        enabledWaves={['top', 'middle', 'bottom']}
-                        lineCount={[4, 5, 3]}
-                        lineDistance={[4, 5, 4]}
-                        bendRadius={5}
-                        bendStrength={-0.5}
-                        interactive={true}
-                        parallax={true}
-                        parallaxStrength={0.15}
-                        animationSpeed={0.8}
-                    />
-                </div>
-            )}
+            {/* Subtle grid */}
+            <div
+                className="absolute inset-0 z-0 opacity-[0.04]"
+                style={{
+                    backgroundImage: 'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)',
+                    backgroundSize: '80px 80px',
+                }}
+            />
+
+            {/* Brand accent glow */}
+            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-brand-500/5 rounded-full blur-[120px] pointer-events-none" />
 
             {/* ── Content ── */}
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 py-16 md:py-24">
-                <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 py-20 md:py-28">
 
-                    {/* Left: text content */}
+                {/* Top: Tag + Heading + Description */}
+                <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-start mb-16 md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                     >
-                        <span className="inline-flex items-center gap-2 px-3 py-1 border border-[#8A29AC]/20 bg-[#8A29AC]/8 text-[#8A29AC] text-[10px] font-bold uppercase tracking-widest mb-5">
+                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-accent-300 border border-accent-300/20 bg-accent-300/8">
                             Enterprise Heritage
                         </span>
                         <h2
-                            className="font-black text-slate-900 tracking-tight leading-[1.1] mb-4"
-                            style={{ fontSize: 'clamp(1.4rem, 3vw, 2.8rem)' }}
+                            className="font-bold text-white tracking-tight leading-[1.1] mb-5"
+                            style={{ fontSize: 'clamp(1.6rem, 3vw, 2.8rem)' }}
                         >
-                            The AI-enforced legacy of<br />
+                            The AI-enforced legacy of{' '}
                             <span className="text-[#00A3E5]">Orane Consulting</span>
                         </h2>
-                        <p className="text-sm text-slate-600 leading-relaxed mb-8 max-w-lg">
+                        <p className="text-sm text-slate-400 leading-relaxed max-w-lg">
                             Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
                         </p>
-
-                        {/* Stats row */}
-                        <div className="flex items-baseline gap-10 mb-8">
-                            {stats.map((stat, i) => (
-                                <div key={stat.label}>
-                                    <AnimatedCounter
-                                        end={stat.end}
-                                        suffix={stat.suffix}
-                                        duration={1600}
-                                        className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight tabular-nums"
-                                    />
-                                    <p className="text-xs font-semibold text-slate-700 mt-1">{stat.label}</p>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Certification badge cards */}
-                        <div className="flex flex-wrap items-start gap-3 pt-6 border-t border-slate-200/60">
-                            {certifications.map((cert, i) => (
-                                <motion.div
-                                    key={cert.name}
-                                    initial={{ opacity: 0, y: 12 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.08 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
-                                    className="relative flex flex-col items-center w-[80px] md:w-[90px]"
-                                >
-                                    <div
-                                        className="w-full bg-white border border-slate-200 shadow-sm flex flex-col items-center px-2 pt-2.5 pb-5"
-                                        style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)' }}
-                                    >
-                                        <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 text-center leading-tight">
-                                            {cert.name}
-                                        </span>
-                                        <Image
-                                            src={cert.file}
-                                            alt={cert.name}
-                                            width={44}
-                                            height={36}
-                                            className="h-7 md:h-8 w-auto object-contain"
-                                            unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
-                                        />
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
                     </motion.div>
 
-                    {/* Right: Globe + region tags */}
+                    {/* Stats grid */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="grid grid-cols-2 gap-3"
+                    >
+                        {stats.map((stat, i) => {
+                            const Icon = stat.icon;
+                            return (
+                                <motion.div
+                                    key={stat.label}
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.1 + i * 0.06 }}
+                                    className="bg-white/[0.04] border border-white/[0.08] p-5 flex flex-col"
+                                >
+                                    <div className="flex items-center justify-between mb-3">
+                                        <div className="w-8 h-8 bg-brand-500/15 flex items-center justify-center">
+                                            <Icon className="w-4 h-4 text-brand-400" strokeWidth={2} />
+                                        </div>
+                                        <AnimatedCounter
+                                            end={stat.end}
+                                            suffix={stat.suffix}
+                                            duration={1600}
+                                            className="text-2xl font-black text-white tracking-tight tabular-nums"
+                                        />
+                                    </div>
+                                    <span className="text-xs text-slate-400 font-medium">{stat.label}</span>
+                                </motion.div>
+                            );
+                        })}
+                    </motion.div>
+                </div>
+
+                {/* Middle: Globe + Region tags */}
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-center mb-16 md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.92 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.15 }}
+                        transition={{ type: 'spring', stiffness: 80, damping: 20 }}
                         className="flex flex-col items-center"
                     >
-                        <div className="relative w-full aspect-square max-w-[520px]">
+                        <div className="relative w-full aspect-square max-w-[420px]">
                             <Globe className="opacity-90" />
                         </div>
                         <div className="flex flex-wrap justify-center gap-2 mt-4">
@@ -178,8 +167,8 @@ export function WhyAxentiaAI() {
                                     initial={{ opacity: 0, y: 8 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: 0.4 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
-                                    className="bg-white/25 backdrop-blur-sm text-[11px] font-bold text-slate-600 px-3 py-1.5 rounded-md border border-white/40 shadow-sm"
+                                    transition={{ delay: 0.3 + i * 0.06 }}
+                                    className="bg-white/[0.06] text-[11px] font-bold text-slate-300 px-3 py-1.5 border border-white/[0.08]"
                                 >
                                     {name}
                                 </motion.span>
@@ -187,10 +176,62 @@ export function WhyAxentiaAI() {
                         </div>
                     </motion.div>
 
+                    {/* Certifications grid */}
+                    <div>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4 block">
+                            Certified &amp; Recognised
+                        </span>
+                        <div className="grid grid-cols-2 gap-3">
+                            {certifications.map((cert, i) => (
+                                <motion.div
+                                    key={cert.name}
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.08 + i * 0.06 }}
+                                    className="bg-white/[0.04] border border-white/[0.08] p-5 flex flex-col items-center text-center hover:bg-white/[0.07] transition-colors"
+                                >
+                                    <div className="h-10 flex items-center justify-center mb-3">
+                                        <Image
+                                            src={cert.file}
+                                            alt={cert.name}
+                                            width={60}
+                                            height={40}
+                                            className="h-8 w-auto object-contain brightness-0 invert opacity-70"
+                                            unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
+                                        />
+                                    </div>
+                                    <h4 className="text-sm font-bold text-white mb-1">{cert.name}</h4>
+                                    <p className="text-[10px] text-slate-500 leading-snug">{cert.tagline}</p>
+                                    <span className="mt-3 inline-block text-[8px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8 px-2 py-0.5">
+                                        {cert.badgeText}
+                                    </span>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
+
+                {/* Bottom: Partner logos strip */}
+                <div className="border-t border-white/[0.08] pt-10">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-6 text-center">
+                        Trusted Partners
+                    </p>
+                    <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                        {partnerLogos.map((logo) => (
+                            <Image
+                                key={logo.alt}
+                                src={logo.src}
+                                alt={logo.alt}
+                                width={logo.width}
+                                height={logo.height}
+                                className="h-7 md:h-8 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-70 transition-opacity"
+                            />
+                        ))}
+                    </div>
+                </div>
+
             </div>
-
-
         </section>
     );
 }
