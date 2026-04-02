@@ -68,16 +68,16 @@ export function WhyAxentiaAI() {
             id="why-axentiaai"
             className="relative overflow-hidden -mt-[100vh] rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.15)]"
             style={{
-                background: '#0f172a',
+                background: '#f8fafc',
                 position: 'relative',
                 zIndex: 10,
             }}
         >
             {/* Subtle grid */}
             <div
-                className="absolute inset-0 z-0 opacity-[0.04]"
+                className="absolute inset-0 z-0 opacity-[0.03]"
                 style={{
-                    backgroundImage: 'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)',
+                    backgroundImage: 'linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px)',
                     backgroundSize: '80px 80px',
                 }}
             />
@@ -96,17 +96,17 @@ export function WhyAxentiaAI() {
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                     >
-                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-accent-300 border border-accent-300/20 bg-accent-300/8">
+                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8">
                             Enterprise Heritage
                         </span>
                         <h2
-                            className="font-bold text-white tracking-tight leading-[1.1] mb-5"
+                            className="font-bold text-slate-900 tracking-tight leading-[1.1] mb-5"
                             style={{ fontSize: 'clamp(1.6rem, 3vw, 2.8rem)' }}
                         >
                             The AI-enforced legacy of{' '}
                             <span className="text-[#00A3E5]">Orane Consulting</span>
                         </h2>
-                        <p className="text-sm text-slate-400 leading-relaxed max-w-lg">
+                        <p className="text-sm text-slate-500 leading-relaxed max-w-lg">
                             Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
                         </p>
                     </motion.div>
@@ -128,20 +128,20 @@ export function WhyAxentiaAI() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.1 + i * 0.06 }}
-                                    className="bg-white/[0.04] border border-white/[0.08] p-5 flex flex-col"
+                                    className="bg-white border border-slate-200 p-5 flex flex-col shadow-sm"
                                 >
                                     <div className="flex items-center justify-between mb-3">
-                                        <div className="w-8 h-8 bg-brand-500/15 flex items-center justify-center">
-                                            <Icon className="w-4 h-4 text-brand-400" strokeWidth={2} />
+                                        <div className="w-8 h-8 bg-brand-500/10 flex items-center justify-center">
+                                            <Icon className="w-4 h-4 text-brand-600" strokeWidth={2} />
                                         </div>
                                         <AnimatedCounter
                                             end={stat.end}
                                             suffix={stat.suffix}
                                             duration={1600}
-                                            className="text-2xl font-black text-white tracking-tight tabular-nums"
+                                            className="text-2xl font-black text-slate-900 tracking-tight tabular-nums"
                                         />
                                     </div>
-                                    <span className="text-xs text-slate-400 font-medium">{stat.label}</span>
+                                    <span className="text-xs text-slate-500 font-medium">{stat.label}</span>
                                 </motion.div>
                             );
                         })}
@@ -168,7 +168,7 @@ export function WhyAxentiaAI() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.3 + i * 0.06 }}
-                                    className="bg-white/[0.06] text-[11px] font-bold text-slate-300 px-3 py-1.5 border border-white/[0.08]"
+                                    className="bg-white text-[11px] font-bold text-slate-600 px-3 py-1.5 border border-slate-200 shadow-sm"
                                 >
                                     {name}
                                 </motion.span>
@@ -178,7 +178,7 @@ export function WhyAxentiaAI() {
 
                     {/* Certifications grid */}
                     <div>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4 block">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 block">
                             Certified &amp; Recognised
                         </span>
                         <div className="grid grid-cols-2 gap-3">
@@ -189,7 +189,7 @@ export function WhyAxentiaAI() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.08 + i * 0.06 }}
-                                    className="bg-white/[0.04] border border-white/[0.08] p-5 flex flex-col items-center text-center hover:bg-white/[0.07] transition-colors"
+                                    className="bg-white border border-slate-200 p-5 flex flex-col items-center text-center hover:border-slate-300 hover:shadow-md transition-all shadow-sm"
                                 >
                                     <div className="h-10 flex items-center justify-center mb-3">
                                         <Image
@@ -197,13 +197,13 @@ export function WhyAxentiaAI() {
                                             alt={cert.name}
                                             width={60}
                                             height={40}
-                                            className="h-8 w-auto object-contain brightness-0 invert opacity-70"
+                                            className="h-8 w-auto object-contain"
                                             unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
                                         />
                                     </div>
-                                    <h4 className="text-sm font-bold text-white mb-1">{cert.name}</h4>
+                                    <h4 className="text-sm font-bold text-slate-900 mb-1">{cert.name}</h4>
                                     <p className="text-[10px] text-slate-500 leading-snug">{cert.tagline}</p>
-                                    <span className="mt-3 inline-block text-[8px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8 px-2 py-0.5">
+                                    <span className="mt-3 inline-block text-[8px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8 px-2 py-0.5">
                                         {cert.badgeText}
                                     </span>
                                 </motion.div>
@@ -213,8 +213,8 @@ export function WhyAxentiaAI() {
                 </div>
 
                 {/* Bottom: Partner logos strip */}
-                <div className="border-t border-white/[0.08] pt-10">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-6 text-center">
+                <div className="border-t border-slate-200 pt-10">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-6 text-center">
                         Trusted Partners
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
@@ -225,7 +225,7 @@ export function WhyAxentiaAI() {
                                 alt={logo.alt}
                                 width={logo.width}
                                 height={logo.height}
-                                className="h-7 md:h-8 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-70 transition-opacity"
+                                className="h-7 md:h-8 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all"
                             />
                         ))}
                     </div>
