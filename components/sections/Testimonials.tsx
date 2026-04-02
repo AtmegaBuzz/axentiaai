@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Star, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface Testimonial {
@@ -46,9 +45,12 @@ const testimonials: Testimonial[] = [
     },
 ];
 
+const col1 = [...testimonials, ...testimonials];
+const col2 = [...[...testimonials].reverse(), ...[...testimonials].reverse()];
+
 function Stars() {
     return (
-        <div className="flex gap-0.5">
+        <div className="flex gap-1 mb-4">
             {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
             ))}
@@ -56,52 +58,32 @@ function Stars() {
     );
 }
 
-export default function Testimonials() {
-    const [current, setCurrent] = useState(0);
-    const [direction, setDirection] = useState(0);
-
-    const goTo = useCallback((idx: number) => {
-        setDirection(idx > current ? 1 : -1);
-        setCurrent(idx);
-    }, [current]);
-
-    const prev = useCallback(() => {
-        setDirection(-1);
-        setCurrent(i => (i === 0 ? testimonials.length - 1 : i - 1));
-    }, []);
-
-    const next = useCallback(() => {
-        setDirection(1);
-        setCurrent(i => (i === testimonials.length - 1 ? 0 : i + 1));
-    }, []);
-
-    /* Auto-advance every 5s */
-    useEffect(() => {
-        const timer = setInterval(next, 5000);
-        return () => clearInterval(timer);
-    }, [next]);
-
-    const t = testimonials[current];
-
-    const variants = {
-        enter: (d: number) => ({ x: d > 0 ? 60 : -60, opacity: 0 }),
-        center: { x: 0, opacity: 1 },
-        exit: (d: number) => ({ x: d > 0 ? -60 : 60, opacity: 0 }),
-    };
-
+function Card({ t }: { t: Testimonial }) {
     return (
-        <section className="bg-slate-50 py-20 md:py-28 overflow-hidden relative">
-            {/* Subtle grid */}
-            <div
-                className="absolute inset-0 z-0 opacity-[0.02]"
-                style={{
-                    backgroundImage: 'linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px)',
-                    backgroundSize: '60px 60px',
-                }}
-            />
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 shrink-0">
+            <Stars />
+            <p className="text-sm text-slate-600 leading-relaxed mb-5">{t.quote}</p>
+            <div className="flex items-center gap-3">
+                <Image
+                    src={t.image}
+                    alt={t.name}
+                    width={36}
+                    height={36}
+                    className="w-9 h-9 rounded-full object-cover"
+                />
+                <span className="text-sm font-bold text-slate-900">{t.name}</span>
+                <span className="w-px h-4 bg-slate-200" />
+                <span className="text-sm text-[#8A29AC] font-medium">{t.program}</span>
+            </div>
+        </div>
+    );
+}
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-20 items-center">
+export default function Testimonials() {
+    return (
+        <section className="bg-slate-50 py-20 md:py-28 overflow-hidden">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12">
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-10 lg:gap-16 items-center">
 
                     {/* Left: heading + stats */}
                     <motion.div
@@ -109,23 +91,21 @@ export default function Testimonials() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8 mb-5">
-                            Testimonials
-                        </span>
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-3">
+                        <span className="text-sm font-semibold text-[#8A29AC] mb-4 block">Testimonials</span>
+                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight mb-3">
                             What our students say about us
                         </h2>
-                        <p className="text-sm text-slate-500 leading-relaxed mb-10 max-w-md">
+                        <p className="text-sm text-slate-400 leading-relaxed mb-10">
                             Real stories from real people who transformed their careers with Axentia.AI
                         </p>
 
-                        {/* Stats */}
+                        {/* Stats filler */}
                         <div className="grid grid-cols-2 gap-4 mb-10">
-                            <div className="bg-white border border-slate-200 p-5 shadow-sm">
+                            <div className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm">
                                 <p className="text-3xl font-black text-slate-900 tracking-tight">95%</p>
                                 <p className="text-xs text-slate-500 mt-1">Placement success rate</p>
                             </div>
-                            <div className="bg-white border border-slate-200 p-5 shadow-sm">
+                            <div className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm">
                                 <p className="text-3xl font-black text-slate-900 tracking-tight">4.9</p>
                                 <div className="flex items-center gap-1.5 mt-1">
                                     <div className="flex gap-0.5">
@@ -140,81 +120,32 @@ export default function Testimonials() {
 
                         <Link
                             href="/outcomes"
-                            className="inline-flex items-center gap-2 bg-slate-900 text-white text-sm font-bold py-3 px-6 hover:bg-slate-800 transition-colors"
+                            className="inline-flex items-center gap-2 bg-[#8A29AC] text-white text-sm font-bold py-3 px-6 rounded-full hover:bg-[#6B1D8E] transition-colors group"
                         >
                             View all testimonials
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </motion.div>
 
-                    {/* Right: featured testimonial card */}
-                    <div className="relative">
-                        {/* Quote icon */}
-                        <Quote className="absolute -top-3 -left-2 w-12 h-12 text-brand-500/10 z-0" strokeWidth={1} />
+                    {/* Right: 2 vertical scrolling columns */}
+                    <div className="relative h-[500px] md:h-[560px]">
+                        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-slate-50 to-transparent z-10 pointer-events-none" />
+                        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none" />
 
-                        <AnimatePresence mode="wait" custom={direction}>
-                            <motion.div
-                                key={current}
-                                custom={direction}
-                                variants={variants}
-                                initial="enter"
-                                animate="center"
-                                exit="exit"
-                                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                                className="relative bg-white border border-slate-200 shadow-lg p-8 md:p-10"
-                            >
-                                <Stars />
-
-                                <p className="text-lg md:text-xl text-slate-700 leading-relaxed mt-5 mb-8">
-                                    &ldquo;{t.quote}&rdquo;
-                                </p>
-
-                                <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
-                                    <Image
-                                        src={t.image}
-                                        alt={t.name}
-                                        width={48}
-                                        height={48}
-                                        className="w-12 h-12 object-cover"
-                                    />
-                                    <div>
-                                        <p className="text-sm font-bold text-slate-900">{t.name}</p>
-                                        <p className="text-xs text-[#8A29AC] font-medium">{t.program}</p>
-                                    </div>
+                        <div className="grid grid-cols-2 gap-4 h-full overflow-hidden">
+                            <div className="relative overflow-hidden">
+                                <div className="flex flex-col gap-4 animate-scroll-up">
+                                    {col1.map((t, i) => (
+                                        <Card key={`col1-${i}`} t={t} />
+                                    ))}
                                 </div>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        {/* Navigation */}
-                        <div className="flex items-center justify-between mt-6">
-                            {/* Dots */}
-                            <div className="flex gap-2">
-                                {testimonials.map((_, i) => (
-                                    <button
-                                        key={i}
-                                        onClick={() => goTo(i)}
-                                        className="w-2 h-2 transition-all duration-300"
-                                        style={{
-                                            backgroundColor: i === current ? 'var(--color-brand-500, #C010DA)' : '#e2e8f0',
-                                            width: i === current ? '24px' : '8px',
-                                        }}
-                                    />
-                                ))}
                             </div>
-
-                            {/* Arrows */}
-                            <div className="flex gap-2">
-                                <button
-                                    onClick={prev}
-                                    className="w-10 h-10 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-700 hover:border-slate-400 transition-colors"
-                                >
-                                    <ChevronLeft className="w-4 h-4" />
-                                </button>
-                                <button
-                                    onClick={next}
-                                    className="w-10 h-10 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-700 hover:border-slate-400 transition-colors"
-                                >
-                                    <ChevronRight className="w-4 h-4" />
-                                </button>
+                            <div className="relative overflow-hidden">
+                                <div className="flex flex-col gap-4 animate-scroll-down">
+                                    {col2.map((t, i) => (
+                                        <Card key={`col2-${i}`} t={t} />
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
