@@ -92,31 +92,12 @@ export default function Testimonials() {
                         viewport={{ once: true }}
                     >
                         <span className="text-sm font-semibold text-[#8A29AC] mb-4 block">Testimonials</span>
-                        <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight mb-3">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-3">
                             What our students say about us
                         </h2>
-                        <p className="text-sm text-slate-400 leading-relaxed mb-10">
+                        <p className="text-sm text-slate-700 leading-relaxed mb-10">
                             Real stories from real people who transformed their careers with Axentia.AI
                         </p>
-
-                        {/* Stats filler */}
-                        <div className="grid grid-cols-2 gap-4 mb-10">
-                            <div className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm">
-                                <p className="text-3xl font-black text-slate-900 tracking-tight">95%</p>
-                                <p className="text-xs text-slate-500 mt-1">Placement success rate</p>
-                            </div>
-                            <div className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm">
-                                <p className="text-3xl font-black text-slate-900 tracking-tight">4.9</p>
-                                <div className="flex items-center gap-1.5 mt-1">
-                                    <div className="flex gap-0.5">
-                                        {[...Array(5)].map((_, i) => (
-                                            <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
-                                        ))}
-                                    </div>
-                                    <span className="text-xs text-slate-500">avg rating</span>
-                                </div>
-                            </div>
-                        </div>
 
                         <Link
                             href="/outcomes"
