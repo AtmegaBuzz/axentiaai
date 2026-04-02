@@ -26,7 +26,7 @@ export function CTA() {
                     {/* Image — Mobile */}
                     <div className="xl:hidden pt-6 pb-2 w-40 h-40 sm:w-56 sm:h-56 rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20 relative self-center shrink-0">
                         <Image
-                            src="/images/new_images/cta/indian-businesswoman-confident.jpg"
+                            src="/images/cta.webp"
                             alt="Axentia.AI Student"
                             fill
                             className="object-cover object-center"
@@ -67,7 +67,7 @@ export function CTA() {
                     {/* Image — Desktop */}
                     <div className="hidden xl:block absolute top-1/2 -translate-y-1/2 right-0 w-[320px] h-[320px] rounded-full border-[6px] border-white shadow-2xl overflow-hidden z-20">
                         <Image
-                            src="/images/new_images/cta/indian-businesswoman-confident.jpg"
+                            src="/images/cta.webp"
                             alt="Axentia.AI Student"
                             fill
                             className="object-cover object-center"
