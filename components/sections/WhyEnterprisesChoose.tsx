@@ -18,12 +18,12 @@ export function WhyEnterprisesChoose() {
     const ref = useRef<HTMLDivElement>(null);
 
     return (
-        <section ref={ref} className="relative overflow-hidden py-20 md:py-28 bg-slate-900">
+        <section ref={ref} className="relative overflow-hidden py-20 md:py-28 bg-[#f8f6fb]">
             {/* Subtle grid pattern */}
             <div
-                className="absolute inset-0 z-0 opacity-[0.04]"
+                className="absolute inset-0 z-0 opacity-[0.06]"
                 style={{
-                    backgroundImage: 'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)',
+                    backgroundImage: 'linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px)',
                     backgroundSize: '80px 80px',
                 }}
             />
@@ -39,7 +39,7 @@ export function WhyEnterprisesChoose() {
                         initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-accent-300 border border-accent-300/20 bg-accent-300/8"
+                        className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8"
                     >
                         Key Differentiators
                     </motion.span>
@@ -48,7 +48,7 @@ export function WhyEnterprisesChoose() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.06 }}
-                        className="font-black text-white tracking-tight leading-[1.05] mb-5"
+                        className="font-black text-slate-900 tracking-tight leading-[1.05] mb-5"
                         style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2.4rem)' }}
                     >
                         Why enterprises choose{' '}
@@ -61,9 +61,9 @@ export function WhyEnterprisesChoose() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-sm text-slate-400 leading-relaxed max-w-lg"
+                        className="text-sm text-slate-500 leading-relaxed max-w-lg"
                     >
-                        Built to last — AI that runs in live environments, owned by your teams, and sustained over time.
+                        Built to last AI that runs in live environments, owned by your teams, and sustained over time.
                     </motion.p>
                 </div>
 
@@ -78,20 +78,20 @@ export function WhyEnterprisesChoose() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05, type: 'spring', stiffness: 120, damping: 18 }}
-                                className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm p-5 md:p-6 flex flex-col hover:bg-white/[0.07] transition-colors duration-200"
+                                className="bg-white border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-200"
                             >
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="w-9 h-9 bg-brand-500/15 flex items-center justify-center">
                                         <Icon className="w-4 h-4 text-brand-400" strokeWidth={2} />
                                     </div>
-                                    <span className="text-2xl font-black text-white tracking-tight">
+                                    <span className="text-2xl font-black text-slate-900 tracking-tight">
                                         {item.number}
                                     </span>
                                 </div>
-                                <span className="text-[9px] font-bold uppercase tracking-widest text-accent-300 mb-2">
+                                <span className="text-[9px] font-bold uppercase tracking-widest text-[#8A29AC] mb-2">
                                     {item.sub}
                                 </span>
-                                <p className="text-xs text-slate-400 leading-relaxed mt-auto">
+                                <p className="text-xs text-slate-500 leading-relaxed mt-auto">
                                     {item.label}
                                 </p>
                             </motion.div>

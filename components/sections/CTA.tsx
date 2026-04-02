@@ -45,19 +45,19 @@ export function CTA() {
                         <div className="flex flex-nowrap items-center gap-3">
                             <Link
                                 href="/programs#apply"
-                                className="bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 hover:bg-brand-50 transition-colors text-sm"
+                                className="bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 hover:bg-brand-50 transition-colors text-xs"
                             >
                                 Book AI Discovery Workshop
                             </Link>
                             <Link
                                 href="/programs?tab=transformation"
-                                className="bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-sm"
+                                className="bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-xs"
                             >
                                 Launch Your First AI Pilot
                             </Link>
                             <Link
                                 href="/programs?tab=academies"
-                                className="bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-sm"
+                                className="bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-xs"
                             >
                                 Join a Talent Academy
                             </Link>
