@@ -174,7 +174,7 @@ export function Offerings() {
                     transition={{ duration: 0.5, delay: 0.12 }}
                     className="text-sm md:text-base text-slate-500 leading-relaxed max-w-2xl mx-auto"
                 >
-                    Be it AI transformation, internal capability, or talent development, Axentia.AI solves them all together. Each part of our model strengthens the others, creating momentum that holds beyond the engagement.
+                    Be it enterprise AI transformation, internal capability building, or structured talent development, Axentia.AI brings them all together under one unified approach. Each part of our model strengthens the others, creating lasting momentum that holds well beyond the engagement itself.
                 </motion.p>
             </div>
 
