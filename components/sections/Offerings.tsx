@@ -55,7 +55,7 @@ const offerings = [
             'Energy & Utilities Industry Academy',
             'SAP Workforce Accelerator',
         ],
-        image: '/images/new_images/offerings/talent-academies.jpg',
+        image: '/images/talent-academy.jpg',
     },
 ];
 
