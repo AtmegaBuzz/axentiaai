@@ -1,12 +1,11 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
-import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Search, Rocket, GraduationCap, TrendingUp } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 interface TimelineEntry {
-  step: number
   period: string
   title: string
   description: string
@@ -17,7 +16,6 @@ interface TimelineEntry {
 
 const timelineItems: TimelineEntry[] = [
   {
-    step: 1,
     period: '2–3 days',
     title: 'Discovery Workshop',
     description:
@@ -27,7 +25,6 @@ const timelineItems: TimelineEntry[] = [
     highlights: ['Process mapping', 'Pain-point analysis', 'Prioritised roadmap'],
   },
   {
-    step: 2,
     period: '4–8 weeks',
     title: 'Pilot & Implementation',
     description:
@@ -37,7 +34,6 @@ const timelineItems: TimelineEntry[] = [
     highlights: ['Live integration', 'Real data validation', 'Measurable outcomes'],
   },
   {
-    step: 3,
     period: '3–6 months',
     title: 'Capability Build',
     description:
@@ -47,7 +43,6 @@ const timelineItems: TimelineEntry[] = [
     highlights: ['Hands-on training', 'Knowledge transfer', 'Team enablement'],
   },
   {
-    step: 4,
     period: 'Ongoing',
     title: 'Scale with Execution Capacity',
     description:
@@ -59,198 +54,124 @@ const timelineItems: TimelineEntry[] = [
 ]
 
 export function HowItWorks() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const [activeStep, setActiveStep] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: containerRef,
     offset: ['start start', 'end end'],
   })
 
-  const lineProgress = useTransform(scrollYProgress, [0, 0.95], [0, 100])
+  // Map vertical scroll → horizontal translateX
+  // 4 cards, each ~420px + gap. We want to scroll from 0 to roughly -(totalWidth - viewport)
+  // Using percentage of the scrollable container width
+  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-75%'])
 
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    const step = Math.min(
-      timelineItems.length - 1,
-      Math.floor(latest * timelineItems.length)
-    )
-    setActiveStep(step)
-  })
+  // Track line grows with scroll
+  const trackWidth = useTransform(scrollYProgress, [0, 0.95], ['0%', '100%'])
 
   return (
-    <div ref={sectionRef} style={{ height: '350vh' }}>
-      <section className="sticky top-0 h-screen bg-white overflow-hidden">
-        <div className="h-full flex flex-col">
+    <div ref={containerRef} style={{ height: '250vh' }}>
+      <section className="sticky top-0 h-screen bg-white overflow-hidden flex flex-col">
+        {/* Header */}
+        <div className="pt-16 md:pt-20 pb-6 px-6 md:px-12 xl:px-20">
+          <div className="max-w-7xl mx-auto">
+            <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200 bg-slate-50 mb-3">
+              How It Works
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-snug">
+              From first conversation to{' '}
+              <span className="bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                operating at scale
+              </span>
+            </h2>
+          </div>
+        </div>
 
-          {/* ── Top bar: header + horizontal stepper ── */}
-          <div className="pt-12 md:pt-16 pb-6 md:pb-8 px-4 md:px-8 xl:px-12">
-            <div className="container mx-auto max-w-6xl">
-              {/* Header */}
-              <div className="text-center mb-8 md:mb-10">
-                <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200 bg-slate-50 mb-4">
-                  How It Works
-                </span>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-snug">
-                  From first conversation to{' '}
-                  <span className="bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                    operating at scale
-                  </span>
-                </h2>
-              </div>
-
-              {/* ── Horizontal stepper ── */}
-              <div className="relative flex items-center justify-between max-w-3xl mx-auto">
-                {/* Background track */}
-                <div className="absolute top-1/2 left-0 right-0 h-[2px] -translate-y-1/2 bg-slate-200" />
-                {/* Animated fill */}
+        {/* Horizontal track line */}
+        <div className="px-6 md:px-12 xl:px-20 mb-6">
+          <div className="max-w-7xl mx-auto relative">
+            <div className="h-[2px] bg-slate-100 w-full" />
+            <motion.div
+              className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-brand-600 to-brand-400"
+              style={{ width: trackWidth }}
+            />
+            {/* Dots on the track */}
+            {timelineItems.map((_, i) => {
+              const pos = `${(i / (timelineItems.length - 1)) * 100}%`
+              return (
                 <motion.div
-                  className="absolute top-1/2 left-0 h-[2px] -translate-y-1/2 bg-gradient-to-r from-brand-600 to-brand-500"
+                  key={i}
+                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-white"
                   style={{
-                    width: `${(activeStep / (timelineItems.length - 1)) * 100}%`,
+                    left: pos,
+                    marginLeft: '-6px',
+                    backgroundColor: '#C010DA',
                   }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
                 />
-
-                {timelineItems.map((item, i) => {
-                  const Icon = item.icon
-                  const isActive = i <= activeStep
-                  const isCurrent = i === activeStep
-
-                  return (
-                    <div key={item.step} className="relative z-10 flex flex-col items-center">
-                      {/* Node */}
-                      <motion.div
-                        animate={{
-                          scale: isCurrent ? 1.15 : 1,
-                          backgroundColor: isActive ? '#C010DA' : '#fff',
-                          borderColor: isActive ? '#C010DA' : '#e2e8f0',
-                        }}
-                        transition={{ duration: 0.4 }}
-                        className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border-2"
-                        style={{ borderRadius: 0 }}
-                      >
-                        <Icon
-                          className="w-4 h-4 md:w-5 md:h-5"
-                          style={{ color: isActive ? '#fff' : '#94a3b8' }}
-                          strokeWidth={2}
-                        />
-                      </motion.div>
-                      {/* Label below node */}
-                      <div className="mt-2 text-center">
-                        <span
-                          className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest block transition-colors duration-300"
-                          style={{ color: isActive ? '#C010DA' : '#94a3b8' }}
-                        >
-                          Step {item.step}
-                        </span>
-                        <span className="hidden md:block text-[10px] text-slate-400 font-medium mt-0.5">
-                          {item.period}
-                        </span>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+              )
+            })}
           </div>
+        </div>
 
-          {/* ── Main content area ── */}
-          <div className="flex-1 px-4 md:px-8 xl:px-12 pb-8 overflow-hidden">
-            <div className="container mx-auto max-w-6xl h-full">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeStep}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                  className="h-full"
+        {/* Scrolling cards area */}
+        <div className="flex-1 overflow-hidden px-6 md:px-12 xl:px-20 pb-10">
+          <motion.div
+            className="flex gap-6 h-full"
+            style={{ x }}
+          >
+            {timelineItems.map((item, i) => {
+              const Icon = item.icon
+
+              return (
+                <div
+                  key={i}
+                  className="flex-shrink-0 w-[85vw] md:w-[42vw] lg:w-[30vw] h-full flex flex-col bg-slate-50 border border-slate-100 overflow-hidden group"
                 >
-                  {(() => {
-                    const item = timelineItems[activeStep]
-                    const Icon = item.icon
-                    const isEven = activeStep % 2 === 0
+                  {/* Image */}
+                  <div className="relative h-[45%] overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                    {/* Period badge */}
+                    <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm px-3 py-1 flex items-center gap-2">
+                      <Icon className="w-3.5 h-3.5 text-brand-500" strokeWidth={2.5} />
+                      <span className="text-[11px] font-bold text-slate-700 tracking-wide">
+                        {item.period}
+                      </span>
+                    </div>
+                  </div>
 
-                    return (
-                      <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 h-full items-center ${isEven ? '' : 'md:[direction:rtl]'}`}>
-                        {/* Image side */}
-                        <div className={`relative h-48 md:h-full overflow-hidden ${isEven ? '' : 'md:[direction:ltr]'}`}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                          {/* Gradient overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                          {/* Step badge on image */}
-                          <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5">
-                            <Icon className="w-3.5 h-3.5 text-brand-500" strokeWidth={2.5} />
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-brand-600">
-                              Step {item.step}
-                            </span>
-                          </div>
-                          {/* Period badge */}
-                          <div className="absolute bottom-4 left-4 bg-brand-500 px-4 py-1.5">
-                            <span className="text-xs font-bold text-white tracking-wide">
-                              {item.period}
-                            </span>
-                          </div>
-                        </div>
+                  {/* Content */}
+                  <div className="flex-1 flex flex-col p-5 md:p-6">
+                    <h3 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight leading-tight mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-slate-500 leading-relaxed mb-5 flex-1">
+                      {item.description}
+                    </p>
 
-                        {/* Content side */}
-                        <div className={`flex flex-col justify-center py-2 md:py-8 ${isEven ? '' : 'md:[direction:ltr]'}`}>
-                          {/* Large step number */}
-                          <span className="text-6xl md:text-8xl font-black text-slate-100 leading-none mb-2 select-none">
-                            0{item.step}
-                          </span>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight leading-tight mb-4">
-                            {item.title}
-                          </h3>
-                          <p className="text-sm md:text-base text-slate-600 leading-relaxed mb-6 max-w-md">
-                            {item.description}
-                          </p>
-
-                          {/* Highlights */}
-                          <div className="flex flex-wrap gap-2">
-                            {item.highlights.map((h) => (
-                              <span
-                                key={h}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold border border-brand-200 bg-brand-50 text-brand-700"
-                              >
-                                <span className="w-1.5 h-1.5 bg-brand-500" />
-                                {h}
-                              </span>
-                            ))}
-                          </div>
-
-                          {/* Progress indicator */}
-                          <div className="mt-8 flex items-center gap-3">
-                            {timelineItems.map((_, i) => (
-                              <div
-                                key={i}
-                                className="h-1 transition-all duration-500"
-                                style={{
-                                  width: i === activeStep ? '40px' : '12px',
-                                  backgroundColor: i === activeStep ? '#C010DA' : i < activeStep ? '#C010DA' : '#e2e8f0',
-                                  opacity: i <= activeStep ? 1 : 0.4,
-                                }}
-                              />
-                            ))}
-                            <span className="ml-2 text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
-                              {activeStep + 1}/{timelineItems.length}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  })()}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-
+                    {/* Highlights */}
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {item.highlights.map((h) => (
+                        <span
+                          key={h}
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold border border-brand-200 bg-white text-brand-700"
+                        >
+                          <span className="w-1 h-1 bg-brand-500 flex-shrink-0" />
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </motion.div>
         </div>
       </section>
     </div>
