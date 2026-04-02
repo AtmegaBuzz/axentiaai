@@ -174,7 +174,7 @@ export function IndustryUseCases() {
                         transition={{ delay: 0.1 }}
                         className="text-slate-500 text-base md:text-lg leading-relaxed max-w-2xl"
                     >
-                        Every use case runs inside your existing SAP environment — shaping how work is carried out across operations, finance, supply chains, and workforce management.
+                        Every use case runs inside your existing SAP environment shaping how work is carried out across operations, finance, supply chains, and workforce management.
                     </motion.p>
 
                     {/* Prev / Next */}
@@ -247,7 +247,7 @@ export function IndustryUseCases() {
                                 </h3>
 
                                 {/* Description */}
-                                <p className="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-3">
+                                <p className="text-sm text-slate-500 leading-relaxed mb-4">
                                     {uc.description}
                                 </p>
 

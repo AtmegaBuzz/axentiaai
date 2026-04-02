@@ -5,13 +5,6 @@ import { Linkedin, ArrowUpRight } from 'lucide-react';
 
 const leaders = [
     {
-        name: 'Gauri Gupta',
-        role: 'Director',
-        company: 'Axentia AI',
-        photo: '/images/team/gauri-gupta.jpeg',
-        linkedin: 'https://in.linkedin.com/in/gauri-gupta-6768b21b5',
-    },
-    {
         name: 'Manuj Gupta',
         role: 'Senior Advisor & Mentor',
         company: 'Axentia AI | Orane Consulting',
@@ -26,11 +19,11 @@ const leaders = [
         linkedin: 'https://in.linkedin.com/in/arun-rajput-65a3925',
     },
     {
-        name: 'Devlina Sarkar',
-        role: 'Brand & Communication Manager',
+        name: 'Gauri Gupta',
+        role: 'Director',
         company: 'Axentia AI',
-        photo: '/images/team/devlina-sarkar.jpeg',
-        linkedin: 'https://www.linkedin.com/in/devlina-sarkar-081401229/',
+        photo: '/images/team/gauri-gupta.jpeg',
+        linkedin: 'https://in.linkedin.com/in/gauri-gupta-6768b21b5',
     },
     {
         name: 'Nadeem Farooq',
@@ -38,6 +31,20 @@ const leaders = [
         company: 'Axentia AI',
         photo: '/images/team/nadeem.jpeg',
         linkedin: 'https://in.linkedin.com/in/nadeem-farooq-62598270',
+    },
+    {
+        name: 'Devlina Sarkar',
+        role: 'Brand & Communication Manager',
+        company: 'Axentia AI',
+        photo: '/images/team/devlina-sarkar.jpeg',
+        linkedin: 'https://www.linkedin.com/in/devlina-sarkar-081401229/',
+    },
+    {
+        name: 'Neha Sharma',
+        role: 'Senior Manager',
+        company: 'Axentia AI',
+        photo: '/images/team/neha-sharma.png',
+        linkedin: 'https://www.linkedin.com/in/neha-sharma-71a4baa7/',
     },
 ];
 
@@ -106,13 +113,13 @@ export function Leaders() {
                         className="flex items-center gap-4 shrink-0"
                     >
                         <div className="text-right">
-                            <p className="text-2xl font-black text-white tracking-tight">{leaders.length}</p>
-                            <p className="text-[10px] font-medium text-white/35 uppercase tracking-wider">Senior Leaders</p>
+                            <p className="text-2xl font-black text-white tracking-tight">3</p>
+                            <p className="text-[10px] font-medium text-white/35 uppercase tracking-wider">Leaders</p>
                         </div>
                         <div className="w-px h-10 bg-white/10" />
                         <div className="text-right">
                             <p className="text-2xl font-black text-white tracking-tight">16+</p>
-                            <p className="text-[10px] font-medium text-white/35 uppercase tracking-wider">Years Combined</p>
+                            <p className="text-[10px] font-medium text-white/35 uppercase tracking-wider">Years Experience</p>
                         </div>
                     </motion.div>
                 </div>

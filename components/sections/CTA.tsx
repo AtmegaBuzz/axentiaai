@@ -42,7 +42,7 @@ export function CTA() {
                             Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia.AI is the right fit, and if it&apos;s not, we&apos;ll say that too.
                         </p>
 
-                        <div className="flex flex-wrap items-center gap-3">
+                        <div className="flex flex-nowrap items-center gap-3">
                             <Link
                                 href="/programs#apply"
                                 className="bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 hover:bg-brand-50 transition-colors text-sm"
