@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowLeft, ArrowRight, Brain, Users, BookOpen, Target, Layers, Briefcase, MonitorPlay, Cpu, FileText, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface InfoItem {
     label: string;
@@ -114,12 +115,12 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
         >
             {/* Thumbnail — no play button */}
             <div className="relative h-48 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                     src={prog.image}
                     alt={prog.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
@@ -177,11 +178,12 @@ export function Programs() {
         <section id="programs" className="relative py-10 md:py-14 overflow-hidden">
             {/* Background image */}
             <div className="absolute inset-0 z-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                     src="/images/programs-bg.jpg"
                     alt=""
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="100vw"
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-black/65" />
             </div>

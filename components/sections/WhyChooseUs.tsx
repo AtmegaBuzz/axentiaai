@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
 export function WhyChooseUs() {
@@ -91,33 +92,33 @@ export function WhyChooseUs() {
                     >
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-4">
-                                <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/5]">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
+                                <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-[4/5]">
+                                    <Image
                                         src="/images/new_images/offerings/enterprise-ai-transformation.jpg"
                                         alt="SAP consulting classroom"
-                                        className="w-full h-full object-cover"
-                                        loading="lazy"
+                                        fill
+                                        sizes="25vw"
+                                        className="object-cover"
                                     />
                                 </div>
                             </div>
                             <div className="space-y-4 pt-8">
-                                <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
+                                <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
+                                    <Image
                                         src="/images/new_images/personas/business-leaders/entrepreneurs-business-office.jpg"
                                         alt="Enterprise consulting team"
-                                        className="w-full h-full object-cover"
-                                        loading="lazy"
+                                        fill
+                                        sizes="25vw"
+                                        className="object-cover"
                                     />
                                 </div>
-                                <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
+                                <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
+                                    <Image
                                         src="/images/new_images/personas/working-professionals/young-woman-striped-laptop.jpg"
                                         alt="AI era consulting"
-                                        className="w-full h-full object-cover"
-                                        loading="lazy"
+                                        fill
+                                        sizes="25vw"
+                                        className="object-cover"
                                     />
                                 </div>
                             </div>

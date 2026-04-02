@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Linkedin, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 const leaders = [
     {
@@ -16,7 +17,7 @@ const leaders = [
         name: 'Arun Rajput',
         role: 'VP - Business Growth & Alliance',
         company: 'Axentia AI',
-        photo: '/images/team/arun-rajput.png',
+        photo: '/images/team/arun-rajput.jpeg',
         linkedin: 'https://in.linkedin.com/in/arun-rajput-65a3925',
     },
     {
@@ -47,7 +48,7 @@ const team = [
         name: 'Neha Sharma',
         role: 'Senior Manager',
         company: 'Axentia AI',
-        photo: '/images/team/neha-sharma.png',
+        photo: '/images/team/neha-sharma.jpeg',
         linkedin: 'https://www.linkedin.com/in/neha-sharma-71a4baa7/',
     },
 ];
@@ -152,12 +153,12 @@ export function Leaders() {
                         >
                             {/* Photo with overlay */}
                             <div className="relative aspect-[4/5] overflow-hidden">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
+                                <Image
                                     src={leader.photo}
                                     alt={leader.name}
-                                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
-                                    loading="lazy"
+                                    fill
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                    className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
                                 />
                                 {/* Gradient overlay for text legibility */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />

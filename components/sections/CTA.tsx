@@ -29,6 +29,7 @@ export function CTA() {
                             src="/images/cta.webp"
                             alt="Axentia.AI Student"
                             fill
+                            sizes="320px"
                             className="object-cover object-center"
                         />
                     </div>
@@ -70,6 +71,7 @@ export function CTA() {
                             src="/images/cta.webp"
                             alt="Axentia.AI Student"
                             fill
+                            sizes="320px"
                             className="object-cover object-center"
                         />
                     </div>

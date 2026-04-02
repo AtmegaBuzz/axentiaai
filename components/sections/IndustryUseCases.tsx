@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
+import Image from 'next/image';
 
 const useCases = [
     {
@@ -215,12 +216,12 @@ export function IndustryUseCases() {
                             style={{ width: '60vw', height: 'clamp(420px, 52vh, 600px)' }}
                         >
                             {/* Full-bleed photo */}
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                            <Image
                                 src={uc.image}
                                 alt={uc.title}
-                                className="absolute inset-0 w-full h-full object-cover"
-                                loading="lazy"
+                                fill
+                                sizes="60vw"
+                                className="object-cover"
                             />
                             {/* Dark gradient for legibility */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />

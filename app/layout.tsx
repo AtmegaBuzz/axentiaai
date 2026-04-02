@@ -37,6 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="preload" href="/videos/hero-latest.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/brand/axentia-logo-white.png" as="image" />
+      </head>
       <body className={`${inter.variable} ${playfairDisplay.variable} font-sans`}>
         <NavbarWrapper>
           {children}

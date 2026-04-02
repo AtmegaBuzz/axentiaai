@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Search, Rocket, GraduationCap, TrendingUp } from 'lucide-react'
+import Image from 'next/image'
 import type { LucideIcon } from 'lucide-react'
 
 interface TimelineEntry {
@@ -129,12 +130,12 @@ export function HowItWorks() {
                 >
                   {/* Image */}
                   <div className="relative h-[45%] overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 768px) 85vw, (max-width: 1024px) 42vw, 30vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     {/* Period badge */}

@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 const enterpriseLogos = [
     { name: 'SAP',           url: 'https://logo.clearbit.com/sap.com' },
     { name: 'Deloitte',      url: 'https://logo.clearbit.com/deloitte.com' },
@@ -36,14 +38,12 @@ export function ReliedOnBy() {
                 <div className="flex w-max animate-marquee items-center">
                     {logos.map((logo, idx) => (
                         <div key={idx} className="mx-10 flex items-center justify-center flex-shrink-0">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                            <Image
                                 src={logo.url}
                                 alt={logo.name}
                                 width={100}
                                 height={40}
                                 className="h-8 w-auto object-contain grayscale opacity-50 hover:opacity-80 hover:grayscale-0 transition-all duration-300"
-                                loading="lazy"
                             />
                         </div>
                     ))}
