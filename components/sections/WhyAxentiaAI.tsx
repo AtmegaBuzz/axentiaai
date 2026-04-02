@@ -6,126 +6,183 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
+const FloatingLines = dynamic(() => import('@/components/ui/FloatingLines'), { ssr: false });
 const Globe = dynamic(() => import('@/components/ui/Globe').then(m => ({ default: m.Globe })), { ssr: false });
 
 const certifications = [
-    { name: 'CMMI', file: '/certifications/cmmi-logo.png' },
-    { name: 'NASSCOM', file: '/certifications/nasscom-logo.gif' },
-    { name: 'ISO 9001', file: '/certifications/ISO_9001-2015.png' },
-    { name: 'ISO 27001', file: '/certifications/ISO-2018.svg' },
+    {
+        name: 'CMMI',
+        tagline: 'Capability Maturity Model Integration',
+        file: '/certifications/cmmi-logo.png',
+        badgeText: 'Process Excellence',
+    },
+    {
+        name: 'NASSCOM',
+        tagline: 'National Association of Software & Service Companies',
+        file: '/certifications/nasscom-logo.gif',
+        badgeText: 'Industry Member',
+    },
+    {
+        name: 'ISO 9001',
+        tagline: 'Quality Management System',
+        file: '/certifications/ISO_9001-2015.png',
+        badgeText: 'Quality Assurance',
+    },
+    {
+        name: 'ISO 27001',
+        tagline: 'Information Security Management',
+        file: '/certifications/ISO-2018.svg',
+        badgeText: 'Data Security',
+    },
 ];
 
 const regionTags = ['India', 'Middle East', 'Africa', 'South East Asia'];
-
-const stats = [
-    { end: 50, suffix: '+', label: 'Enterprises Served' },
-    { end: 300, suffix: '+', label: 'Consultants Deployed' },
-    { end: 16, suffix: '+', label: 'Years of Excellence' },
-    { end: 4, suffix: '', label: 'Global Regions' },
-];
 
 export function TrustedBy() {
     return null;
 }
 
+/* ── main component ────────────────────────────────────────────────── */
 export function WhyAxentiaAI() {
     const { tier } = usePerformance();
+    const isLowEnd = tier === 'low';
+
+    const stats = [
+        { end: 50,  suffix: '+', label: 'Enterprises served globally', sub: 'Across SAP, AI/ML & ERP verticals' },
+        { end: 300, suffix: '+', label: 'Certified professionals', sub: 'Trained & deployed worldwide' },
+    ];
 
     return (
         <section
             id="why-axentiaai"
             className="relative overflow-hidden -mt-[100vh] rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.15)]"
-            style={{ background: '#f8fafc', position: 'relative', zIndex: 10 }}
+            style={{
+                background: '#f8fafc',
+                position: 'relative',
+                zIndex: 10,
+            }}
         >
-            {/* Subtle grid bg */}
+            {/* FloatingLines WebGL background — muted B2B tones */}
+            {!isLowEnd && (
+                <div className="absolute inset-0 z-0 opacity-40 overflow-hidden">
+                    <FloatingLines
+                        linesGradient={['#8929AC', '#C010DA', '#94a3b8', '#cbd5e1', '#8929AC', '#475569']}
+                        enabledWaves={['top', 'middle', 'bottom']}
+                        lineCount={[4, 5, 3]}
+                        lineDistance={[4, 5, 4]}
+                        bendRadius={5}
+                        bendStrength={-0.5}
+                        interactive={true}
+                        parallax={true}
+                        parallaxStrength={0.15}
+                        animationSpeed={0.6}
+                    />
+                </div>
+            )}
+
+            {/* Subtle grid overlay */}
             <div
-                className="absolute inset-0 z-0 opacity-[0.03]"
+                className="absolute inset-0 z-[1] opacity-[0.03] pointer-events-none"
                 style={{
-                    backgroundImage:
-                        'linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px)',
+                    backgroundImage: 'linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px)',
                     backgroundSize: '80px 80px',
                 }}
             />
 
-            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 py-14 md:py-20">
-                {/* ── Row 1: Header left + Stats right ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-end mb-10 md:mb-14">
-                    <div>
-                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-4 text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8">
+            {/* ── Content ── */}
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 py-16 md:py-24">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
+
+                    {/* Left: text content */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 90, damping: 20 }}
+                    >
+                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-slate-500 border border-slate-300 bg-white">
                             Enterprise Heritage
                         </span>
                         <h2
-                            className="font-bold text-slate-900 tracking-tight leading-[1.1]"
-                            style={{ fontSize: 'clamp(1.5rem, 2.8vw, 2.5rem)' }}
+                            className="font-bold text-slate-900 tracking-tight leading-[1.1] mb-4"
+                            style={{ fontSize: 'clamp(1.4rem, 3vw, 2.8rem)' }}
                         >
-                            The AI-enforced legacy of{' '}
+                            The AI-enforced legacy of<br />
                             <span className="text-[#00A3E5]">Orane Consulting</span>
                         </h2>
-                    </div>
+                        <p className="text-sm text-slate-500 leading-relaxed mb-8 max-w-lg">
+                            Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
+                        </p>
 
-                    {/* Inline stats strip */}
-                    <div className="flex gap-6 md:gap-8">
-                        {stats.map((stat) => (
-                            <div key={stat.label} className="text-center">
-                                <AnimatedCounter
-                                    end={stat.end}
-                                    suffix={stat.suffix}
-                                    duration={1600}
-                                    className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight tabular-nums"
-                                />
-                                <p className="text-[10px] text-slate-400 font-medium mt-0.5 whitespace-nowrap">
-                                    {stat.label}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* ── Row 2: Globe + Regions | Certifications ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 items-center">
-                    {/* Globe compact */}
-                    <div className="flex flex-col items-center">
-                        <div className="relative w-[220px] h-[220px] md:w-[260px] md:h-[260px]">
-                            <Globe className="opacity-85" />
-                        </div>
-                        <div className="flex flex-wrap justify-center gap-1.5 mt-3">
-                            {regionTags.map((name) => (
-                                <span
-                                    key={name}
-                                    className="bg-white text-[10px] font-bold text-slate-500 px-2.5 py-1 border border-slate-200"
-                                >
-                                    {name}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Certifications — horizontal cards */}
-                    <div>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3 block">
-                            Certified &amp; Recognised
-                        </span>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            {certifications.map((cert) => (
-                                <div
-                                    key={cert.name}
-                                    className="bg-white border border-slate-200 px-4 py-4 flex flex-col items-center text-center hover:border-slate-300 hover:shadow-sm transition-all"
-                                >
-                                    <div className="h-10 flex items-center justify-center mb-2">
-                                        <Image
-                                            src={cert.file}
-                                            alt={cert.name}
-                                            width={50}
-                                            height={34}
-                                            className="h-8 w-auto object-contain"
-                                            unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
-                                        />
-                                    </div>
-                                    <span className="text-xs font-bold text-slate-800">{cert.name}</span>
+                        {/* Stats row */}
+                        <div className="flex items-baseline gap-10 mb-8">
+                            {stats.map((stat) => (
+                                <div key={stat.label}>
+                                    <AnimatedCounter
+                                        end={stat.end}
+                                        suffix={stat.suffix}
+                                        duration={1600}
+                                        className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight tabular-nums"
+                                    />
+                                    <p className="text-xs font-semibold text-slate-600 mt-1">{stat.label}</p>
                                 </div>
                             ))}
                         </div>
-                    </div>
+
+                        {/* Certification cards — flat B2B style */}
+                        <div className="flex flex-wrap items-start gap-3 pt-6 border-t border-slate-200">
+                            {certifications.map((cert, i) => (
+                                <motion.div
+                                    key={cert.name}
+                                    initial={{ opacity: 0, y: 12 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.08 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
+                                    className="bg-white border border-slate-200 px-3 py-2.5 flex flex-col items-center w-[80px] md:w-[90px] hover:border-slate-300 hover:shadow-sm transition-all"
+                                >
+                                    <Image
+                                        src={cert.file}
+                                        alt={cert.name}
+                                        width={44}
+                                        height={36}
+                                        className="h-7 md:h-8 w-auto object-contain mb-1.5"
+                                        unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
+                                    />
+                                    <span className="text-[8px] font-bold uppercase tracking-wider text-slate-500 text-center leading-tight">
+                                        {cert.name}
+                                    </span>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Right: Globe + region tags */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.92 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.15 }}
+                        className="flex flex-col items-center"
+                    >
+                        <div className="relative w-full aspect-square max-w-[520px]">
+                            <Globe className="opacity-90" />
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-2 mt-4">
+                            {regionTags.map((name, i) => (
+                                <motion.span
+                                    key={name}
+                                    initial={{ opacity: 0, y: 8 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.4 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
+                                    className="bg-white text-[11px] font-bold text-slate-600 px-3 py-1.5 border border-slate-200 shadow-sm"
+                                >
+                                    {name}
+                                </motion.span>
+                            ))}
+                        </div>
+                    </motion.div>
+
                 </div>
             </div>
         </section>
@@ -161,6 +218,10 @@ export function StandardsSection() {
                                     />
                                 </div>
                                 <h4 className="text-base font-bold text-slate-900 mb-1 tracking-tight">{cert.name}</h4>
+                                <p className="text-[10px] text-slate-500 leading-snug mb-3 font-medium">{cert.tagline}</p>
+                                <span className="mt-auto inline-flex items-center gap-1.5 bg-slate-900 text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-1">
+                                    {cert.badgeText}
+                                </span>
                             </motion.div>
                         ))}
                     </div>
@@ -173,8 +234,8 @@ export function StandardsSection() {
                         transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                         className="flex flex-col h-full"
                     >
-                        <div className="inline-flex items-center gap-2.5 bg-slate-900 text-white text-xs font-bold uppercase tracking-[0.2em] px-5 py-2.5 rounded-full shadow-lg mb-5 w-fit">
-                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ring-2 ring-emerald-400/30" />
+                        <div className="inline-flex items-center gap-2.5 bg-slate-900 text-white text-xs font-bold uppercase tracking-[0.2em] px-5 py-2.5 shadow-lg mb-5 w-fit">
+                            <span className="w-2 h-2 bg-emerald-400 animate-pulse ring-2 ring-emerald-400/30" />
                             Certified &amp; Recognised
                         </div>
                         <h3
