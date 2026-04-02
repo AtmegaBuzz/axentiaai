@@ -8,7 +8,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 const metrics = [
     { value: '50+', label: 'Enterprises' },
     { value: '300+', label: 'Certified Professionals' },
-    { value: '16+', label: 'Years of Delivery' },
+    { value: '4+', label: 'Countries' },
 ];
 
 export function Hero() {
