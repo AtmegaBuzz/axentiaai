@@ -110,7 +110,7 @@ export function WhyAxentiaAI() {
                             The AI-enforced legacy of<br />
                             <span className="text-[#00A3E5]">Orane Consulting</span>
                         </h2>
-                        <p className="text-sm text-slate-500 leading-relaxed mb-8 max-w-lg">
+                        <p className="text-sm text-slate-700 leading-relaxed mb-8 max-w-lg">
                             Building on over a decade and a half of global enterprise delivery excellence, we prepare our talent for the highest standards of the industry.
                         </p>
 
@@ -129,31 +129,6 @@ export function WhyAxentiaAI() {
                             ))}
                         </div>
 
-                        {/* Certification cards — flat B2B style */}
-                        <div className="flex flex-wrap items-start gap-3 pt-6 border-t border-slate-200">
-                            {certifications.map((cert, i) => (
-                                <motion.div
-                                    key={cert.name}
-                                    initial={{ opacity: 0, y: 12 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.08 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
-                                    className="bg-white border border-slate-200 px-3 py-2.5 flex flex-col items-center w-[80px] md:w-[90px] hover:border-slate-300 hover:shadow-sm transition-all"
-                                >
-                                    <Image
-                                        src={cert.file}
-                                        alt={cert.name}
-                                        width={44}
-                                        height={36}
-                                        className="h-7 md:h-8 w-auto object-contain mb-1.5"
-                                        unoptimized={cert.file.endsWith('.gif') || cert.file.endsWith('.svg')}
-                                    />
-                                    <span className="text-[8px] font-bold uppercase tracking-wider text-slate-500 text-center leading-tight">
-                                        {cert.name}
-                                    </span>
-                                </motion.div>
-                            ))}
-                        </div>
                     </motion.div>
 
                     {/* Right: Globe + region tags */}
