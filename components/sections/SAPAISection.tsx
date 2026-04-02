@@ -26,35 +26,23 @@ function IntegrationIllustration() {
 const allCards = [
     {
         label: 'SAP Integration',
-        status: 'Native',
-        statusColor: 'bg-blue-500',
-        dotColor: '#3B82F6',
         title: 'Deep inside SAP',
         desc: 'S/4HANA · Joule · BTP · SuccessFactors · Analytics Cloud · PM / PS',
     },
     {
         label: 'Capabilities',
-        status: 'Enterprise',
-        statusColor: 'bg-[#8A29AC]',
-        dotColor: '#8A29AC',
         title: 'Real operational AI',
         desc: 'Demand forecasting, invoice processing, HR copilot, maintenance planning, workflow execution.',
     },
     {
         label: 'In Practice',
-        status: 'Live',
-        statusColor: 'bg-emerald-500',
-        dotColor: '#10B981',
         title: 'Woven into daily work',
         desc: 'AI shapes decisions as they happen, drawing on existing data and processes inside your systems.',
     },
     {
         label: 'Track Record',
-        status: 'Global',
-        statusColor: 'bg-amber-500',
-        dotColor: '#F59E0B',
         title: '50+ Enterprises',
-        desc: '16+ years of SAP delivery. 300+ certified professionals across industries.',
+        desc: 'SAP delivery + AI Delivery. 300+ certified professionals across industries.',
     },
 ];
 
@@ -110,7 +98,7 @@ export function SAPAISection() {
                         transition={{ delay: 0.14 }}
                         className="text-base md:text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto"
                     >
-                        We bring AI into SAP environments so it becomes part of how work is done across teams — from planning and operations to people and finance.
+                        We bring AI into SAP environments so it becomes part of how work is done across teams from planning and operations to people and finance.
                     </motion.p>
                 </div>
 
@@ -128,12 +116,8 @@ export function SAPAISection() {
                                 transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
                                 className="bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-300"
                             >
-                                <div className="flex items-center justify-between mb-3">
+                                <div className="mb-3">
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{card.label}</span>
-                                    <div className="flex items-center gap-1.5">
-                                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: card.dotColor }} />
-                                        <span className="text-[10px] font-semibold text-slate-400">{card.status}</span>
-                                    </div>
                                 </div>
                                 <p className="text-base font-bold text-slate-900 mb-2 leading-snug">{card.title}</p>
                                 <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
@@ -163,12 +147,8 @@ export function SAPAISection() {
                                 transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
                                 className="bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-300"
                             >
-                                <div className="flex items-center justify-between mb-3">
+                                <div className="mb-3">
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{card.label}</span>
-                                    <div className="flex items-center gap-1.5">
-                                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: card.dotColor }} />
-                                        <span className="text-[10px] font-semibold text-slate-400">{card.status}</span>
-                                    </div>
                                 </div>
                                 <p className="text-base font-bold text-slate-900 mb-2 leading-snug">{card.title}</p>
                                 <p className="text-xs text-slate-500 leading-relaxed">{card.desc}</p>
