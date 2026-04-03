@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Linkedin, Twitter, Phone, Mail, MapPin } from 'lucide-react';
 
 const footerNav = {
@@ -46,13 +47,14 @@ export function Footer() {
                         {/* Col 1: Logo + description + socials */}
                         <div className="md:col-span-1">
                             {/* Logo lockup */}
-                            <Link href="/" className="inline-flex items-center gap-3 mb-5">
-                                <div className="w-9 h-9 rounded-xl bg-[#8A29AC] flex items-center justify-center shrink-0">
-                                    <span className="text-white font-extrabold text-base leading-none">A</span>
-                                </div>
-                                <span className="text-white font-bold text-lg tracking-tight">
-                                    Axentia<span className="text-[#8A29AC]">.AI</span>
-                                </span>
+                            <Link href="/" className="inline-block mb-5">
+                                <Image
+                                    src="/brand/axentia-logo.png"
+                                    alt="Axentia.AI"
+                                    width={160}
+                                    height={42}
+                                    className="h-9 w-auto"
+                                />
                             </Link>
 
                             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-[220px]">

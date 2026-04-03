@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Linkedin, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 
-const leaders = [
+const people = [
+    // Row 1 — Leaders
     {
         name: 'Manuj Gupta',
         role: 'Senior Advisor, Industry Expert',
@@ -17,19 +17,39 @@ const leaders = [
         name: 'Aditya Shankar',
         role: 'AI Lead, Industry Expert',
         company: 'Axentia AI',
-        photo: '/images/team/aditya-shankar.jpeg',
+        photo: '/images/team/Aditya-Shankar.jpeg',
         linkedin: '',
     },
     {
         name: 'Naresh Pathak',
         role: 'Mentor & Wellness Coach, Industry Expert',
         company: 'Axentia AI',
-        photo: '/images/team/naresh-pathak.jpeg',
+        photo: '/images/team/Naresh-Pathak.jpg',
         linkedin: '',
     },
-];
-
-const team = [
+    // Row 2
+    {
+        name: 'Arun Rajput',
+        role: 'VP - Business Growth & Alliance',
+        company: 'Axentia AI',
+        photo: '/images/team/arun-rajput.jpeg',
+        linkedin: 'https://in.linkedin.com/in/arun-rajput-65a3925',
+    },
+    {
+        name: 'Gauri Gupta',
+        role: 'Director',
+        company: 'Axentia AI',
+        photo: '/images/team/gauri-gupta.jpeg',
+        linkedin: 'https://in.linkedin.com/in/gauri-gupta-6768b21b5',
+    },
+    {
+        name: 'Rohit',
+        role: 'Program Manager',
+        company: 'Axentia AI',
+        photo: '/images/team/rohit.jpeg',
+        linkedin: '',
+    },
+    // Row 3
     {
         name: 'Nadeem Farooq',
         role: 'Senior Manager - Business Growth & Alliance',
@@ -38,27 +58,22 @@ const team = [
         linkedin: 'https://in.linkedin.com/in/nadeem-farooq-62598270',
     },
     {
-        name: 'Devlina Sarkar',
-        role: 'Brand & Communication Manager',
-        company: 'Axentia AI',
-        photo: '/images/team/devlina-sarkar.jpeg',
-        linkedin: 'https://www.linkedin.com/in/devlina-sarkar-081401229/',
-    },
-    {
         name: 'Neha Sharma',
         role: 'Senior Manager',
         company: 'Axentia AI',
         photo: '/images/team/neha-sharma.jpeg',
         linkedin: 'https://www.linkedin.com/in/neha-sharma-71a4baa7/',
     },
+    {
+        name: 'Devlina Sarkar',
+        role: 'Brand & Communication Manager',
+        company: 'Axentia AI',
+        photo: '/images/team/devlina-sarkar.jpeg',
+        linkedin: 'https://www.linkedin.com/in/devlina-sarkar-081401229/',
+    },
 ];
 
-type Tab = 'leaders' | 'team';
-
 export function Leaders() {
-    const [activeTab, setActiveTab] = useState<Tab>('leaders');
-    const people = activeTab === 'leaders' ? leaders : team;
-
     return (
         <section className="relative overflow-hidden bg-slate-900">
             {/* Subtle grid pattern */}
@@ -79,83 +94,56 @@ export function Leaders() {
             <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 py-20 md:py-28">
 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 md:mb-18">
-                    <div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 12 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="mb-4 flex gap-2"
-                        >
-                            <button
-                                onClick={() => setActiveTab('leaders')}
-                                className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-colors duration-200 cursor-pointer ${
-                                    activeTab === 'leaders'
-                                        ? 'text-accent-300 border border-accent-300/20 bg-accent-300/8'
-                                        : 'text-white/40 border border-white/10 bg-white/[0.03] hover:text-white/60'
-                                }`}
-                            >
-                                Leaders
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('team')}
-                                className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-colors duration-200 cursor-pointer ${
-                                    activeTab === 'team'
-                                        ? 'text-accent-300 border border-accent-300/20 bg-accent-300/8'
-                                        : 'text-white/40 border border-white/10 bg-white/[0.03] hover:text-white/60'
-                                }`}
-                            >
-                                Team
-                            </button>
-                        </motion.div>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.06 }}
-                            className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight mb-4"
-                        >
-                            Backbone of{' '}
-                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                Axentia.AI
-                            </span>
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 12 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="text-xs md:text-sm text-white/50 max-w-xl leading-relaxed"
-                        >
-                            Industry veterans building the next generation for AI Era
-                        </motion.p>
-                    </div>
-
+                <div className="mb-14 md:mb-18">
+                    <motion.div
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="mb-4"
+                    >
+                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8">
+                            Our Team
+                        </span>
+                    </motion.div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.06 }}
+                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight mb-4"
+                    >
+                        Backbone of{' '}
+                        <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                            Axentia.AI
+                        </span>
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-xs md:text-sm text-white/50 max-w-xl leading-relaxed"
+                    >
+                        Industry veterans building the next generation for AI Era
+                    </motion.p>
                 </div>
 
                 {/* Cards grid */}
-                <AnimatePresence mode="wait">
-                <motion.div
-                    key={activeTab}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]"
-                >
-                    {people.map((leader, index) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]">
+                    {people.map((person, index) => (
                         <motion.div
-                            key={leader.name}
+                            key={person.name}
                             initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-40px' }}
                             transition={{ duration: 0.5, delay: index * 0.08 }}
                             className="group relative bg-slate-900 hover:bg-slate-800/80 transition-colors duration-300"
                         >
                             {/* Photo with overlay */}
                             <div className="relative aspect-[4/5] overflow-hidden">
                                 <Image
-                                    src={leader.photo}
-                                    alt={leader.name}
+                                    src={person.photo}
+                                    alt={person.name}
                                     fill
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                     className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
@@ -163,38 +151,39 @@ export function Leaders() {
                                 {/* Gradient overlay for text legibility */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
 
-                                {/* LinkedIn icon — top right, always visible */}
-                                <a
-                                    href={leader.linkedin}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/10 text-white/60 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <Linkedin className="w-4 h-4" />
-                                </a>
+                                {/* LinkedIn icon — top right, only if link exists */}
+                                {person.linkedin && (
+                                    <a
+                                        href={person.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/10 text-white/60 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <Linkedin className="w-4 h-4" />
+                                    </a>
+                                )}
 
                                 {/* Name + role overlay at bottom of photo */}
                                 <div className="absolute bottom-0 left-0 right-0 p-5">
                                     <div className="flex items-center gap-2 mb-1.5">
                                         <h3 className="text-base font-bold text-white leading-snug tracking-tight">
-                                            {leader.name}
+                                            {person.name}
                                         </h3>
                                         <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-accent-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
                                     </div>
                                     <p className="text-[11px] font-semibold text-brand-300 uppercase tracking-wider mb-0.5">
-                                        {leader.role}
+                                        {person.role}
                                     </p>
                                     <p className="text-[10px] text-white/35 font-medium">
-                                        {leader.company}
+                                        {person.company}
                                     </p>
                                 </div>
                             </div>
 
                         </motion.div>
                     ))}
-                </motion.div>
-                </AnimatePresence>
+                </div>
             </div>
         </section>
     );
