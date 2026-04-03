@@ -41,7 +41,12 @@
       "Bash(git pull:*)",
       "Bash(git rm:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(pnpm run:*)"
+      "Bash(pnpm run:*)",
+      "Bash(find:*)",
+      "Bash(ffmpeg -i /Users/swapnilshinde/Desktop/axentiaai/public/videos/hero-latest.mp4 -vcodec libx264 -crf 28 -preset slow -vf \"scale=1920:-2\" -an -movflags +faststart /Users/swapnilshinde/Desktop/axentiaai/public/videos/hero-optimized.mp4 -y)",
+      "Bash(ffmpeg -i /Users/swapnilshinde/Desktop/axentiaai/public/videos/join_community.mp4 -vcodec libx264 -crf 28 -preset slow -vf \"scale=1920:-2\" -movflags +faststart /Users/swapnilshinde/Desktop/axentiaai/public/videos/join_community_optimized.mp4 -y)",
+      "Bash(ffmpeg -i /Users/swapnilshinde/Desktop/axentiaai/public/videos/graduation-celebration.mp4 -vcodec libx264 -crf 28 -preset slow -vf \"scale=1280:-2\" -movflags +faststart /Users/swapnilshinde/Desktop/axentiaai/public/videos/graduation-optimized.mp4 -y)",
+      "Bash(sort -k2)"
     ]
   }
 }

@@ -18,7 +18,7 @@ const enterprisePersonas: Persona[] = [
         description:
             'Brings AI into the flow of systems already in place, so improvements show up in how the business runs day to day.',
         points: ['Works with existing SAP landscape', 'Cuts manual load across functions', 'Speeds up decision-making'],
-        image: '/images/cio-cto.jpg',
+        image: '/images/cic-cto.jpg',
         imageAlt: 'CTO reviewing enterprise systems',
     },
     {
