@@ -49,7 +49,7 @@ export function Footer() {
                             {/* Logo lockup */}
                             <Link href="/" className="inline-block mb-5">
                                 <Image
-                                    src="/brand/axentia-logo.png"
+                                    src="/brand/axentia-logo-white.png"
                                     alt="Axentia.AI"
                                     width={160}
                                     height={42}
