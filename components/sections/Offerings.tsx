@@ -152,7 +152,7 @@ export function Offerings() {
                     className="mb-5"
                 >
                     <span
-                        className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest border border-[#8A29AC]/20 bg-[#8A29AC]/8 text-[#8A29AC]"
+                        className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest border border-[#8A29AC]/20 bg-[#8A29AC]/8 text-[#8A29AC]"
                     >
                         HOW WE HELP YOU SUCCEED
                     </span>

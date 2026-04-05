@@ -15,8 +15,8 @@ export function CTA() {
         <section id="cta" ref={ref} className="py-16 md:py-20 bg-white">
             <div className="container mx-auto px-4 md:px-8 xl:px-12">
                 <motion.div
-                    style={{ scale, borderRadius: 0 }}
-                    className="relative w-full bg-gradient-to-r from-brand-700 to-brand-500 overflow-hidden shadow-xl xl:h-[320px] flex flex-col xl:flex-row items-center"
+                    style={{ scale }}
+                    className="relative w-full rounded-2xl bg-gradient-to-r from-brand-700 to-brand-500 overflow-hidden shadow-xl xl:h-[320px] flex flex-col xl:flex-row items-center"
                 >
                     {/* Watermark letter */}
                     <div className="absolute -top-10 right-0 xl:right-[15%] text-[16rem] md:text-[24rem] font-[family-name:var(--font-playfair)] italic font-bold text-white/10 leading-none pointer-events-none select-none">
@@ -46,19 +46,19 @@ export function CTA() {
                         <div className="flex flex-nowrap items-center gap-3">
                             <Link
                                 href="/programs#apply"
-                                className="bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 hover:bg-brand-50 transition-colors text-xs"
+                                className="rounded-xl bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 hover:bg-brand-50 transition-colors text-xs"
                             >
                                 Book AI Discovery Workshop
                             </Link>
                             <Link
                                 href="/programs?tab=transformation"
-                                className="bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-xs"
+                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-xs"
                             >
                                 Launch Your First AI Pilot
                             </Link>
                             <Link
                                 href="/programs?tab=academies"
-                                className="bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-xs"
+                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-xs"
                             >
                                 Join a Talent Academy
                             </Link>

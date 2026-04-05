@@ -100,7 +100,7 @@ export function WhyAxentiaAI() {
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                     >
-                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-slate-500 border border-slate-300 bg-white">
+                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-slate-500 border border-slate-300 bg-white rounded-lg">
                             Enterprise Heritage
                         </span>
                         <h2
@@ -117,7 +117,7 @@ export function WhyAxentiaAI() {
                         {/* Stats row */}
                         <div className="flex gap-4 mb-8">
                             {stats.map((stat) => (
-                                <div key={stat.label} className="bg-white/50 backdrop-blur-sm border border-slate-200/60 px-5 py-4">
+                                <div key={stat.label} className="bg-white/50 backdrop-blur-sm border border-slate-200/60 rounded-xl px-5 py-4">
                                     <AnimatedCounter
                                         end={stat.end}
                                         suffix={stat.suffix}
@@ -150,7 +150,7 @@ export function WhyAxentiaAI() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.4 + i * 0.06, type: 'spring', stiffness: 120, damping: 16 }}
-                                    className="bg-white text-[11px] font-bold text-slate-600 px-3 py-1.5 border border-slate-200 shadow-sm"
+                                    className="bg-white text-[11px] font-bold text-slate-600 px-3 py-1.5 border border-slate-200 rounded-lg shadow-sm"
                                 >
                                     {name}
                                 </motion.span>
@@ -180,7 +180,7 @@ export function StandardsSection() {
                                 viewport={{ once: true, margin: '-40px' }}
                                 transition={{ type: 'spring', stiffness: 140, damping: 18, delay: i * 0.08 }}
                                 whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300, damping: 22 } }}
-                                className="group relative bg-white border border-slate-200 p-5 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
+                                className="group relative bg-white border border-slate-200 rounded-xl p-5 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
                             >
                                 <div className="relative w-full h-14 mb-3 flex items-center justify-center">
                                     <Image
@@ -194,7 +194,7 @@ export function StandardsSection() {
                                 </div>
                                 <h4 className="text-base font-bold text-slate-900 mb-1 tracking-tight">{cert.name}</h4>
                                 <p className="text-[10px] text-slate-500 leading-snug mb-3 font-medium">{cert.tagline}</p>
-                                <span className="mt-auto inline-flex items-center gap-1.5 bg-slate-900 text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-1">
+                                <span className="mt-auto inline-flex items-center gap-1.5 bg-slate-900 text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md">
                                     {cert.badgeText}
                                 </span>
                             </motion.div>
@@ -209,7 +209,7 @@ export function StandardsSection() {
                         transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                         className="flex flex-col h-full"
                     >
-                        <div className="inline-flex items-center gap-2.5 bg-slate-900 text-white text-xs font-bold uppercase tracking-[0.2em] px-5 py-2.5 shadow-lg mb-5 w-fit">
+                        <div className="inline-flex items-center gap-2.5 bg-slate-900 text-white text-xs font-bold uppercase tracking-[0.2em] px-5 py-2.5 shadow-lg rounded-lg mb-5 w-fit">
                             <span className="w-2 h-2 bg-emerald-400 animate-pulse ring-2 ring-emerald-400/30" />
                             Certified &amp; Recognised
                         </div>

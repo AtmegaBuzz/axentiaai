@@ -147,7 +147,7 @@ export function IndustryUseCases() {
                     className="mb-4"
                 >
                     <span
-                        className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8"
+                        className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8"
                     >
                         Industry Use Cases
                     </span>
@@ -183,7 +183,7 @@ export function IndustryUseCases() {
                         <button
                             onClick={prev}
                             disabled={current === 0}
-                            className="flex items-center gap-2 px-5 py-2.5 border border-slate-300 text-sm font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+                            className="flex items-center gap-2 rounded-xl px-5 py-2.5 border border-slate-300 text-sm font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
                         >
                             <ArrowLeft className="w-4 h-4" />
                             Prev
@@ -191,7 +191,7 @@ export function IndustryUseCases() {
                         <button
                             onClick={next}
                             disabled={current >= maxIdx}
-                            className="flex items-center gap-2 px-5 py-2.5 border border-slate-300 text-sm font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
+                            className="flex items-center gap-2 rounded-xl px-5 py-2.5 border border-slate-300 text-sm font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
                         >
                             Next
                             <ArrowRight className="w-4 h-4" />
@@ -212,7 +212,7 @@ export function IndustryUseCases() {
                     {useCases.map((uc, i) => (
                         <div
                             key={uc.id}
-                            className="relative overflow-hidden shrink-0"
+                            className="relative rounded-2xl overflow-hidden shrink-0"
                             style={{ width: '60vw', height: 'clamp(420px, 52vh, 600px)' }}
                         >
                             {/* Full-bleed photo */}
@@ -232,7 +232,7 @@ export function IndustryUseCases() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-60px' }}
                                 transition={{ delay: i * 0.05, duration: 0.5 }}
-                                className="absolute bottom-6 left-6 md:max-w-[360px] bg-white p-6 shadow-xl border border-slate-100"
+                                className="absolute bottom-6 left-6 md:max-w-[360px] rounded-2xl bg-white p-6 shadow-xl border border-slate-100"
                             >
                                 {/* Industry + modules */}
                                 <p className="text-xs font-bold uppercase tracking-widest text-[#8A29AC] mb-1">

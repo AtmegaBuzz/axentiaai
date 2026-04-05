@@ -39,7 +39,7 @@ export function WhyEnterprisesChoose() {
                         initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8"
+                        className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8"
                     >
                         Key Differentiators
                     </motion.span>
@@ -77,10 +77,10 @@ export function WhyEnterprisesChoose() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05, type: 'spring', stiffness: 120, damping: 18 }}
-                                className="bg-white border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-200"
+                                className="rounded-2xl bg-white border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-200"
                             >
                                 <div className="flex items-center justify-between mb-4">
-                                    <div className="w-9 h-9 bg-brand-500/15 flex items-center justify-center">
+                                    <div className="w-9 h-9 rounded-xl bg-brand-500/15 flex items-center justify-center">
                                         <Icon className="w-4 h-4 text-brand-400" strokeWidth={2} />
                                     </div>
                                     <span className="text-2xl font-black text-slate-900 tracking-tight">
@@ -103,12 +103,12 @@ export function WhyEnterprisesChoose() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: items.length * 0.05, type: 'spring', stiffness: 120, damping: 18 }}
-                        className="bg-brand-600 p-6 md:p-8 flex flex-col justify-center items-center text-center"
+                        className="rounded-2xl bg-brand-600 p-6 md:p-8 flex flex-col justify-center items-center text-center"
                     >
                         <p className="text-white font-bold text-lg mb-3">Ready to start?</p>
                         <a
                             href="/programs#apply"
-                            className="inline-flex items-center gap-2 bg-white text-slate-900 text-sm font-bold px-5 py-2.5 hover:bg-slate-100 transition-colors"
+                            className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 text-sm font-bold px-5 py-2.5 hover:bg-slate-100 transition-colors"
                         >
                             Schedule Consultation
                         </a>

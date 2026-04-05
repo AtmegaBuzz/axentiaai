@@ -36,7 +36,7 @@ export function Hero() {
                         poster="/videos/hero-poster.jpg"
                         className="w-full h-full object-cover"
                     >
-                        <source src="/videos/hero-latest.mp4" type="video/mp4" />
+                        <source src="/videos/hero.mp4" type="video/mp4" />
                     </video>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/65 to-black/50" />
                 </div>

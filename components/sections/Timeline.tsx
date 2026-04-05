@@ -76,7 +76,7 @@ export function HowItWorks() {
         {/* Header */}
         <div className="pt-16 md:pt-20 pb-6 px-6 md:px-12 xl:px-20">
           <div className="max-w-7xl mx-auto">
-            <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200 bg-slate-50 mb-3">
+            <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200 bg-slate-50 mb-3">
               How It Works
             </span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
@@ -102,7 +102,7 @@ export function HowItWorks() {
               return (
                 <motion.div
                   key={i}
-                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 border-2 border-white"
+                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white"
                   style={{
                     left: pos,
                     marginLeft: '-6px',
@@ -126,7 +126,7 @@ export function HowItWorks() {
               return (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[85vw] md:w-[42vw] lg:w-[30vw] h-full flex flex-col bg-slate-50 border border-slate-100 overflow-hidden group"
+                  className="flex-shrink-0 w-[85vw] md:w-[42vw] lg:w-[30vw] h-full flex flex-col rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden group"
                 >
                   {/* Image */}
                   <div className="relative h-[45%] overflow-hidden">
@@ -139,7 +139,7 @@ export function HowItWorks() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     {/* Period badge */}
-                    <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm px-3 py-1 flex items-center gap-2">
+                    <div className="absolute bottom-3 left-3 rounded-lg bg-white/95 backdrop-blur-sm px-3 py-1 flex items-center gap-2">
                       <Icon className="w-3.5 h-3.5 text-brand-500" strokeWidth={2.5} />
                       <span className="text-[11px] font-bold text-slate-700 tracking-wide">
                         {item.period}
@@ -157,13 +157,13 @@ export function HowItWorks() {
                     </p>
 
                     {/* Highlights */}
-                    <div className="flex flex-nowrap gap-2 mt-3">
+                    <div className="flex flex-wrap gap-2 mt-3">
                       {item.highlights.map((h) => (
                         <span
                           key={h}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold border border-brand-200 bg-white text-brand-700"
+                          className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold border border-brand-200 bg-white text-brand-700 whitespace-nowrap shrink-0"
                         >
-                          <span className="w-1 h-1 bg-brand-500 flex-shrink-0" />
+                          <span className="w-1 h-1 rounded-full bg-brand-500 flex-shrink-0" />
                           {h}
                         </span>
                       ))}

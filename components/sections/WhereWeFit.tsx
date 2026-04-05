@@ -78,7 +78,7 @@ function PersonaCard({ p, index }: { p: Persona; index: number }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.4, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex flex-col overflow-hidden bg-white border border-slate-200"
+            className="relative flex flex-col rounded-2xl overflow-hidden bg-white border border-slate-200"
         >
             {/* Image */}
             <div className="relative h-40 overflow-hidden shrink-0">
@@ -131,7 +131,7 @@ export function WhereWeFit() {
                         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                     >
                         {/* Tab buttons */}
-                        <div className="flex items-center gap-0 mb-6 border border-slate-200 w-fit">
+                        <div className="flex items-center gap-0 mb-6 rounded-xl border border-slate-200 w-fit overflow-hidden">
                             {tabs.map((tab) => (
                                 <button
                                     key={tab.id}

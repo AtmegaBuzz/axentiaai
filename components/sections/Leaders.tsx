@@ -101,7 +101,7 @@ export function Leaders() {
                         viewport={{ once: true }}
                         className="mb-4"
                     >
-                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8">
+                        <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8">
                             Our Team
                         </span>
                     </motion.div>
@@ -129,7 +129,7 @@ export function Leaders() {
                 </div>
 
                 {/* Cards grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                     {people.map((person, index) => (
                         <motion.div
                             key={person.name}
@@ -137,7 +137,7 @@ export function Leaders() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-40px' }}
                             transition={{ duration: 0.5, delay: index * 0.08 }}
-                            className="group relative bg-slate-900 hover:bg-slate-800/80 transition-colors duration-300"
+                            className="group relative rounded-2xl bg-slate-900 hover:bg-slate-800/80 transition-colors duration-300 overflow-hidden"
                         >
                             {/* Photo with overlay */}
                             <div className="relative aspect-[4/5] overflow-hidden">
@@ -157,7 +157,7 @@ export function Leaders() {
                                         href={person.linkedin}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/10 text-white/60 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200"
+                                        className="absolute top-4 right-4 w-9 h-9 rounded-xl flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/10 text-white/60 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200"
                                         onClick={(e) => e.stopPropagation()}
                                     >
                                         <Linkedin className="w-4 h-4" />

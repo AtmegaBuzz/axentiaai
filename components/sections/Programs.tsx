@@ -111,7 +111,7 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.5, delay: index * 0.08 }}
-            className="group relative bg-white shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden h-full"
+            className="group relative rounded-2xl bg-white shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden h-full"
         >
             {/* Thumbnail — no play button */}
             <div className="relative h-48 overflow-hidden">
@@ -134,7 +134,7 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                     {prog.info.map(({ label, value, Icon }) => (
                         <div key={label} className="flex items-start gap-3">
-                            <div className="w-9 h-9 bg-slate-100 flex items-center justify-center flex-shrink-0">
+                            <div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0">
                                 <Icon className="w-4 h-4 text-slate-600" />
                             </div>
                             <div>
@@ -146,7 +146,7 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
                 </div>
                 <Link
                     href={`/programs?tab=${prog.id}`}
-                    className="mt-auto inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 w-fit transition-colors duration-200"
+                    className="mt-auto inline-flex items-center gap-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 w-fit transition-colors duration-200"
                 >
                     Explore Program
                     <ArrowUpRight className="w-4 h-4" />
@@ -199,7 +199,7 @@ export function Programs() {
                             transition={{ duration: 0.5 }}
                             className="mb-4"
                         >
-                            <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8">
+                            <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8">
                                 Our Programmes
                             </span>
                         </motion.div>
@@ -231,14 +231,14 @@ export function Programs() {
                         <button
                             onClick={prev}
                             disabled={current === 0}
-                            className="flex items-center justify-center w-10 h-10 border border-white/20 text-white hover:border-white/50 disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
+                            className="flex items-center justify-center w-10 h-10 rounded-xl border border-white/20 text-white hover:border-white/50 disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
                         >
                             <ArrowLeft className="w-4 h-4" />
                         </button>
                         <button
                             onClick={next}
                             disabled={current >= maxIdx}
-                            className="flex items-center justify-center w-10 h-10 border border-white/20 text-white hover:border-white/50 disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
+                            className="flex items-center justify-center w-10 h-10 rounded-xl border border-white/20 text-white hover:border-white/50 disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200"
                         >
                             <ArrowRight className="w-4 h-4" />
                         </button>
@@ -274,7 +274,7 @@ export function Programs() {
                 >
                     <Link
                         href="/programs"
-                        className="inline-flex items-center gap-2 bg-white text-slate-900 text-sm font-bold py-3 px-7 hover:bg-slate-100 transition-colors duration-200"
+                        className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 text-sm font-bold py-3 px-7 hover:bg-slate-100 transition-colors duration-200"
                     >
                         Browse All Programs
                         <ArrowUpRight className="w-4 h-4" />

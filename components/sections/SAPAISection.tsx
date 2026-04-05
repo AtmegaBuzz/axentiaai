@@ -114,7 +114,7 @@ export function SAPAISection() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-                                className="bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-300"
+                                className="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-300"
                             >
                                 <div className="mb-3">
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{card.label}</span>
@@ -145,7 +145,7 @@ export function SAPAISection() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
-                                className="bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-300"
+                                className="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md hover:border-[#8A29AC]/15 transition-all duration-300"
                             >
                                 <div className="mb-3">
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{card.label}</span>
