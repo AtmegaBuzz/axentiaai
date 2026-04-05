@@ -32,7 +32,7 @@ export function Hero() {
                         muted
                         loop
                         playsInline
-                        preload="metadata"
+                        preload="auto"
                         poster="/videos/hero-poster.jpg"
                         className="w-full h-full object-cover"
                     >
