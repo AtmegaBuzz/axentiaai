@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ContactInquiry {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  email       String
+  phone       String?
+  message     String
+  submittedAt DateTime @default(now()) @map("submitted_at") @db.Timestamptz()
+
+  @@index([submittedAt(sort: Desc)])
+  @@map("contact_inquiries")
+}
+
+model Subscriber {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email        String   @unique
+  source       String?  @default("footer")
+  subscribedAt DateTime @default(now()) @map("subscribed_at") @db.Timestamptz()
+
+  @@index([email])
+  @@index([subscribedAt(sort: Desc)])
+  @@map("subscribers")
+}
+
+model EnterpriseInquiry {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  email       String
+  company     String
+  message     String
+  submittedAt DateTime @default(now()) @map("submitted_at") @db.Timestamptz()
+
+  @@index([submittedAt(sort: Desc)])
+  @@map("enterprise_inquiries")
+}

@@ -290,7 +290,7 @@ function LegacySection() {
               {/* Large filler image behind stats */}
               <div className="absolute -top-8 -right-6 w-[calc(100%+24px)] h-[calc(100%+40px)] rounded-3xl overflow-hidden opacity-[0.08]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/new_images/about/professional-woman-workspace.jpg" alt="Enterprise building" className="w-full h-full object-cover" />
+                <img src="/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg" alt="Enterprise building" className="w-full h-full object-cover" />
               </div>
               <div className="grid grid-cols-2 gap-3 relative p-6 bg-slate-50 rounded-3xl border border-slate-100">
                 {[

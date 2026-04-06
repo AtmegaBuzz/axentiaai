@@ -23,7 +23,7 @@ const valuePropCards = [
         desc: 'Every program integrates AI tools and thinking into the SAP consulting process, so graduates are prepared for what enterprises actually need.',
     },
     {
-        image: '/images/new_images/about/professional-woman-workspace.jpg',
+        image: '/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg',
         title: 'Backed by 25+ Years of Delivery',
         desc: 'Axentia.AI is built on Orane Consulting\'s enterprise SAP legacy, giving us unique credibility and curriculum depth.',
     },

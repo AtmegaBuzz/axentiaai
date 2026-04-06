@@ -11,7 +11,7 @@ export const config = {
      * Only run auth middleware on admin and API routes.
      * All other routes skip the Supabase auth.getUser() network call.
      */
-    '/admin/:path*',
+    '/ax-portal/:path*',
     '/api/:path*',
   ],
 };
