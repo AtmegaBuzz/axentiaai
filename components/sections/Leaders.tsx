@@ -15,17 +15,17 @@ const people = [
     },
     {
         name: 'Aditya Shankar',
-        role: 'AI Lead, Industry Expert',
+        role: 'Chief Product and Technology Officer',
         company: 'Axentia AI',
         photo: '/images/team/Aditya-Shankar.jpeg',
-        linkedin: '',
+        linkedin: 'https://www.linkedin.com/in/aditya-shanker-iiml',
     },
     {
         name: 'Dr. Naresh Pathak',
         role: 'Adviser & Wellness Coach',
         company: 'Axentia AI',
         photo: '/images/team/Naresh-Pathak.jpg',
-        linkedin: '',
+        linkedin: 'https://www.linkedin.com/in/nkp74/',
     },
     // Row 2
     {
@@ -47,7 +47,7 @@ const people = [
         role: 'Program Manager',
         company: 'Axentia AI',
         photo: '/images/team/rohit.jpeg',
-        linkedin: '',
+        linkedin: 'https://www.linkedin.com/in/rohit-aggarwal92/',
     },
     // Row 3
     {
