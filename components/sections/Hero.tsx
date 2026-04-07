@@ -5,11 +5,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { ContactModal } from '@/components/ContactModal';
 
-const metrics = [
-    { value: '50+', label: 'Enterprises' },
-    { value: '300+', label: 'Certified Professionals' },
-    { value: '4+', label: 'Countries' },
-];
 
 export function Hero() {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -118,23 +113,6 @@ export function Hero() {
                                 </span>
                             </motion.div>
 
-                            {/* Trust metrics strip — above-fold social proof */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 12 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: 0.65 }}
-                                className="flex items-center gap-8 md:gap-12"
-                            >
-                                {metrics.map((m, i) => (
-                                    <div key={m.label} className="flex items-center gap-3">
-                                        {i > 0 && <div className="w-px h-8 bg-white/15 -ml-4 md:-ml-6 mr-1" />}
-                                        <div>
-                                            <p className="text-lg md:text-xl font-black text-white tracking-tight">{m.value}</p>
-                                            <p className="text-[10px] md:text-[11px] font-medium text-white/45 uppercase tracking-wider">{m.label}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </motion.div>
 
                         </div>
                     </div>
