@@ -1,22 +1,27 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 interface ContactModalProps {
     isOpen: boolean;
     onClose: () => void;
+    defaultMessage?: string;
 }
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+export function ContactModal({ isOpen, onClose, defaultMessage = '' }: ContactModalProps) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState(defaultMessage);
     const [status, setStatus] = useState<Status>('idle');
+
+    useEffect(() => {
+        if (isOpen && defaultMessage) setMessage(defaultMessage);
+    }, [isOpen, defaultMessage]);
     const [errorMsg, setErrorMsg] = useState('');
 
     const resetForm = () => {

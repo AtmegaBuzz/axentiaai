@@ -137,7 +137,13 @@ export function IndustryUseCases() {
     }, [maxIdx]);
 
     return (
-        <section ref={sectionRef} className="bg-white overflow-hidden">
+        <section ref={sectionRef} className="bg-white overflow-hidden relative">
+            {/* ── Separator ── */}
+            <div className="relative h-px w-full">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8A29AC]/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C010DA]/20 to-transparent blur-sm" />
+            </div>
+
             {/* ── Header ── */}
             <div className="container mx-auto px-4 md:px-8 xl:px-12 pt-20 md:pt-28 pb-12 md:pb-16">
                 <motion.div

@@ -109,13 +109,13 @@ function OfferingRow({ offering, index }: { offering: typeof offerings[0]; index
                 <ul className="space-y-2.5 mb-10">
                     {offering.includes.map((item) => (
                         <li key={item} className="flex items-start gap-3">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-4 h-4 text-[#A20EBF] shrink-0 mt-0.5" />
                             <span className="text-sm text-slate-600 leading-snug">{item}</span>
                         </li>
                     ))}
                 </ul>
                 <span
-                    className="inline-flex items-center gap-2 bg-slate-900 text-white text-sm font-bold px-5 py-2.5 cursor-default"
+                    className="inline-flex items-center gap-2 bg-slate-900 text-white text-sm font-bold px-5 py-2.5 cursor-default rounded-full"
                 >
                     Learn More
                     <ArrowUpRight className="w-4 h-4" />

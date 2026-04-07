@@ -151,7 +151,7 @@ export function WhereWeFit() {
                             className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-4"
                         >
                             Where Axentia.AI{' '}
-                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">fits?</span>
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent pr-[4px]">fits?</span>
                         </h2>
                         <p className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-md">
                             For enterprises and individuals ready to scale with AI

@@ -166,12 +166,18 @@ export function Leaders() {
 
                                 {/* Name + role overlay at bottom of photo */}
                                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                                    <div className="flex items-center gap-2 mb-1.5">
+                                    <a
+                                        href={person.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 mb-1.5"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
                                         <h3 className="text-base font-bold text-white leading-snug tracking-tight">
                                             {person.name}
                                         </h3>
                                         <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-accent-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
-                                    </div>
+                                    </a>
                                     <p className="text-[11px] font-semibold text-brand-300 uppercase tracking-wider mb-0.5">
                                         {person.role}
                                     </p>

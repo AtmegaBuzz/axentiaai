@@ -100,7 +100,7 @@ export function WhyAxentiaAI() {
                         viewport={{ once: true }}
                         transition={{ type: 'spring', stiffness: 90, damping: 20 }}
                     >
-                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5 text-slate-500 border border-slate-300 bg-white rounded-lg">
+                        <span className="inline-flex items-center px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest mb-5 text-slate-500 border border-slate-300 bg-white rounded-full">
                             Enterprise Heritage
                         </span>
                         <h2

@@ -57,7 +57,7 @@ export function Hero() {
                                 transition={{ duration: 0.5, delay: 0.1 }}
                                 className="mb-6"
                             >
-                                <span className="inline-flex items-center gap-2.5 bg-white/8 backdrop-blur-sm border border-white/12 text-white/70 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2">
+                                <span className="inline-flex items-center gap-2.5 bg-white/8 backdrop-blur-sm border border-white/12 text-white/70 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full">
                                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                                     Enterprise AI Platform
                                 </span>
@@ -106,13 +106,13 @@ export function Hero() {
                                 <button
                                     type="button"
                                     onClick={() => setContactOpen(true)}
-                                    className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold py-3 px-7 text-sm hover:bg-slate-100 transition-colors duration-200 cursor-pointer"
+                                    className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold py-3 px-7 text-sm hover:bg-slate-100 transition-colors duration-200 cursor-pointer rounded-full"
                                 >
                                     Book AI Discovery Workshop
                                     <ArrowRight className="w-4 h-4" />
                                 </button>
                                 <span
-                                    className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/20 text-white font-semibold py-3 px-7 text-sm cursor-default"
+                                    className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/20 text-white font-semibold py-3 px-7 text-sm cursor-default rounded-full"
                                 >
                                     See What We Deliver
                                 </span>

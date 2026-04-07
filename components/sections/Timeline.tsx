@@ -71,7 +71,7 @@ export function HowItWorks() {
   const trackWidth = useTransform(scrollYProgress, [0, 0.95], ['0%', '100%'])
 
   return (
-    <div ref={containerRef} style={{ height: '250vh' }}>
+    <div ref={containerRef} style={{ height: '150vh' }}>
       <section className="sticky top-0 h-screen bg-white overflow-hidden flex flex-col">
         {/* Header */}
         <div className="pt-16 md:pt-20 pb-6 px-6 md:px-12 xl:px-20">
@@ -117,7 +117,7 @@ export function HowItWorks() {
         {/* Scrolling cards area */}
         <div className="flex-1 overflow-hidden px-6 md:px-12 xl:px-20 pb-10">
           <motion.div
-            className="flex gap-6 h-full"
+            className="flex gap-6 items-stretch"
             style={{ x }}
           >
             {timelineItems.map((item, i) => {
@@ -126,10 +126,10 @@ export function HowItWorks() {
               return (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[85vw] md:w-[42vw] lg:w-[30vw] h-full flex flex-col rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden group"
+                  className="flex-shrink-0 w-[85vw] md:w-[42vw] lg:w-[30vw] flex flex-col rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden group"
                 >
                   {/* Image */}
-                  <div className="relative h-[45%] overflow-hidden">
+                  <div className="relative h-48 md:h-52 overflow-hidden">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -152,7 +152,7 @@ export function HowItWorks() {
                     <h3 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight leading-tight mb-3">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-slate-500 leading-relaxed flex-1">
+                    <p className="text-sm text-slate-500 leading-relaxed">
                       {item.description}
                     </p>
 
