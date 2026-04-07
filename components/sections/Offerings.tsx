@@ -114,13 +114,12 @@ function OfferingRow({ offering, index }: { offering: typeof offerings[0]; index
                         </li>
                     ))}
                 </ul>
-                <Link
-                    href={`/programs?tab=${offering.id}`}
-                    className="inline-flex items-center gap-2 bg-slate-900 text-white text-sm font-bold px-5 py-2.5 hover:bg-slate-800 transition-colors duration-200 group"
+                <span
+                    className="inline-flex items-center gap-2 bg-slate-900 text-white text-sm font-bold px-5 py-2.5 cursor-default"
                 >
                     Learn More
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-                </Link>
+                    <ArrowUpRight className="w-4 h-4" />
+                </span>
             </div>
         </motion.div>
     );

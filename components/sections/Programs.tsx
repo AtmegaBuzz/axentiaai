@@ -144,13 +144,12 @@ function ProgramCard({ prog, index }: { prog: Program; index: number }) {
                         </div>
                     ))}
                 </div>
-                <Link
-                    href={`/programs?tab=${prog.id}`}
-                    className="mt-auto inline-flex items-center gap-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-5 w-fit transition-colors duration-200"
+                <span
+                    className="mt-auto inline-flex items-center gap-2 rounded-xl bg-slate-900 text-white text-sm font-bold py-2.5 px-5 w-fit cursor-default"
                 >
                     Explore Program
                     <ArrowUpRight className="w-4 h-4" />
-                </Link>
+                </span>
             </div>
         </motion.div>
     );
@@ -272,13 +271,12 @@ export function Programs() {
                     transition={{ delay: 0.3 }}
                     className="text-center mt-8"
                 >
-                    <Link
-                        href="/programs"
-                        className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 text-sm font-bold py-3 px-7 hover:bg-slate-100 transition-colors duration-200"
+                    <span
+                        className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 text-sm font-bold py-3 px-7 cursor-default"
                     >
                         Browse All Programs
                         <ArrowUpRight className="w-4 h-4" />
-                    </Link>
+                    </span>
                 </motion.div>
             </div>
         </section>

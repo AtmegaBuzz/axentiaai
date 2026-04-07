@@ -1,13 +1,13 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ContactModal } from '@/components/ContactModal';
 
 export function CTA() {
     const ref = useRef(null);
+    const [contactOpen, setContactOpen] = useState(false);
     const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 40%'] });
     const scale = useTransform(scrollYProgress, [0, 1], [0.88, 1]);
 
@@ -44,24 +44,23 @@ export function CTA() {
                         </p>
 
                         <div className="flex flex-nowrap items-center gap-3">
-                            <Link
-                                href="/programs#apply"
-                                className="rounded-xl bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 hover:bg-brand-50 transition-colors text-xs"
+                            <button
+                                type="button"
+                                onClick={() => setContactOpen(true)}
+                                className="rounded-xl bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 text-xs cursor-pointer hover:bg-brand-50 transition-colors"
                             >
                                 Book AI Discovery Workshop
-                            </Link>
-                            <Link
-                                href="/programs?tab=transformation"
-                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-xs"
+                            </button>
+                            <span
+                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 text-xs cursor-default"
                             >
                                 Launch Your First AI Pilot
-                            </Link>
-                            <Link
-                                href="/programs?tab=academies"
-                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 hover:bg-white/25 transition-colors text-xs"
+                            </span>
+                            <span
+                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 text-xs cursor-default"
                             >
                                 Join a Talent Academy
-                            </Link>
+                            </span>
                         </div>
                     </div>
 
@@ -77,6 +76,7 @@ export function CTA() {
                     </div>
                 </motion.div>
             </div>
+            <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
         </section>
     );
 }

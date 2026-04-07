@@ -1,380 +1,312 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
-import { Button } from '@/components/ui/Button';
-import { Users, Briefcase, Building2, ArrowRight, CheckCircle2, Cpu, Layers } from 'lucide-react';
-import { useState } from 'react';
-import Link from 'next/link';
+import { useRef, useEffect, useState } from 'react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
-import { WhyEnterprisesChoose } from '@/components/sections/WhyEnterprisesChoose';
 
-type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+const deliverables = [
+    'AI outputs appear directly in existing workflows',
+    'Use cases move into steady, repeatable use across operations',
+    '20–40% reduction in manual effort across targeted processes',
+    'Faster decision cycles with fewer handoffs and escalations',
+    'Internal capability established to run and extend use cases independently',
+    'Each initiative reduces time and cost for the next, creating compounding returns',
+];
 
-const valuePropCards = [
+const areas = [
     {
-        image: '/images/new_images/personas/enterprise-ld/group-projector-training.jpg',
-        title: 'Pre-trained, Deployment-Ready Talent',
-        desc: 'Our graduates arrive with 10 months of hands-on SAP training and apprenticeship experience, not just classroom theory.',
+        title: 'Customer Service',
+        desc: 'Assistants that handle high-volume queries and route complex cases appropriately.',
+        bullets: ['Customer support', 'Internal helpdesk', 'HR self-service'],
+        image: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=800&q=80',
     },
     {
-        image: '/images/new_images/offerings/enterprise-ai-transformation.jpg',
-        title: 'AI-Era Consulting Capability',
-        desc: 'Every program integrates AI tools and thinking into the SAP consulting process, so graduates are prepared for what enterprises actually need.',
+        title: 'Process Automation',
+        desc: 'Workflows that read, interpret, and act — reducing manual handling across processes.',
+        bullets: ['Invoice and PO processing', 'Contract extraction', 'Approval flows'],
+        image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&q=80',
     },
     {
-        image: '/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg',
-        title: 'Backed by 25+ Years of Delivery',
-        desc: 'Axentia.AI is built on Orane Consulting\'s enterprise SAP legacy, giving us unique credibility and curriculum depth.',
+        title: 'Computer Vision',
+        desc: 'Image-based models used in operations, production, and field environments.',
+        bullets: ['Defect detection', 'Inventory tracking', 'Safety checks'],
+        image: 'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80',
     },
     {
-        image: '/images/new_images/personas/business-leaders/professionals-meeting.jpg',
-        title: 'Placement-First by Design',
-        desc: 'Our model is structured around outcomes. Every cohort is prepared specifically for enterprise deployment, not generic employability.',
+        title: 'Forecasting & Planning',
+        desc: 'Forward-looking signals embedded into planning and decision-making.',
+        bullets: ['Demand and inventory', 'Risk and churn', 'Financial projections'],
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+    },
+    {
+        title: 'Workforce & HR',
+        desc: 'Operational support and insights across workforce processes.',
+        bullets: ['Talent matching', 'Attrition signals', 'Onboarding workflows'],
+        image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80',
+    },
+    {
+        title: 'Data & Integration',
+        desc: 'Connecting models to enterprise data and processes so outputs can be used directly.',
+        bullets: ['Data pipelines', 'Real-time APIs', 'Monitoring and governance'],
+        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
     },
 ];
 
-const whatWeBring = [
-    { icon: <Users className="w-6 h-6" />, text: 'A continuous stream of SAP-trained, AI-ready consultants' },
-    { icon: <Cpu className="w-6 h-6" />, text: 'Technology integration across SAP S/4HANA, FICO, MM, SD, ABAP' },
-    { icon: <Building2 className="w-6 h-6" />, text: 'Workforce capability aligned to your project delivery model' },
-    { icon: <Layers className="w-6 h-6" />, text: 'Talent pipelines designed to scale with your enterprise needs' },
-];
+function WhatWeBuildSection() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [activeIdx, setActiveIdx] = useState(0);
+    const totalAreas = areas.length;
 
-const partnershipModels = [
-    {
-        title: 'Talent Pipeline',
-        badge: 'Most Popular',
-        desc: 'Access a continuous pipeline of Axentia.AI graduates who are deployment-ready from day one. Work with us to pre-select candidates, define your requirements, and build a reliable inflow of SAP consulting talent.',
-        benefits: ['Direct access to graduating cohorts', 'Pre-screening based on your criteria', 'Candidates prepared for your tech stack', 'Ongoing pipeline management'],
-    },
-    {
-        title: 'Apprenticeship Collaborations',
-        badge: 'High Impact',
-        desc: 'Co-host paid apprenticeship projects from our active cohorts. Apprentices work under your supervision on live or shadow projects — giving you low-cost capacity while they build real experience.',
-        benefits: ['6-month paid apprenticeship placements', 'Structured work allocation framework', 'Mentorship from your delivery team', 'First-right-of-offer for graduation hire'],
-    },
-    {
-        title: 'Capability Development',
-        badge: 'Enterprise',
-        desc: 'Work with Axentia.AI to design and deliver tailored upskilling programs for your existing SAP workforce. Leverage our curriculum depth and Orane\'s delivery expertise to close capability gaps fast.',
-        benefits: ['Custom curriculum co-design', 'Delivered by senior SAP practitioners', 'Blended online + workshop formats', 'Progress tracking and outcome reporting'],
-    },
-];
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ['start start', 'end end'],
+    });
 
-const impactStats = [
-    { end: 100, suffix: '+', label: 'Careers launched through our programs' },
-    { end: 95, suffix: '%', label: 'Placement success rate' },
-    { end: 4, suffix: '+', label: 'Countries where graduates are working' },
-    { end: 30, suffix: '+', label: 'Enterprise hiring partners' },
-];
-
-export default function EnterprisesPage() {
-    const [form, setForm] = useState({ name: '', email: '', company: '', message: '' });
-    const [status, setStatus] = useState<FormStatus>('idle');
-    const [errorMsg, setErrorMsg] = useState('');
-
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        setStatus('loading');
-        setErrorMsg('');
-        try {
-            const res = await fetch('/api/enterprise-inquiry', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
-            });
-            const data = await res.json();
-            if (res.ok) {
-                setStatus('success');
-                setForm({ name: '', email: '', company: '', message: '' });
-            } else {
-                setStatus('error');
-                setErrorMsg(data.error ?? 'Something went wrong. Please try again.');
-            }
-        } catch {
-            setStatus('error');
-            setErrorMsg('Network error. Please try again.');
-        }
-    }
+    useMotionValueEvent(scrollYProgress, 'change', (v) => {
+        // Map scroll progress to area index
+        const idx = Math.min(Math.floor(v * totalAreas), totalAreas - 1);
+        setActiveIdx(idx);
+    });
 
     return (
-        <>
-            <main>
-                {/* Hero */}
-                <section className="relative pt-40 pb-24 md:pt-48 md:pb-24 overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e0735 0%, #2a0845 50%, #1a0630 100%)' }}>
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 70% 50%, rgba(192,16,218,0.12) 0%, transparent 60%)' }} />
-                    <div className="container mx-auto px-4 md:px-6 relative z-10">
-                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
-                            <span className="inline-block px-3 py-1 rounded-full bg-brand-500/20 border border-brand-500/30 text-brand-300 text-sm font-semibold mb-6">
-                                For Enterprises
-                            </span>
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 leading-tight text-left">
-                                Building Capability{' '}
-                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
-                                    Together
-                                </span>
-                            </h1>
-                            <p className="text-base md:text-xl text-slate-300 leading-relaxed mb-8">
-                                Whether you need deployment-ready SAP consultants, apprenticeship collaborations, or capability development programs, Axentia.AI builds the talent infrastructure your enterprise needs.
-                            </p>
-                            <div className="flex flex-wrap gap-4">
-                                <Link href="#contact" className="inline-flex items-center gap-2 bg-white text-slate-900 font-bold px-8 py-4 rounded-full shadow-xl hover:-translate-y-1 transition-all duration-200">
-                                    Work With Axentia.AI
-                                    <ArrowRight className="w-4 h-4" />
-                                </Link>
-                                <Link href="#partnerships" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/20 transition-all">
-                                    See Partnership Models
-                                </Link>
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
+        <section ref={containerRef} style={{ height: `${totalAreas * 100}vh` }} className="relative">
+            {/* Sticky viewport */}
+            <div
+                className="sticky top-0 h-screen w-full overflow-hidden"
+                style={{
+                    background:
+                        'linear-gradient(135deg, #1e0735 0%, #2a0845 30%, #58179B 70%, #6B1D8E 100%)',
+                }}
+            >
+                {/* Section heading — top */}
+                <div className="absolute top-0 left-0 right-0 z-30 pt-24 pb-6 text-center pointer-events-none">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-2">
+                        What We Build
+                    </h2>
+                    <p className="text-base md:text-lg text-white/60">
+                        Six areas where work can move forward in a measurable way
+                    </p>
+                </div>
 
-                {/* Why Enterprises Choose Axentia.AI */}
-                <WhyEnterprisesChoose />
-
-                {/* Why Enterprises Work With Axentia.AI */}
-                <section className="py-24 bg-white border-b border-slate-200">
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="text-center max-w-2xl mx-auto mb-16">
-                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-sm font-semibold uppercase tracking-widest mb-3">
-                                <span className="inline-block px-2 py-0.5 rounded-md" style={{ background: '#F7C87A', color: '#232322' }}>Why Us</span>
-                            </motion.p>
-                            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
-                                Why Enterprises Work With Axentia.AI
-                            </motion.h2>
-                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-2xl text-slate-600 text-center">
-                                We don&apos;t just supply candidates. We build enterprise-ready consultants from the ground up.
-                            </motion.p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {valuePropCards.map((card, idx) => (
-                                <motion.div key={card.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-brand-300 hover:shadow-lg transition-all group">
-                                    <div className="relative w-full h-48 overflow-hidden">
-                                        <Image
-                                            src={card.image}
-                                            alt={card.title}
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                        />
-                                    </div>
-                                    <div className="p-8">
-                                        <h3 className="text-xl font-bold text-slate-900 mb-3 text-left">{card.title}</h3>
-                                        <p className="text-slate-600 text-sm leading-relaxed text-left">{card.desc}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* What We Bring to the Ecosystem */}
-                <section className="py-20 bg-gradient-to-br from-brand-900 to-brand-700">
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="grid lg:grid-cols-2 gap-16 items-center">
-                            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                                <h2 className="text-2xl md:text-4xl font-bold text-white tracking-tight mb-6">
-                                    What We Bring to the Ecosystem
-                                </h2>
-                                <p className="text-base md:text-xl text-brand-100 leading-relaxed mb-8">
-                                    Axentia.AI sits at the intersection of talent development, enterprise delivery, and AI-era capability building. When you partner with us, you get access to the entire ecosystem.
+                {/* Main content grid */}
+                <div className="h-full grid lg:grid-cols-2">
+                    {/* Left — Text */}
+                    <div className="flex flex-col justify-center px-8 md:px-14 lg:px-20 relative z-10">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeIdx}
+                                initial={{ opacity: 0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -40 }}
+                                transition={{ duration: 0.45, ease: 'easeOut' }}
+                            >
+                                <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-5 leading-tight">
+                                    {areas[activeIdx].title}
+                                </h3>
+                                <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+                                    {areas[activeIdx].desc}
                                 </p>
                                 <ul className="space-y-4">
-                                    {whatWeBring.map((item, idx) => (
-                                        <li key={idx} className="flex items-start gap-4">
-                                            <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white flex-shrink-0 mt-0.5">{item.icon}</div>
-                                            <p className="text-white/80 leading-relaxed">{item.text}</p>
+                                    {areas[activeIdx].bullets.map((b, i) => (
+                                        <li key={i} className="flex items-center gap-3">
+                                            <span className="w-2 h-2 rounded-full bg-brand-300 flex-shrink-0" />
+                                            <span className="text-white text-base md:text-lg">{b}</span>
                                         </li>
                                     ))}
                                 </ul>
                             </motion.div>
-                            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                                <div className="bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 p-10">
-                                    <h3 className="text-2xl font-bold text-white mb-6">A Shared Ecosystem</h3>
-                                    <p className="text-white/70 leading-relaxed mb-6">
-                                        Our enterprise partners aren&apos;t just hiring from us — they&apos;re shaping what the next generation of consultants looks like. From apprenticeship hosting to curriculum input, every collaboration makes the ecosystem stronger.
-                                    </p>
-                                    <p className="text-white/70 leading-relaxed">
-                                        Enterprises that work with Axentia.AI gain influence over the talent pipeline that serves them — not just access to it.
-                                    </p>
-                                </div>
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Right — Image (slides up) */}
+                    <div className="relative hidden lg:block overflow-hidden">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeIdx}
+                                initial={{ opacity: 0, y: '100%' }}
+                                animate={{ opacity: 1, y: '0%' }}
+                                exit={{ opacity: 0, y: '-30%' }}
+                                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                                className="absolute inset-0"
+                            >
+                                <Image
+                                    src={areas[activeIdx].image}
+                                    alt={areas[activeIdx].title}
+                                    fill
+                                    className="object-cover"
+                                />
+                                {/* Left fade into purple */}
+                                <div
+                                    className="absolute inset-0 pointer-events-none"
+                                    style={{
+                                        background:
+                                            'linear-gradient(90deg, #2a0845 0%, transparent 50%)',
+                                    }}
+                                />
                             </motion.div>
-                        </div>
+                        </AnimatePresence>
                     </div>
-                </section>
+                </div>
 
-                {/* Partnership Models */}
-                <section id="partnerships" className="py-24 bg-white border-b border-slate-200">
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="text-center max-w-3xl mx-auto mb-16">
-                            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">
-                                Partnership Models
-                            </motion.h2>
-                            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }} className="text-xl text-slate-600 text-center">
-                                Three ways to work with Axentia.AI, choose the model that fits your enterprise needs.
-                            </motion.p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {partnershipModels.map((model, idx) => (
-                                <motion.div key={model.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx, type: 'spring', stiffness: 120, damping: 20 }} className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-brand-300 hover:shadow-lg transition-all flex flex-col">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <h3 className="text-xl font-bold text-slate-900">{model.title}</h3>
-                                        <span className="text-xs font-bold px-2 py-1 rounded-full bg-brand-100 text-brand-700 whitespace-nowrap ml-2">{model.badge}</span>
-                                    </div>
-                                    <p className="text-slate-600 text-sm leading-relaxed mb-6">{model.desc}</p>
-                                    <ul className="space-y-2 mt-auto">
-                                        {model.benefits.map((b) => (
-                                            <li key={b} className="flex items-start gap-2 text-sm text-slate-700">
-                                                <CheckCircle2 className="w-4 h-4 text-brand-500 mt-0.5 flex-shrink-0" />
-                                                {b}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </motion.div>
-                            ))}
-                        </div>
+                {/* Tab bar at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-black/20 backdrop-blur-sm">
+                    <div className="flex overflow-x-auto no-scrollbar">
+                        {areas.map((area, idx) => (
+                            <span
+                                key={area.title}
+                                className={`flex-1 min-w-[140px] px-4 py-4 text-xs md:text-sm font-semibold tracking-wide uppercase whitespace-nowrap text-center transition-all duration-300 ${
+                                    idx === activeIdx
+                                        ? 'text-white bg-white/10 border-t-2 border-white'
+                                        : 'text-white/40 border-t-2 border-transparent'
+                                }`}
+                            >
+                                {area.title}
+                            </span>
+                        ))}
                     </div>
-                </section>
+                </div>
 
-                {/* Talent Pipeline Model — Steps */}
-                <section id="talent-pipeline" className="py-16 md:py-24 bg-slate-50 border-b border-slate-200">
-                    <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-                            <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">How the Talent Pipeline Works</h2>
-                            <p className="text-lg text-slate-600">From training intake to deployment, a structured, transparent model.</p>
+                {/* Scroll progress indicator */}
+                <motion.div
+                    className="absolute bottom-[52px] left-0 h-[2px] bg-brand-300 z-30"
+                    style={{
+                        width: `${((activeIdx + 1) / totalAreas) * 100}%`,
+                        transition: 'width 0.4s ease',
+                    }}
+                />
+            </div>
+        </section>
+    );
+}
+
+export default function EnterprisesPage() {
+
+    return (
+        <main>
+            {/* Hero Section */}
+            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+                {/* Background gradient */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background:
+                            'linear-gradient(135deg, #1e0735 0%, #2a0845 30%, #58179B 60%, #8929AC 80%, #C010DA 100%)',
+                    }}
+                />
+                {/* Radial glow overlays */}
+                <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                        background:
+                            'radial-gradient(ellipse at 30% 70%, rgba(228,115,186,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 30%, rgba(192,16,218,0.12) 0%, transparent 50%)',
+                    }}
+                />
+
+                <div className="container mx-auto px-4 md:px-6 relative z-10 text-center pt-32 pb-24 md:pt-40 md:pb-32">
+                    {/* Tag */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <span className="inline-block px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-semibold tracking-wide mb-10">
+                            Enterprise &middot; AI Transformation
+                        </span>
+                    </motion.div>
+
+                    {/* Main heading */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-8 max-w-5xl mx-auto uppercase"
+                    >
+                        WHERE CHANGE{' '}
+                        <span className="font-[family-name:var(--font-playfair)] italic text-[0.75em] font-normal lowercase text-white/80">
+                            settles
+                        </span>{' '}
+                        INTO EVERYDAY WORK
+                    </motion.h1>
+
+                    {/* Description */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.25 }}
+                        className="text-base md:text-lg lg:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
+                    >
+                        Work only shifts when it becomes part of daily operations inside workflows and decisions already in place. Axentia works with your organisation to bring this into motion and carry it forward across your needs.
+                    </motion.p>
+                </div>
+
+                {/* Bottom fade */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 to-transparent" />
+            </section>
+
+            {/* What a transformation engagement delivers */}
+            <section className="py-20 md:py-32 bg-slate-50">
+                <div className="container mx-auto px-4 md:px-6">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        {/* Left — Content */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-10">
+                                What a transformation engagement delivers
+                            </h2>
+                            <ul className="space-y-5">
+                                {deliverables.map((item, idx) => (
+                                    <motion.li
+                                        key={idx}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.08 * idx, duration: 0.4 }}
+                                        className="flex items-start gap-4"
+                                    >
+                                        <CheckCircle2 className="w-6 h-6 text-brand-500 mt-0.5 flex-shrink-0" />
+                                        <span className="text-slate-700 text-base md:text-lg leading-relaxed">
+                                            {item}
+                                        </span>
+                                    </motion.li>
+                                ))}
+                            </ul>
                         </motion.div>
 
-                        {/* Desktop: horizontal steps with connecting line */}
-                        <div className="hidden md:block relative">
-                            {/* Connecting line */}
-                            <div className="absolute top-12 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-brand-200 via-brand-400 to-brand-200" />
-
-                            <div className="grid grid-cols-4 gap-8 relative">
-                                {[
-                                    { step: '01', title: 'Identify Needs', desc: 'Tell us your requirements, module expertise, batch size, timeline.' },
-                                    { step: '02', title: 'Train Talent', desc: 'We enroll and train candidates matched to your requirements.' },
-                                    { step: '03', title: 'Apprenticeship', desc: 'Candidates complete paid apprenticeship, on real or shadow projects.' },
-                                    { step: '04', title: 'Deploy', desc: 'Deployment-ready consultants join your team, credentialled and experienced.' },
-                                ].map((item, idx) => (
-                                    <motion.div
-                                        key={item.step}
-                                        initial={{ opacity: 0, y: 30 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: idx * 0.1 }}
-                                        className="flex flex-col items-center text-center"
-                                    >
-                                        {/* Step circle */}
-                                        <div className="relative z-10 w-24 h-24 rounded-full bg-white border-2 border-brand-200 flex items-center justify-center mb-6 shadow-md group-hover:shadow-lg transition-shadow">
-                                            <span className="text-2xl font-black text-brand-600">{item.step}</span>
-                                        </div>
-                                        {/* Content */}
-                                        <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
-                                        <p className="text-sm text-slate-500 leading-relaxed max-w-[200px]">{item.desc}</p>
-                                    </motion.div>
-                                ))}
+                        {/* Right — Image */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.15 }}
+                            className="flex justify-center lg:justify-end"
+                        >
+                            <div className="relative w-80 aspect-[3/5] rounded-full overflow-hidden shadow-2xl">
+                                <Image
+                                    src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80"
+                                    alt="AI Transformation"
+                                    fill
+                                    className="object-cover"
+                                />
+                                {/* Gradient overlay */}
+                                <div
+                                    className="absolute inset-0 pointer-events-none"
+                                    style={{
+                                        background:
+                                            'linear-gradient(180deg, transparent 60%, rgba(88,23,155,0.3) 100%)',
+                                    }}
+                                />
                             </div>
-                        </div>
-
-                        {/* Mobile: vertical timeline */}
-                        <div className="md:hidden space-y-0">
-                            {[
-                                { step: '01', title: 'Identify Needs', desc: 'Tell us your requirements, module expertise, batch size, timeline.' },
-                                { step: '02', title: 'Train Talent', desc: 'We enroll and train candidates matched to your requirements.' },
-                                { step: '03', title: 'Apprenticeship', desc: 'Candidates complete paid apprenticeship — on real or shadow projects.' },
-                                { step: '04', title: 'Deploy', desc: 'Deployment-ready consultants join your team, credentialled and experienced.' },
-                            ].map((item, idx) => (
-                                <motion.div
-                                    key={item.step}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: idx * 0.1 }}
-                                    className="flex gap-5"
-                                >
-                                    {/* Timeline */}
-                                    <div className="flex flex-col items-center">
-                                        <div className="w-12 h-12 rounded-full bg-white border-2 border-brand-200 flex items-center justify-center shrink-0 shadow-sm">
-                                            <span className="text-sm font-black text-brand-600">{item.step}</span>
-                                        </div>
-                                        {idx < 3 && <div className="w-0.5 flex-1 bg-brand-200 min-h-[32px]" />}
-                                    </div>
-                                    {/* Content */}
-                                    <div className="pb-8">
-                                        <h3 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h3>
-                                        <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
+                        </motion.div>
                     </div>
-                </section>
-
-                {/* The Impact of Collaboration */}
-                <section className="py-24 bg-white border-b border-slate-200">
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="text-center mb-16">
-                            <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">The Impact of Collaboration</h2>
-                            <p className="text-lg text-slate-600">Numbers that reflect what happens when enterprises and Axentia.AI build together.</p>
-                        </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                            {impactStats.map((stat, idx) => (
-                                <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * idx }} className="text-center">
-                                    <p className="text-3xl md:text-4xl font-black text-brand-600 mb-2"><AnimatedCounter end={stat.end} suffix={stat.suffix} /></p>
-                                    <p className="text-slate-600 text-sm leading-relaxed">{stat.label}</p>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Contact Form */}
-                <section id="contact" className="py-24 bg-slate-50">
-                    <div className="container mx-auto px-4 md:px-6 max-w-2xl">
-                        <div className="text-center mb-12">
-                            <h2 className="text-2xl md:text-4xl font-bold text-slate-900 tracking-tight mb-4">Work With Axentia.AI</h2>
-                            <p className="text-lg text-slate-600">Tell us about your enterprise needs and we&apos;ll set up a conversation with our team.</p>
-                        </div>
-                        <div className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
-                            {status === 'success' ? (
-                                <div className="py-10 text-center">
-                                    <div className="w-14 h-14 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto mb-4">
-                                        <CheckCircle2 className="w-7 h-7 text-emerald-500" />
-                                    </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-2">Inquiry Received!</h3>
-                                    <p className="text-slate-500 text-sm">Thanks for reaching out. Our team will be in touch within 1–2 business days.</p>
-                                </div>
-                            ) : (
-                                <form onSubmit={handleSubmit} noValidate className="space-y-6">
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-700 mb-2">Name</label>
-                                        <input type="text" required className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} disabled={status === 'loading'} />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-700 mb-2">Email</label>
-                                        <input type="email" required className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="you@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} disabled={status === 'loading'} />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-700 mb-2">Company</label>
-                                        <input type="text" required className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Your company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} disabled={status === 'loading'} />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-700 mb-2">Message</label>
-                                        <textarea required className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 h-32 resize-none" placeholder="What are you looking for?" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} disabled={status === 'loading'} />
-                                    </div>
-                                    {status === 'error' && (
-                                        <p className="text-red-500 text-sm font-medium">{errorMsg}</p>
-                                    )}
-                                    <Button variant="primary" className="w-full" disabled={status === 'loading'}>
-                                        {status === 'loading' ? 'Submitting…' : 'Submit Inquiry'}
-                                    </Button>
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                </section>
-            </main>
-        </>
+                </div>
+            </section>
+            {/* What We Build — scroll-driven full page */}
+            <WhatWeBuildSection />
+        </main>
     );
 }

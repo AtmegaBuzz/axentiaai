@@ -112,9 +112,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
                                         <CheckCircle className="w-7 h-7 text-emerald-600" />
                                     </div>
-                                    <h3 className="text-lg font-semibold text-slate-900">Message Sent!</h3>
+                                    <h3 className="text-lg font-semibold text-slate-900">Message Received!</h3>
                                     <p className="text-sm text-slate-500 mt-1 max-w-xs">
-                                        Thank you for reaching out. We&apos;ve sent a confirmation to your email. Our team will contact you shortly.
+                                        Thank you for reaching out. We will get back to you shortly.
                                     </p>
                                     <button
                                         type="button"

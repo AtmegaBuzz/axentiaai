@@ -95,13 +95,12 @@ export default function Testimonials() {
                             Testimonials
                         </h2>
 
-                        <Link
-                            href="/outcomes"
-                            className="inline-flex items-center gap-2 bg-[#8A29AC] text-white text-sm font-bold py-3 px-6 rounded-full hover:bg-[#6B1D8E] transition-colors group"
+                        <span
+                            className="inline-flex items-center gap-2 bg-[#8A29AC] text-white text-sm font-bold py-3 px-6 rounded-full cursor-default"
                         >
                             View all testimonials
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
+                            <ArrowRight className="w-4 h-4" />
+                        </span>
                     </motion.div>
 
                     {/* Right: 2 vertical scrolling columns */}

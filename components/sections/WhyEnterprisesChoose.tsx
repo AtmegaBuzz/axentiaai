@@ -106,12 +106,11 @@ export function WhyEnterprisesChoose() {
                         className="rounded-2xl bg-brand-600 p-6 md:p-8 flex flex-col justify-center items-center text-center"
                     >
                         <p className="text-white font-bold text-lg mb-3">Ready to start?</p>
-                        <a
-                            href="/programs#apply"
-                            className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 text-sm font-bold px-5 py-2.5 hover:bg-slate-100 transition-colors"
+                        <span
+                            className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 text-sm font-bold px-5 py-2.5 cursor-default"
                         >
                             Schedule Consultation
-                        </a>
+                        </span>
                     </motion.div>
                 </div>
 

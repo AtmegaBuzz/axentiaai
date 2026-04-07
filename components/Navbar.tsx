@@ -7,7 +7,12 @@ import { Menu, X, Users, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ContactModal } from './ContactModal';
 
-const navHeadings = ['ENTERPRISE', 'ACADEMIES', "WHO IT'S FOR", 'WHY AXENTIA.AI'];
+const navLinks: { label: string; href?: string }[] = [
+    { label: 'ENTERPRISE', href: '/enterprises' },
+    { label: 'ACADEMIES' },
+    { label: "WHO IT'S FOR" },
+    { label: 'WHY AXENTIA.AI' },
+];
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -46,16 +51,16 @@ export function Navbar() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden lg:flex items-center justify-center shrink-0">
-                    {navHeadings.map((heading) => (
-                        <span
-                            key={heading}
-                            className={`px-3 xl:px-4 py-1.5 text-xs font-semibold tracking-wider select-none whitespace-nowrap transition-colors duration-200 cursor-pointer ${
-                                isScrolled ? 'text-slate-600 hover:text-brand-600' : 'text-white/80 hover:text-white'
-                            }`}
-                        >
-                            {heading}
-                        </span>
-                    ))}
+                    {navLinks.map(({ label, href }) => {
+                        const cls = `px-3 xl:px-4 py-1.5 text-xs font-semibold tracking-wider select-none whitespace-nowrap transition-colors duration-200 cursor-pointer ${
+                            isScrolled ? 'text-slate-600 hover:text-brand-600' : 'text-white/80 hover:text-white'
+                        }`;
+                        return href ? (
+                            <Link key={label} href={href} className={cls}>{label}</Link>
+                        ) : (
+                            <span key={label} className={cls}>{label}</span>
+                        );
+                    })}
                 </nav>
 
                 {/* CTA Buttons & Mobile Toggle */}
@@ -108,9 +113,13 @@ export function Navbar() {
                         className="lg:hidden bg-white border-b border-slate-200 shadow-xl max-h-[calc(100vh-4rem)] overflow-y-auto"
                     >
                         <div className="px-[5%] py-6 space-y-2">
-                            {navHeadings.map((heading) => (
-                                <div key={heading} className="p-2.5">
-                                    <span className="text-sm font-bold text-slate-700 uppercase tracking-wider">{heading}</span>
+                            {navLinks.map(({ label, href }) => (
+                                <div key={label} className="p-2.5">
+                                    {href ? (
+                                        <Link href={href} onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-slate-700 uppercase tracking-wider hover:text-brand-600 transition-colors">{label}</Link>
+                                    ) : (
+                                        <span className="text-sm font-bold text-slate-700 uppercase tracking-wider">{label}</span>
+                                    )}
                                 </div>
                             ))}
                             <div className="pt-4 border-t border-slate-200 space-y-3">

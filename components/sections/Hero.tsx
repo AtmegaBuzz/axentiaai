@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
 import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ContactModal } from '@/components/ContactModal';
 
 const metrics = [
     { value: '50+', label: 'Enterprises' },
@@ -13,6 +13,7 @@ const metrics = [
 
 export function Hero() {
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const [contactOpen, setContactOpen] = useState(false);
     const { scrollYProgress } = useScroll({
         target: wrapperRef,
         offset: ['start start', 'end end'],
@@ -72,7 +73,7 @@ export function Hero() {
                                 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
                             >
                                 <span className="text-white">Ecosystem for </span>
-                                <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#F7C87A] via-[#F3B15F] to-[#E89B3A] bg-clip-text text-transparent">
+                                <span className="font-[family-name:var(--font-playfair)] pl-[8px] italic bg-gradient-to-r from-[#F7C87A] via-[#F3B15F] to-[#E89B3A] bg-clip-text text-transparent">
                                     AI Era
                                 </span>
                             </motion.h1>
@@ -102,19 +103,19 @@ export function Hero() {
                                 transition={{ duration: 0.6, delay: 0.5 }}
                                 className="flex flex-col sm:flex-row flex-wrap gap-3 mb-12"
                             >
-                                <Link
-                                    href="/programs#apply"
-                                    className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold py-3 px-7 text-sm hover:bg-slate-100 transition-colors duration-200"
+                                <button
+                                    type="button"
+                                    onClick={() => setContactOpen(true)}
+                                    className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold py-3 px-7 text-sm hover:bg-slate-100 transition-colors duration-200 cursor-pointer"
                                 >
                                     Book AI Discovery Workshop
                                     <ArrowRight className="w-4 h-4" />
-                                </Link>
-                                <Link
-                                    href="#what-we-deliver"
-                                    className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/20 text-white font-semibold py-3 px-7 text-sm hover:bg-white/8 transition-colors duration-200"
+                                </button>
+                                <span
+                                    className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/20 text-white font-semibold py-3 px-7 text-sm cursor-default"
                                 >
                                     See What We Deliver
-                                </Link>
+                                </span>
                             </motion.div>
 
                             {/* Trust metrics strip — above-fold social proof */}
@@ -154,6 +155,7 @@ export function Hero() {
                 </motion.div>
 
             </div>
+            <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
         </div>
     );
 }
