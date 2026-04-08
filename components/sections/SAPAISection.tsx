@@ -13,7 +13,7 @@ function IntegrationIllustration() {
     return (
         <div className="relative w-full max-w-[420px] mx-auto aspect-square flex items-center justify-center">
             <DotLottieReact
-                src="/Ai-brain-board.lottie"
+                src="/lottie/ai-brain-board.lottie"
                 loop
                 autoplay
                 style={{ width: '100%', height: '100%' }}

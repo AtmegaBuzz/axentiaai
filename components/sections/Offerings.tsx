@@ -21,7 +21,7 @@ const offerings = [
             'Integration with S/4HANA, BTP, and Joule',
             'Seamless progression from pilot to wider adoption',
         ],
-        image: '/images/new_images/offerings/enterprise-ai-transformation.jpg',
+        image: '/images/offerings/enterprise-ai-transformation.jpg',
     },
     {
         id: 'capability',
@@ -38,7 +38,7 @@ const offerings = [
             'Enablement across SuccessFactors and Analytics Cloud',
             'Training tailored to your organisation',
         ],
-        image: '/images/ai-technology-human-interaction.jpg',
+        image: '/images/offerings/ai-technology-human-interaction.jpg',
     },
     {
         id: 'academies',
@@ -55,7 +55,7 @@ const offerings = [
             'Energy & Utilities Industry Academy',
             'SAP Workforce Accelerator',
         ],
-        image: '/images/talent-academy.jpg',
+        image: '/images/offerings/talent-academy.jpg',
     },
 ];
 

@@ -13,7 +13,7 @@ const useCases = [
         title: 'Predictive Maintenance',
         description:
             'Anticipate equipment failures using sensor data and maintenance history, helping reduce unplanned downtime and improve asset reliability.',
-        image: '/images/predictive-maintainance.jpg',
+        image: '/images/industry-usecases/predictive-maintenance.jpg',
         stat1Label: 'Downtime reduction',
         stat1Value: '~40%',
         stat2Label: 'Maintenance saving',
@@ -26,7 +26,7 @@ const useCases = [
         title: 'Demand Forecasting',
         description:
             'Improve planning accuracy across supply chains, reducing stock imbalances and enabling more responsive inventory decisions.',
-        image: '/images/new_images/industry-use-cases/demand-forecasting/modern-store-interior.jpg',
+        image: '/images/industry-usecases/demand-forecasting.jpg',
         stat1Label: 'Forecast accuracy',
         stat1Value: '~98%',
         stat2Label: 'Overstock reduction',
@@ -39,7 +39,7 @@ const useCases = [
         title: 'Invoice & Document Processing',
         description:
             'Automate document handling across finance workflows, including extraction, validation, approvals, and exception handling.',
-        image: '/images/Invoice-Document-Processing.jpg',
+        image: '/images/industry-usecases/invoice-document-processing.jpg',
         stat1Label: 'Processing time saved',
         stat1Value: '~60%',
         stat2Label: 'Error rate reduction',
@@ -52,7 +52,7 @@ const useCases = [
         title: 'Quality Control (Vision-Based)',
         description:
             'Detect defects in real time on production lines, improving consistency and reducing manual inspection effort.',
-        image: '/images/quality-control.webp',
+        image: '/images/industry-usecases/quality-control-vision-based.jpg',
         stat1Label: 'Defect detection rate',
         stat1Value: '~99%',
         stat2Label: 'Inspection time saved',
@@ -65,7 +65,7 @@ const useCases = [
         title: 'Asset Performance Optimisation',
         description:
             'Monitor asset health and plan maintenance more effectively using operational and sensor data across distributed systems.',
-        image: '/images/asset-management.webp',
+        image: '/images/industry-usecases/asset-performance-optimisation.jpg',
         stat1Label: 'Asset availability',
         stat1Value: '+15%',
         stat2Label: 'Maintenance efficiency',
@@ -78,7 +78,7 @@ const useCases = [
         title: 'HR Copilot',
         description:
             'Support HR teams with policy queries, approvals, and talent insights within existing workflows.',
-        image: '/images/hr-copilot.jpg',
+        image: '/images/industry-usecases/hr-copilot.jpg',
         stat1Label: 'Query resolution',
         stat1Value: '70% faster',
         stat2Label: 'HR capacity freed',

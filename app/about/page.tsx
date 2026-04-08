@@ -166,7 +166,7 @@ function HeroSection() {
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* Background photo */}
         <Image
-          src="/images/about-us-hero.jpg"
+          src="/images/hero/about-us-hero.jpg"
           alt="Axentia.AI About Hero"
           fill
           priority
@@ -247,7 +247,7 @@ function LegacySection() {
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-14 h-14 rounded-full overflow-hidden shadow-lg shadow-brand-500/30">
                   <Image
-                    src="/images/pfps/manuj_gupta.jpeg"
+                    src="/images/team/manuj-gupta.jpeg"
                     alt="Manuj Gupta"
                     width={56}
                     height={56}

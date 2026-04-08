@@ -36,7 +36,7 @@ const programs: Program[] = [
             { label: 'Format', value: 'Structured Learning', Icon: MonitorPlay },
             { label: 'Prereq', value: 'None Required', Icon: BookOpen },
         ],
-        image: '/images/ai-academy.jpg',
+        image: '/images/programs/ai-foundation.jpg',
     },
     {
         id: 'sap-sf',
@@ -52,7 +52,7 @@ const programs: Program[] = [
             { label: 'Approach', value: 'Hands-on Practice', Icon: Target },
             { label: 'Format', value: 'Instructor-led', Icon: MonitorPlay },
         ],
-        image: '/images/new_images/programs/sap-successfactors/team-meeting-indian.jpg',
+        image: '/images/programs/sap-successfactors.jpg',
     },
     {
         id: 'retail-fmcg',
@@ -68,7 +68,7 @@ const programs: Program[] = [
             { label: 'Decisions', value: 'Real-world Scenarios', Icon: Brain },
             { label: 'Format', value: 'Applied Learning', Icon: MonitorPlay },
         ],
-        image: '/images/retail-academy.webp',
+        image: '/images/programs/retail-fmcg.webp',
     },
     {
         id: 'energy-utilities',
@@ -84,7 +84,7 @@ const programs: Program[] = [
             { label: 'Industry', value: 'Energy Sector', Icon: Briefcase },
             { label: 'Format', value: 'Applied Learning', Icon: MonitorPlay },
         ],
-        image: '/images/industry.jpg',
+        image: '/images/programs/energy-utilities.jpg',
     },
     {
         id: 'workforce-accelerator',
@@ -100,7 +100,7 @@ const programs: Program[] = [
             { label: 'Experience', value: 'Client-ready', Icon: Layers },
             { label: 'Outcome', value: 'Enterprise Hiring', Icon: FileText },
         ],
-        image: '/images/workforce.jpg',
+        image: '/images/programs/sap-workforce.jpg',
     },
 ];
 
@@ -178,7 +178,7 @@ export function Programs() {
             {/* Background image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/images/programs-bg.jpg"
+                    src="/images/programs/programs-bg.jpg"
                     alt=""
                     fill
                     sizes="100vw"

@@ -94,7 +94,7 @@ export function WhyChooseUs() {
                             <div className="space-y-4">
                                 <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-[4/5]">
                                     <Image
-                                        src="/images/new_images/offerings/enterprise-ai-transformation.jpg"
+                                        src="/images/offerings/enterprise-ai-transformation.jpg"
                                         alt="SAP consulting classroom"
                                         fill
                                         sizes="25vw"
@@ -105,7 +105,7 @@ export function WhyChooseUs() {
                             <div className="space-y-4 pt-8">
                                 <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
                                     <Image
-                                        src="/images/new_images/personas/business-leaders/entrepreneurs-business-office.jpg"
+                                        src="/images/personas/entrepreneurs-business-office.jpg"
                                         alt="Enterprise consulting team"
                                         fill
                                         sizes="25vw"
@@ -114,7 +114,7 @@ export function WhyChooseUs() {
                                 </div>
                                 <div className="relative rounded-2xl overflow-hidden shadow-lg aspect-[4/3]">
                                     <Image
-                                        src="/images/new_images/personas/working-professionals/young-woman-striped-laptop.jpg"
+                                        src="/images/personas/woman-laptop-checkered.jpg"
                                         alt="AI era consulting"
                                         fill
                                         sizes="25vw"

@@ -1,13 +1,29 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { CheckCircle2, Zap } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import {
+    motion,
+    AnimatePresence,
+    useScroll,
+    useTransform,
+    useMotionValueEvent,
+    useInView,
+} from 'framer-motion';
+import {
+    CheckCircle2,
+    Headphones,
+    Cog,
+    Eye,
+    BarChart3,
+    Users,
+    Database,
+} from 'lucide-react';
 import Image from 'next/image';
-import { ContactModal } from '@/components/ContactModal';
+
+/* ─── Data ─── */
 
 const deliverables = [
-    'AI outputs appear directly in existing workflows',
+    'AI outputs embedded directly into existing workflows — not sitting in a separate tool',
     'Use cases move into steady, repeatable use across operations',
     '20–40% reduction in manual effort across targeted processes',
     'Faster decision cycles with fewer handoffs and escalations',
@@ -21,47 +37,370 @@ const areas = [
         desc: 'Assistants that handle high-volume queries and route complex cases appropriately.',
         bullets: ['Customer support', 'Internal helpdesk', 'HR self-service'],
         image: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=800&q=80',
+        icon: Headphones,
     },
     {
         title: 'Process Automation',
         desc: 'Workflows that read, interpret, and act — reducing manual handling across processes.',
         bullets: ['Invoice and PO processing', 'Contract extraction', 'Approval flows'],
         image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&q=80',
+        icon: Cog,
     },
     {
         title: 'Computer Vision',
         desc: 'Image-based models used in operations, production, and field environments.',
         bullets: ['Defect detection', 'Inventory tracking', 'Safety checks'],
         image: 'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&q=80',
+        icon: Eye,
     },
     {
         title: 'Forecasting & Planning',
         desc: 'Forward-looking signals embedded into planning and decision-making.',
         bullets: ['Demand and inventory', 'Risk and churn', 'Financial projections'],
         image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+        icon: BarChart3,
     },
     {
         title: 'Workforce & HR',
         desc: 'Operational support and insights across workforce processes.',
         bullets: ['Talent matching', 'Attrition signals', 'Onboarding workflows'],
         image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80',
+        icon: Users,
     },
     {
         title: 'Data & Integration',
         desc: 'Connecting models to enterprise data and processes so outputs can be used directly.',
         bullets: ['Data pipelines', 'Real-time APIs', 'Monitoring and governance'],
         image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+        icon: Database,
     },
 ];
 
-const partnerLogos = [
-    { src: '/certifications/cmmi-logo.png', alt: 'CMMI' },
-    { src: '/certifications/nasscom-logo.gif', alt: 'NASSCOM' },
-    { src: '/certifications/iso-9001-logo.png', alt: 'ISO 9001' },
-    { src: '/certifications/iso-27001-logo.png', alt: 'ISO 27001' },
-    { src: '/certifications/ISO-2018.svg', alt: 'ISO 2018' },
-    { src: '/certifications/ISO_9001-2015.png', alt: 'ISO 9001:2015' },
+const engagementSteps = [
+    {
+        title: 'Discovery',
+        description:
+            'We assess how work currently moves, identify the right starting points, and define scope with clear success metrics. A focused plan is established so the first step is well-defined and grounded.',
+    },
+    {
+        title: 'Pilot',
+        description:
+            'The first use case is built and integrated into existing workflows, with outcomes measured from the start. What is delivered is usable in live operations, not held back as a prototype.',
+    },
+    {
+        title: 'Scale',
+        description:
+            'The work extends into adjacent areas, with each use case building on the last. Capability develops alongside delivery, allowing the organisation to move forward with increasing speed and clarity.',
+    },
 ];
+
+const sapHighlights = [
+    'Demand planning within IBP',
+    'HR queries and actions within SuccessFactors',
+    'Maintenance tasks created within SAP PM',
+    'Financial workflows handled within SAP FI',
+];
+
+const ease = [0.16, 1, 0.3, 1] as const;
+
+/* ─── TiltCard Component — 3D perspective tilt on hover ─── */
+
+function TiltCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
+    const [shine, setShine] = useState({ x: 50, y: 50, opacity: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const card = cardRef.current;
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const tiltX = (y - 0.5) * -20;
+        const tiltY = (x - 0.5) * 20;
+        setTilt({ rotateX: tiltX, rotateY: tiltY, scale: 1.02 });
+        setShine({ x: x * 100, y: y * 100, opacity: 0.15 });
+    };
+
+    const handleMouseLeave = () => {
+        setTilt({ rotateX: 0, rotateY: 0, scale: 1 });
+        setShine({ x: 50, y: 50, opacity: 0 });
+    };
+
+    return (
+        <motion.div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            animate={{
+                rotateX: tilt.rotateX,
+                rotateY: tilt.rotateY,
+                scale: tilt.scale,
+            }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20, mass: 0.5 }}
+            style={{ perspective: 800, transformStyle: 'preserve-3d' }}
+            className={`relative ${className}`}
+        >
+            {children}
+            {/* Shine overlay */}
+            <motion.div
+                className="pointer-events-none absolute inset-0 rounded-2xl z-10"
+                animate={{ opacity: shine.opacity }}
+                transition={{ duration: 0.2 }}
+                style={{
+                    background: `radial-gradient(circle at ${shine.x}% ${shine.y}%, rgba(255,255,255,0.5) 0%, transparent 60%)`,
+                }}
+            />
+        </motion.div>
+    );
+}
+
+/* ─── ShinyText Component ─── */
+
+function ShinyText({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+    return (
+        <motion.span
+            className={`relative inline-block ${className}`}
+            style={{
+                backgroundImage:
+                    'linear-gradient(100deg, #F7C87A 0%, #F7C87A 40%, #ffffff 50%, #F7C87A 60%, #F7C87A 100%)',
+                backgroundSize: '200% 100%',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+            }}
+            animate={{ backgroundPosition: ['200% center', '-200% center'] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+        >
+            {children}
+        </motion.span>
+    );
+}
+
+/* ─── TypewriterText Component ─── */
+
+function TypewriterText({ text, delay = 0.8, speed = 30 }: { text: string; delay?: number; speed?: number }) {
+    const [displayed, setDisplayed] = useState('');
+    const [started, setStarted] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setStarted(true), delay * 1000);
+        return () => clearTimeout(timeout);
+    }, [delay]);
+
+    useEffect(() => {
+        if (!started) return;
+        if (displayed.length >= text.length) return;
+        const timer = setTimeout(() => {
+            setDisplayed(text.slice(0, displayed.length + 1));
+        }, speed);
+        return () => clearTimeout(timer);
+    }, [started, displayed, text, speed]);
+
+    return (
+        <span>
+            {displayed}
+            {displayed.length < text.length && (
+                <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
+                    className="inline-block w-[2px] h-[1em] bg-white/50 ml-0.5 align-middle"
+                />
+            )}
+        </span>
+    );
+}
+
+/* ─── Hero — Dark, authoritative, static BG ─── */
+
+function HeroSection() {
+    const heroRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: heroRef,
+        offset: ['start start', 'end start'],
+    });
+    const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-40%']);
+    const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
+    const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+    return (
+        <section ref={heroRef} className="relative h-screen flex flex-col overflow-hidden bg-black">
+            {/* Static BG Image — slow parallax */}
+            <motion.div className="absolute inset-0 z-0 will-change-transform" style={{ y: bgY }}>
+                <Image
+                    src="/images/enterprise/enterprise-hero.jpg"
+                    alt="Enterprise AI transformation"
+                    fill
+                    className="object-cover opacity-50"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
+            </motion.div>
+
+            {/* Content — fast parallax */}
+            <motion.div
+                className="relative z-10 flex flex-col h-full max-w-7xl mx-auto w-full px-6 md:px-12 xl:px-20 will-change-transform"
+                style={{ y: textY, opacity: textOpacity }}
+            >
+                {/* Center hero content */}
+                <div className="flex flex-col items-center justify-center flex-1 text-center">
+                    {/* Eyebrow */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="text-white/50 text-xs md:text-sm uppercase tracking-[0.2em] font-medium mb-6"
+                    >
+                        Enterprise AI Transformation
+                    </motion.p>
+
+                    {/* Main heading */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3, ease }}
+                        className="font-medium tracking-tighter"
+                        style={{ fontSize: 'clamp(2.8rem, 8vw, 8rem)', lineHeight: 0.85 }}
+                    >
+                        <span className="text-white block mb-2">Where Change</span>
+                        <ShinyText className="font-[family-name:var(--font-playfair)] italic">
+                            Settles In.
+                        </ShinyText>
+                    </motion.h1>
+
+                    {/* Typewriter description */}
+                    <div className="mt-10 md:mt-14 h-8">
+                        <p className="text-sm md:text-base text-white/45 max-w-xl mx-auto leading-relaxed">
+                            <TypewriterText
+                                text="We work with organisations to embed AI into the workflows and decisions that already run the business."
+                                delay={1.2}
+                                speed={28}
+                            />
+                        </p>
+                    </div>
+                </div>
+
+                {/* Bottom spacer */}
+                <div className="pb-12 md:pb-16" />
+            </motion.div>
+        </section>
+    );
+}
+
+
+
+/* ─── Section: Deliverables ─── */
+
+function DeliverablesSection() {
+    return (
+        <section className="py-24 md:py-36 bg-white">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12">
+                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200 bg-slate-50 mb-5">
+                            Engagement Outcomes
+                        </span>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-4 leading-tight">
+                            What a transformation{' '}
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                                engagement delivers
+                            </span>
+                        </h2>
+                        <p className="text-sm text-slate-500 leading-relaxed mb-10 max-w-lg">
+                            Every engagement is structured to leave your organisation with working systems, not just recommendations.
+                        </p>
+                        <ul className="space-y-5">
+                            {deliverables.map((item, idx) => (
+                                <motion.li
+                                    key={idx}
+                                    initial={{ opacity: 0, x: -15 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.06 * idx, duration: 0.4 }}
+                                    className="flex items-start gap-3"
+                                >
+                                    <CheckCircle2 className="w-4 h-4 text-brand-500 mt-1 flex-shrink-0" />
+                                    <span className="text-slate-600 text-sm md:text-base leading-relaxed">
+                                        {item}
+                                    </span>
+                                </motion.li>
+                            ))}
+                        </ul>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.15 }}
+                        className="hidden lg:flex justify-end"
+                    >
+                        <TiltCard className="w-full max-w-md cursor-pointer">
+                            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+                                <Image
+                                    src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80"
+                                    alt="Enterprise AI workshop"
+                                    fill
+                                    className="object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+                            </div>
+                        </TiltCard>
+                    </motion.div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+/* ─── Scroll-driven image layer (GPU-composited, no React re-renders) ─── */
+
+function StackingImage({
+    src,
+    alt,
+    index,
+    totalAreas,
+    scrollYProgress,
+}: {
+    src: string;
+    alt: string;
+    index: number;
+    totalAreas: number;
+    scrollYProgress: ReturnType<typeof useScroll>['scrollYProgress'];
+}) {
+    // Each image occupies a segment: [index/total .. (index+1)/total]
+    // Image i=0 starts at y=0 (already in place)
+    // Image i>0 starts at y=100% and slides to y=0 during the PREVIOUS segment's second half
+    const segmentSize = 1 / totalAreas;
+    const slideStart = index === 0 ? 0 : (index - 1) * segmentSize + segmentSize * 0.45;
+    const slideEnd = index === 0 ? 0 : index * segmentSize;
+
+    const y = useTransform(
+        scrollYProgress,
+        index === 0 ? [0, 0.001] : [slideStart, slideEnd],
+        index === 0 ? ['0%', '0%'] : ['100%', '0%'],
+    );
+
+    return (
+        <motion.div
+            className="absolute inset-0 will-change-transform"
+            style={{
+                y,
+                zIndex: index,
+                boxShadow: index > 0 ? '0 -30px 80px rgba(0,0,0,0.6)' : 'none',
+            }}
+        >
+            <Image src={src} alt={alt} fill className="object-cover grayscale" />
+        </motion.div>
+    );
+}
+
+/* ─── Section: What We Build (scroll-driven stacking cards) ─── */
 
 function WhatWeBuildSection() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -80,286 +419,272 @@ function WhatWeBuildSection() {
 
     return (
         <section ref={containerRef} style={{ height: `${totalAreas * 100}vh` }} className="relative">
-            <div
-                className="sticky top-0 h-screen w-full overflow-hidden"
-                style={{
-                    background:
-                        'linear-gradient(135deg, #1e0735 0%, #2a0845 30%, #58179B 70%, #6B1D8E 100%)',
-                }}
-            >
-                <div className="absolute top-0 left-0 right-0 z-30 pt-24 pb-6 text-center pointer-events-none">
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-2">
-                        What We Build
-                    </h2>
-                    <p className="text-base md:text-lg text-white/60">
-                        Six areas where work can move forward in a measurable way
-                    </p>
-                </div>
-
+            <div className="sticky top-0 h-screen w-full overflow-hidden">
+                {/* Two-column layout: left content (50%), right image only (50%) */}
                 <div className="h-full grid lg:grid-cols-2">
-                    <div className="flex flex-col justify-center px-8 md:px-14 lg:px-20 relative z-10">
-                        <AnimatePresence mode="wait">
+                    {/* Left: all text content + nav — dark bg only here */}
+                    <div className="flex flex-col h-full px-8 md:px-14 lg:px-20 relative z-10 pt-24 bg-[#0a0a14]">
+                        {/* Static "WHAT WE BUILD" — visible, matching heading color */}
+                        <span className="self-start rounded-md px-3 py-1 text-xs font-bold uppercase tracking-widest" style={{ background: '#F7C87A', color: '#232322' }}>
+                            What We Build
+                        </span>
+
+                        {/* Active area title + desc + bullets */}
+                        <div className="flex-1 flex flex-col justify-center">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={activeIdx}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -25 }}
+                                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                                    className="max-w-md"
+                                >
+                                    <span className="text-[10px] font-bold tracking-widest text-white/20 uppercase mb-4 block">
+                                        {String(activeIdx + 1).padStart(2, '0')} / {String(totalAreas).padStart(2, '0')}
+                                    </span>
+
+                                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-5">
+                                        {areas[activeIdx].title}
+                                    </h2>
+
+                                    <p className="text-white/45 text-base md:text-lg leading-relaxed mb-8">
+                                        {areas[activeIdx].desc}
+                                    </p>
+                                    <ul className="space-y-3">
+                                        {areas[activeIdx].bullets.map((b, i) => (
+                                            <motion.li
+                                                key={i}
+                                                initial={{ opacity: 0, x: -10 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.1 + i * 0.07 }}
+                                                className="flex items-center gap-3"
+                                            >
+                                                <span className="w-1.5 h-1.5 rounded-full bg-brand-400 flex-shrink-0" />
+                                                <span className="text-white/70 text-base font-medium">{b}</span>
+                                            </motion.li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+
+                        {/* Horizontal nav strip — scroll-driven, overflow hidden both sides */}
+                        <div className="pb-6 overflow-hidden">
                             <motion.div
-                                key={activeIdx}
-                                initial={{ opacity: 0, y: 40 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -40 }}
-                                transition={{ duration: 0.45, ease: 'easeOut' }}
+                                className="flex gap-1 whitespace-nowrap will-change-transform"
+                                style={{
+                                    x: useTransform(
+                                        scrollYProgress,
+                                        [0, 1],
+                                        ['0%', `-${((totalAreas - 1) / totalAreas) * 100}%`],
+                                    ),
+                                }}
                             >
-                                <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-5 leading-tight">
-                                    {areas[activeIdx].title}
-                                </h3>
-                                <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-                                    {areas[activeIdx].desc}
-                                </p>
-                                <ul className="space-y-4">
-                                    {areas[activeIdx].bullets.map((b, i) => (
-                                        <li key={i} className="flex items-center gap-3">
-                                            <span className="w-2 h-2 rounded-full bg-brand-300 flex-shrink-0" />
-                                            <span className="text-white text-base md:text-lg">{b}</span>
-                                        </li>
-                                    ))}
-                                </ul>
+                                {areas.map((area, idx) => (
+                                    <span
+                                        key={area.title}
+                                        className={`flex-shrink-0 px-4 py-2 text-[11px] font-semibold tracking-wide uppercase transition-colors duration-300 ${
+                                            idx === activeIdx
+                                                ? 'text-white'
+                                                : 'text-white/20'
+                                        }`}
+                                    >
+                                        {area.title}
+                                    </span>
+                                ))}
                             </motion.div>
-                        </AnimatePresence>
+                        </div>
                     </div>
 
+                    {/* Right: full-height B&W stacking images — fully scroll-driven, GPU composited */}
                     <div className="relative hidden lg:block overflow-hidden">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={activeIdx}
-                                initial={{ opacity: 0, y: '100%' }}
-                                animate={{ opacity: 1, y: '0%' }}
-                                exit={{ opacity: 0, y: '-30%' }}
-                                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                                className="absolute inset-0"
-                            >
-                                <Image
-                                    src={areas[activeIdx].image}
-                                    alt={areas[activeIdx].title}
-                                    fill
-                                    className="object-cover"
-                                />
-                                <div
-                                    className="absolute inset-0 pointer-events-none"
-                                    style={{
-                                        background:
-                                            'linear-gradient(90deg, #2a0845 0%, transparent 50%)',
-                                    }}
-                                />
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-black/20 backdrop-blur-sm">
-                    <div className="flex overflow-x-auto no-scrollbar">
-                        {areas.map((area, idx) => (
-                            <span
+                        {areas.map((area, i) => (
+                            <StackingImage
                                 key={area.title}
-                                className={`flex-1 min-w-[140px] px-4 py-4 text-xs md:text-sm font-semibold tracking-wide uppercase whitespace-nowrap text-center transition-all duration-300 ${
-                                    idx === activeIdx
-                                        ? 'text-white bg-white/10 border-t-2 border-white'
-                                        : 'text-white/40 border-t-2 border-transparent'
-                                }`}
-                            >
-                                {area.title}
-                            </span>
+                                src={area.image}
+                                alt={area.title}
+                                index={i}
+                                totalAreas={totalAreas}
+                                scrollYProgress={scrollYProgress}
+                            />
                         ))}
                     </div>
                 </div>
-
-                <motion.div
-                    className="absolute bottom-[52px] left-0 h-[2px] bg-brand-300 z-30"
-                    style={{
-                        width: `${((activeIdx + 1) / totalAreas) * 100}%`,
-                        transition: 'width 0.4s ease',
-                    }}
-                />
             </div>
         </section>
     );
 }
 
-export default function EnterprisesPage() {
-    const [contactOpen, setContactOpen] = useState(false);
+/* ─── Section: How We Engage (horizontal scroll timeline) ─── */
+
+function HowWeEngageSection() {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
     return (
-        <main>
-            {/* Hero Section — lavender/purple gradient */}
-            <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-                {/* Background: soft lavender-to-white gradient with dark navy blob on right */}
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        background:
-                            'linear-gradient(135deg, #f5f0ff 0%, #ede4ff 20%, #e8dbff 35%, #ddd0fa 50%, #c9b8f0 65%, #8b7abf 80%, #1e1245 100%)',
-                    }}
-                />
-                {/* Radial purple mesh glow */}
-                <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                        background:
-                            'radial-gradient(ellipse at 20% 50%, rgba(200, 170, 255, 0.4) 0%, transparent 60%), radial-gradient(ellipse at 80% 40%, rgba(30, 18, 69, 0.7) 0%, transparent 55%), radial-gradient(ellipse at 50% 80%, rgba(140, 100, 240, 0.15) 0%, transparent 50%)',
-                    }}
-                />
-                {/* Subtle noise texture overlay */}
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")', backgroundSize: '128px 128px' }} />
+        <section ref={sectionRef} className="py-24 md:py-36 bg-white overflow-hidden">
+            <div className="px-6 md:px-12 xl:px-20">
+                <div className="max-w-7xl mx-auto">
+                    {/* Header */}
+                    <div className="mb-14">
+                        <motion.span
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.4 }}
+                            className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200 bg-slate-50 mb-4"
+                        >
+                            How We Engage
+                        </motion.span>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.6, delay: 0.05 }}
+                            className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight"
+                        >
+                            A structured path from first discussion to{' '}
+                            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                                scaled use
+                            </span>
+                        </motion.h2>
+                    </div>
 
-                <div className="relative z-10 text-center px-4 md:px-6 pt-32 pb-24 md:pt-40 md:pb-32 max-w-4xl mx-auto">
-                    {/* Pill badge */}
-                    <motion.div
+                    {/* Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {engagementSteps.map((step, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: 0.2 + i * 0.12,
+                                    ease: [0.22, 1, 0.36, 1],
+                                }}
+                                className="group border border-slate-200 rounded-xl p-6 md:p-8 bg-white hover:border-slate-300 hover:shadow-sm transition-all duration-300"
+                            >
+                                <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-4 block">
+                                    Step {String(i + 1).padStart(2, '0')}
+                                </span>
+                                <h3 className="text-lg font-bold text-slate-900 tracking-tight mb-3">
+                                    {step.title}
+                                </h3>
+                                <p className="text-sm text-slate-500 leading-relaxed">
+                                    {step.description}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+/* ─── Section: Our SAP Depth ─── */
+
+function SAPDepthSection() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: '-80px' });
+
+    return (
+        <section ref={ref} className="py-24 md:py-36 bg-white">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12">
+                <div className="max-w-3xl mx-auto text-center mb-16">
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.4 }}
+                        className="inline-block rounded-md px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-5"
+                        style={{ background: '#F7C87A', color: '#232322' }}
+                    >
+                        SAP Expertise
+                    </motion.span>
+                    <motion.h2
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="mb-8"
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.05 }}
+                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-8 leading-tight"
                     >
-                        <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-600 text-white text-sm font-semibold tracking-wide shadow-lg shadow-brand-600/25">
-                            <Zap className="w-4 h-4" />
-                            Trusted by Industry Leaders
+                        Our SAP{' '}
+                        <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                            Depth
                         </span>
-                    </motion.div>
-
-                    {/* Large serif headline */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="font-[family-name:var(--font-playfair)] tracking-tight leading-[1.1] mb-6"
-                        style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
-                    >
-                        <span className="text-[#0f0a2e]">
-                            Enterprise AI Solutions
-                        </span>
-                        <br />
-                        <span className="text-[#0f0a2e]">for </span>
-                        <span className="italic text-brand-600">
-                            Every Organisation
-                        </span>
-                    </motion.h1>
-
-                    {/* Subtext */}
+                    </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.25 }}
-                        className="text-base md:text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto mb-10"
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="text-base md:text-lg text-slate-500 leading-relaxed"
                     >
-                        Work only shifts when it becomes part of daily operations — inside workflows
-                        <br className="hidden md:block" />
-                        and decisions already in place. We bring this into motion across your enterprise.
+                        If your organisation runs SAP, where this work sits matters in a very practical way.
+                        SAP reflects how the business actually operates — how teams are structured, how
+                        processes move, how decisions get recorded. When this work runs within that
+                        environment, it connects directly to that context. Outputs appear in the same places
+                        people are already working, and actions follow naturally from there.
                     </motion.p>
-
-                    {/* Two CTAs */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.35 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-                    >
-                        <button
-                            type="button"
-                            onClick={() => setContactOpen(true)}
-                            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-base transition-all duration-200 shadow-lg shadow-brand-600/30 cursor-pointer"
-                        >
-                            Get Started
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => setContactOpen(true)}
-                            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full border-2 border-slate-300 hover:border-slate-400 text-slate-700 font-semibold text-base transition-all duration-200 bg-white/50 backdrop-blur-sm cursor-pointer"
-                        >
-                            Book a Demo
-                        </button>
-                    </motion.div>
-
-                    {/* Logo strip */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.45 }}
-                        className="flex items-center justify-center gap-8 md:gap-12 flex-wrap"
-                    >
-                        {partnerLogos.map((logo) => (
-                            <div key={logo.alt} className="relative h-8 w-20 md:h-10 md:w-24 grayscale opacity-50 hover:opacity-80 transition-opacity duration-200">
-                                <Image
-                                    src={logo.src}
-                                    alt={logo.alt}
-                                    fill
-                                    className="object-contain"
-                                />
-                            </div>
-                        ))}
-                    </motion.div>
                 </div>
 
-                {/* Bottom fade into next section */}
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 to-transparent" />
-            </section>
-
-            {/* What a transformation engagement delivers */}
-            <section className="py-20 md:py-32 bg-slate-50">
-                <div className="container mx-auto px-4 md:px-6">
-                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight mb-10">
-                                What a transformation engagement delivers
-                            </h2>
-                            <ul className="space-y-5">
-                                {deliverables.map((item, idx) => (
+                {/* Two-column cards */}
+                <div className="max-w-4xl mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="grid md:grid-cols-2 gap-6"
+                    >
+                        <div className="rounded-2xl border border-slate-100 bg-slate-50 p-8">
+                            <h3 className="text-base font-bold text-slate-900 mb-5 tracking-tight uppercase">
+                                Where This Shows Up
+                            </h3>
+                            <ul className="space-y-4">
+                                {sapHighlights.map((item, idx) => (
                                     <motion.li
                                         key={idx}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: 0.08 * idx, duration: 0.4 }}
-                                        className="flex items-start gap-4"
+                                        initial={{ opacity: 0, x: -12 }}
+                                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                                        transition={{ delay: 0.3 + idx * 0.07, duration: 0.4 }}
+                                        className="flex items-start gap-3"
                                     >
-                                        <CheckCircle2 className="w-6 h-6 text-brand-500 mt-0.5 flex-shrink-0" />
-                                        <span className="text-slate-700 text-base md:text-lg leading-relaxed">
-                                            {item}
-                                        </span>
+                                        <CheckCircle2 className="w-4 h-4 text-brand-500 mt-0.5 flex-shrink-0" />
+                                        <span className="text-sm text-slate-600 leading-relaxed">{item}</span>
                                     </motion.li>
                                 ))}
                             </ul>
-                        </motion.div>
+                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.15 }}
-                            className="flex justify-center lg:justify-end"
-                        >
-                            <div className="relative w-80 aspect-[3/5] rounded-full overflow-hidden shadow-2xl">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80"
-                                    alt="AI Transformation"
-                                    fill
-                                    className="object-cover"
-                                />
-                                <div
-                                    className="absolute inset-0 pointer-events-none"
-                                    style={{
-                                        background:
-                                            'linear-gradient(180deg, transparent 60%, rgba(88,23,155,0.3) 100%)',
-                                    }}
-                                />
+                        <div className="rounded-2xl border border-slate-100 overflow-hidden relative min-h-[280px]">
+                            <Image
+                                src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80"
+                                alt="SAP Enterprise Integration"
+                                fill
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a14]/70 to-[#0a0a14]/10" />
+                            <div className="absolute bottom-6 left-6 right-6">
+                                <p className="text-white text-sm font-medium leading-relaxed">
+                                    Deeply embedded within SAP&apos;s ecosystem — S/4HANA, BTP, SuccessFactors, IBP, PM, and FI.
+                                </p>
                             </div>
-                        </motion.div>
-                    </div>
+                        </div>
+                    </motion.div>
                 </div>
-            </section>
+            </div>
+        </section>
+    );
+}
 
+
+/* ─── Page ─── */
+
+export default function EnterprisesPage() {
+    return (
+        <main>
+            <HeroSection />
+            <DeliverablesSection />
             <WhatWeBuildSection />
-
-            <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
+            <HowWeEngageSection />
+            <SAPDepthSection />
         </main>
     );
 }

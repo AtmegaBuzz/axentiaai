@@ -13,25 +13,25 @@ const certifications = [
     {
         name: 'CMMI',
         tagline: 'Capability Maturity Model Integration',
-        file: '/certifications/cmmi-logo.png',
+        file: '/images/certifications/cmmi.png',
         badgeText: 'Process Excellence',
     },
     {
         name: 'NASSCOM',
         tagline: 'National Association of Software & Service Companies',
-        file: '/certifications/nasscom-logo.gif',
+        file: '/images/certifications/nasscom.gif',
         badgeText: 'Industry Member',
     },
     {
         name: 'ISO 9001',
         tagline: 'Quality Management System',
-        file: '/certifications/ISO_9001-2015.png',
+        file: '/images/certifications/iso-9001.png',
         badgeText: 'Quality Assurance',
     },
     {
         name: 'ISO 27001',
         tagline: 'Information Security Management',
-        file: '/certifications/ISO-2018.svg',
+        file: '/images/certifications/iso-27001.svg',
         badgeText: 'Data Security',
     },
 ];
