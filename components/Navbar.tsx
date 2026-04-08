@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ContactModal } from './ContactModal';
 
 const navLinks: { label: string; href?: string }[] = [
-    { label: 'ENTERPRISE' },
+    { label: 'ENTERPRISE', href: '/enterprises' },
     { label: 'ACADEMIES' },
     { label: "WHO IT'S FOR" },
     { label: 'WHY AXENTIA.AI' },

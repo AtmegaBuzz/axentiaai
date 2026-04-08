@@ -1,9 +1,10 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Zap } from 'lucide-react';
 import Image from 'next/image';
+import { ContactModal } from '@/components/ContactModal';
 
 const deliverables = [
     'AI outputs appear directly in existing workflows',
@@ -53,6 +54,15 @@ const areas = [
     },
 ];
 
+const partnerLogos = [
+    { src: '/certifications/cmmi-logo.png', alt: 'CMMI' },
+    { src: '/certifications/nasscom-logo.gif', alt: 'NASSCOM' },
+    { src: '/certifications/iso-9001-logo.png', alt: 'ISO 9001' },
+    { src: '/certifications/iso-27001-logo.png', alt: 'ISO 27001' },
+    { src: '/certifications/ISO-2018.svg', alt: 'ISO 2018' },
+    { src: '/certifications/ISO_9001-2015.png', alt: 'ISO 9001:2015' },
+];
+
 function WhatWeBuildSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [activeIdx, setActiveIdx] = useState(0);
@@ -64,14 +74,12 @@ function WhatWeBuildSection() {
     });
 
     useMotionValueEvent(scrollYProgress, 'change', (v) => {
-        // Map scroll progress to area index
         const idx = Math.min(Math.floor(v * totalAreas), totalAreas - 1);
         setActiveIdx(idx);
     });
 
     return (
         <section ref={containerRef} style={{ height: `${totalAreas * 100}vh` }} className="relative">
-            {/* Sticky viewport */}
             <div
                 className="sticky top-0 h-screen w-full overflow-hidden"
                 style={{
@@ -79,7 +87,6 @@ function WhatWeBuildSection() {
                         'linear-gradient(135deg, #1e0735 0%, #2a0845 30%, #58179B 70%, #6B1D8E 100%)',
                 }}
             >
-                {/* Section heading — top */}
                 <div className="absolute top-0 left-0 right-0 z-30 pt-24 pb-6 text-center pointer-events-none">
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-2">
                         What We Build
@@ -89,9 +96,7 @@ function WhatWeBuildSection() {
                     </p>
                 </div>
 
-                {/* Main content grid */}
                 <div className="h-full grid lg:grid-cols-2">
-                    {/* Left — Text */}
                     <div className="flex flex-col justify-center px-8 md:px-14 lg:px-20 relative z-10">
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -119,7 +124,6 @@ function WhatWeBuildSection() {
                         </AnimatePresence>
                     </div>
 
-                    {/* Right — Image (slides up) */}
                     <div className="relative hidden lg:block overflow-hidden">
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -136,7 +140,6 @@ function WhatWeBuildSection() {
                                     fill
                                     className="object-cover"
                                 />
-                                {/* Left fade into purple */}
                                 <div
                                     className="absolute inset-0 pointer-events-none"
                                     style={{
@@ -149,7 +152,6 @@ function WhatWeBuildSection() {
                     </div>
                 </div>
 
-                {/* Tab bar at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-black/20 backdrop-blur-sm">
                     <div className="flex overflow-x-auto no-scrollbar">
                         {areas.map((area, idx) => (
@@ -167,7 +169,6 @@ function WhatWeBuildSection() {
                     </div>
                 </div>
 
-                {/* Scroll progress indicator */}
                 <motion.div
                     className="absolute bottom-[52px] left-0 h-[2px] bg-brand-300 z-30"
                     style={{
@@ -181,66 +182,119 @@ function WhatWeBuildSection() {
 }
 
 export default function EnterprisesPage() {
+    const [contactOpen, setContactOpen] = useState(false);
 
     return (
         <main>
-            {/* Hero Section */}
-            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-                {/* Background gradient */}
+            {/* Hero Section — lavender/purple gradient */}
+            <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+                {/* Background: soft lavender-to-white gradient with dark navy blob on right */}
                 <div
                     className="absolute inset-0"
                     style={{
                         background:
-                            'linear-gradient(135deg, #1e0735 0%, #2a0845 30%, #58179B 60%, #8929AC 80%, #C010DA 100%)',
+                            'linear-gradient(135deg, #f5f0ff 0%, #ede4ff 20%, #e8dbff 35%, #ddd0fa 50%, #c9b8f0 65%, #8b7abf 80%, #1e1245 100%)',
                     }}
                 />
-                {/* Radial glow overlays */}
+                {/* Radial purple mesh glow */}
                 <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
                         background:
-                            'radial-gradient(ellipse at 30% 70%, rgba(228,115,186,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 30%, rgba(192,16,218,0.12) 0%, transparent 50%)',
+                            'radial-gradient(ellipse at 20% 50%, rgba(200, 170, 255, 0.4) 0%, transparent 60%), radial-gradient(ellipse at 80% 40%, rgba(30, 18, 69, 0.7) 0%, transparent 55%), radial-gradient(ellipse at 50% 80%, rgba(140, 100, 240, 0.15) 0%, transparent 50%)',
                     }}
                 />
+                {/* Subtle noise texture overlay */}
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")', backgroundSize: '128px 128px' }} />
 
-                <div className="container mx-auto px-4 md:px-6 relative z-10 text-center pt-32 pb-24 md:pt-40 md:pb-32">
-                    {/* Tag */}
+                <div className="relative z-10 text-center px-4 md:px-6 pt-32 pb-24 md:pt-40 md:pb-32 max-w-4xl mx-auto">
+                    {/* Pill badge */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
+                        className="mb-8"
                     >
-                        <span className="inline-block px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-semibold tracking-wide mb-10">
-                            Enterprise &middot; AI Transformation
+                        <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-600 text-white text-sm font-semibold tracking-wide shadow-lg shadow-brand-600/25">
+                            <Zap className="w-4 h-4" />
+                            Trusted by Industry Leaders
                         </span>
                     </motion.div>
 
-                    {/* Main heading */}
+                    {/* Large serif headline */}
                     <motion.h1
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-8 max-w-5xl mx-auto uppercase"
+                        className="font-[family-name:var(--font-playfair)] tracking-tight leading-[1.1] mb-6"
+                        style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
                     >
-                        WHERE CHANGE{' '}
-                        <span className="font-[family-name:var(--font-playfair)] italic text-[0.75em] font-normal lowercase text-white/80">
-                            settles
-                        </span>{' '}
-                        INTO EVERYDAY WORK
+                        <span className="text-[#0f0a2e]">
+                            Enterprise AI Solutions
+                        </span>
+                        <br />
+                        <span className="text-[#0f0a2e]">for </span>
+                        <span className="italic text-brand-600">
+                            Every Organisation
+                        </span>
                     </motion.h1>
 
-                    {/* Description */}
+                    {/* Subtext */}
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.25 }}
-                        className="text-base md:text-lg lg:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
+                        className="text-base md:text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto mb-10"
                     >
-                        Work only shifts when it becomes part of daily operations inside workflows and decisions already in place. Axentia works with your organisation to bring this into motion and carry it forward across your needs.
+                        Work only shifts when it becomes part of daily operations — inside workflows
+                        <br className="hidden md:block" />
+                        and decisions already in place. We bring this into motion across your enterprise.
                     </motion.p>
+
+                    {/* Two CTAs */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.35 }}
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+                    >
+                        <button
+                            type="button"
+                            onClick={() => setContactOpen(true)}
+                            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-base transition-all duration-200 shadow-lg shadow-brand-600/30 cursor-pointer"
+                        >
+                            Get Started
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setContactOpen(true)}
+                            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full border-2 border-slate-300 hover:border-slate-400 text-slate-700 font-semibold text-base transition-all duration-200 bg-white/50 backdrop-blur-sm cursor-pointer"
+                        >
+                            Book a Demo
+                        </button>
+                    </motion.div>
+
+                    {/* Logo strip */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.45 }}
+                        className="flex items-center justify-center gap-8 md:gap-12 flex-wrap"
+                    >
+                        {partnerLogos.map((logo) => (
+                            <div key={logo.alt} className="relative h-8 w-20 md:h-10 md:w-24 grayscale opacity-50 hover:opacity-80 transition-opacity duration-200">
+                                <Image
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        ))}
+                    </motion.div>
                 </div>
 
-                {/* Bottom fade */}
+                {/* Bottom fade into next section */}
                 <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 to-transparent" />
             </section>
 
@@ -248,7 +302,6 @@ export default function EnterprisesPage() {
             <section className="py-20 md:py-32 bg-slate-50">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                        {/* Left — Content */}
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -277,7 +330,6 @@ export default function EnterprisesPage() {
                             </ul>
                         </motion.div>
 
-                        {/* Right — Image */}
                         <motion.div
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -292,7 +344,6 @@ export default function EnterprisesPage() {
                                     fill
                                     className="object-cover"
                                 />
-                                {/* Gradient overlay */}
                                 <div
                                     className="absolute inset-0 pointer-events-none"
                                     style={{
@@ -305,8 +356,10 @@ export default function EnterprisesPage() {
                     </div>
                 </div>
             </section>
-            {/* What We Build — scroll-driven full page */}
+
             <WhatWeBuildSection />
+
+            <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
         </main>
     );
 }
