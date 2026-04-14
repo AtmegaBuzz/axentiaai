@@ -22,7 +22,7 @@ const people = [
     },
     {
         name: 'Dr. Naresh Pathak',
-        role: 'Adviser & Wellness Coach',
+        role: 'Advisor & Wellness Coach',
         company: 'Axentia AI',
         photo: '/images/team/Naresh-Pathak.jpg',
         linkedin: 'https://www.linkedin.com/in/nkp74/',
