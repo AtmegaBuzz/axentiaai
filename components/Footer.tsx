@@ -108,7 +108,7 @@ export function Footer() {
                 <div className="container mx-auto px-4 md:px-8 xl:px-12 py-5 relative z-10">
                     <div className="flex flex-wrap gap-x-8 gap-y-2 text-xs text-slate-500">
                         <a href="tel:+9217665361" className="flex items-center gap-1.5 hover:text-slate-300 transition-colors font-medium">
-                            <Phone className="w-3.5 h-3.5 text-[#8A29AC]" /> +91-9217665361
+                            <Phone className="w-3.5 h-3.5 text-[#8A29AC]" /> +91-9355181110
                         </a>
                         <a href="mailto:info@axentiaai.com" className="flex items-center gap-1.5 hover:text-slate-300 transition-colors font-medium">
                             <Mail className="w-3.5 h-3.5 text-[#8A29AC]" /> info@axentiaai.com
