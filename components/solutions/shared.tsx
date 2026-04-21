@@ -487,163 +487,162 @@ export function SolutionForm({
     };
 
     return (
-        <section id="request" ref={ref} className="py-24 md:py-32 bg-slate-50">
-            <div className="max-w-7xl mx-auto px-6 md:px-12">
-                <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-[0_30px_80px_-30px_rgba(11,28,48,0.2)]">
-                    {/* Image column — full height */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={isInView ? { opacity: 1 } : {}}
-                        transition={{ duration: 0.8, ease }}
-                        className="relative min-h-[320px] lg:min-h-[640px]"
-                    >
-                        <Image
-                            src={image}
-                            alt=""
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 1024px) 100vw, 45vw"
-                        />
-                        {/* Dark tonal overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628]/75 via-[#0a1628]/50 to-brand-900/60" />
-                        {/* Top content */}
-                        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between text-white">
-                            <div>
-                                <div className="flex items-center gap-3">
-                                    <span className="block w-8 h-px bg-accent-300" />
-                                    <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent-300">
-                                        Senior architects
-                                    </span>
-                                </div>
-                            </div>
-                            <div>
-                                <p className="font-[family-name:var(--font-playfair)] italic text-2xl md:text-3xl leading-[1.2] text-white mb-4 max-w-md">
-                                    {imageCaption ||
-                                        'Every briefing starts with a real conversation — not a form letter.'}
-                                </p>
-                                <div className="flex items-center gap-3 text-xs text-white/70">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                    Response within one business day
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Form column */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+        <section
+            id="request"
+            ref={ref}
+            className="relative min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-slate-50"
+        >
+            {/* Left: form column */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6 }}
+                className="order-2 lg:order-1 flex items-center px-6 md:px-12 lg:px-16 xl:px-24 py-16 md:py-24"
+            >
+                <div className="w-full max-w-xl mx-auto lg:mx-0">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 12 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.15 }}
-                        className="p-8 md:p-12 lg:p-14"
+                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-3"
                     >
-                        <motion.h2
-                            initial={{ opacity: 0, y: 12 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-3"
-                        >
-                            {heading}
-                            {headingAccent && (
-                                <>
-                                    {' '}
-                                    <span className="font-[family-name:var(--font-playfair)] italic font-normal bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                                        {headingAccent}
-                                    </span>
-                                </>
-                            )}
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={isInView ? { opacity: 1 } : {}}
-                            transition={{ duration: 0.5, delay: 0.3 }}
-                            className="text-slate-600 text-sm md:text-base mb-10"
-                        >
-                            {subtext}
-                        </motion.p>
+                        {heading}
+                        {headingAccent && (
+                            <>
+                                {' '}
+                                <span className="font-[family-name:var(--font-playfair)] italic font-normal bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                                    {headingAccent}
+                                </span>
+                            </>
+                        )}
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : {}}
+                        transition={{ duration: 0.5, delay: 0.25 }}
+                        className="text-slate-600 text-sm md:text-base mb-10"
+                    >
+                        {subtext}
+                    </motion.p>
 
-                        <form onSubmit={onSubmit} className="space-y-7" noValidate>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <FormField label="First Name">
-                                    <input
-                                        required
-                                        type="text"
-                                        value={firstName}
-                                        onChange={(e) => setFirstName(e.target.value)}
-                                        placeholder="Jane"
-                                        className={underlineInput}
-                                    />
-                                </FormField>
-                                <FormField label="Last Name">
-                                    <input
-                                        required
-                                        type="text"
-                                        value={lastName}
-                                        onChange={(e) => setLastName(e.target.value)}
-                                        placeholder="Doe"
-                                        className={underlineInput}
-                                    />
-                                </FormField>
-                            </div>
-                            <FormField label="Corporate Email">
+                    <form onSubmit={onSubmit} className="space-y-7" noValidate>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <FormField label="First Name">
                                 <input
                                     required
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="jane@enterprise.com"
+                                    type="text"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    placeholder="Jane"
                                     className={underlineInput}
                                 />
                             </FormField>
-                            <FormField label="Primary Objective">
-                                <select
+                            <FormField label="Last Name">
+                                <input
                                     required
-                                    value={objective}
-                                    onChange={(e) => setObjective(e.target.value)}
-                                    className={`${underlineInput} text-slate-700`}
-                                >
-                                    <option value="">Select an objective…</option>
-                                    {objectives.map((o) => (
-                                        <option key={o}>{o}</option>
-                                    ))}
-                                </select>
+                                    type="text"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    placeholder="Doe"
+                                    className={underlineInput}
+                                />
                             </FormField>
-                            <div className="pt-2">
-                                <button
-                                    type="submit"
-                                    disabled={status === 'loading'}
-                                    className="w-full bg-brand-600 hover:bg-brand-700 text-white py-4 rounded-lg font-bold text-base transition-colors disabled:opacity-60 shadow-lg shadow-brand-600/25 inline-flex items-center justify-center gap-2"
+                        </div>
+                        <FormField label="Corporate Email">
+                            <input
+                                required
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="jane@enterprise.com"
+                                className={underlineInput}
+                            />
+                        </FormField>
+                        <FormField label="Primary Objective">
+                            <select
+                                required
+                                value={objective}
+                                onChange={(e) => setObjective(e.target.value)}
+                                className={`${underlineInput} text-slate-700`}
+                            >
+                                <option value="">Select an objective…</option>
+                                {objectives.map((o) => (
+                                    <option key={o}>{o}</option>
+                                ))}
+                            </select>
+                        </FormField>
+                        <div className="pt-2">
+                            <button
+                                type="submit"
+                                disabled={status === 'loading'}
+                                className="w-full bg-brand-600 hover:bg-brand-700 text-white py-4 rounded-lg font-bold text-base transition-colors disabled:opacity-60 shadow-lg shadow-brand-600/25 inline-flex items-center justify-center gap-2"
+                            >
+                                {status === 'loading' ? 'Submitting…' : 'Submit Request'}
+                            </button>
+                            <div className="flex items-center justify-center gap-4 mt-4">
+                                <a
+                                    href="https://wa.me/919999999999"
+                                    target="_blank"
+                                    rel="noopener"
+                                    className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-brand-600 transition font-medium"
                                 >
-                                    {status === 'loading' ? 'Submitting…' : 'Submit Request'}
-                                </button>
-                                <div className="flex items-center justify-center gap-4 mt-4">
-                                    <a
-                                        href="https://wa.me/919999999999"
-                                        target="_blank"
-                                        rel="noopener"
-                                        className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-brand-600 transition font-medium"
-                                    >
-                                        <MessageCircle className="w-4 h-4" />
-                                        Or chat on WhatsApp
-                                    </a>
+                                    <MessageCircle className="w-4 h-4" />
+                                    Or chat on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        {status === 'success' && (
+                            <div className="p-4 bg-brand-50 border border-brand-200 rounded-lg text-sm">
+                                <div className="flex items-center gap-2 text-brand-700 font-semibold">
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    Thanks — our team will be in touch within one business day.
                                 </div>
                             </div>
-                            {status === 'success' && (
-                                <div className="p-4 bg-brand-50 border border-brand-200 rounded-lg text-sm">
-                                    <div className="flex items-center gap-2 text-brand-700 font-semibold">
-                                        <CheckCircle2 className="w-4 h-4" />
-                                        Thanks — our team will be in touch within one business day.
-                                    </div>
-                                </div>
-                            )}
-                            {status === 'error' && (
-                                <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
-                                    {errorMsg}
-                                </div>
-                            )}
-                        </form>
-                    </motion.div>
+                        )}
+                        {status === 'error' && (
+                            <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                                {errorMsg}
+                            </div>
+                        )}
+                    </form>
                 </div>
-            </div>
+            </motion.div>
+
+            {/* Right: full-height image */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.8, ease }}
+                className="order-1 lg:order-2 relative min-h-[320px] lg:min-h-screen"
+            >
+                <Image
+                    src={image}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority={false}
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628]/75 via-[#0a1628]/45 to-brand-900/60" />
+                <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col justify-between text-white">
+                    <div className="flex items-center gap-3">
+                        <span className="block w-8 h-px bg-accent-300" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent-300">
+                            Senior architects
+                        </span>
+                    </div>
+                    <div>
+                        <p className="font-[family-name:var(--font-playfair)] italic text-2xl md:text-3xl lg:text-4xl leading-[1.2] text-white mb-5 max-w-lg">
+                            {imageCaption ||
+                                'Every briefing starts with a real conversation — not a form letter.'}
+                        </p>
+                        <div className="flex items-center gap-3 text-xs text-white/70">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            Response within one business day
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
         </section>
     );
 }
