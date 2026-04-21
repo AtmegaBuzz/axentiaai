@@ -1,1096 +1,833 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight, Linkedin, ExternalLink, ChevronDown } from 'lucide-react';
-import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import {
+    ArrowRight,
+    MessageCircle,
+    Building2,
+    Award,
+    Globe2,
+    Users,
+} from 'lucide-react';
+import { Leaders } from '@/components/sections/Leaders';
 
-/* ═══════════════════════════════════════════════════════════════
-   INLINE SVG ICONS
-   ═══════════════════════════════════════════════════════════════ */
+const ease = [0.16, 1, 0.3, 1] as const;
 
-function ConsultingIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>);
-}
-function GlobeIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>);
-}
-function TargetIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>);
-}
-function HeartIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>);
-}
-function LightbulbIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18h6M10 22h4" /><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" /></svg>);
-}
-function ShieldIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>);
-}
-function BuildingIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01" /></svg>);
-}
-function BrainIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 1.5-.5 2.5-1.5 3.5L12 14l-3.5-3.5C7.5 9.5 7 8.5 7 7a5 5 0 0 1 5-5z" /><path d="M12 14v8" /><path d="M8 18h8" /><circle cx="12" cy="7" r="1" fill="currentColor" /></svg>);
-}
-function SAPIcon({ className = 'w-6 h-6' }: { className?: string }) {
-  return (<svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="18" rx="3" /><path d="M7 8h10M7 12h6M7 16h8" /><circle cx="18" cy="14" r="2" fill="currentColor" opacity="0.3" /></svg>);
+function useIsMobile(breakpoint = 768) {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+        const update = () => setIsMobile(mq.matches);
+        update();
+        mq.addEventListener('change', update);
+        return () => mq.removeEventListener('change', update);
+    }, [breakpoint]);
+    return isMobile;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ANIMATED DECORATIVE WIDGETS
-   ═══════════════════════════════════════════════════════════════ */
+/* TypewriterText — rAF-based char-by-char reveal */
+function TypewriterText({
+    text,
+    delay = 0.6,
+    speed = 18,
+}: {
+    text: string;
+    delay?: number;
+    speed?: number;
+}) {
+    const [displayed, setDisplayed] = useState('');
+    const [started, setStarted] = useState(false);
 
-/* Spinning ring with orbiting dots */
-function OrbitRing({ className = '', size = 120, color = '#8929AC' }: { className?: string; size?: number; color?: string }) {
-  return (
-    <div className={`pointer-events-none ${className}`} style={{ width: size, height: size }}>
-      <motion.svg viewBox="0 0 120 120" fill="none" className="w-full h-full" animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}>
-        <circle cx="60" cy="60" r="50" stroke={color} strokeWidth="1" opacity="0.3" strokeDasharray="8 6" />
-        <circle cx="60" cy="60" r="35" stroke={color} strokeWidth="0.5" opacity="0.2" />
-        <circle cx="60" cy="10" r="4" fill={color} opacity="0.6" />
-        <circle cx="110" cy="60" r="3" fill={color} opacity="0.4" />
-        <circle cx="60" cy="110" r="2.5" fill={color} opacity="0.5" />
-      </motion.svg>
-    </div>
-  );
-}
+    useEffect(() => {
+        const t = setTimeout(() => setStarted(true), delay * 1000);
+        return () => clearTimeout(t);
+    }, [delay]);
 
-/* Counter-rotating concentric rings */
-function SpinningGear({ className = '', size = 80 }: { className?: string; size?: number }) {
-  return (
-    <div className={`pointer-events-none ${className}`} style={{ width: size, height: size }}>
-      <svg viewBox="0 0 80 80" fill="none" className="w-full h-full">
-        <motion.g animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}>
-          <circle cx="40" cy="40" r="30" stroke="#C010DA" strokeWidth="1" opacity="0.25" strokeDasharray="4 8" />
-        </motion.g>
-        <motion.g animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 22, ease: 'linear' }}>
-          <circle cx="40" cy="40" r="20" stroke="#F3B15F" strokeWidth="1" opacity="0.2" strokeDasharray="3 6" />
-        </motion.g>
-        <motion.g animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}>
-          <circle cx="40" cy="40" r="10" stroke="#C010DA" strokeWidth="0.75" opacity="0.3" strokeDasharray="2 4" />
-        </motion.g>
-        <circle cx="40" cy="40" r="2" fill="#8929AC" opacity="0.4" />
-      </svg>
-    </div>
-  );
-}
+    useEffect(() => {
+        if (!started) return;
+        if (displayed.length >= text.length) return;
+        const t = setTimeout(() => {
+            setDisplayed(text.slice(0, displayed.length + 1));
+        }, speed);
+        return () => clearTimeout(t);
+    }, [started, displayed, text, speed]);
 
-/* Rotating cross/plus */
-function RotatingCross({ className = '', color = '#8929AC' }: { className?: string; color?: string }) {
-  return (
-    <motion.div className={`pointer-events-none ${className}`} animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 12, ease: 'linear' }}>
-      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-        <line x1="12" y1="4" x2="12" y2="20" stroke={color} strokeWidth="1.5" opacity="0.4" />
-        <line x1="4" y1="12" x2="20" y2="12" stroke={color} strokeWidth="1.5" opacity="0.4" />
-      </svg>
-    </motion.div>
-  );
-}
-
-/* Floating diamond */
-function FloatingDiamond({ className = '', color = '#8929AC' }: { className?: string; color?: string }) {
-  return (
-    <motion.div className={`pointer-events-none ${className}`} animate={{ y: [-8, 8, -8], rotate: [0, 45, 0] }} transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}>
-      <svg viewBox="0 0 20 20" fill="none" className="w-full h-full">
-        <rect x="3" y="3" width="14" height="14" rx="2" stroke={color} strokeWidth="1.5" opacity="0.35" transform="rotate(45 10 10)" />
-      </svg>
-    </motion.div>
-  );
-}
-
-/* ── Flowing animated line (horizontal, draws on scroll) ── */
-function FlowingLine({ className = '' }: { className?: string }) {
-  return (
-    <div className={`pointer-events-none ${className}`}>
-      <svg viewBox="0 0 1200 60" fill="none" className="w-full h-full" preserveAspectRatio="none">
-        <motion.path
-          d="M0,30 Q150,5 300,30 T600,30 T900,30 T1200,30"
-          stroke="url(#flowGrad)"
-          strokeWidth="1.5"
-          fill="none"
-          initial={{ pathLength: 0, opacity: 0 }}
-          whileInView={{ pathLength: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 2, ease: 'easeOut' }}
-        />
-        <defs>
-          <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#8929AC" stopOpacity="0" />
-            <stop offset="20%" stopColor="#8929AC" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#F3B15F" stopOpacity="0.3" />
-            <stop offset="80%" stopColor="#8929AC" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#8929AC" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   HELPERS
-   ═══════════════════════════════════════════════════════════════ */
-
-function FadeIn({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.7, delay, ease: 'easeOut' }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 1: HERO — Pinned full-viewport with scroll-fade + images
-   ═══════════════════════════════════════════════════════════════ */
-
-function HeroSection() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.6], [0, -100]);
-  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.95]);
-  const imgY = useTransform(scrollYProgress, [0, 0.6], [0, 60]);
-  const imgRotate = useTransform(scrollYProgress, [0, 0.6], [0, -5]);
-
-  return (
-    <section ref={ref} className="relative h-[120vh] md:h-[160vh]">
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Background photo */}
-        <Image
-          src="/images/hero/about-us-hero.jpg"
-          alt="Axentia.AI About Hero"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        {/* Dark overlay — same pattern as landing hero video */}
-        <div className="absolute inset-0 bg-black/55" />
-
-        <motion.div style={{ opacity, y, scale }} className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 xl:px-20">
-          <div className="max-w-5xl">
-            <FadeIn delay={0.1}>
-              <p className="text-brand-300 font-semibold uppercase tracking-[0.2em] text-sm mb-5">Our Story</p>
-            </FadeIn>
-            <FadeIn delay={0.2}>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8">
-                The Story of{' '}
-                <span className="bg-gradient-to-r from-accent-300 to-accent-500 bg-clip-text text-transparent">Axentia.AI</span>
-              </h1>
-            </FadeIn>
-            <FadeIn delay={0.3}>
-              <p className="text-base md:text-xl lg:text-2xl text-indigo-200/80 max-w-3xl leading-relaxed mb-10">
-                Building the capability infrastructure required for the AI era, one enterprise consultant at a time.
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.4}>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/programs" className="inline-flex items-center gap-2 bg-white text-slate-900 font-semibold px-8 py-4 rounded-full shadow-lg shadow-white/20 hover:shadow-xl transition-all hover:-translate-y-0.5">
-                  Start Your Journey <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link href="/programs" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/20 transition-all">
-                  Explore Programs
-                </Link>
-              </div>
-            </FadeIn>
-          </div>
-          <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>
-            <span className="text-xs font-medium uppercase tracking-wider text-white/30">Scroll</span>
-            <motion.div animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
-              <ChevronDown className="w-5 h-5 text-white/30" />
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 2: LEGACY — Founder quote + stats + image + widgets
-   ═══════════════════════════════════════════════════════════════ */
-
-function LegacySection() {
-  return (
-    <section className="relative py-24 md:py-36 bg-white overflow-hidden">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
-      {/* Moving line */}
-      <FlowingLine className="absolute top-12 left-0 right-0 h-16 opacity-60" />
-      {/* Rotating widgets */}
-      <SpinningGear className="absolute top-16 right-16 hidden lg:block" size={70} />
-      <RotatingCross className="absolute bottom-20 left-12 w-6 h-6 hidden md:block" />
-      <FloatingDiamond className="absolute top-[60%] right-8 w-5 h-5" color="#eab308" />
-
-      <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center">
-          <div>
-            <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500 mb-4">Our Legacy</p></FadeIn>
-            <FadeIn delay={0.05}>
-              <div className="relative mb-8">
-                <svg className="w-4 h-4 text-brand-300 mb-2" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
-                <blockquote className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium pl-6 border-l-4 border-brand-300">
-                  In enterprise consulting, readiness shows in the details — how you document, how you communicate, how you handle responsibility inside a team.{' '}
-                  <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Axentia AI</span>{' '}
-                  was created to build that preparation deliberately, for the AI era.
-                </blockquote>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.1}>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-full overflow-hidden shadow-lg shadow-brand-500/30">
-                  <Image
-                    src="/images/team/manuj-gupta.jpeg"
-                    alt="Manuj Gupta"
-                    width={56}
-                    height={56}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <p className="text-lg font-bold text-slate-900">Manuj Gupta</p>
-                  <p className="text-sm text-slate-500">Founder & CEO, Orane Consulting</p>
-                  <p className="text-sm text-brand-600 font-medium">Founder, Axentia.AI</p>
-                </div>
-                <a href="https://www.linkedin.com/in/manuj123/" target="_blank" rel="noopener noreferrer" className="ml-auto w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white hover:bg-[#004182] transition-colors"><Linkedin className="w-4 h-4" /></a>
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <p className="text-slate-600 leading-relaxed mb-8">
-                Manuj Gupta founded Orane Consulting in 2009. The firm has grown into a 500+ consultant SAP practice with delivery presence across India, Canada, Portugal, and Kenya. Axentia.AI extends those same delivery standards into a focused training and apprenticeship pathway.
-              </p>
-            </FadeIn>
-            {/* Filler image strip */}
-            <FadeIn delay={0.2}>
-              <div className="flex gap-3">
-                <div className="w-28 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/new_images/about/people-modern-office-talk.jpg" alt="SAP consulting" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-28 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/new_images/about/teamwork-collaboration.jpg" alt="Team meeting" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-28 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-sm hidden sm:block">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/new_images/about/business-professionals-office.jpg" alt="Enterprise tech" className="w-full h-full object-cover" />
-                </div>
-              </div>
-            </FadeIn>
-          </div>
-          <FadeIn delay={0.1}>
-            <div className="relative">
-              {/* Large filler image behind stats */}
-              <div className="absolute -top-8 -right-6 w-[calc(100%+24px)] h-[calc(100%+40px)] rounded-3xl overflow-hidden opacity-[0.08]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/new_images/personas/working-professionals/woman-laptop-checkered.jpg" alt="Enterprise building" className="w-full h-full object-cover" />
-              </div>
-              <div className="grid grid-cols-2 gap-3 relative p-6 bg-slate-50 rounded-3xl border border-slate-100">
-                {[
-                  { end: 30, suffix: '+', label: 'Years', sub: 'Enterprise Experience' },
-                  { end: 500, suffix: '+', label: 'Consultants', sub: 'At Orane Consulting' },
-                  { end: 10, suffix: '+', label: 'Countries', sub: 'Global Delivery' },
-                  { end: 2009, suffix: '', label: 'Founded', sub: 'Orane Consulting' },
-                ].map((s) => (
-                  <div key={s.label} className="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-brand-200 transition-all duration-200">
-                    <p className="text-4xl font-black text-brand-700 leading-none mb-1 tracking-tight"><AnimatedCounter end={s.end} suffix={s.suffix} /></p>
-                    <p className="text-sm font-bold text-slate-800 mt-1">{s.label}</p>
-                    <p className="text-[11px] font-medium text-slate-400 mt-0.5 leading-tight">{s.sub}</p>
-                  </div>
-                ))}
-              </div>
-              {/* Orbit ring behind stats */}
-              <OrbitRing className="absolute -bottom-10 -left-10 hidden lg:block" size={100} color="#8929AC" />
-            </div>
-          </FadeIn>
-        </div>
-      </div>
-      {/* Bottom flowing line */}
-      <FlowingLine className="absolute bottom-4 left-0 right-0 h-12 opacity-40" />
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 3: JOURNEY — Horizontal scroll + images in cards
-   ═══════════════════════════════════════════════════════════════ */
-
-const milestones = [
-  { year: '2000', title: 'Orane\'s SAP Legacy Begins', desc: 'Orane Consulting starts delivering enterprise SAP projects across India, building 25+ years of real-world consulting expertise.', icon: <BuildingIcon className="w-5 h-5" />, hl: false, img: '/images/new_images/about/journey/sap-legacy-2000.jpg' },
-  { year: '2012', title: 'Global Expansion', desc: 'Operations extend to Canada, Portugal, and Kenya, becoming a truly international SAP delivery organisation.', icon: <GlobeIcon className="w-5 h-5" />, hl: false, img: '/images/new_images/about/journey/global-expansion-2012.jpg' },
-  { year: '2022', title: 'The Talent Gap Emerges', desc: '500+ consultants deployed, but the market demand for AI-ready SAP talent far outpaces what traditional hiring can deliver.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: '/images/new_images/about/journey/talent-gap-2022.jpg' },
-  { year: '2024', title: 'Axentia.AI Begins', desc: 'A new idea takes shape: what if we could build consultants, not just hire them? Axentia.AI is founded to solve the capability gap at its source.', icon: <BrainIcon className="w-5 h-5" />, hl: true, img: '/images/new_images/about/journey/axentia-begins-2024.jpg' },
-  { year: '2025', title: 'Axentia.AI Launches', desc: 'The Daksha Career Accelerator launches: 10 months of classroom training plus paid apprenticeship. First cohort placed in enterprise roles.', icon: <TargetIcon className="w-5 h-5" />, hl: true, img: '/images/new_images/about/journey/axentia-launches-2025.jpg' },
-  { year: '2026', title: 'AI-Ready Consultants', desc: '100+ careers launched. Graduates working across SAP S/4HANA, FICO, MM, SD, building the next generation of enterprise consulting talent.', icon: <ConsultingIcon className="w-5 h-5" />, hl: false, img: '/images/new_images/about/journey/ai-ready-2026.jpg' },
-  { year: 'Next', title: 'The Road Ahead', desc: 'Expanding programs, deepening enterprise partnerships, and building the capability infrastructure needed for the AI era of consulting.', icon: <LightbulbIcon className="w-5 h-5" />, hl: true, img: '/images/new_images/about/journey/road-ahead.jpg' },
-];
-
-function JourneySection() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
-  const x = useTransform(scrollYProgress, [0, 1], ['5%', '-60%']);
-  const lineWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  /* ── Mobile: vertical timeline ── */
-  if (isMobile) {
     return (
-      <section className="relative py-16 bg-gradient-to-b from-slate-50 via-brand-50/20 to-slate-50 overflow-hidden">
-        <div className="px-6">
-          <div className="mb-10">
-            <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500 mb-3">Our Journey</p></FadeIn>
-            <FadeIn delay={0.1}>
-              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-                Built on Orane&apos;s{' '}
-                <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">25+ Year Enterprise SAP Legacy</span>
-              </h2>
-            </FadeIn>
-          </div>
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute top-0 bottom-0 left-[18px] w-[2px] bg-slate-200" />
-            <div className="space-y-6">
-              {milestones.map((m, i) => (
-                <FadeIn key={m.year} delay={i * 0.05}>
-                  <div className="flex gap-4">
-                    <div className="flex flex-col items-center shrink-0">
-                      <div className={`w-[38px] h-[38px] rounded-full border-[3px] flex items-center justify-center z-10 bg-white ${m.hl ? 'border-brand-500' : 'border-brand-300'}`}>
-                        <span className={`text-xs font-bold ${m.hl ? 'text-brand-600' : 'text-slate-500'}`}>{m.year.slice(-2)}</span>
-                      </div>
-                    </div>
-                    <div className={`${m.hl ? 'bg-brand-50 border-brand-200' : 'bg-white border-slate-200'} border rounded-2xl overflow-hidden flex-1`}>
-                      <div className="h-28 overflow-hidden">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={m.img} alt={m.title} className="w-full h-full object-cover" loading="lazy" />
-                      </div>
-                      <div className="p-4">
-                        <p className={`text-lg font-bold mb-1 ${m.hl ? 'text-brand-600' : 'text-slate-900'}`}>{m.year} — {m.title}</p>
-                        <p className="text-xs text-slate-500 leading-relaxed">{m.desc}</p>
-                      </div>
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+        <span>
+            {displayed}
+            {displayed.length < text.length && (
+                <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
+                    className="inline-block w-[2px] h-[1em] bg-white/50 ml-0.5 align-middle"
+                />
+            )}
+        </span>
     );
-  }
-
-  /* ── Desktop: horizontal scroll-jacking ── */
-  return (
-    <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
-      <div className="sticky top-0 h-screen overflow-hidden bg-gradient-to-b from-slate-50 via-brand-50/20 to-slate-50">
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 900">
-          <path d="M-100,450 Q360,200 720,450 T1540,450" stroke="#8929AC" strokeWidth="3" fill="none" />
-          <path d="M-100,350 Q500,600 1000,350 T1540,350" stroke="#eab308" strokeWidth="2" fill="none" />
-        </svg>
-        {/* Rotating widgets */}
-        <OrbitRing className="absolute top-8 right-8 hidden lg:block" size={100} color="#8929AC" />
-        <FloatingDiamond className="absolute bottom-16 right-20 w-7 h-7 hidden md:block" />
-        <SpinningGear className="absolute bottom-8 left-8 hidden lg:block" size={60} />
-
-        <div className="h-full flex flex-col justify-center px-6 md:px-12 xl:px-20">
-          <div className="mb-10 md:mb-14">
-            <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500 mb-3">Our Journey</p></FadeIn>
-            <FadeIn delay={0.1}>
-              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">
-                Built on Orane&apos;s{' '}
-                <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">25+ Year Enterprise SAP Legacy</span>
-              </h2>
-            </FadeIn>
-          </div>
-
-          <div className="relative">
-            <div className="absolute top-[28px] left-0 right-0 h-[3px] bg-slate-200 rounded-full overflow-hidden">
-              <motion.div className="h-full rounded-full origin-left" style={{ width: lineWidth, background: 'linear-gradient(to right, var(--color-brand-400), var(--color-brand-600))' }} />
-            </div>
-
-            <motion.div style={{ x }} className="flex gap-6 md:gap-8 pt-0 will-change-transform">
-              {milestones.map((m) => (
-                <div key={m.year} className="flex-shrink-0 w-[320px]">
-                  <div className="flex justify-start mb-4 pl-1">
-                    <div className={`w-4 h-4 rounded-full border-[3px] ${m.hl ? 'border-brand-500 bg-brand-500 shadow-[0_0_0_4px_rgba(217,70,239,0.2)]' : 'border-brand-400 bg-brand-400'}`} />
-                  </div>
-                  <p className={`text-2xl md:text-3xl font-bold mb-2 ${m.hl ? 'text-brand-600' : 'text-slate-900'}`}>{m.year}</p>
-                  <div className={`${m.hl ? 'bg-brand-50 border-brand-200' : 'bg-white border-slate-200'} border rounded-2xl overflow-hidden`}>
-                    {/* Card image */}
-                    <div className="h-28 overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={m.img} alt={m.title} className="w-full h-full object-cover" loading="lazy" />
-                    </div>
-                    <div className="p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${m.hl ? 'bg-brand-100 text-brand-600' : 'bg-slate-100 text-slate-500'}`}>{m.icon}</div>
-                        <p className="text-sm font-bold text-slate-900">{m.title}</p>
-                      </div>
-                      <p className="text-xs text-slate-500 leading-relaxed">{m.desc}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 4: BY THE NUMBERS — with rotating widgets + moving lines
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── Hero — dark full-bleed, matching GCC/Enterprise pattern ─── */
+function AboutHero() {
+    const ref = useRef<HTMLElement>(null);
+    const isMobile = useIsMobile();
+    const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+    const bgY = useTransform(scrollYProgress, [0, 1], isMobile ? ['0%', '0%'] : ['0%', '15%']);
+    const bgScale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1, 1.08]);
+    const textY = useTransform(scrollYProgress, [0, 1], isMobile ? ['0%', '0%'] : ['0%', '-12%']);
+    const textOpacity = useTransform(scrollYProgress, [0, 0.85], isMobile ? [1, 1] : [1, 0]);
 
-function NumbersSection() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 85%', 'center 40%'] });
-  const counterProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-  const stats = [
-    { end: 100, suffix: '+', label: 'Careers Launched', sub: 'Through Axentia.AI' },
-    { end: 10, suffix: '+', label: 'Months Training', sub: 'Structured pathway' },
-    { end: 500, suffix: '+', label: 'Consultants', sub: 'Active at Orane' },
-    { end: 25, suffix: '+', label: 'Years Legacy', sub: 'SAP Delivery' },
-  ];
-
-  return (
-    <section ref={ref} className="relative py-24 md:py-36 overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(120deg, #58179B 0%, #8929AC 30%, #C010DA 60%, #E473BA 100%)' }} />
-      <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 600">
-        {Array.from({ length: 13 }).map((_, i) => <line key={`v${i}`} x1={i * 120} y1="0" x2={i * 120} y2="600" stroke="white" strokeWidth="1" />)}
-        {Array.from({ length: 7 }).map((_, i) => <line key={`h${i}`} x1="0" y1={i * 100} x2="1440" y2={i * 100} stroke="white" strokeWidth="1" />)}
-      </svg>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-400/20 rounded-full blur-[150px]" />
-
-      {/* Moving lines */}
-      <div className="absolute top-8 left-0 right-0 h-16 pointer-events-none">
-        <svg viewBox="0 0 1200 50" fill="none" className="w-full h-full" preserveAspectRatio="none">
-          <motion.path d="M0,25 Q200,5 400,25 T800,25 T1200,25" stroke="white" strokeWidth="1" opacity="0.1" fill="none" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 2 }} />
-        </svg>
-      </div>
-      <div className="absolute bottom-8 left-0 right-0 h-16 pointer-events-none">
-        <svg viewBox="0 0 1200 50" fill="none" className="w-full h-full" preserveAspectRatio="none">
-          <motion.path d="M0,25 Q300,45 600,25 T1200,25" stroke="white" strokeWidth="1" opacity="0.08" fill="none" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 2, delay: 0.3 }} />
-        </svg>
-      </div>
-
-      {/* Rotating widgets */}
-      <OrbitRing className="absolute top-12 left-12 hidden lg:block" size={120} color="#C010DA" />
-      <OrbitRing className="absolute bottom-12 right-12 hidden lg:block" size={90} color="#F3B15F" />
-      <RotatingCross className="absolute top-1/2 right-[5%] w-10 h-10 hidden md:block" color="rgba(255,255,255,0.15)" />
-
-      <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
-        <FadeIn className="text-center mb-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-300 mb-3">In the Last Year</p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight">The Numbers Speak</h2>
-        </FadeIn>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-5xl mx-auto">
-          {stats.map((s, i) => (
-            <FadeIn key={s.label} delay={i * 0.08} className="text-center">
-              <motion.p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2">
-                <CounterDisplay progress={counterProgress} end={s.end} suffix={s.suffix} />
-              </motion.p>
-              <p className="text-lg font-semibold text-white/90 mb-1">{s.label}</p>
-              <p className="text-sm text-white/50">{s.sub}</p>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CounterDisplay({ progress, end, suffix }: { progress: ReturnType<typeof useTransform<number, number>>; end: number; suffix: string }) {
-  const display = useTransform(progress, [0, 1], [0, end]);
-  const rounded = useTransform(display, (v: number) => {
-    const eased = 1 - Math.pow(1 - Math.min(v / end, 1), 3);
-    return `${Math.floor(eased * end)}${suffix}`;
-  });
-  return <motion.span>{rounded}</motion.span>;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 5: VALUES — Glassmorphic cards + floating widgets + images
-   ═══════════════════════════════════════════════════════════════ */
-
-const valuesData = [
-  { icon: <TargetIcon className="w-6 h-6" />, title: 'Capability, Not AI Hype', desc: 'We believe the world does not need more surface-level AI content. It needs people who understand how technology integrates with real business systems.' },
-  { icon: <HeartIcon className="w-6 h-6" />, title: 'Enterprise Relevance', desc: 'Learning should not happen in isolation from the environments where it will be applied. Everything we build is designed with enterprise workflows in mind.' },
-  { icon: <LightbulbIcon className="w-6 h-6" />, title: 'Pathways, Not Programs', desc: 'Careers are not built through isolated courses. They are built through structured journeys that move from awareness to capability to real-world application.' },
-  { icon: <GlobeIcon className="w-6 h-6" />, title: 'Ecosystems, Not Silos', desc: 'Transformation happens when enterprises, institutions, technology partners, and talent ecosystems move together.' },
-  { icon: <ShieldIcon className="w-6 h-6" />, title: 'Practical Transformation', desc: 'Real change happens through capability, systems understanding, and workforce readiness, not technology theater.' },
-  { icon: <SAPIcon className="w-6 h-6" />, title: 'Enterprise-Ready', desc: 'Prepared for SAP project delivery realities from day one, not in 12-18 months.' },
-];
-
-function ValuesSection() {
-  return (
-    <section className="relative py-24 md:py-36 overflow-hidden">
-      <div className="absolute inset-0 animate-gradient-loop" style={{ background: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 25%, #fef8ec 50%, #faf5ff 75%, #e9d0ff 100%)' }} />
-      <div className="absolute top-16 left-16 w-64 h-64 bg-brand-400/15 rounded-full blur-[100px] animate-pulse" />
-      <div className="absolute bottom-16 right-16 w-56 h-56 bg-accent-400/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }} />
-      <svg className="absolute inset-0 w-full h-full opacity-[0.08] pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 800">
-        <path d="M0,250 C360,150 720,350 1440,250" stroke="#8929AC" strokeWidth="1.5" fill="none" />
-        <path d="M0,550 C360,450 720,650 1440,550" stroke="#eab308" strokeWidth="1" fill="none" />
-      </svg>
-
-      {/* Widgets */}
-      <SpinningGear className="absolute top-12 right-20 hidden lg:block" size={80} />
-      <OrbitRing className="absolute bottom-20 left-12 hidden lg:block" size={100} color="#eab308" />
-      <FloatingDiamond className="absolute top-[30%] left-8 w-6 h-6 hidden md:block" />
-      <RotatingCross className="absolute bottom-[25%] right-12 w-7 h-7 hidden md:block" color="#8929AC" />
-
-      {/* Floating filler images */}
-      <motion.div className="absolute top-16 left-[60%] hidden xl:block" animate={{ y: [-5, 5, -5] }} transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}>
-        <div className="w-24 h-16 rounded-lg overflow-hidden border border-white/40 shadow-lg rotate-3 opacity-40">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/new_images/about/teamwork-collaboration.jpg" alt="" className="w-full h-full object-cover" />
-        </div>
-      </motion.div>
-      <motion.div className="absolute bottom-20 right-[55%] hidden xl:block" animate={{ y: [5, -5, 5] }} transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}>
-        <div className="w-20 h-14 rounded-lg overflow-hidden border border-white/40 shadow-lg -rotate-2 opacity-30">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/new_images/about/people-modern-office-talk.jpg" alt="" className="w-full h-full object-cover" />
-        </div>
-      </motion.div>
-
-      <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
-        <div className="text-center mb-14">
-          <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-600 mb-3">What We Stand For</p></FadeIn>
-          <FadeIn delay={0.05}>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-              What Axentia.AI{' '}<span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Stands For</span>
-            </h2>
-          </FadeIn>
-          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto text-center">Five principles that define how we build capability at the intersection of enterprise AI and workforce development.</p></FadeIn>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {valuesData.map((v, i) => (
-            <FadeIn key={v.title} delay={i * 0.06}>
-              <div className="bg-white/30 backdrop-blur-md border border-white/40 rounded-2xl p-7 hover:bg-white/50 transition-all duration-300 group shadow-[0_8px_32px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.7)]">
-                <div className="w-12 h-12 rounded-xl bg-brand-50/80 border border-brand-200/30 flex items-center justify-center mb-5 text-brand-600 group-hover:scale-110 transition-transform">{v.icon}</div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">{v.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{v.desc}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-      {/* Flowing line between values and next section */}
-      <FlowingLine className="absolute -bottom-2 left-0 right-0 h-16 opacity-50" />
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 6: ECOSYSTEM — Axentia.AI + Axentia + Orane + images
-   ═══════════════════════════════════════════════════════════════ */
-
-const ecosystem = [
-  { name: 'Axentia AI', tag: 'Enterprise AI & Automation', info: 'Data, AI, Automation', desc: 'AI-powered solutions for enterprise consulting and digital transformation.', icon: <BrainIcon className="w-7 h-7" />, grad: 'from-indigo-500 to-indigo-700', img: '/images/new_images/hero/modern-office-collaboration.jpg' },
-  { name: 'Orane Consulting', tag: 'SAP Enterprise Delivery', info: '500+ consultants, 4 countries', desc: '15+ year SAP practice — India, Canada, Portugal, Kenya.', icon: <BuildingIcon className="w-7 h-7" />, grad: 'from-accent-500 to-accent-700', img: '/images/new_images/about/business-professionals-office.jpg' },
-];
-
-function EcosystemSection() {
-  return (
-    <section className="relative py-24 md:py-36 bg-white overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-50/40 rounded-full blur-[120px]" />
-      <RotatingCross className="absolute top-20 left-16 w-8 h-8 hidden lg:block" />
-      <SpinningGear className="absolute bottom-20 right-16 hidden lg:block" size={70} />
-
-      <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
-        <div className="text-center mb-14">
-          <FadeIn><p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500 mb-3">The Ecosystem</p></FadeIn>
-          <FadeIn delay={0.05}>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-              Be Part of Something <span className="font-[family-name:var(--font-playfair)] italic text-brand-600">Bigger</span>
-            </h2>
-          </FadeIn>
-          <FadeIn delay={0.1}><p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto text-center">We build the capability infrastructure required for the AI era. <br /> Our mission is simple: Turn AI potential into real capability.</p></FadeIn>
-        </div>
-
-        <div className="hidden lg:block relative h-12 mb-6 max-w-3xl mx-auto">
-          <svg className="w-full h-full" viewBox="0 0 600 48" preserveAspectRatio="xMidYMid meet">
-            <line x1="100" y1="24" x2="290" y2="24" stroke="#8929AC" strokeWidth="2" />
-            <circle cx="300" cy="24" r="4" fill="#8929AC" />
-            <line x1="310" y1="24" x2="500" y2="24" stroke="#6366f1" strokeWidth="2" />
-          </svg>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {ecosystem.map((e, i) => (
-            <FadeIn key={e.name} delay={i * 0.1}>
-              <div className="bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl hover:border-brand-200 transition-all group h-full flex flex-col">
-                {/* Card image */}
-                <div className="h-36 overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={e.img} alt={e.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                </div>
-                <div className="p-7 flex flex-col flex-1">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${e.grad} flex items-center justify-center text-white mb-5 shadow-lg group-hover:scale-110 transition-transform -mt-12 relative z-10 border-4 border-white`}>{e.icon}</div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-1">{e.name}</h3>
-                  <p className="text-brand-600 font-medium text-sm mb-3">{e.tag}</p>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-4 flex-1">{e.desc}</p>
-                  <div className="bg-white border border-slate-100 rounded-xl px-4 py-2.5"><p className="text-xs text-slate-500 font-medium">{e.info}</p></div>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 7: TEAM — Crazy snap animations + team photos
-   ═══════════════════════════════════════════════════════════════ */
-
-const teamMembers = [
-  {
-    name: 'Priya Sharma',
-    role: 'Head of Academics',
-    company: 'Axentia.AI',
-    desc: 'Former SAP Practice Lead with 15+ years of delivery experience.',
-    photo: '/images/new_images/about/team/priya-sharma.jpg',
-    linkedin: '#',
-    color: 'from-rose-500 to-pink-600',
-  },
-  {
-    name: 'Rajesh Kumar',
-    role: 'Director of Operations',
-    company: 'Axentia AI',
-    desc: 'Scaled consulting operations across 10+ countries.',
-    photo: '/images/new_images/about/team/rajesh-kumar.jpg',
-    linkedin: '#',
-    color: 'from-blue-500 to-indigo-600',
-  },
-  {
-    name: 'Anita Verma',
-    role: 'Head of Placements',
-    company: 'Axentia.AI',
-    desc: 'Built talent pipelines for Fortune 500 companies.',
-    photo: '/images/new_images/about/team/anita-verma.jpg',
-    linkedin: '#',
-    color: 'from-amber-500 to-orange-600',
-  },
-  {
-    name: 'Vikram Singh',
-    role: 'CTO',
-    company: 'Axentia AI',
-    desc: 'AI/ML architect building next-gen enterprise solutions.',
-    photo: '/images/new_images/about/team/vikram-singh.jpg',
-    linkedin: '#',
-    color: 'from-emerald-500 to-teal-600',
-  },
-  {
-    name: 'Meera Patel',
-    role: 'Head of Curriculum',
-    company: 'Axentia.AI',
-    desc: 'Designed enterprise-grade training for 1000+ professionals.',
-    photo: '/images/new_images/about/team/meera-patel.jpg',
-    linkedin: '#',
-    color: 'from-violet-500 to-purple-600',
-  },
-  {
-    name: 'Arjun Nair',
-    role: 'VP of Partnerships',
-    company: 'Orane Consulting',
-    desc: 'Forged strategic alliances with top-tier SAP partners globally.',
-    photo: '/images/new_images/about/team/arjun-nair.jpg',
-    linkedin: '#',
-    color: 'from-cyan-500 to-blue-600',
-  },
-];
-
-/* Interactive tilt card wrapper */
-function TiltCard({ children, className = '', index }: { children: React.ReactNode; className?: string; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  /* Staggered snap-in: each card enters from a different direction with elastic spring */
-  const directions = [
-    { x: -120, y: 80, rotate: -15, scale: 0.3 },   // from bottom-left, rotated
-    { x: 0, y: -150, rotate: 10, scale: 0.2 },      // from top, tilted
-    { x: 120, y: 80, rotate: 15, scale: 0.3 },      // from bottom-right, rotated
-    { x: -100, y: -100, rotate: -20, scale: 0.1 },   // from top-left, heavy rotate
-    { x: 100, y: 100, rotate: 25, scale: 0.2 },      // from bottom-right, heavy rotate
-    { x: 0, y: 150, rotate: -10, scale: 0.3 },       // from bottom, tilted
-  ];
-  const dir = directions[index % directions.length];
-
-  return (
-    <motion.div
-      ref={cardRef}
-      className={`${className}`}
-      style={{ perspective: 800 }}
-      initial={{
-        opacity: 0,
-        x: dir.x,
-        y: dir.y,
-        rotate: dir.rotate,
-        scale: dir.scale,
-      }}
-      whileInView={{
-        opacity: 1,
-        x: 0,
-        y: 0,
-        rotate: 0,
-        scale: 1,
-      }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{
-        type: 'spring',
-        stiffness: 200,
-        damping: 18,
-        mass: 0.8,
-        delay: index * 0.12,
-      }}
-      whileHover={{
-        y: -12,
-        rotateY: 8,
-        rotateX: -4,
-        scale: 1.04,
-        transition: { type: 'spring', stiffness: 400, damping: 25 },
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function TeamSection() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-
-  return (
-    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden border-y border-slate-200" style={{ background: 'linear-gradient(180deg, #fafafa 0%, #faf5ff 40%, #faf5ff 70%, #fafafa 100%)' }}>
-      {/* Animated dot grid background */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none">
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]" preserveAspectRatio="none" viewBox="0 0 1440 800">
-          <pattern id="teamDotPat" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="#8929AC" /></pattern>
-          <rect width="100%" height="100%" fill="url(#teamDotPat)" />
-        </svg>
-      </motion.div>
-
-      {/* Gradient blobs */}
-      <div className="absolute top-20 left-[10%] w-80 h-80 bg-brand-400/10 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-20 right-[10%] w-72 h-72 bg-accent-400/8 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '3s' }} />
-
-      {/* Widgets */}
-      <OrbitRing className="absolute top-12 right-16 hidden lg:block" size={110} color="#8929AC" />
-      <OrbitRing className="absolute bottom-24 left-12 hidden lg:block" size={80} color="#eab308" />
-      <SpinningGear className="absolute top-[40%] left-8 hidden xl:block" size={60} />
-      <FloatingDiamond className="absolute bottom-16 right-[20%] w-7 h-7 hidden md:block" />
-      <RotatingCross className="absolute top-32 left-[30%] w-6 h-6 hidden lg:block" color="#8929AC" />
-      <FlowingLine className="absolute top-4 left-0 right-0 h-12 opacity-30" />
-
-      <div className="relative z-10 container mx-auto px-6 md:px-12 xl:px-20">
-        {/* Section header with dramatic entrance */}
-        <div className="text-center mb-20">
-          <motion.p
-            className="text-sm font-semibold uppercase tracking-[0.3em] text-brand-500 mb-4"
-            initial={{ opacity: 0, letterSpacing: '0.6em' }}
-            whileInView={{ opacity: 1, letterSpacing: '0.3em' }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-          >
-            Leadership
-          </motion.p>
-          <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 tracking-tight mb-5"
-            initial={{ opacity: 0, y: 60, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: 'spring', stiffness: 120, damping: 20, delay: 0.1 }}
-          >
-            The People Behind the{' '}
-            <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-brand-500 to-brand-700 bg-clip-text text-transparent">Mission</span>
-          </motion.h2>
-          <motion.p
-            className="text-lg text-slate-500 max-w-xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            Industry veterans building the next generation of enterprise consultants.
-          </motion.p>
-        </div>
-
-        {/* ── Manuj Gupta — Hero featured card ── */}
-        <motion.div
-          className="mb-20 max-w-5xl mx-auto"
-          initial={{ opacity: 0, scale: 0.6, rotateX: 25 }}
-          whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ type: 'spring', stiffness: 100, damping: 20, duration: 1 }}
-          style={{ perspective: 1200 }}
+    return (
+        <section
+            ref={ref}
+            className="relative min-h-screen overflow-hidden bg-[#0a1628] text-white flex items-center"
         >
-          <motion.div
-            className="relative bg-white rounded-[2rem] border border-slate-200/80 shadow-[0_20px_80px_rgba(124,58,237,0.12)] overflow-hidden group"
-            whileHover={{ y: -6, boxShadow: '0 30px 100px rgba(124,58,237,0.18)' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-[380px_1fr] lg:grid-cols-[420px_1fr]">
-              {/* Photo side */}
-              <div className="relative h-72 md:h-auto overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-600 to-brand-900" />
+            <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0 will-change-transform">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/new_images/about/cta-founder.jpg"
-                  alt="Manuj Gupta"
-                  className="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-60 group-hover:opacity-80 group-hover:mix-blend-normal transition-all duration-700"
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2400&q=80"
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
                 />
-                {/* Gradient overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-brand-800/30 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/10 md:to-white/20" />
-
-                {/* Animated orbit ring on photo */}
-                <motion.div
-                  className="absolute top-6 right-6 w-20 h-20 border border-white/20 rounded-full"
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/70 to-[#0a1628]/30" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-transparent to-[#0a1628]" />
+                <div
+                    className="absolute inset-0 opacity-[0.04]"
+                    style={{
+                        backgroundImage:
+                            'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+                        backgroundSize: '72px 72px',
+                        maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
+                    }}
                 />
-                <motion.div
-                  className="absolute top-10 right-10 w-12 h-12 border border-white/10 rounded-full"
-                  animate={{ rotate: -360 }}
-                  transition={{ repeat: Infinity, duration: 15, ease: 'linear' }}
-                />
+            </motion.div>
+            <div className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full bg-brand-600/20 blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] rounded-full bg-accent-300/10 blur-[120px] pointer-events-none" />
 
-                {/* Name overlay on photo */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4, type: 'spring', stiffness: 150, damping: 20 }}
-                  >
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">Manuj Gupta</h3>
-                    <p className="text-brand-200 text-sm font-medium">Founder & CEO</p>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Info side */}
-              <div className="p-8 md:p-10 flex flex-col justify-center">
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3, type: 'spring', stiffness: 120, damping: 20 }}
-                >
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-brand-600 bg-brand-50 border border-brand-100 px-3 py-1 rounded-lg">Orane Consulting</span>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-lg">Axentia AI</span>
-                  </div>
-                  <p className="text-slate-600 leading-relaxed mb-6">
-                    30+ years in enterprise consulting. Founded Orane Consulting in 2009, growing it into a 500+ consultant SAP practice across India, Canada, Portugal, and Kenya. Now building Axentia AI and the Daksha Career Accelerator.
-                  </p>
-
-                  {/* Animated stats */}
-                  <div className="grid grid-cols-3 gap-3 mb-6">
-                    {[
-                      { end: 30, suffix: '+', l: 'Years Experience' },
-                      { end: 500, suffix: '+', l: 'Consultants Led' },
-                      { end: 10, suffix: '+', l: 'Countries' },
-                    ].map((s, si) => (
-                      <motion.div
-                        key={s.l}
-                        className="text-center bg-gradient-to-br from-slate-50 to-brand-50/30 rounded-xl p-3 border border-slate-100"
-                        initial={{ opacity: 0, y: 20, scale: 0.8 }}
-                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 + si * 0.1, type: 'spring', stiffness: 200, damping: 20 }}
-                      >
-                        <p className="text-xl font-bold text-slate-900"><AnimatedCounter end={s.end} suffix={s.suffix} /></p>
-                        <p className="text-[10px] text-slate-500 font-medium">{s.l}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <a
-                      href="https://www.linkedin.com/in/manuj-gupta"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-[#0A66C2] text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#004182] transition-all hover:-translate-y-0.5 shadow-lg shadow-blue-500/20"
+            <motion.div
+                style={{ y: textY, opacity: textOpacity }}
+                className="relative max-w-screen-2xl mx-auto w-full px-6 md:px-12 pt-36 md:pt-40 pb-24"
+            >
+                <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="mb-6"
                     >
-                      <Linkedin className="w-4 h-4" /> Connect
-                    </a>
-                    <div className="flex gap-2">
-                      {['/images/new_images/about/footer/gallery-1.jpg', '/images/new_images/about/footer/gallery-2.jpg'].map((src, i) => (
-                        <motion.div
-                          key={i}
-                          className="w-16 h-11 rounded-lg overflow-hidden border border-slate-100 shadow-sm"
-                          initial={{ opacity: 0, scale: 0 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.7 + i * 0.1, type: 'spring', stiffness: 300, damping: 20 }}
+                        <span className="inline-flex items-center gap-2.5 bg-white/8 backdrop-blur-sm border border-white/12 text-white/70 text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            About Axentia AI
+                        </span>
+                    </motion.div>
+
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease }}
+                        className="font-black tracking-tight leading-[1.04]"
+                        style={{ fontSize: 'clamp(2rem, 4.8vw, 4rem)' }}
+                    >
+                        <span className="text-white">Built to bridge the gap between </span>
+                        <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#F7C87A] via-[#F3B15F] to-[#E89B3A] bg-clip-text text-transparent">
+                            AI ambition
+                        </span>
+                        <span className="text-white"> and enterprise execution</span>
+                    </motion.h1>
+
+                    {/* Typewriter subtext */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.35 }}
+                        className="mt-8 text-sm md:text-base text-white/65 max-w-2xl leading-relaxed min-h-[5rem]"
+                    >
+                        <TypewriterText
+                            text="The next wave of enterprise performance will not come from collecting more AI ideas. It will come from choosing the right opportunities, building capability in the right roles, and executing with clarity."
+                            delay={1.1}
+                            speed={14}
+                        />
+                    </motion.p>
+
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
+                        className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent w-full max-w-sm mt-10 mb-8"
+                    />
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.55 }}
+                        className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center"
+                    >
+                        <a
+                            href="/solutions/ai-strategy-sprint"
+                            className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold py-3 px-7 text-sm hover:bg-slate-100 transition-colors duration-200 rounded-full"
                         >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
+                            Book an AI Strategy Sprint
+                            <ArrowRight className="w-4 h-4" />
+                        </a>
+                        <a
+                            href="#enquiry"
+                            className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/20 text-white font-semibold py-3 px-7 text-sm hover:bg-white/5 transition-colors duration-200 rounded-full"
+                        >
+                            Contact us
+                        </a>
+                    </motion.div>
+                </div>
+            </motion.div>
+        </section>
+    );
+}
 
-        {/* ── Team grid ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {teamMembers.map((member, i) => (
-            <div key={member.name}>
-              <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(124,58,237,0.15)] transition-shadow duration-500 group h-full flex flex-col">
-                {/* Photo with overlay */}
-                <div className="relative h-56 overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 ease-out"
-                    loading="lazy"
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+/* ─── What we believe — centered heading + split quotes + carousel ─── */
+const beliefs = [
+    {
+        title: 'Not a technology vendor',
+        desc: 'We lead with business problems, prioritisation frameworks, and structured execution paths — not tools.',
+        image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80',
+    },
+    {
+        title: 'Not a generic training institute',
+        desc: 'Every Axentia programme is tied to enterprise context, workflow reality, and business outcomes.',
+        image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80',
+    },
+    {
+        title: 'Distinctly enterprise-oriented',
+        desc: 'Our design frame is SAP-led and workflow-intensive organisations — where AI creates the most compressible value.',
+        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80',
+    },
+    {
+        title: 'Partnership, not dependency',
+        desc: 'Every engagement builds internal capability. Our goal is organisations that sustain AI adoption without ongoing external reliance.',
+        image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80',
+    },
+];
 
-                  {/* Company badge */}
-                  <div className="absolute top-3 right-3">
-                    <span className={`text-[10px] font-bold uppercase tracking-wider text-white bg-gradient-to-r ${member.color} px-3 py-1 rounded-full shadow-lg`}>
-                      {member.company}
-                    </span>
-                  </div>
+function WhatWeBelieve() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: '-100px' });
+    const [active, setActive] = useState(0);
+    const userInteracted = useRef(false);
+    const total = beliefs.length;
 
-                  {/* LinkedIn icon that slides up on hover */}
-                  <div className="absolute bottom-3 right-3 translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-[#0A66C2] hover:bg-white transition-colors shadow-lg"
+    // Auto-advance every 4s after section in view
+    useEffect(() => {
+        if (!isInView) return;
+        const t = setTimeout(() => {
+            const i = setInterval(() => {
+                if (userInteracted.current) return;
+                setActive((v) => (v + 1) % total);
+            }, 4000);
+            return () => clearInterval(i);
+        }, 2000);
+        return () => clearTimeout(t);
+    }, [isInView, total]);
+
+    const prev = () => {
+        userInteracted.current = true;
+        setActive((v) => (v - 1 + total) % total);
+    };
+    const next = () => {
+        userInteracted.current = true;
+        setActive((v) => (v + 1) % total);
+    };
+
+    return (
+        <section ref={ref} className="py-20 md:py-28 bg-white">
+            <div className="container mx-auto px-4 md:px-8 xl:px-12">
+                {/* Eyebrow centered */}
+                <div className="max-w-3xl mx-auto text-center mb-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.5 }}
                     >
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                  </div>
-
-                  {/* Name overlay on hover */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                    <p className="text-white text-xs leading-relaxed">{member.desc}</p>
-                  </div>
+                        <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8">
+                            What we believe
+                        </span>
+                    </motion.div>
                 </div>
 
-                {/* Card body */}
-                <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="text-lg font-bold text-slate-900 mb-0.5 group-hover:text-brand-600 transition-colors">{member.name}</h3>
-                  <p className="text-brand-600 text-sm font-medium mb-1">{member.role}</p>
-                  <p className="text-slate-400 text-xs">{member.company}</p>
+                {/* Two-column quote split — moved ABOVE pillars */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.15 }}
+                    className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 md:divide-x md:divide-slate-200 mb-12"
+                >
+                    <div className="md:pr-10 lg:pr-14">
+                        <span
+                            aria-hidden
+                            className="block font-[family-name:var(--font-playfair)] text-brand-600 text-5xl leading-[0.6] mb-2"
+                            style={{ height: '0.4em' }}
+                        >
+                            &ldquo;
+                        </span>
+                        <p className="font-[family-name:var(--font-playfair)] italic text-lg md:text-xl text-slate-800 leading-[1.55]">
+                            Most AI engagements fail not because the technology is wrong, but because the prioritisation
+                            is absent, capability is not built alongside deployment, and the implementation path is
+                            never clearly owned.
+                        </p>
+                    </div>
+                    <div className="md:pl-10 lg:pl-14">
+                        <span
+                            aria-hidden
+                            className="block font-[family-name:var(--font-playfair)] text-accent-500 text-5xl leading-[0.6] mb-2"
+                            style={{ height: '0.4em' }}
+                        >
+                            &ldquo;
+                        </span>
+                        <p className="font-[family-name:var(--font-playfair)] italic text-lg md:text-xl text-slate-800 leading-[1.55]">
+                            Axentia AI was designed to address all three. We bring together strategic thinking,
+                            practical enablement, and workflow-centred implementation so organisations can move with
+                            more confidence and less noise.
+                        </p>
+                    </div>
+                </motion.div>
 
-                  {/* Animated decorative line */}
-                  <motion.div
-                    className="mt-auto pt-4"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + i * 0.12, duration: 0.6, ease: 'easeOut' }}
-                    style={{ transformOrigin: 'left' }}
-                  >
-                    <div className={`h-0.5 rounded-full bg-gradient-to-r ${member.color} opacity-30`} />
-                  </motion.div>
+                {/* Pillars diagram */}
+                <Pillars />
+
+                {/* Belief carousel */}
+                <div className="max-w-6xl mx-auto">
+                    <div className="flex items-end justify-between mb-6">
+                        <motion.span
+                            initial={{ opacity: 0 }}
+                            animate={isInView ? { opacity: 1 } : {}}
+                            transition={{ duration: 0.4, delay: 0.35 }}
+                            className="text-[10px] font-bold uppercase tracking-[0.24em] text-slate-500"
+                        >
+                            Principles · {String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+                        </motion.span>
+                        <div className="flex gap-2">
+                            <button
+                                type="button"
+                                onClick={prev}
+                                aria-label="Previous"
+                                className="w-10 h-10 rounded-full border border-slate-300 text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-colors flex items-center justify-center"
+                            >
+                                <ArrowRight className="w-4 h-4 rotate-180" />
+                            </button>
+                            <button
+                                type="button"
+                                onClick={next}
+                                aria-label="Next"
+                                className="w-10 h-10 rounded-full border border-slate-300 text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-colors flex items-center justify-center"
+                            >
+                                <ArrowRight className="w-4 h-4" />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="overflow-hidden rounded-2xl border border-slate-200">
+                        <motion.div
+                            className="flex"
+                            animate={{ x: `-${active * 100}%` }}
+                            transition={{ type: 'spring', stiffness: 220, damping: 32, mass: 0.8 }}
+                        >
+                            {beliefs.map((b, i) => (
+                                <article
+                                    key={b.title}
+                                    className="shrink-0 w-full grid grid-cols-1 md:grid-cols-2 bg-white"
+                                >
+                                    <div className="relative h-56 md:h-auto md:min-h-[320px]">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={b.image}
+                                            alt={b.title}
+                                            className="absolute inset-0 w-full h-full object-cover"
+                                            loading={i === 0 ? 'eager' : 'lazy'}
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-[#0a1628]/40 via-transparent to-brand-900/25" />
+                                        <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur text-[10px] font-bold uppercase tracking-[0.18em] text-brand-600 shadow-sm">
+                                            Principle {String(i + 1).padStart(2, '0')}
+                                        </div>
+                                    </div>
+                                    <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center">
+                                        <div className="font-[family-name:var(--font-playfair)] italic text-3xl md:text-4xl text-brand-600/20 leading-none mb-4">
+                                            {String(i + 1).padStart(2, '0')}
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight leading-tight mb-4">
+                                            {b.title}
+                                        </h3>
+                                        <p className="text-sm md:text-base text-slate-600 leading-relaxed max-w-md">
+                                            {b.desc}
+                                        </p>
+                                    </div>
+                                </article>
+                            ))}
+                        </motion.div>
+                    </div>
+
+                    {/* Dots */}
+                    <div className="flex items-center justify-center gap-2 mt-6">
+                        {beliefs.map((_, i) => (
+                            <button
+                                key={i}
+                                type="button"
+                                aria-label={`Go to principle ${i + 1}`}
+                                onClick={() => {
+                                    userInteracted.current = true;
+                                    setActive(i);
+                                }}
+                                className={`h-1.5 rounded-full transition-all ${
+                                    i === active ? 'w-8 bg-brand-600' : 'w-2 bg-slate-300 hover:bg-slate-400'
+                                }`}
+                            />
+                        ))}
+                    </div>
                 </div>
-              </div>
             </div>
-          ))}
+        </section>
+    );
+}
+
+/* ─── Pillars — architectural 3-column diagram representing beliefs ─── */
+function Pillars() {
+    const ref = useRef<SVGSVGElement>(null);
+    const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+    // Three pillar x-centers evenly across viewBox 1200 wide
+    const columns = [
+        {
+            x: 220,
+            label: 'Business-first',
+            accent: false,
+        },
+        {
+            x: 600,
+            label: 'Enterprise-aware',
+            accent: false,
+        },
+        {
+            x: 980,
+            label: 'Built for movement',
+            accent: true,
+        },
+    ];
+
+    const LABEL_Y = 78;
+    const CAPITAL_Y = 118;
+    const SHAFT_Y = 142;
+    const SHAFT_H = 240;
+    const BASE_Y = 382;
+    const STYLOBATE_Y = 410;
+
+    return (
+        <div className="max-w-6xl mx-auto mb-16 md:mb-20 px-2">
+            <svg
+                ref={ref}
+                viewBox="0 0 1200 460"
+                preserveAspectRatio="xMidYMax meet"
+                className="w-full h-auto"
+                role="img"
+                aria-label="Three pillars representing business-first, enterprise-aware, and built for movement"
+            >
+                <defs>
+                    <linearGradient id="pillar-accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#8A29AC" />
+                        <stop offset="100%" stopColor="#C010DA" />
+                    </linearGradient>
+                    <linearGradient id="pillar-shaft" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#1e293b" />
+                        <stop offset="50%" stopColor="#334155" />
+                        <stop offset="100%" stopColor="#1e293b" />
+                    </linearGradient>
+                </defs>
+
+                {/* Entablature — architrave + cornice hairlines spanning the top */}
+                <motion.line
+                    x1="60"
+                    y1="30"
+                    x2="1140"
+                    y2="30"
+                    stroke="#0f172a"
+                    strokeWidth="1.5"
+                    initial={{ pathLength: 0 }}
+                    animate={isInView ? { pathLength: 1 } : {}}
+                    transition={{ duration: 1.2, ease }}
+                />
+                <motion.line
+                    x1="60"
+                    y1="54"
+                    x2="1140"
+                    y2="54"
+                    stroke="#0f172a"
+                    strokeWidth="1"
+                    initial={{ pathLength: 0 }}
+                    animate={isInView ? { pathLength: 1 } : {}}
+                    transition={{ duration: 1.2, delay: 0.15, ease }}
+                />
+
+                {/* Stylobate — shared foundation line below pillars */}
+                <motion.line
+                    x1="60"
+                    y1={STYLOBATE_Y}
+                    x2="1140"
+                    y2={STYLOBATE_Y}
+                    stroke="#0f172a"
+                    strokeWidth="1.5"
+                    initial={{ pathLength: 0 }}
+                    animate={isInView ? { pathLength: 1 } : {}}
+                    transition={{ duration: 1.2, delay: 0.1, ease }}
+                />
+                <motion.line
+                    x1="40"
+                    y1={STYLOBATE_Y + 10}
+                    x2="1160"
+                    y2={STYLOBATE_Y + 10}
+                    stroke="#0f172a"
+                    strokeWidth="1"
+                    strokeOpacity="0.5"
+                    initial={{ pathLength: 0 }}
+                    animate={isInView ? { pathLength: 1 } : {}}
+                    transition={{ duration: 1.2, delay: 0.25, ease }}
+                />
+
+                {/* Pillars */}
+                {columns.map((col, i) => {
+                    const shaftW = 80;
+                    const capitalW = 104;
+                    const baseW = 120;
+                    return (
+                        <g key={col.label}>
+                            {/* Word label above pillar */}
+                            <motion.text
+                                x={col.x}
+                                y={LABEL_Y}
+                                textAnchor="middle"
+                                dominantBaseline="middle"
+                                fontFamily={
+                                    col.accent
+                                        ? 'Playfair Display, serif'
+                                        : 'Inter, sans-serif'
+                                }
+                                fontStyle={col.accent ? 'italic' : 'normal'}
+                                fontWeight={col.accent ? 500 : 900}
+                                fontSize={col.accent ? 28 : 20}
+                                letterSpacing={col.accent ? '0' : '3'}
+                                fill={col.accent ? '#A20EBF' : '#0f172a'}
+                                initial={{ opacity: 0, y: LABEL_Y - 10 }}
+                                animate={isInView ? { opacity: 1, y: LABEL_Y } : {}}
+                                transition={{ duration: 0.6, delay: 1.1 + i * 0.12, ease }}
+                                style={{
+                                    textTransform: col.accent ? 'none' : 'uppercase',
+                                }}
+                            >
+                                {col.label}
+                            </motion.text>
+
+                            {/* Pillar group — scaleY rise-up */}
+                            <motion.g
+                                initial={{ scaleY: 0, opacity: 0 }}
+                                animate={isInView ? { scaleY: 1, opacity: 1 } : {}}
+                                transition={{ duration: 0.9, delay: 0.3 + i * 0.12, ease }}
+                                style={{ transformOrigin: `${col.x}px ${BASE_Y + 20}px`, transformBox: 'fill-box' }}
+                            >
+                                {/* Capital — wider plate */}
+                                <rect
+                                    x={col.x - capitalW / 2}
+                                    y={CAPITAL_Y}
+                                    width={capitalW}
+                                    height="10"
+                                    fill="#0f172a"
+                                />
+                                <rect
+                                    x={col.x - (capitalW - 8) / 2}
+                                    y={CAPITAL_Y + 10}
+                                    width={capitalW - 8}
+                                    height="14"
+                                    fill="#1e293b"
+                                />
+
+                                {/* Shaft */}
+                                <rect
+                                    x={col.x - shaftW / 2}
+                                    y={SHAFT_Y}
+                                    width={shaftW}
+                                    height={SHAFT_H}
+                                    fill="url(#pillar-shaft)"
+                                />
+
+                                {/* Fluting — vertical hairlines on shaft */}
+                                {[-24, -12, 0, 12, 24].map((offset) => (
+                                    <line
+                                        key={offset}
+                                        x1={col.x + offset}
+                                        y1={SHAFT_Y + 6}
+                                        x2={col.x + offset}
+                                        y2={SHAFT_Y + SHAFT_H - 6}
+                                        stroke="#0f172a"
+                                        strokeWidth="1"
+                                        strokeOpacity="0.35"
+                                    />
+                                ))}
+
+                                {/* Base */}
+                                <rect
+                                    x={col.x - (baseW - 10) / 2}
+                                    y={BASE_Y}
+                                    width={baseW - 10}
+                                    height="14"
+                                    fill="#1e293b"
+                                />
+                                <rect
+                                    x={col.x - baseW / 2}
+                                    y={BASE_Y + 14}
+                                    width={baseW}
+                                    height="10"
+                                    fill="#0f172a"
+                                />
+                            </motion.g>
+                        </g>
+                    );
+                })}
+            </svg>
         </div>
-      </div>
-
-      {/* Bottom flowing line */}
-      <FlowingLine className="absolute -bottom-2 left-0 right-0 h-16 opacity-40" />
-    </section>
-  );
+    );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SECTION 8: CTA — with rotating widgets
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── AxentiaReveal — scroll-driven letter-by-letter activation ─── */
+function AxentiaReveal() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ['start start', 'end end'],
+    });
+    const letters = ['A', 'X', 'E', 'N', 'T', 'I', 'A'];
 
-function CTASection() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 40%'] });
-  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
-  const borderRadius = useTransform(scrollYProgress, [0, 1], [48, 32]);
-
-  return (
-    <section ref={ref} className="py-12 md:py-20 bg-white">
-      <div className="container mx-auto px-6 md:px-12 xl:px-20">
-        <motion.div style={{ scale, borderRadius }} className="relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #8929AC 0%, #C010DA 50%, #E473BA 100%)' }} />
-          <div className="absolute -right-8 -bottom-16 font-[family-name:var(--font-playfair)] italic text-[16rem] md:text-[22rem] font-bold text-white/[0.05] leading-none select-none pointer-events-none">D</div>
-          <div className="absolute top-12 right-20 w-40 h-40 border border-white/10 rounded-full" />
-          <div className="absolute top-24 right-12 w-56 h-56 border border-white/5 rounded-full" />
-          {/* Widgets */}
-          <OrbitRing className="absolute bottom-8 right-8 hidden md:block" size={100} color="rgba(255,255,255,0.15)" />
-          <SpinningGear className="absolute top-8 left-[60%] hidden lg:block" size={60} />
-
-          <div className="relative z-10 px-8 md:px-16 py-16 md:py-20">
-            <FadeIn>
-              <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight max-w-2xl">
-                Start a{' '}<span className="font-[family-name:var(--font-playfair)] italic text-accent-300">Conversation</span>
-              </h2>
-            </FadeIn>
-            <FadeIn delay={0.1}>
-              <p className="text-lg text-white/70 mb-8 leading-relaxed max-w-2xl">
-                Whether you are exploring enterprise transformation programs, workforce development initiatives, institutional partnerships, or industry alliances,  Axentia.AI is built for capability. If you are building the future of AI adoption, enterprise transformation, or talent ecosystems, we would welcome the conversation.
-              </p>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/programs" className="inline-flex items-center gap-2 bg-white text-brand-700 font-semibold px-8 py-4 rounded-full shadow-lg shadow-black/20 hover:shadow-xl hover:-translate-y-0.5 transition-all">
-                  Start Your Journey <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link href="/enterprises" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/20 transition-all">
-                  Enterprise Partnerships <ExternalLink className="w-4 h-4" />
-                </Link>
-              </div>
-            </FadeIn>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
+    return (
+        <section
+            ref={containerRef}
+            className="relative left-1/2 right-1/2 -translate-x-1/2 w-screen bg-white"
+            style={{ height: `${letters.length * 55}vh` }}
+        >
+            <div className="sticky top-0 h-screen w-screen flex items-center justify-center overflow-hidden">
+                <div className="flex items-center justify-center gap-[1vw] md:gap-[1.5vw] px-4">
+                    {letters.map((l, i) => (
+                        <RevealLetter
+                            key={i}
+                            letter={l}
+                            index={i}
+                            total={letters.length}
+                            scrollYProgress={scrollYProgress}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PAGE EXPORT
-   ═══════════════════════════════════════════════════════════════ */
+function RevealLetter({
+    letter,
+    index,
+    total,
+    scrollYProgress,
+}: {
+    letter: string;
+    index: number;
+    total: number;
+    scrollYProgress: ReturnType<typeof useScroll>['scrollYProgress'];
+}) {
+    const segment = 1 / total;
+    const start = index * segment;
+    const mid = start + segment * 0.5;
+    const end = start + segment;
+
+    const scale = useTransform(scrollYProgress, [start, mid, end], [1, 1.35, 1]);
+    const y = useTransform(scrollYProgress, [start, mid, end], ['0%', '-8%', '0%']);
+    const color = useTransform(
+        scrollYProgress,
+        [start, mid, end],
+        ['#eaeaf0', '#0a1628', '#eaeaf0'],
+    );
+
+    return (
+        <motion.span
+            style={{
+                scale,
+                y,
+                color,
+                display: 'inline-block',
+                fontFamily: 'var(--font-inter)',
+                fontWeight: 900,
+                fontSize: 'clamp(4rem, 14vw, 14rem)',
+                letterSpacing: '-0.04em',
+                lineHeight: 1,
+                willChange: 'transform, color',
+                transformOrigin: 'center bottom',
+            }}
+        >
+            {letter}
+        </motion.span>
+    );
+}
+
+/* ─── Partnership band — light, compact ─── */
+function PartnershipBand() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: '-80px' });
+    return (
+        <section ref={ref} className="py-16 md:py-20 bg-slate-50 relative overflow-hidden">
+            <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
+                <div className="text-center mb-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.5 }}
+                        className="mb-4"
+                    >
+                        <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8">
+                            Our partnership ecosystem
+                        </span>
+                    </motion.div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight leading-tight max-w-3xl mx-auto"
+                    >
+                        Built on{' '}
+                        <span className="font-[family-name:var(--font-playfair)] italic font-normal bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                            enterprise credentials
+                        </span>
+                    </motion.h2>
+                </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                    className="bg-white border border-slate-200 rounded-2xl p-7 md:p-10 shadow-sm"
+                >
+                    <p className="text-sm md:text-base text-slate-600 leading-relaxed mb-7 max-w-3xl">
+                        Axentia AI operates in strategic partnership with{' '}
+                        <strong className="text-slate-900">Orane Consulting</strong> — a SAP Gold Partner practice. SAP
+                        project experience in ECAP and GCC programmes is delivered via Orane Consulting.
+                    </p>
+
+                    <div className="grid grid-cols-3 gap-4 md:gap-8 pt-6 border-t border-slate-200">
+                        {[
+                            { Icon: Users, value: '500+', label: 'Consultants' },
+                            { Icon: Building2, value: '120+', label: 'Enterprise clients' },
+                            { Icon: Globe2, value: '10+', label: 'Countries' },
+                        ].map((s, i) => (
+                            <motion.div
+                                key={s.label}
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ duration: 0.5, delay: 0.3 + i * 0.08 }}
+                                className="text-center md:text-left"
+                            >
+                                <div className="w-9 h-9 rounded-lg bg-brand-600/10 flex items-center justify-center text-brand-600 mb-3 mx-auto md:mx-0">
+                                    <s.Icon className="w-4 h-4" />
+                                </div>
+                                <div className="font-[family-name:var(--font-playfair)] italic text-2xl md:text-3xl font-medium text-brand-600 mb-1 leading-none">
+                                    {s.value}
+                                </div>
+                                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mt-2">
+                                    {s.label}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <div className="flex items-start gap-2.5 mt-6 pt-5 border-t border-slate-200">
+                        <Award className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
+                        <p className="text-xs text-slate-500 leading-relaxed">
+                            Axentia AI and Orane Consulting are distinct entities. Orane is a strategic partner — not a
+                            parent company.
+                        </p>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+
+/* ─── Final CTA band — dark, matches /solutions page bottom ─── */
+function FinalCTA() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: '-80px' });
+    return (
+        <section
+            id="enquiry"
+            ref={ref}
+            className="relative overflow-hidden bg-[#0a1628] text-white py-20 md:py-28"
+        >
+            <div className="absolute -top-40 -right-20 w-[600px] h-[600px] rounded-full bg-brand-600/25 blur-[140px] pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-[500px] h-[500px] rounded-full bg-accent-300/10 blur-[120px] pointer-events-none" />
+
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 relative z-10 text-center">
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight mb-5 max-w-3xl mx-auto"
+                >
+                    Ready to start the{' '}
+                    <span className="font-[family-name:var(--font-playfair)] italic font-normal text-accent-300 text-[1.1em]">
+                        conversation
+                    </span>
+                    ?
+                </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ duration: 0.5, delay: 0.15 }}
+                    className="text-sm md:text-base text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed"
+                >
+                    An AI Strategy Sprint is the logical starting point for most organisations — clarity before
+                    investment.
+                </motion.p>
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap"
+                >
+                    <a
+                        href="/solutions/ai-strategy-sprint"
+                        className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold py-3 px-7 text-sm hover:bg-slate-100 transition-colors rounded-full"
+                    >
+                        Book an AI Strategy Sprint
+                        <ArrowRight className="w-4 h-4" />
+                    </a>
+                    <a
+                        href="/contact"
+                        className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/20 text-white font-semibold py-3 px-7 text-sm hover:bg-white/5 transition-colors rounded-full"
+                    >
+                        Contact us
+                        <ArrowRight className="w-4 h-4" />
+                    </a>
+                    <a
+                        href="https://wa.me/919999999999?text=Hi%20Axentia%20AI%2C%20I%20want%20to%20learn%20more"
+                        target="_blank"
+                        rel="noopener"
+                        className="inline-flex items-center justify-center gap-2 bg-white/0 border border-white/20 text-white font-semibold py-3 px-7 text-sm hover:bg-white/5 transition-colors rounded-full"
+                    >
+                        <MessageCircle className="w-4 h-4" />
+                        WhatsApp us
+                    </a>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
 
 export default function AboutPage() {
-  return (
-    <main className="pt-0">
-      <HeroSection />
-      <LegacySection />
-      <JourneySection />
-      <NumbersSection />
-      <ValuesSection />
-      <EcosystemSection />
-      <TeamSection />
-      <CTASection />
-    </main>
-  );
+    return (
+        <main>
+            <AboutHero />
+            <WhatWeBelieve />
+            <AxentiaReveal />
+            <PartnershipBand />
+            <Leaders />
+            <FinalCTA />
+        </main>
+    );
 }

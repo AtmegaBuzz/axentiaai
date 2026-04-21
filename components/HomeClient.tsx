@@ -11,7 +11,6 @@ const Offerings       = dynamic(() => import('@/components/sections/Offerings').
 const Programs        = dynamic(() => import('@/components/sections/Programs').then(m => ({ default: m.Programs })), { ssr: true });
 const HowItWorks            = dynamic(() => import('@/components/sections/Timeline').then(m => ({ default: m.HowItWorks })), { ssr: true });
 const WhyEnterprisesChoose  = dynamic(() => import('@/components/sections/WhyEnterprisesChoose').then(m => ({ default: m.WhyEnterprisesChoose })), { ssr: true });
-const Leaders         = dynamic(() => import('@/components/sections/Leaders').then(m => ({ default: m.Leaders })), { ssr: true });
 const Testimonials    = dynamic(() => import('@/components/sections/Testimonials'), { ssr: true });
 const WhereWeFit      = dynamic(() => import('@/components/sections/WhereWeFit').then(m => ({ default: m.WhereWeFit })), { ssr: true });
 const CTA             = dynamic(() => import('@/components/sections/CTA').then(m => ({ default: m.CTA })), { ssr: true });
@@ -37,9 +36,7 @@ export function HomeClient() {
             <WhereWeFit />
             {/* 9. Programs — Training & development detail */}
             <Programs />
-            {/* 10. Leadership — Team credibility */}
-            <Leaders />
-            {/* 11. Testimonials — Social proof */}
+            {/* 10. Testimonials — Social proof */}
             <Testimonials />
             {/* 12. CTA — Final conversion push */}
             <CTA />

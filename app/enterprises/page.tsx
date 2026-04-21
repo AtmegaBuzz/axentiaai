@@ -762,145 +762,192 @@ function EnquirySection() {
     };
 
     return (
-        <section id="enquiry" ref={ref} className="py-28 md:py-32 px-6 md:px-16 bg-white">
-            <div className="max-w-3xl mx-auto">
-                <div className="mb-14 text-center">
-                    <motion.h2
+        <section
+            id="enquiry"
+            ref={ref}
+            className="relative lg:min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-slate-50"
+        >
+            {/* Left: form */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6 }}
+                className="order-2 lg:order-1 flex items-center px-6 md:px-12 lg:px-16 xl:px-24 py-16 md:py-24"
+            >
+                <div className="w-full max-w-xl mx-auto lg:mx-0">
+                    <motion.div
                         initial={{ opacity: 0, y: 12 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.5 }}
-                        className="text-xs font-bold tracking-[0.18em] text-brand-600 uppercase mb-5 flex items-center justify-center gap-3"
+                        className="mb-4"
                     >
-                        <span className="w-8 h-px bg-brand-600" />READY TO START THE CONVERSATION?
-                        <span className="w-8 h-px bg-brand-600" />
-                    </motion.h2>
-                    <motion.h3
+                        <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8">
+                            Ready to start the conversation
+                        </span>
+                    </motion.div>
+                    <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-4xl font-bold text-slate-900 leading-tight"
+                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-3"
                     >
                         Pilot proposals open for{' '}
-                        <span className="font-[family-name:var(--font-playfair)] italic font-normal text-brand-600">
+                        <span className="font-[family-name:var(--font-playfair)] italic font-normal bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
                             October 2026
                         </span>{' '}
-                        cohorts.
-                    </motion.h3>
-                </div>
+                        cohorts
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : {}}
+                        transition={{ duration: 0.5, delay: 0.25 }}
+                        className="text-slate-600 text-sm md:text-base mb-10"
+                    >
+                        Tell us about your GCC, team size, and what you&apos;re trying to build. We&apos;ll respond
+                        within 48 hours.
+                    </motion.p>
 
-                <motion.form
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    onSubmit={onSubmit}
-                    className="bg-slate-50 p-8 md:p-14 rounded-xl shadow-sm border border-slate-200 space-y-7"
-                    noValidate
-                >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-                        <Field label="Name" required>
-                            <input
-                                required
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Full name"
-                                className={inputCls}
-                            />
-                        </Field>
-                        <Field label="Company" required>
-                            <input
-                                required
-                                type="text"
-                                value={company}
-                                onChange={(e) => setCompany(e.target.value)}
-                                placeholder="GCC / organisation name"
-                                className={inputCls}
-                            />
-                        </Field>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-                        <Field label="Work email" required>
-                            <input
-                                required
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="name@company.com"
-                                className={inputCls}
-                            />
-                        </Field>
-                        <Field label="Role" optional>
-                            <input
-                                type="text"
-                                value={role}
-                                onChange={(e) => setRole(e.target.value)}
-                                placeholder="e.g. Head of L&D"
-                                className={inputCls}
-                            />
-                        </Field>
-                    </div>
-                    <Field label="What are you exploring?">
-                        <div className="relative">
-                            <select
-                                value={exploring}
-                                onChange={(e) => setExploring(e.target.value)}
-                                className={`${inputCls} appearance-none pr-10`}
-                            >
-                                <option value="">Select an option</option>
-                                <option>6-month AI upskilling cohort</option>
-                                <option>Custom talent programme</option>
-                                <option>ECAP hire pipeline</option>
-                                <option>General discussion</option>
-                            </select>
-                            <ChevronDown className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                    <form onSubmit={onSubmit} className="space-y-6" noValidate>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <Field label="Name" required>
+                                <input
+                                    required
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="Full name"
+                                    className={inputCls}
+                                />
+                            </Field>
+                            <Field label="Company" required>
+                                <input
+                                    required
+                                    type="text"
+                                    value={company}
+                                    onChange={(e) => setCompany(e.target.value)}
+                                    placeholder="GCC / organisation name"
+                                    className={inputCls}
+                                />
+                            </Field>
                         </div>
-                    </Field>
-                    <Field label="Message" optional>
-                        <textarea
-                            rows={4}
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            placeholder="Tell us about your GCC, team size, and what you're trying to build…"
-                            className={`${inputCls} resize-none`}
-                        />
-                    </Field>
-                    <div className="pt-2">
-                        <button
-                            type="submit"
-                            disabled={status === 'loading'}
-                            className="w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-60 text-white px-8 py-4 rounded-lg font-semibold text-base transition-all shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2"
-                        >
-                            {status === 'loading' ? 'Sending…' : 'Start a GCC conversation'}
-                            {status !== 'loading' && <ArrowRight className="w-5 h-5" />}
-                        </button>
-                        <div className="text-center mt-4">
-                            <a
-                                href="https://wa.me/919999999999"
-                                target="_blank"
-                                rel="noopener"
-                                className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-brand-600 transition font-medium"
-                            >
-                                <MessageCircle className="w-4 h-4" />
-                                Or chat on WhatsApp
-                            </a>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <Field label="Work email" required>
+                                <input
+                                    required
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="name@company.com"
+                                    className={inputCls}
+                                />
+                            </Field>
+                            <Field label="Role" optional>
+                                <input
+                                    type="text"
+                                    value={role}
+                                    onChange={(e) => setRole(e.target.value)}
+                                    placeholder="e.g. Head of L&D"
+                                    className={inputCls}
+                                />
+                            </Field>
                         </div>
-                    </div>
+                        <Field label="What are you exploring?">
+                            <div className="relative">
+                                <select
+                                    value={exploring}
+                                    onChange={(e) => setExploring(e.target.value)}
+                                    className={`${inputCls} appearance-none pr-10`}
+                                >
+                                    <option value="">Select an option</option>
+                                    <option>6-month AI upskilling cohort</option>
+                                    <option>Custom talent programme</option>
+                                    <option>ECAP hire pipeline</option>
+                                    <option>General discussion</option>
+                                </select>
+                                <ChevronDown className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                            </div>
+                        </Field>
+                        <Field label="Message" optional>
+                            <textarea
+                                rows={3}
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                placeholder="Tell us about your GCC, team size, and what you're trying to build…"
+                                className={`${inputCls} resize-none`}
+                            />
+                        </Field>
 
-                    {status === 'success' && (
-                        <div className="p-4 bg-brand-50 border border-brand-200 rounded-lg text-sm">
-                            <div className="flex items-center gap-2 text-brand-700 font-semibold">
-                                <CheckCircle2 className="w-4 h-4" />
-                                Thanks — we&apos;ll be in touch within 48 hours.
+                        <div className="pt-2">
+                            <button
+                                type="submit"
+                                disabled={status === 'loading'}
+                                className="w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-60 text-white py-4 rounded-lg font-bold text-base transition-colors shadow-lg shadow-brand-600/25 inline-flex items-center justify-center gap-2"
+                            >
+                                {status === 'loading' ? 'Sending…' : 'Start a GCC conversation'}
+                                {status !== 'loading' && <ArrowRight className="w-4 h-4" />}
+                            </button>
+                            <div className="flex items-center justify-center gap-4 mt-4">
+                                <a
+                                    href="https://wa.me/919999999999"
+                                    target="_blank"
+                                    rel="noopener"
+                                    className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-brand-600 transition font-medium"
+                                >
+                                    <MessageCircle className="w-4 h-4" />
+                                    Or chat on WhatsApp
+                                </a>
                             </div>
                         </div>
-                    )}
-                    {status === 'error' && (
-                        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
-                            {errorMsg}
+
+                        {status === 'success' && (
+                            <div className="p-4 bg-brand-50 border border-brand-200 rounded-lg text-sm">
+                                <div className="flex items-center gap-2 text-brand-700 font-semibold">
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    Thanks — we&apos;ll be in touch within 48 hours.
+                                </div>
+                            </div>
+                        )}
+                        {status === 'error' && (
+                            <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                                {errorMsg}
+                            </div>
+                        )}
+                    </form>
+                </div>
+            </motion.div>
+
+            {/* Right: full-height image */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.8 }}
+                className="order-1 lg:order-2 relative min-h-[320px] lg:min-h-screen"
+            >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=2000&q=80"
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628]/75 via-[#0a1628]/45 to-brand-900/60" />
+                <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col justify-between text-white">
+                    <div className="flex items-center gap-3">
+                        <span className="block w-8 h-px bg-accent-300" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent-300">
+                            GCC engagement
+                        </span>
+                    </div>
+                    <div>
+                        <p className="font-[family-name:var(--font-playfair)] italic text-2xl md:text-3xl lg:text-4xl leading-[1.2] text-white mb-5 max-w-lg">
+                            Build AI-ready talent before the next product cycle makes it urgent.
+                        </p>
+                        <div className="flex items-center gap-3 text-xs text-white/70">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            Response within 48 hours
                         </div>
-                    )}
-                </motion.form>
-            </div>
+                    </div>
+                </div>
+            </motion.div>
         </section>
     );
 }
