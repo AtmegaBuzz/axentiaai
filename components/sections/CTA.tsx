@@ -36,31 +36,40 @@ export function CTA() {
 
                     {/* Content */}
                     <div className="relative z-10 p-6 md:p-10 xl:py-8 xl:px-12 xl:w-3/5 flex flex-col items-start justify-center h-full">
-                        <h2 className="text-xl md:text-3xl xl:text-4xl font-bold text-white tracking-tight mb-3">
-                            Let&apos;s get you to the <span className="font-[family-name:var(--font-playfair)] italic text-accent-300 text-[1.1em]">right place.</span>
+                        <h2 className="text-xl md:text-3xl xl:text-4xl font-bold text-white tracking-tight leading-tight mb-3">
+                            Ready to identify where AI can create{' '}
+                            <span className="font-[family-name:var(--font-playfair)] italic text-accent-300 text-[1.1em]">
+                                real value
+                            </span>{' '}
+                            in your organisation?
                         </h2>
                         <p className="text-sm md:text-base text-brand-100 mb-5 md:mb-6 font-medium leading-relaxed">
-                            Tell us where you are in your career and what you&apos;re trying to figure out. We&apos;ll tell you honestly whether Axentia.AI is the right fit, and if it&apos;s not, we&apos;ll say that too.
+                            Whether you need an execution roadmap, a leadership capability, or are developing
+                            enterprise consultants — Axentia has the right starting point.
                         </p>
 
-                        <div className="flex flex-nowrap items-center gap-3">
+                        <div className="flex flex-wrap items-center gap-3">
+                            <a
+                                href="/solutions/ai-strategy-sprint"
+                                className="rounded-xl bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 text-xs hover:bg-brand-50 transition-colors"
+                            >
+                                Book an AI Strategy Sprint
+                            </a>
+                            <a
+                                href="https://wa.me/919999999999?text=I%20want%20to%20discuss%20AI%20for%20my%20organisation"
+                                target="_blank"
+                                rel="noopener"
+                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 text-xs hover:bg-white/25 transition-colors"
+                            >
+                                💬 WhatsApp us
+                            </a>
                             <button
                                 type="button"
                                 onClick={() => setContactOpen(true)}
-                                className="rounded-xl bg-white text-slate-900 border-2 border-white font-bold py-2.5 px-5 text-xs cursor-pointer hover:bg-brand-50 transition-colors"
+                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 text-xs cursor-pointer hover:bg-white/25 transition-colors"
                             >
-                                Book AI Discovery Workshop
+                                Request a conversation
                             </button>
-                            <span
-                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 text-xs cursor-default"
-                            >
-                                Launch Your First AI Pilot
-                            </span>
-                            <span
-                                className="rounded-xl bg-white/15 backdrop-blur-sm text-white border border-white/30 font-bold py-2.5 px-5 text-xs cursor-default"
-                            >
-                                Join a Talent Academy
-                            </span>
                         </div>
                     </div>
 

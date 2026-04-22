@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
 interface Industry {
@@ -115,6 +116,22 @@ export function WhereWeFit() {
                         <IndustryCard key={ind.name} ind={ind} index={i} />
                     ))}
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.15 }}
+                    className="text-center mt-10 md:mt-14"
+                >
+                    <a
+                        href="/enterprises"
+                        className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-7 text-sm transition-colors rounded-full"
+                    >
+                        See industry detail
+                        <ArrowRight className="w-4 h-4" />
+                    </a>
+                </motion.div>
             </div>
         </section>
     );
