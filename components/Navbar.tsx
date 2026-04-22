@@ -154,6 +154,7 @@ type NavItem = { name: string; href?: string; hasDropdown?: boolean };
 const menuItems: NavItem[] = [
     { name: 'Solutions', hasDropdown: true },
     { name: 'Training', hasDropdown: true },
+    { name: 'ECAP', href: '/ecap' },
     { name: 'GCC & Enterprise', href: '/enterprises' },
     { name: 'About', href: '/about' },
 ];

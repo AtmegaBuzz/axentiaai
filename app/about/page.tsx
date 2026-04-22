@@ -9,6 +9,7 @@ import {
     Award,
     Globe2,
     Users,
+    Compass,
 } from 'lucide-react';
 import { Leaders } from '@/components/sections/Leaders';
 
@@ -385,207 +386,90 @@ function WhatWeBelieve() {
     );
 }
 
-/* ─── Pillars — architectural 3-column diagram representing beliefs ─── */
+/* ─── Pillars — three editorial belief cards ─── */
 function Pillars() {
-    const ref = useRef<SVGSVGElement>(null);
-    const isInView = useInView(ref, { once: true, margin: '-100px' });
+    const ref = useRef<HTMLDivElement>(null);
+    const isInView = useInView(ref, { once: true, margin: '-80px' });
 
-    // Three pillar x-centers evenly across viewBox 1200 wide
-    const columns = [
+    const cards = [
         {
-            x: 220,
-            label: 'Business-first',
-            accent: false,
+            num: '01',
+            word: 'Business-first',
+            tagline: 'Decisions before tools',
+            desc: 'Every engagement leads with the business question — not the technology stack.',
+            Icon: Compass,
+            accent: 'brand',
         },
         {
-            x: 600,
-            label: 'Enterprise-aware',
-            accent: false,
+            num: '02',
+            word: 'Enterprise-aware',
+            tagline: 'Workflow-intensive context',
+            desc: 'Designed for SAP-led organisations where process complexity is the operating reality.',
+            Icon: Building2,
+            accent: 'slate',
         },
         {
-            x: 980,
-            label: 'Built for movement',
-            accent: true,
+            num: '03',
+            word: 'Built for movement',
+            tagline: 'Capability, not dependency',
+            desc: 'Engagements end with internal teams who can run, extend, and scale on their own.',
+            Icon: ArrowRight,
+            accent: 'gold',
         },
     ];
 
-    const LABEL_Y = 78;
-    const CAPITAL_Y = 118;
-    const SHAFT_Y = 142;
-    const SHAFT_H = 240;
-    const BASE_Y = 382;
-    const STYLOBATE_Y = 410;
+    const accentClass = (a: string) => {
+        if (a === 'brand') return 'text-brand-600 bg-brand-600/10 border-brand-600/20';
+        if (a === 'gold') return 'text-amber-700 bg-accent-300/20 border-accent-300/40';
+        return 'text-slate-700 bg-slate-100 border-slate-200';
+    };
+    const ruleClass = (a: string) => {
+        if (a === 'brand') return 'bg-brand-600';
+        if (a === 'gold') return 'bg-accent-500';
+        return 'bg-slate-700';
+    };
 
     return (
-        <div className="max-w-6xl mx-auto mb-16 md:mb-20 px-2">
-            <svg
-                ref={ref}
-                viewBox="0 0 1200 460"
-                preserveAspectRatio="xMidYMax meet"
-                className="w-full h-auto"
-                role="img"
-                aria-label="Three pillars representing business-first, enterprise-aware, and built for movement"
-            >
-                <defs>
-                    <linearGradient id="pillar-accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#8A29AC" />
-                        <stop offset="100%" stopColor="#C010DA" />
-                    </linearGradient>
-                    <linearGradient id="pillar-shaft" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#1e293b" />
-                        <stop offset="50%" stopColor="#334155" />
-                        <stop offset="100%" stopColor="#1e293b" />
-                    </linearGradient>
-                </defs>
+        <div ref={ref} className="max-w-6xl mx-auto mb-16 md:mb-20 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+            {cards.map((c, i) => (
+                <motion.article
+                    key={c.word}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: i * 0.12, ease }}
+                    className="group relative bg-white border border-slate-200 rounded-2xl p-7 md:p-8 hover:shadow-xl hover:-translate-y-1 hover:border-slate-300 transition-all duration-300 flex flex-col"
+                >
+                    {/* Top: number + icon */}
+                    <div className="flex items-start justify-between mb-6">
+                        <span className="font-[family-name:var(--font-playfair)] italic text-slate-300 text-3xl leading-none">
+                            {c.num}
+                        </span>
+                        <div className={`w-10 h-10 rounded-lg border flex items-center justify-center ${accentClass(c.accent)}`}>
+                            <c.Icon className="w-5 h-5" strokeWidth={1.75} />
+                        </div>
+                    </div>
 
-                {/* Entablature — architrave + cornice hairlines spanning the top */}
-                <motion.line
-                    x1="60"
-                    y1="30"
-                    x2="1140"
-                    y2="30"
-                    stroke="#0f172a"
-                    strokeWidth="1.5"
-                    initial={{ pathLength: 0 }}
-                    animate={isInView ? { pathLength: 1 } : {}}
-                    transition={{ duration: 1.2, ease }}
-                />
-                <motion.line
-                    x1="60"
-                    y1="54"
-                    x2="1140"
-                    y2="54"
-                    stroke="#0f172a"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0 }}
-                    animate={isInView ? { pathLength: 1 } : {}}
-                    transition={{ duration: 1.2, delay: 0.15, ease }}
-                />
+                    {/* Word — main belief */}
+                    <h3
+                        className={`text-xl md:text-2xl font-bold tracking-tight leading-tight mb-2 ${
+                            c.accent === 'gold' ? 'font-[family-name:var(--font-playfair)] italic font-normal text-slate-900' : 'text-slate-900'
+                        }`}
+                    >
+                        {c.word}
+                    </h3>
 
-                {/* Stylobate — shared foundation line below pillars */}
-                <motion.line
-                    x1="60"
-                    y1={STYLOBATE_Y}
-                    x2="1140"
-                    y2={STYLOBATE_Y}
-                    stroke="#0f172a"
-                    strokeWidth="1.5"
-                    initial={{ pathLength: 0 }}
-                    animate={isInView ? { pathLength: 1 } : {}}
-                    transition={{ duration: 1.2, delay: 0.1, ease }}
-                />
-                <motion.line
-                    x1="40"
-                    y1={STYLOBATE_Y + 10}
-                    x2="1160"
-                    y2={STYLOBATE_Y + 10}
-                    stroke="#0f172a"
-                    strokeWidth="1"
-                    strokeOpacity="0.5"
-                    initial={{ pathLength: 0 }}
-                    animate={isInView ? { pathLength: 1 } : {}}
-                    transition={{ duration: 1.2, delay: 0.25, ease }}
-                />
+                    {/* Tagline */}
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-5">
+                        {c.tagline}
+                    </p>
 
-                {/* Pillars */}
-                {columns.map((col, i) => {
-                    const shaftW = 80;
-                    const capitalW = 104;
-                    const baseW = 120;
-                    return (
-                        <g key={col.label}>
-                            {/* Word label above pillar */}
-                            <motion.text
-                                x={col.x}
-                                y={LABEL_Y}
-                                textAnchor="middle"
-                                dominantBaseline="middle"
-                                fontFamily={
-                                    col.accent
-                                        ? 'Playfair Display, serif'
-                                        : 'Inter, sans-serif'
-                                }
-                                fontStyle={col.accent ? 'italic' : 'normal'}
-                                fontWeight={col.accent ? 500 : 900}
-                                fontSize={col.accent ? 28 : 20}
-                                letterSpacing={col.accent ? '0' : '3'}
-                                fill={col.accent ? '#A20EBF' : '#0f172a'}
-                                initial={{ opacity: 0, y: LABEL_Y - 10 }}
-                                animate={isInView ? { opacity: 1, y: LABEL_Y } : {}}
-                                transition={{ duration: 0.6, delay: 1.1 + i * 0.12, ease }}
-                                style={{
-                                    textTransform: col.accent ? 'none' : 'uppercase',
-                                }}
-                            >
-                                {col.label}
-                            </motion.text>
+                    {/* Hairline */}
+                    <div className={`h-px w-10 ${ruleClass(c.accent)} mb-5 group-hover:w-16 transition-all duration-500`} />
 
-                            {/* Pillar group — scaleY rise-up */}
-                            <motion.g
-                                initial={{ scaleY: 0, opacity: 0 }}
-                                animate={isInView ? { scaleY: 1, opacity: 1 } : {}}
-                                transition={{ duration: 0.9, delay: 0.3 + i * 0.12, ease }}
-                                style={{ transformOrigin: `${col.x}px ${BASE_Y + 20}px`, transformBox: 'fill-box' }}
-                            >
-                                {/* Capital — wider plate */}
-                                <rect
-                                    x={col.x - capitalW / 2}
-                                    y={CAPITAL_Y}
-                                    width={capitalW}
-                                    height="10"
-                                    fill="#0f172a"
-                                />
-                                <rect
-                                    x={col.x - (capitalW - 8) / 2}
-                                    y={CAPITAL_Y + 10}
-                                    width={capitalW - 8}
-                                    height="14"
-                                    fill="#1e293b"
-                                />
-
-                                {/* Shaft */}
-                                <rect
-                                    x={col.x - shaftW / 2}
-                                    y={SHAFT_Y}
-                                    width={shaftW}
-                                    height={SHAFT_H}
-                                    fill="url(#pillar-shaft)"
-                                />
-
-                                {/* Fluting — vertical hairlines on shaft */}
-                                {[-24, -12, 0, 12, 24].map((offset) => (
-                                    <line
-                                        key={offset}
-                                        x1={col.x + offset}
-                                        y1={SHAFT_Y + 6}
-                                        x2={col.x + offset}
-                                        y2={SHAFT_Y + SHAFT_H - 6}
-                                        stroke="#0f172a"
-                                        strokeWidth="1"
-                                        strokeOpacity="0.35"
-                                    />
-                                ))}
-
-                                {/* Base */}
-                                <rect
-                                    x={col.x - (baseW - 10) / 2}
-                                    y={BASE_Y}
-                                    width={baseW - 10}
-                                    height="14"
-                                    fill="#1e293b"
-                                />
-                                <rect
-                                    x={col.x - baseW / 2}
-                                    y={BASE_Y + 14}
-                                    width={baseW}
-                                    height="10"
-                                    fill="#0f172a"
-                                />
-                            </motion.g>
-                        </g>
-                    );
-                })}
-            </svg>
+                    {/* Supporting copy */}
+                    <p className="text-sm text-slate-600 leading-relaxed flex-1">{c.desc}</p>
+                </motion.article>
+            ))}
         </div>
     );
 }
