@@ -9,7 +9,6 @@ import {
     Award,
     Globe2,
     Users,
-    Compass,
 } from 'lucide-react';
 import { Leaders } from '@/components/sections/Leaders';
 
@@ -81,26 +80,16 @@ function AboutHero() {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen overflow-hidden bg-[#0a1628] text-white flex items-center"
+            className="relative min-h-screen overflow-hidden bg-black text-white flex items-center"
         >
             <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0 will-change-transform">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2400&q=80"
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/70 to-[#0a1628]/30" />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-transparent to-[#0a1628]" />
-                <div
-                    className="absolute inset-0 opacity-[0.04]"
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                        backgroundSize: '72px 72px',
-                        maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
-                    }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
             </motion.div>
             <div className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full bg-brand-600/20 blur-[140px] pointer-events-none" />
             <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] rounded-full bg-accent-300/10 blur-[120px] pointer-events-none" />
@@ -386,43 +375,32 @@ function WhatWeBelieve() {
     );
 }
 
-/* ─── Pillars — three editorial belief cards ─── */
+/* ─── Pillars — three compact belief cards ─── */
 function Pillars() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: '-80px' });
 
     const cards = [
         {
-            num: '01',
             word: 'Business-first',
             tagline: 'Decisions before tools',
             desc: 'Every engagement leads with the business question — not the technology stack.',
-            Icon: Compass,
             accent: 'brand',
         },
         {
-            num: '02',
             word: 'Enterprise-aware',
             tagline: 'Workflow-intensive context',
             desc: 'Designed for SAP-led organisations where process complexity is the operating reality.',
-            Icon: Building2,
             accent: 'slate',
         },
         {
-            num: '03',
             word: 'Built for movement',
             tagline: 'Capability, not dependency',
             desc: 'Engagements end with internal teams who can run, extend, and scale on their own.',
-            Icon: ArrowRight,
             accent: 'gold',
         },
     ];
 
-    const accentClass = (a: string) => {
-        if (a === 'brand') return 'text-brand-600 bg-brand-600/10 border-brand-600/20';
-        if (a === 'gold') return 'text-amber-700 bg-accent-300/20 border-accent-300/40';
-        return 'text-slate-700 bg-slate-100 border-slate-200';
-    };
     const ruleClass = (a: string) => {
         if (a === 'brand') return 'bg-brand-600';
         if (a === 'gold') return 'bg-accent-500';
@@ -430,44 +408,32 @@ function Pillars() {
     };
 
     return (
-        <div ref={ref} className="max-w-6xl mx-auto mb-16 md:mb-20 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        <div ref={ref} className="max-w-5xl mx-auto mb-12 md:mb-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
             {cards.map((c, i) => (
                 <motion.article
                     key={c.word}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 24 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: i * 0.12, ease }}
-                    className="group relative bg-white border border-slate-200 rounded-2xl p-7 md:p-8 hover:shadow-xl hover:-translate-y-1 hover:border-slate-300 transition-all duration-300 flex flex-col"
+                    transition={{ duration: 0.5, delay: i * 0.1, ease }}
+                    className="group relative bg-white border border-slate-200 rounded-xl p-5 md:p-6 hover:shadow-md hover:-translate-y-0.5 hover:border-slate-300 transition-all duration-300 flex flex-col"
                 >
-                    {/* Top: number + icon */}
-                    <div className="flex items-start justify-between mb-6">
-                        <span className="font-[family-name:var(--font-playfair)] italic text-slate-300 text-3xl leading-none">
-                            {c.num}
-                        </span>
-                        <div className={`w-10 h-10 rounded-lg border flex items-center justify-center ${accentClass(c.accent)}`}>
-                            <c.Icon className="w-5 h-5" strokeWidth={1.75} />
-                        </div>
-                    </div>
-
-                    {/* Word — main belief */}
                     <h3
-                        className={`text-xl md:text-2xl font-bold tracking-tight leading-tight mb-2 ${
-                            c.accent === 'gold' ? 'font-[family-name:var(--font-playfair)] italic font-normal text-slate-900' : 'text-slate-900'
+                        className={`text-base md:text-lg font-bold tracking-tight leading-tight mb-1 ${
+                            c.accent === 'gold'
+                                ? 'font-[family-name:var(--font-playfair)] italic font-normal text-slate-900'
+                                : 'text-slate-900'
                         }`}
                     >
                         {c.word}
                     </h3>
 
-                    {/* Tagline */}
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500 mb-3">
                         {c.tagline}
                     </p>
 
-                    {/* Hairline */}
-                    <div className={`h-px w-10 ${ruleClass(c.accent)} mb-5 group-hover:w-16 transition-all duration-500`} />
+                    <div className={`h-px w-8 ${ruleClass(c.accent)} mb-3 group-hover:w-12 transition-all duration-500`} />
 
-                    {/* Supporting copy */}
-                    <p className="text-sm text-slate-600 leading-relaxed flex-1">{c.desc}</p>
+                    <p className="text-xs md:text-sm text-slate-600 leading-relaxed flex-1">{c.desc}</p>
                 </motion.article>
             ))}
         </div>

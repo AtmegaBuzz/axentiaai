@@ -7,53 +7,53 @@ import { useRef } from 'react';
 
 const offerings = [
     {
-        id: 'transformation',
+        id: 'advisory',
         number: '01',
-        tag: 'Enterprise · Project-based',
-        title: 'Enterprise AI',
-        titleAccent: 'Transformation',
+        tag: 'Enterprise Advisory',
+        title: 'AI Strategy',
+        titleAccent: 'Sprint',
         description:
-            'We design, build, and deploy AI within your SAP and enterprise workflows taking ideas into active use across the business.',
+            'A structured engagement to identify priority AI opportunities, assess readiness, and build a 90-day execution roadmap. For leadership teams that want clarity before investing widely.',
         includes: [
-            'AI pilots aligned to real business use cases',
-            'Demand forecasting, invoice automation, HR copilots',
-            'Predictive maintenance using SAP PM data',
-            'Integration with S/4HANA, BTP, and Joule',
-            'Seamless progression from pilot to wider adoption',
+            'Priority use cases ranked by value and feasibility',
+            'Readiness gap view — data, capability, governance',
+            'Risk & governance framed for leadership decisions',
+            '90-day execution roadmap with named ownership',
+            'For: CEO · CIO · CFO · COO · Transformation leads',
         ],
         image: '/images/offerings/enterprise-ai-transformation.jpg',
     },
     {
-        id: 'capability',
+        id: 'corporates',
         number: '02',
-        tag: 'Enterprise · Company-specific',
-        title: 'Enterprise AI',
-        titleAccent: 'Capability',
+        tag: 'Corporate Training',
+        title: 'AI for',
+        titleAccent: 'Corporates',
         description:
-            'We develop the capability within your organisation to lead, operate, and expand AI initiatives with clarity and ownership.',
+            'Practical AI programmes for the people who lead and manage enterprise work. A leadership intensive for C-suite and a practical fluency series for mid-management — delivered at your premises.',
         includes: [
-            'AI-enabled teams across business and IT',
-            'Identification and development of internal use cases',
-            'Governance and ways of working for AI adoption',
-            'Enablement across SuccessFactors and Analytics Cloud',
-            'Training tailored to your organisation',
+            'AI Leadership Workshop — half-day, C-suite',
+            'AI for Managers — 5-module applied fluency series',
+            'Standalone modules or full programme delivery',
+            'In-person, virtual, or series formats',
+            'For: CHRO · L&D Heads · VPs · Senior managers',
         ],
         image: '/images/offerings/ai-technology-human-interaction.jpg',
     },
     {
-        id: 'academies',
+        id: 'ecap',
         number: '03',
-        tag: 'Public · Open Enrollment',
-        title: 'Talent',
-        titleAccent: 'Academies',
+        tag: 'Career Programme',
+        title: 'ECAP',
+        titleAccent: 'Programme',
         description:
-            'We prepare individuals and enterprise teams through structured programs across AI, SAP, and industry tracks.',
+            'A highly selective 14-month SAP Techno-Functional AI Consultant programme. 30 seats per batch. Paid internship on live enterprise projects. July 2026 batch open now.',
         includes: [
-            'AI Foundation Academy',
-            'SAP SuccessFactors Academy',
-            'Retail & FMCG Industry Academy',
-            'Energy & Utilities Industry Academy',
-            'SAP Workforce Accelerator',
+            '14-month structured journey across two phases',
+            'SAP core + Python + applied AI foundations',
+            'Paid internship on Orane live projects (Month 10)',
+            'Pre-validated consultants with placement pipeline',
+            'For: Final-year students · MBA aspirants · Early professionals',
         ],
         image: '/images/offerings/talent-academy.jpg',
     },
@@ -153,7 +153,7 @@ export function Offerings() {
                     <span
                         className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest border border-[#8A29AC]/20 bg-[#8A29AC]/8 text-[#8A29AC]"
                     >
-                        HOW WE HELP YOU SUCCEED
+                        Three ways Axentia AI works with you
                     </span>
                 </motion.div>
                 <motion.h2
@@ -163,8 +163,8 @@ export function Offerings() {
                     transition={{ duration: 0.6, delay: 0.06 }}
                     className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-6 max-w-none mx-auto"
                 >
-                    Bringing transformation, capability, and talent into{' '}
-                    <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">alignment</span>
+                    Choose your{' '}
+                    <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">starting point</span>
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0, y: 16 }}
@@ -173,7 +173,7 @@ export function Offerings() {
                     transition={{ duration: 0.5, delay: 0.12 }}
                     className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-4xl mx-auto"
                 >
-                    Be it enterprise AI transformation, internal capability building, or structured talent development Axentia.AI brings them together under one unified approach. Each part of our model strengthens the others, creating momentum that holds beyond the engagement.
+                    Strategic advisory, capability programmes, and a career pipeline — engage one, or engage all three. Every engagement ends with a clear next step, not a deck.
                 </motion.p>
             </div>
 

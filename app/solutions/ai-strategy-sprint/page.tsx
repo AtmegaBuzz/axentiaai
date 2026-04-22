@@ -32,7 +32,7 @@ function SprintHero() {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen overflow-hidden bg-[#0a1628] text-white flex items-center"
+            className="relative min-h-screen overflow-hidden bg-black text-white flex items-center"
         >
             {/* Full-bleed background image with parallax */}
             <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0 will-change-transform">
@@ -40,20 +40,9 @@ function SprintHero() {
                 <img
                     src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=2400&q=80"
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
                 />
-                {/* Tonal overlays for legibility */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/70 to-[#0a1628]/30" />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-transparent to-[#0a1628]" />
-                <div
-                    className="absolute inset-0 opacity-[0.04]"
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                        backgroundSize: '72px 72px',
-                        maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
-                    }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
             </motion.div>
             {/* Brand glow orbs */}
             <div className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full bg-brand-600/20 blur-[140px] pointer-events-none" />

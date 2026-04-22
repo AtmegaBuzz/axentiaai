@@ -18,7 +18,8 @@ const megaMenuData = {
             label: "FLAGSHIP",
             title: "AI Strategy Sprint",
             description: "Align leadership, identify high-ROI use cases, ship a 90-day plan.",
-            href: "/solutions/ai-strategy-sprint"
+            href: "/solutions/ai-strategy-sprint",
+            image: "/videos/hero-poster.jpg"
         }
     },
     'Training': {
@@ -32,7 +33,8 @@ const megaMenuData = {
             label: "POPULAR",
             title: "AI for Corporates",
             description: "Scalable training paths built for large teams, with outcome tracking.",
-            href: "/training/corporates"
+            href: "/training/corporates",
+            image: "/videos/hero-poster.jpg"
         }
     },
 };
@@ -120,10 +122,15 @@ function MegaMenuDropdown({ menuKey, isOpen, onMouseEnter, onMouseLeave }: { men
                                     >
                                         <Link href={menuData.featured.href} className="group block">
                                             <div className="rounded-xl border border-slate-200 overflow-hidden hover:border-slate-300 hover:shadow-md transition-all duration-300">
-                                                <div className="w-full aspect-[16/9] bg-gradient-to-br from-brand-600/20 via-brand-500/10 to-accent-400/20 flex items-center justify-center">
-                                                    <div className="w-12 h-12 bg-brand-600/20 rounded-xl flex items-center justify-center">
-                                                        <div className="w-5 h-5 bg-brand-600 rounded-md" />
-                                                    </div>
+                                                <div className="relative w-full aspect-[16/9] overflow-hidden">
+                                                    <Image
+                                                        src={menuData.featured.image}
+                                                        alt={menuData.featured.title}
+                                                        fill
+                                                        sizes="280px"
+                                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-600/30 via-transparent to-accent-400/20" />
                                                 </div>
                                                 <div className="p-5 space-y-2">
                                                     <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest">

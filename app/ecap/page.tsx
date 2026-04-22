@@ -81,26 +81,16 @@ function EcapHero() {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen overflow-hidden bg-[#0a1628] text-white flex items-center"
+            className="relative min-h-screen overflow-hidden bg-black text-white flex items-center"
         >
             <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0 will-change-transform">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                    src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2400&q=80"
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2400&q=80"
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/70 to-[#0a1628]/30" />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-transparent to-[#0a1628]" />
-                <div
-                    className="absolute inset-0 opacity-[0.04]"
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                        backgroundSize: '72px 72px',
-                        maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
-                    }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
             </motion.div>
             <div className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full bg-brand-600/20 blur-[140px] pointer-events-none" />
             <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] rounded-full bg-accent-300/10 blur-[120px] pointer-events-none" />
@@ -127,11 +117,11 @@ function EcapHero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2, ease }}
                         className="font-black tracking-tight leading-[1.02]"
-                        style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)' }}
+                        style={{ fontSize: 'clamp(2rem, 4.5vw, 4rem)' }}
                     >
-                        <span className="block text-white">ECAP — Enterprise Career</span>
+                        <span className="block text-white">ECAP — Enterprise</span>
                         <span className="block mt-2">
-                            <span className="text-white">Acceleration </span>
+                            <span className="text-white whitespace-nowrap">Career Acceleration</span>{' '}
                             <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#F7C87A] via-[#F3B15F] to-[#E89B3A] bg-clip-text text-transparent">
                                 Programme
                             </span>
@@ -196,205 +186,201 @@ function StatsRow() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-80px' });
     return (
-        <section ref={ref} className="bg-slate-100/50 py-20 md:py-24 border-y border-slate-200/60">
-            <div className="max-w-screen-2xl mx-auto px-6 md:px-12">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
-                    {stats.map((item, i) => (
-                        <motion.div
-                            key={item.label}
-                            initial={{ opacity: 0, y: 25 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.6, delay: i * 0.1, ease }}
-                            className="flex flex-col"
-                        >
-                            <span className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl italic font-medium text-brand-600 mb-3 leading-none tabular-nums">
-                                <CountUp value={item.value} start={isInView} duration={1500 + i * 150} />
-                            </span>
-                            <p className="text-sm text-slate-600 leading-relaxed">{item.label}</p>
-                        </motion.div>
-                    ))}
-                </div>
+        <section ref={ref} className="w-full bg-slate-50/40 border-b border-slate-200">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-y divide-x-0 md:divide-y-0 md:divide-x divide-slate-200">
+                {stats.map((item, i) => (
+                    <motion.div
+                        key={item.label}
+                        initial={{ opacity: 0, y: 25 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.6, delay: i * 0.1, ease }}
+                        className="flex flex-col items-center justify-center text-center px-6 py-10 md:py-14 hover:bg-white transition-colors"
+                    >
+                        <span className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl italic font-medium text-brand-600 mb-3 leading-none tabular-nums">
+                            <CountUp value={item.value} start={isInView} duration={1500 + i * 150} />
+                        </span>
+                        <p className="text-xs md:text-sm text-slate-600 leading-relaxed max-w-[200px]">
+                            {item.label}
+                        </p>
+                    </motion.div>
+                ))}
             </div>
         </section>
     );
 }
 
-/* ─── Phases — 3 stacking cards ─── */
+/* ─── Phases — alternating image/content rows (Offerings pattern) ─── */
 const phases = [
     {
         Icon: GraduationCap,
         period: 'Phase 1 · Months 1–8',
-        title: 'Training & Foundations',
+        title: 'Training &',
+        accent: 'Foundations',
         desc: "SAP core processes (P2P, O2C, R2R, H2R), Python for enterprise, applied AI fundamentals, and business process analysis. SAP functional module (FICO, SD, or MM) assigned at Month 8 based on Orane's live project pipeline.",
         image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1600&q=80',
-        points: ['SAP core processes', 'Python for enterprise', 'Applied AI fundamentals'],
+        points: [
+            'SAP core processes (P2P, O2C, R2R, H2R)',
+            'Python for enterprise applications',
+            'Applied AI fundamentals',
+            'Business process analysis',
+            'Module assignment at Month 8',
+        ],
     },
     {
         Icon: Briefcase,
         period: 'Phase 2 · Months 9–14 · Paid internship',
-        title: 'Live Project Internship — The Crucible',
+        title: 'Live Project',
+        accent: 'Internship',
         desc: 'Paid internship on real Orane Consulting client projects. Up to ₹20,000/month from Month 10. Real deliverables, real clients, real consulting experience — not simulated case studies.',
         image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1600&q=80',
-        points: ['Live client engagements', 'Up to ₹20K/month from M10', 'Real consulting deliverables'],
+        points: [
+            'Live client engagements via Orane',
+            'Up to ₹20K/month from Month 10',
+            'Real consulting deliverables',
+            'Senior consultant supervision',
+            'Cross-functional exposure',
+        ],
     },
     {
         Icon: Award,
         period: 'Post-programme',
-        title: 'Placement & Career Track',
+        title: 'Placement &',
+        accent: 'Career Track',
         desc: 'Graduates are pre-validated SAP + AI consultants with live project experience. Access to placement networks and preferred GCC hiring arrangements.',
         image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80',
-        points: ['Pre-validated consultants', 'Placement network access', 'Preferred GCC hiring'],
+        points: [
+            'Pre-validated SAP + AI consultants',
+            'Placement network access',
+            'Preferred GCC hiring arrangements',
+            'Continued alumni community',
+        ],
     },
 ];
 
-function PhasesStack() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const isMobile = useIsMobile(1024);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ['start start', 'end end'],
-    });
-    const smoothProgress = useSpring(scrollYProgress, { stiffness: 260, damping: 38, mass: 0.5 });
-    const total = phases.length;
-
-    if (isMobile) {
-        return (
-            <div>
-                <h2 className="text-2xl font-bold text-slate-900 tracking-tight leading-tight mb-8">
-                    Not a course.{' '}
-                    <span className="font-[family-name:var(--font-playfair)] italic font-normal bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                        A career launchpad
-                    </span>
-                </h2>
-                <div className="space-y-6">
-                    {phases.map((p, i) => (
-                        <article
-                            key={p.title}
-                            className="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm"
-                        >
-                            <div className="relative h-48">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={p.image} alt={p.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628]/55 via-transparent to-brand-900/40" />
-                                <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 text-[10px] font-bold uppercase tracking-widest text-brand-600">
-                                    {String(i + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-                                </div>
-                            </div>
-                            <div className="p-6">
-                                <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600 mb-3">
-                                    {p.period}
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-900 tracking-tight mb-3">{p.title}</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed mb-5">{p.desc}</p>
-                                <ul className="space-y-2">
-                                    {p.points.map((pt) => (
-                                        <li key={pt} className="flex items-center gap-2.5 text-sm text-slate-700">
-                                            <CheckCircle2 className="w-4 h-4 text-brand-600 shrink-0" />
-                                            <span className="font-medium">{pt}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </article>
-                    ))}
-                </div>
-            </div>
-        );
-    }
-
+function PhaseParallaxImage({ src, alt }: { src: string; alt: string }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+    const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
     return (
-        <div className="relative left-1/2 right-1/2 -translate-x-1/2 w-screen">
-            <div ref={containerRef} className="relative" style={{ height: `${(total - 1) * 70 + 100}vh` }}>
-                <div className="sticky top-0 h-screen w-screen overflow-hidden">
-                    {phases.map((p, i) => (
-                        <PhaseStackCard
-                            key={p.title}
-                            phase={p}
-                            index={i}
-                            total={total}
-                            scrollYProgress={smoothProgress}
-                        />
-                    ))}
-                </div>
-            </div>
+        <div ref={ref} className="relative w-full h-full overflow-hidden min-h-[55vw] md:min-h-0">
+            <motion.img
+                src={src}
+                alt={alt}
+                style={{ y }}
+                // eslint-disable-next-line @next/next/no-img-element
+                className="absolute inset-0 w-full h-[115%] object-cover"
+                loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#8A29AC]/10 to-transparent" />
         </div>
     );
 }
 
-function PhaseStackCard({
-    phase,
-    index,
-    total,
-    scrollYProgress,
-}: {
-    phase: (typeof phases)[number];
-    index: number;
-    total: number;
-    scrollYProgress: ReturnType<typeof useScroll>['scrollYProgress'];
-}) {
-    const transitions = total - 1;
-    const windowSize = 1 / transitions;
-    const center = index === 0 ? 0 : (index - 0.5) / transitions;
-    const snapStart = Math.max(0, center - windowSize * 0.15);
-    const snapEnd = Math.min(1, center + windowSize * 0.15);
-
-    const y = useTransform(
-        scrollYProgress,
-        index === 0 ? [0, 0.001] : [snapStart, snapEnd],
-        index === 0 ? ['0%', '0%'] : ['100%', '0%'],
-    );
-
+function PhaseRow({ phase, index }: { phase: (typeof phases)[number]; index: number }) {
+    const imageRight = index % 2 !== 0;
     const Icon = phase.Icon;
 
-    return (
-        <motion.article
-            className="absolute inset-0 will-change-transform"
-            style={{
-                y,
-                zIndex: index + 1,
-                boxShadow: index > 0 ? '0 -40px 100px rgba(11,28,48,0.35)' : 'none',
-            }}
+    const ContentPanel = (
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease }}
+            className={`flex flex-col justify-between p-10 md:p-14 lg:p-20 min-h-[70vh] md:min-h-0 ${
+                imageRight ? 'border-r border-slate-200' : ''
+            }`}
         >
-            <div className="h-full w-full bg-white grid grid-cols-1 md:grid-cols-2">
-                <div className="relative min-h-[280px] md:min-h-full">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={phase.image} alt={phase.title} className="absolute inset-0 w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628]/55 via-transparent to-brand-900/40" />
-                    <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/95 backdrop-blur text-[10px] font-bold uppercase tracking-widest text-brand-600 shadow-sm">
-                        {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-                    </div>
-                </div>
-
-                <div className="px-8 md:px-14 lg:px-20 py-10 md:py-14 flex flex-col justify-center max-w-[720px]">
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight leading-tight mb-8 pb-6 border-b border-slate-200">
-                        Not a course.{' '}
-                        <span className="font-[family-name:var(--font-playfair)] italic font-normal bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                            A career launchpad
+            <div>
+                <div className="mb-6">
+                    <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] bg-[#8A29AC]/8 border border-[#8A29AC]/20 rounded-full px-3 py-1 mb-4">
+                        <Icon className="w-3.5 h-3.5" strokeWidth={2} />
+                        {phase.period}
+                    </span>
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight leading-tight">
+                        {phase.title}{' '}
+                        <span className="bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                            {phase.accent}
                         </span>
-                    </h2>
-                    <div className="flex items-center gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-lg bg-brand-600/10 flex items-center justify-center text-brand-600">
-                            <Icon className="w-5 h-5" strokeWidth={1.75} />
-                        </div>
-                        <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
-                            {phase.period}
-                        </span>
-                    </div>
-                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-5">
-                        {phase.title}
                     </h3>
-                    <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-7 max-w-xl">{phase.desc}</p>
-                    <ul className="space-y-3">
-                        {phase.points.map((pt) => (
-                            <li key={pt} className="flex items-center gap-3 text-sm md:text-base text-slate-700">
-                                <CheckCircle2 className="w-4 h-4 text-brand-600 shrink-0" />
-                                <span className="font-medium">{pt}</span>
-                            </li>
-                        ))}
-                    </ul>
                 </div>
             </div>
-        </motion.article>
+            <div>
+                <p className="text-base md:text-lg text-slate-500 leading-relaxed mb-8 max-w-lg">
+                    {phase.desc}
+                </p>
+                <ul className="space-y-2.5">
+                    {phase.points.map((pt) => (
+                        <li key={pt} className="flex items-start gap-3">
+                            <CheckCircle2 className="w-4 h-4 text-[#A20EBF] shrink-0 mt-0.5" />
+                            <span className="text-sm text-slate-600 leading-snug">{pt}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </motion.div>
+    );
+
+    const ImagePanel = (
+        <div className="relative overflow-hidden min-h-[55vw] md:min-h-0">
+            <PhaseParallaxImage src={phase.image} alt={`${phase.title} ${phase.accent}`} />
+        </div>
+    );
+
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-2 border-b border-slate-200 last:border-b-0">
+            {imageRight ? ContentPanel : ImagePanel}
+            {imageRight ? ImagePanel : ContentPanel}
+        </div>
+    );
+}
+
+function PhasesAlternating() {
+    return (
+        <section className="relative left-1/2 right-1/2 -translate-x-1/2 w-screen bg-white overflow-hidden">
+            {/* Header */}
+            <div className="border-b border-slate-200 px-10 md:px-14 lg:px-20 py-20 md:py-24 w-full text-center flex flex-col items-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-5"
+                >
+                    <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest border border-[#8A29AC]/20 bg-[#8A29AC]/8 text-[#8A29AC]">
+                        14-month structured journey
+                    </span>
+                </motion.div>
+                <motion.h2
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.06 }}
+                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-6 max-w-none mx-auto"
+                >
+                    Not a course.{' '}
+                    <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
+                        A career launchpad
+                    </span>
+                </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.12 }}
+                    className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-3xl mx-auto"
+                >
+                    Two phases of structured training and live project execution, followed by placement support
+                    designed for SAP + AI consultant roles.
+                </motion.p>
+            </div>
+
+            {/* Alternating rows */}
+            <div>
+                {phases.map((phase, i) => (
+                    <PhaseRow key={phase.title} phase={phase} index={i} />
+                ))}
+            </div>
+        </section>
     );
 }
 
@@ -722,11 +708,11 @@ function ApplyFormSection() {
             >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                    src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2000&q=80"
-                    alt=""
+                    src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=2000&q=80"
+                    alt="ECAP cohort in session"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628]/75 via-[#0a1628]/45 to-brand-900/60" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628]/65 via-[#0a1628]/35 to-brand-900/50" />
                 <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col justify-between text-white">
                     <div className="flex items-center gap-3">
                         <span className="block w-8 h-px bg-accent-300" />
@@ -832,13 +818,12 @@ export default function ECAPPage() {
 
             <StatsRow />
 
-            {/* Phases stacking */}
+            <PhasesAlternating />
+
+            {/* Selection process */}
             <section className="pt-20 md:pt-28 pb-0 bg-white">
                 <div className="container mx-auto px-4 md:px-8 xl:px-12">
-                    <div className="space-y-20 md:space-y-24">
-                        <PhasesStack />
-                        <SelectionCarousel />
-                    </div>
+                    <SelectionCarousel />
                 </div>
             </section>
 

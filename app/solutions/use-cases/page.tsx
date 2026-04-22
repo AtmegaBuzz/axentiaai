@@ -2,17 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import {
-    ArrowRight,
-    MessageCircle,
-    ClipboardCheck,
-    FileText,
-    Users,
-    Brain,
-    BarChart3,
-    Settings,
-} from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -41,26 +31,16 @@ function UseCasesHero() {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen overflow-hidden bg-[#0a1628] text-white flex items-center"
+            className="relative min-h-screen overflow-hidden bg-black text-white flex items-center"
         >
             <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0 will-change-transform">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2400&q=80"
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/70 to-[#0a1628]/30" />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-transparent to-[#0a1628]" />
-                <div
-                    className="absolute inset-0 opacity-[0.04]"
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                        backgroundSize: '72px 72px',
-                        maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
-                    }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
             </motion.div>
             <div className="absolute -top-20 -right-20 w-[600px] h-[600px] rounded-full bg-brand-600/20 blur-[140px] pointer-events-none" />
             <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] rounded-full bg-accent-300/10 blur-[120px] pointer-events-none" />
@@ -141,7 +121,7 @@ function UseCasesHero() {
 }
 
 type UseCase = {
-    icon: LucideIcon;
+    image: string;
     category: string;
     title: string;
     problem: string;
@@ -150,7 +130,7 @@ type UseCase = {
 
 const useCases: UseCase[] = [
     {
-        icon: ClipboardCheck,
+        image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80',
         category: 'Operations · Finance',
         title: 'Vendor onboarding & compliance automation',
         problem:
@@ -159,7 +139,7 @@ const useCases: UseCase[] = [
             'Faster onboarding, cleaner compliance flow, reduced manual back-and-forth, and a single audit trail per vendor.',
     },
     {
-        icon: FileText,
+        image: 'https://images.unsplash.com/photo-1554224154-26032cdc0c5f?auto=format&fit=crop&w=1200&q=80',
         category: 'Finance · Legal · Procurement',
         title: 'Document & invoice intelligence',
         problem:
@@ -168,7 +148,7 @@ const useCases: UseCase[] = [
             'Accurate extraction, faster turnaround, reduced manual effort, and consistent review quality at scale.',
     },
     {
-        icon: Users,
+        image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80',
         category: 'HR · Shared Services',
         title: 'HR & employee service assistant',
         problem:
@@ -177,7 +157,7 @@ const useCases: UseCase[] = [
             'Higher self-service rates, consistent policy responses, reduced HR team burden, and better employee experience.',
     },
     {
-        icon: Brain,
+        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
         category: 'Operations · Customer Support',
         title: 'Enterprise knowledge copilot',
         problem:
@@ -186,7 +166,7 @@ const useCases: UseCase[] = [
             'Quicker, more consistent retrieval — lower friction in support interactions, reduced expert dependency.',
     },
     {
-        icon: BarChart3,
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
         category: 'Finance · Operations · Strategy',
         title: 'Analytics support for finance & operations',
         problem:
@@ -195,7 +175,7 @@ const useCases: UseCase[] = [
             'Faster narrative support, AI-surfaced follow-up questions, and improved decision rhythm for leadership.',
     },
     {
-        icon: Settings,
+        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80',
         category: 'SAP · Enterprise IT',
         title: 'SAP & enterprise application support',
         problem:
@@ -206,41 +186,57 @@ const useCases: UseCase[] = [
 ];
 
 function UseCaseCard({ uc, index }: { uc: UseCase; index: number }) {
-    const Icon = uc.icon;
     return (
         <motion.article
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5, delay: (index % 3) * 0.08, ease }}
-            className="group relative rounded-2xl bg-white border border-slate-200 p-6 md:p-7 hover:shadow-xl hover:-translate-y-1 hover:border-brand-200 transition-all duration-300 flex flex-col"
+            className="group relative rounded-xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-[0_8px_24px_-12px_rgba(11,28,48,0.15)] transition-all duration-300 flex flex-col overflow-hidden"
         >
-            <div className="grid grid-cols-[auto_1fr] gap-4 mb-5">
-                <div className="w-12 h-12 rounded-xl bg-brand-600/10 flex items-center justify-center text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-colors">
-                    <Icon className="w-6 h-6" />
-                </div>
-                <div>
-                    <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-1.5">
-                        {uc.category}
+            {/* Image header */}
+            <div className="relative h-44 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={uc.image}
+                    alt={uc.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/60 via-[#0a1628]/10 to-transparent" />
+                <span className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full bg-white/95 backdrop-blur text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-700 shadow-sm">
+                    {uc.category}
+                </span>
+            </div>
+
+            <div className="p-6 md:p-7 flex flex-col flex-1">
+                <h3 className="text-base md:text-[17px] font-bold text-slate-900 leading-snug tracking-tight mb-5">
+                    {uc.title}
+                </h3>
+
+                {/* Problem */}
+                <div className="mb-4">
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="block w-3 h-px bg-slate-300" />
+                        <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-slate-400">
+                            Problem
+                        </span>
                     </div>
-                    <h3 className="text-base md:text-lg font-bold text-slate-900 leading-snug tracking-tight">
-                        {uc.title}
-                    </h3>
+                    <p className="text-[13px] text-slate-600 leading-relaxed">{uc.problem}</p>
                 </div>
-            </div>
 
-            <div className="mb-4">
-                <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-1.5">
-                    The problem
-                </div>
-                <p className="text-sm text-slate-600 leading-relaxed">{uc.problem}</p>
-            </div>
+                <div className="h-px w-full bg-slate-100 my-4" />
 
-            <div className="mt-auto p-4 rounded-lg bg-emerald-50/60 border border-emerald-200/50">
-                <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-700 mb-1.5">
-                    Outcome direction
+                {/* Outcome */}
+                <div className="mt-auto">
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="block w-3 h-px bg-brand-600" />
+                        <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-brand-600">
+                            Outcome
+                        </span>
+                    </div>
+                    <p className="text-[13px] text-slate-700 leading-relaxed">{uc.outcome}</p>
                 </div>
-                <p className="text-sm text-slate-700 leading-relaxed">{uc.outcome}</p>
             </div>
         </motion.article>
     );

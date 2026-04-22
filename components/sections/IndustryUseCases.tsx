@@ -7,82 +7,82 @@ import Image from 'next/image';
 
 const useCases = [
     {
-        id: 'predictive-maintenance',
-        industry: 'Manufacturing',
-        modules: 'SAP PM · BTP · IoT',
-        title: 'Predictive Maintenance',
+        id: 'vendor-onboarding',
+        industry: 'Operations · Finance',
+        modules: '',
+        title: 'Vendor onboarding & compliance automation',
         description:
-            'Anticipate equipment failures using sensor data and maintenance history, helping reduce unplanned downtime and improve asset reliability.',
-        image: '/images/industry-usecases/predictive-maintenance.jpg',
-        stat1Label: 'Downtime reduction',
-        stat1Value: '~40%',
-        stat2Label: 'Maintenance saving',
-        stat2Value: '~25%',
+            'Reduce manual back-and-forth, enforce policy consistently, and cut onboarding timelines dramatically.',
+        image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80',
+        stat1Label: '',
+        stat1Value: '',
+        stat2Label: '',
+        stat2Value: '',
     },
     {
-        id: 'demand-forecasting',
-        industry: 'Retail & FMCG',
-        modules: 'SAP IBP · Analytics Cloud',
-        title: 'Demand Forecasting',
+        id: 'document-intelligence',
+        industry: 'Finance · Legal · Procurement',
+        modules: '',
+        title: 'Document & invoice intelligence',
         description:
-            'Improve planning accuracy across supply chains, reducing stock imbalances and enabling more responsive inventory decisions.',
-        image: '/images/industry-usecases/demand-forecasting.jpg',
-        stat1Label: 'Forecast accuracy',
-        stat1Value: '~98%',
-        stat2Label: 'Overstock reduction',
-        stat2Value: '~30%',
+            'Intelligent extraction, sorting and routing — eliminating high-volume manual document work at scale.',
+        image: 'https://images.unsplash.com/photo-1554224154-26032cdc0c5f?auto=format&fit=crop&w=1600&q=80',
+        stat1Label: '',
+        stat1Value: '',
+        stat2Label: '',
+        stat2Value: '',
     },
     {
-        id: 'invoice-processing',
-        industry: 'Banking & Financial Services',
-        modules: 'SAP FI · BTP · Document AI',
-        title: 'Invoice & Document Processing',
+        id: 'hr-assistant',
+        industry: 'HR · Shared Services',
+        modules: '',
+        title: 'HR & employee service assistant',
         description:
-            'Automate document handling across finance workflows, including extraction, validation, approvals, and exception handling.',
-        image: '/images/industry-usecases/invoice-document-processing.jpg',
-        stat1Label: 'Processing time saved',
-        stat1Value: '~60%',
-        stat2Label: 'Error rate reduction',
-        stat2Value: '~80%',
+            'AI-powered policy responses and service support that scales without scaling headcount.',
+        image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=80',
+        stat1Label: '',
+        stat1Value: '',
+        stat2Label: '',
+        stat2Value: '',
     },
     {
-        id: 'quality-control',
-        industry: 'Manufacturing',
-        modules: 'SAP QM · Vision AI · BTP',
-        title: 'Quality Control (Vision-Based)',
+        id: 'knowledge-copilot',
+        industry: 'Operations · Support',
+        modules: '',
+        title: 'Enterprise knowledge copilot',
         description:
-            'Detect defects in real time on production lines, improving consistency and reducing manual inspection effort.',
-        image: '/images/industry-usecases/quality-control-vision-based.jpg',
-        stat1Label: 'Defect detection rate',
-        stat1Value: '~99%',
-        stat2Label: 'Inspection time saved',
-        stat2Value: '~50%',
+            'Surface the right answers across scattered knowledge sources — consistently, at speed.',
+        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80',
+        stat1Label: '',
+        stat1Value: '',
+        stat2Label: '',
+        stat2Value: '',
     },
     {
-        id: 'asset-performance',
-        industry: 'Energy & Utilities',
-        modules: 'SAP PM · IS-Utilities · IoT',
-        title: 'Asset Performance Optimisation',
+        id: 'analytics-finance',
+        industry: 'Finance · Operations',
+        modules: '',
+        title: 'Analytics support for finance',
         description:
-            'Monitor asset health and plan maintenance more effectively using operational and sensor data across distributed systems.',
-        image: '/images/industry-usecases/asset-performance-optimisation.jpg',
-        stat1Label: 'Asset availability',
-        stat1Value: '+15%',
-        stat2Label: 'Maintenance efficiency',
-        stat2Value: '~35%',
+            'Faster interpretation of reports, better follow-up questions, improved leadership decision rhythm.',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
+        stat1Label: '',
+        stat1Value: '',
+        stat2Label: '',
+        stat2Value: '',
     },
     {
-        id: 'hr-copilot',
-        industry: 'HR / SuccessFactors',
-        modules: 'SuccessFactors · SAP Joule',
-        title: 'HR Copilot',
+        id: 'sap-support',
+        industry: 'SAP · Enterprise IT',
+        modules: '',
+        title: 'SAP & enterprise application support',
         description:
-            'Support HR teams with policy queries, approvals, and talent insights within existing workflows.',
-        image: '/images/industry-usecases/hr-copilot.jpg',
-        stat1Label: 'Query resolution',
-        stat1Value: '70% faster',
-        stat2Label: 'HR capacity freed',
-        stat2Value: '~40%',
+            'Higher self-service and smoother triage — reducing dependency on a few internal SAP experts.',
+        image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80',
+        stat1Label: '',
+        stat1Value: '',
+        stat2Label: '',
+        stat2Value: '',
     },
 ];
 
@@ -155,7 +155,7 @@ export function IndustryUseCases() {
                     <span
                         className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8"
                     >
-                        Industry Use Cases
+                        Practical starting points
                     </span>
                 </motion.div>
 
@@ -166,11 +166,10 @@ export function IndustryUseCases() {
                     transition={{ delay: 0.06 }}
                     className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-5"
                 >
-                    Where AI creates{' '}
+                    Where AI creates value in{' '}
                     <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                        measurable impact
-                    </span>{' '}
-                    inside your industry
+                        enterprise workflows
+                    </span>
                 </motion.h2>
 
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -181,7 +180,7 @@ export function IndustryUseCases() {
                         transition={{ delay: 0.1 }}
                         className="text-xs md:text-sm text-slate-500 leading-relaxed max-w-2xl"
                     >
-                        Every use case runs inside your existing SAP environment shaping how work is carried out across operations, finance, supply chains, and workforce management.
+                        The best AI use cases sit closest to an important workflow, a recurring decision, or a costly delay.
                     </motion.p>
 
                     {/* Prev / Next */}
@@ -244,12 +243,14 @@ export function IndustryUseCases() {
                                 <p className="text-xs font-bold uppercase tracking-widest text-[#8A29AC] mb-1">
                                     {uc.industry}
                                 </p>
-                                <p className="text-xs text-slate-400 font-medium mb-3">
-                                    {uc.modules}
-                                </p>
+                                {uc.modules && (
+                                    <p className="text-xs text-slate-400 font-medium mb-3">
+                                        {uc.modules}
+                                    </p>
+                                )}
 
                                 {/* Title */}
-                                <h3 className="text-xl font-bold text-slate-900 leading-snug mb-2">
+                                <h3 className="text-xl font-bold text-slate-900 leading-snug mb-2 mt-3">
                                     {uc.title}
                                 </h3>
 
@@ -258,22 +259,28 @@ export function IndustryUseCases() {
                                     {uc.description}
                                 </p>
 
-                                {/* Stats */}
-                                <div className="flex gap-8 mb-4 pt-3 border-t border-slate-100">
-                                    <div>
-                                        <p className="text-xs text-slate-400 leading-tight">{uc.stat1Label}</p>
-                                        <p className="text-base font-black text-slate-900">{uc.stat1Value}</p>
+                                {/* Stats — only when populated */}
+                                {(uc.stat1Value || uc.stat2Value) && (
+                                    <div className="flex gap-8 mb-4 pt-3 border-t border-slate-100">
+                                        {uc.stat1Value && (
+                                            <div>
+                                                <p className="text-xs text-slate-400 leading-tight">{uc.stat1Label}</p>
+                                                <p className="text-base font-black text-slate-900">{uc.stat1Value}</p>
+                                            </div>
+                                        )}
+                                        {uc.stat2Value && (
+                                            <div>
+                                                <p className="text-xs text-slate-400 leading-tight">{uc.stat2Label}</p>
+                                                <p className="text-base font-black text-slate-900">{uc.stat2Value}</p>
+                                            </div>
+                                        )}
                                     </div>
-                                    <div>
-                                        <p className="text-xs text-slate-400 leading-tight">{uc.stat2Label}</p>
-                                        <p className="text-base font-black text-slate-900">{uc.stat2Value}</p>
-                                    </div>
-                                </div>
+                                )}
 
                                 {/* CTA */}
                                 <a
-                                    href="#"
-                                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 underline underline-offset-2 decoration-[#8A29AC] hover:text-[#8A29AC] transition-colors duration-200"
+                                    href="/solutions/use-cases"
+                                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 underline underline-offset-2 decoration-[#8A29AC] hover:text-[#8A29AC] transition-colors duration-200 mt-2"
                                 >
                                     Explore use case
                                     <ArrowRight className="w-4 h-4" />
@@ -282,6 +289,21 @@ export function IndustryUseCases() {
                         </div>
                     ))}
                 </motion.div>
+            </div>
+
+            {/* Explore all use cases CTA */}
+            <div className="container mx-auto px-4 md:px-8 xl:px-12 pb-20 md:pb-24 text-center">
+                <motion.a
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    href="/solutions/use-cases"
+                    className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-7 text-sm transition-colors rounded-full"
+                >
+                    Explore all use cases
+                    <ArrowRight className="w-4 h-4" />
+                </motion.a>
             </div>
         </section>
     );

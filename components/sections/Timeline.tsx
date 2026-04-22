@@ -17,40 +17,40 @@ interface TimelineEntry {
 
 const timelineItems: TimelineEntry[] = [
   {
-    period: '2–3 days',
-    title: 'Discovery Workshop',
+    period: 'Step 01',
+    title: 'Diagnose',
     description:
-      'We sit with your team to map how work actually moves today, identify where time, effort, and decisions get stuck, and arrive at a clear, practical starting point.',
+      'Identify where AI creates real business value and surface the two or three priorities worth acting on first.',
     image: '/images/how-it-works/discovery-workshop.jpg',
     icon: Search,
-    highlights: ['Process mapping', 'Pain-point analysis', 'Prioritised roadmap'],
+    highlights: ['Workflow mapping', 'Opportunity ranking', 'Readiness gap view'],
   },
   {
-    period: '4–8 weeks',
-    title: 'Pilot & Implementation',
+    period: 'Step 02',
+    title: 'Design',
     description:
-      'We take the highest-value use cases and put them into motion inside your existing systems using your data, processes, and teams.',
+      'Build the business case, map the workflow, and create a structured execution roadmap with clear ownership.',
     image: '/images/how-it-works/pilot-implementation.jpg',
     icon: Rocket,
-    highlights: ['Live integration', 'Real data validation', 'Measurable outcomes'],
+    highlights: ['Business case', 'Execution roadmap', 'Named ownership'],
   },
   {
-    period: '3–6 months',
-    title: 'Capability Build',
+    period: 'Step 03',
+    title: 'Deploy',
     description:
-      'Your teams learn by doing. They engage directly with what has been built, take ownership of it, and start to adapt it.',
+      'Launch focused pilots and workflow accelerators. Build capability alongside execution so adoption is embedded.',
     image: '/images/how-it-works/capability-build.jpg',
     icon: GraduationCap,
-    highlights: ['Hands-on training', 'Knowledge transfer', 'Team enablement'],
+    highlights: ['Focused pilots', 'Workflow accelerators', 'Embedded adoption'],
   },
   {
-    period: 'Ongoing',
-    title: 'Scale with Execution Capacity',
+    period: 'Step 04',
+    title: 'Scale',
     description:
-      'AI-led ways of working extend across teams and geographies, carried by people already trained in how to use and sustain them.',
+      'Measure outcomes, expand what works, and build the internal capability to sustain AI adoption without dependency.',
     image: '/images/how-it-works/scale-with-execution-capacity.jpg',
     icon: TrendingUp,
-    highlights: ['Cross-team rollout', 'Continuous optimisation', 'Sustainable growth'],
+    highlights: ['Outcome measurement', 'Cross-team rollout', 'Internal capability'],
   },
 ]
 
@@ -63,46 +63,60 @@ export function HowItWorks() {
   })
 
   // Map vertical scroll → horizontal translateX
-  // 4 cards, each ~420px + gap. We want to scroll from 0 to roughly -(totalWidth - viewport)
-  // Using percentage of the scrollable container width
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-75%'])
+  // 4 cards + gaps + container padding; shift enough to bring last card flush to right
+  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-55%'])
 
   // Track line grows with scroll
   const trackWidth = useTransform(scrollYProgress, [0, 0.95], ['0%', '100%'])
 
   return (
-    <div ref={containerRef} style={{ height: '150vh' }}>
-      <section className="sticky top-0 h-screen bg-white overflow-hidden flex flex-col">
+    <div ref={containerRef} style={{ height: '160vh' }}>
+      <section className="sticky top-0 h-screen overflow-hidden flex flex-col">
+        {/* Background image + dark overlay — matches Programs section */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/programs/programs-bg.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority={false}
+          />
+          <div className="absolute inset-0 bg-black/65" />
+        </div>
+
         {/* Header */}
-        <div className="pt-16 md:pt-20 pb-6 px-6 md:px-12 xl:px-20">
+        <div className="relative z-10 pt-16 md:pt-20 pb-6 px-6 md:px-12 xl:px-20">
           <div className="max-w-7xl mx-auto">
-            <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200 bg-slate-50 mb-3">
-              How It Works
+            <span className="inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent-300 border border-accent-300/20 bg-accent-300/8 mb-3">
+              How we work
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
-              From first conversation to{' '}
-              <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#8A29AC] to-[#C010DA] bg-clip-text text-transparent">
-                operating at scale
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+              From diagnosis to{' '}
+              <span className="font-[family-name:var(--font-playfair)] italic bg-gradient-to-r from-[#F7C87A] via-[#F3B15F] to-[#E89B3A] bg-clip-text text-transparent">
+                deployed outcome
               </span>
             </h2>
+            <p className="text-xs md:text-sm text-white/55 leading-relaxed mt-3 max-w-2xl">
+              Four steps. Clear ownership. No ambiguity about what happens next.
+            </p>
           </div>
         </div>
 
         {/* Horizontal track line */}
-        <div className="px-6 md:px-12 xl:px-20 mb-6">
+        <div className="relative z-10 px-6 md:px-12 xl:px-20 mb-6">
           <div className="max-w-7xl mx-auto relative">
-            <div className="h-[2px] bg-slate-100 w-full" />
+            <div className="h-[2px] bg-white/10 w-full" />
             <motion.div
-              className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-brand-600 to-brand-400"
+              className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-brand-500 to-brand-300"
               style={{ width: trackWidth }}
             />
-            {/* Dots on the track */}
             {timelineItems.map((_, i) => {
               const pos = `${(i / (timelineItems.length - 1)) * 100}%`
               return (
                 <motion.div
                   key={i}
-                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white"
+                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-white/80"
                   style={{
                     left: pos,
                     marginLeft: '-6px',
@@ -115,7 +129,7 @@ export function HowItWorks() {
         </div>
 
         {/* Scrolling cards area */}
-        <div className="flex-1 overflow-hidden px-6 md:px-12 xl:px-20 pb-10">
+        <div className="relative z-10 flex-1 overflow-hidden px-6 md:px-12 xl:px-20 pb-10">
           <motion.div
             className="flex gap-6 items-stretch"
             style={{ x }}
@@ -126,10 +140,9 @@ export function HowItWorks() {
               return (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[85vw] md:w-[42vw] lg:w-[30vw] flex flex-col rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden group"
+                  className="flex-shrink-0 w-[85vw] md:w-[42vw] lg:w-[30vw] flex flex-col rounded-2xl bg-white shadow-sm overflow-hidden group"
                 >
-                  {/* Image */}
-                  <div className="relative h-48 md:h-52 overflow-hidden">
+                  <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -138,7 +151,6 @@ export function HowItWorks() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    {/* Period badge */}
                     <div className="absolute bottom-3 left-3 rounded-lg bg-white/95 backdrop-blur-sm px-3 py-1 flex items-center gap-2">
                       <Icon className="w-3.5 h-3.5 text-brand-500" strokeWidth={2.5} />
                       <span className="text-[11px] font-bold text-slate-700 tracking-wide">
@@ -147,7 +159,6 @@ export function HowItWorks() {
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="flex-1 flex flex-col p-5 md:p-6">
                     <h3 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight leading-tight mb-3">
                       {item.title}
@@ -155,19 +166,6 @@ export function HowItWorks() {
                     <p className="text-sm text-slate-500 leading-relaxed">
                       {item.description}
                     </p>
-
-                    {/* Highlights */}
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {item.highlights.map((h) => (
-                        <span
-                          key={h}
-                          className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold border border-brand-200 bg-white text-brand-700 whitespace-nowrap shrink-0"
-                        >
-                          <span className="w-1 h-1 rounded-full bg-brand-500 flex-shrink-0" />
-                          {h}
-                        </span>
-                      ))}
-                    </div>
                   </div>
                 </div>
               )

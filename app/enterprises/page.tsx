@@ -515,11 +515,12 @@ function WhatWeBuildSection() {
         <section ref={containerRef} style={{ height: `${totalAreas * 100}vh` }} className="relative">
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 <div className="h-full grid lg:grid-cols-2">
-                    <div className="flex flex-col h-full px-8 md:px-14 lg:px-20 relative z-10 pt-24 bg-[#0a0a14]">
-                        <span
-                            className="self-start rounded-md px-3 py-1 text-xs font-bold uppercase tracking-widest"
-                            style={{ background: '#F7C87A', color: '#232322' }}
-                        >
+                    <div className="flex flex-col h-full px-8 md:px-14 lg:px-20 relative z-10 pt-24 bg-slate-50 border-r border-slate-200 overflow-hidden">
+                        {/* Subtle brand ambient */}
+                        <div className="absolute top-0 -left-20 w-[400px] h-[400px] rounded-full bg-brand-300/15 blur-[120px] pointer-events-none" />
+                        <div className="absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full bg-accent-300/10 blur-[100px] pointer-events-none" />
+
+                        <span className="self-start inline-block rounded-lg px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8A29AC] border border-[#8A29AC]/20 bg-[#8A29AC]/8">
                             What We Build
                         </span>
 
@@ -533,13 +534,14 @@ function WhatWeBuildSection() {
                                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                                     className="max-w-md"
                                 >
-                                    <span className="text-[10px] font-bold tracking-widest text-white/20 uppercase mb-4 block">
-                                        {String(activeIdx + 1).padStart(2, '0')} / {String(totalAreas).padStart(2, '0')}
+                                    <span className="font-[family-name:var(--font-playfair)] italic text-brand-600 text-3xl mb-4 block leading-none">
+                                        {String(activeIdx + 1).padStart(2, '0')}
+                                        <span className="text-slate-300"> / {String(totalAreas).padStart(2, '0')}</span>
                                     </span>
-                                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-5">
+                                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-5">
                                         {areas[activeIdx].title}
                                     </h2>
-                                    <p className="text-white/45 text-base md:text-lg leading-relaxed mb-8">
+                                    <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-8">
                                         {areas[activeIdx].desc}
                                     </p>
                                     <ul className="space-y-3">
@@ -551,8 +553,8 @@ function WhatWeBuildSection() {
                                                 transition={{ delay: 0.1 + i * 0.07 }}
                                                 className="flex items-center gap-3"
                                             >
-                                                <span className="w-1.5 h-1.5 rounded-full bg-brand-400 flex-shrink-0" />
-                                                <span className="text-white/70 text-base font-medium">{b}</span>
+                                                <span className="w-1.5 h-1.5 rounded-full bg-brand-600 flex-shrink-0" />
+                                                <span className="text-slate-700 text-base font-medium">{b}</span>
                                             </motion.li>
                                         ))}
                                     </ul>
@@ -575,7 +577,7 @@ function WhatWeBuildSection() {
                                     <span
                                         key={area.title}
                                         className={`flex-shrink-0 px-4 py-2 text-[11px] font-semibold tracking-wide uppercase transition-colors duration-300 ${
-                                            idx === activeIdx ? 'text-white' : 'text-white/20'
+                                            idx === activeIdx ? 'text-slate-900' : 'text-slate-300'
                                         }`}
                                     >
                                         {area.title}
@@ -609,9 +611,10 @@ function WhyNowSection() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-100px' });
     return (
-        <section ref={ref} className="py-28 md:py-32 px-6 md:px-16 bg-[#0b1c30] text-white relative overflow-hidden">
-            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-300/10 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-600/15 rounded-full blur-[140px] -translate-y-1/4 translate-x-1/4 pointer-events-none" />
+        <section ref={ref} className="py-28 md:py-32 px-6 md:px-16 bg-[#1a0d2e] text-white relative overflow-hidden">
+            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-500/20 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-700/30 rounded-full blur-[140px] -translate-y-1/4 translate-x-1/4 pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-brand-600/10 rounded-full blur-[160px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10 items-start">
                 <div className="flex flex-col justify-center">
